@@ -25,6 +25,7 @@ task :upload => :update do
     unless File.directory?(local_path)
       remote_path = local_path.sub(/^public\//, '')
       puts "Sending #{local_path} -> #{remote_path}"
+      # TODO: fix mime-types!
       bucket.objects[remote_path].write(:file => local_path, :acl => :public_read)
     end
   end
