@@ -48,11 +48,10 @@
     <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
     <script type="text/javascript">
     angular.module("formatters", [])
-      .filter("formatDateTime", function () {
+      .filter("formatDate", function () {
         return function (input) {
           var date = new Date(input)
-          var tz = date.toString().replace(/^.+(GMT[+-]\d{4}).+$/, '$1')
-          return _.str.sprintf("%4d-%02d-%02d %02d:%02d:%02d %s", date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), tz)
+          return _.str.sprintf("%4d-%02d-%02d", date.getFullYear(), date.getMonth() + 1, date.getDate())
         }
       })
 
@@ -332,15 +331,17 @@
         </div>
       </div>
       <footer class="row">
-        <div class="span8">
+        <div class="span6">
           <p>
             Data from <a href="http://aws.amazon.com/ec2/pricing/">EC2 Pricing</a> and <a href="http://aws.amazon.com/ec2/instance-types/">EC2 Instance Types</a>,
-            last updated {{lastUpdated | formatDateTime}}
+            last updated {{lastUpdated | formatDate}}
           </p>
         </div>
-        <div class="span4 text-right">
+        <div class="span6 text-right">
           <p>
-            Created by <a href="http://twitter.com/iconara">Theo Hultberg / @iconara</a>
+            Created by <a href="http://twitter.com/iconara">Theo Hultberg / @iconara</a>, 
+            find the code at <a href="https://github.com/iconara/ec2pricing">github.com/iconara/ec2pricing</a>
+            <i class="icon-github"></i>
           </p>
         </div>
       </footer>
