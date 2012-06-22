@@ -28,8 +28,12 @@
       opacity: 0.5;
     }
 
-    .right {
+    .text-right {
       text-align: right;
+    }
+
+    .component-right {
+      float: right;
     }
 
     footer {
@@ -58,6 +62,7 @@
       var ioSortOrder = ["low", "moderate", "high", "very high"]
       var typeClassSortOrder = ["m1", "t1", "c1", "m2", "cc1", "cc2", "cg1"]
       var typeSizeSortOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
+      var periodMultipliers = {"hourly": 1, "daily": 24, "weekly": 7 * 24, "monthly": 30.4 * 24, "yearly": 365.25 * 24}
 
       $scope.pricing = null
       $scope.regions = null
@@ -66,6 +71,8 @@
       $scope.sortAscending = false
       $scope.operatingSystems = {"linux": "Linux", "mswin": "Windows"}
       $scope.selectedOs = null
+      $scope.periods = ["hourly", "daily", "weekly", "monthly", "yearly"]
+      $scope.selectedPeriod = null
 
       var sortInstanceTypes = function () {
         if ($scope.selectedRegion) {
@@ -147,7 +154,8 @@
           $location.search({
             sort: $scope.sortField + ":" + ($scope.sortAscending ? "asc" : "desc"),
             region: $scope.selectedRegion.api_name,
-            os: $scope.selectedOs
+            os: $scope.selectedOs,
+            period: $scope.selectedPeriod
           })
         }
       }
@@ -156,6 +164,7 @@
         var state = $location.search()
 
         $scope.selectedOs = state.os || "linux"
+        $scope.selectedPeriod = state.period || "hourly"
         
         if (state.sort) {
           var sortState = state.sort.split(":")
@@ -173,15 +182,11 @@
         $scope.selectedRegion = $scope.pricing[r]
       }
       
-      $scope.$watch("sortField", sortInstanceTypes)
-      $scope.$watch("sortAscending", sortInstanceTypes)
-      $scope.$watch("selectedRegion", sortInstanceTypes)
-      $scope.$watch("selectedOs", sortInstanceTypes)
-      
-      $scope.$watch("sortField", updateState)
-      $scope.$watch("sortAscending", updateState)
-      $scope.$watch("selectedRegion", updateState)
-      $scope.$watch("selectedOs", updateState)
+      var stateFields = ["sortField", "sortAscending", "selectedRegion", "selectedOs", "selectedPeriod"]
+      stateFields.forEach(function (property) {
+        $scope.$watch(property, sortInstanceTypes)
+        $scope.$watch(property, updateState)
+      })
 
       $scope.isSelectedRegion = function (r) {
         return r == $scope.isSelectedRegion
@@ -195,6 +200,11 @@
       $scope.selectOs = function ($event, o) {
         $event.preventDefault()
         $scope.selectedOs = o
+      }
+
+      $scope.selectPeriod = function ($event, p) {
+        $event.preventDefault()
+        $scope.selectedPeriod = p
       }
 
       $scope.sortBy = function ($event, f) {
@@ -220,6 +230,24 @@
 
       $scope.instanceTypeRowClass = function (instanceType) {
         return instanceType.pricing[$scope.selectedOs] ? "" : "not-available"
+      }
+
+      $scope.periodSelectorClass = function (p) {
+        return p == $scope.selectedPeriod ? "active" : ""
+      }
+
+      $scope.calculatedPrice = function (instanceType) {
+        var basePrice = instanceType.pricing[$scope.selectedOs]
+        var multiplier = periodMultipliers[$scope.selectedPeriod]
+        var price = basePrice * multiplier
+        // var decimals = Math.max(0, 3 - Math.floor(Math.log(multiplier)/Math.log(10)))
+        var decimals = 3
+        if (multiplier > 100) {
+          decimals = 0
+        } else if (multiplier > 1) {
+          decimals = 2
+        }
+        return _.str.sprintf("%." + decimals + "f", price)
       }
       
       $http({method: "GET", url: "pricing.json"}).success(function (data, status, headers, config) {
@@ -258,7 +286,7 @@
                 <th><a href="#" ng-click="sortBy($event, 'ram')">RAM</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'disk')">Disk</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'io')">IO Perf.</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'price')">Price/hour</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'price')">Price</a></th>
               </tr>
             </thead>
             <tbody>
@@ -277,14 +305,24 @@
                 <td class="numeric">{{instanceType.ram}}</td>
                 <td class="numeric">{{instanceType.disk || 'n/a'}}</td>
                 <td>{{instanceType.io}}</td>
-                <td class="numeric">{{instanceType.pricing[selectedOs] || "n/a"}}</td>
+                <td class="numeric">${{calculatedPrice(instanceType) || "n/a"}}</td>
               </tr>
             </tbody>
           </table>
-
+        </div>
+      </div>
+      <div class="row">
+        <div class="span6">
           <ul class="nav nav-pills">
             <li ng-repeat="(os, osName) in operatingSystems" ng-class="osSelectorClass(os)">
               <a href="#" ng-click="selectOs($event, os)">{{osName}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="span6">
+          <ul class="nav nav-pills component-right">
+            <li ng-repeat="period in periods" ng-class="periodSelectorClass(period)">
+              <a href="#" ng-click="selectPeriod($event, period)">{{period}}</a>
             </li>
           </ul>
         </div>
@@ -296,7 +334,7 @@
             last updated {{lastUpdated | formatDateTime}}
           </p>
         </div>
-        <div class="span4 right">
+        <div class="span4 text-right">
           <p>
             Created by <a href="http://twitter.com/iconara">Theo Hultberg / @iconara</a>
           </p>
