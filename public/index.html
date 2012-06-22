@@ -163,8 +163,8 @@
 
       $http({method: "GET", url: "pricing.json"}).success(function (data, status, headers, config) {
         $scope.pricing = data
-        $scope.regions = _(data).keys()
-        $scope.selectRegion($scope.regions[0])
+        $scope.regions = _(data).keys().sort()
+        $scope.selectRegion("us-east-1")
       })
     }
     </script>
