@@ -150,14 +150,18 @@
         return sortedInstanceTypes
       }
 
-      var updateState = function () {
+      var updateState = function (firstTime) {
         if ($scope.selectedRegion) {
+          var oldPath = $location.path()
+          $location.path($scope.selectedRegion.api_name)
           $location.search({
             sort: $scope.sortField + ":" + ($scope.sortAscending ? "asc" : "desc"),
-            region: $scope.selectedRegion.api_name,
             os: $scope.selectedOs,
             period: $scope.selectedPeriod
           })
+          if (oldPath != $location.path()) {
+            trackPageview()
+          }
         }
       }
 
@@ -176,11 +180,23 @@
           $scope.sortAscending = false
         }
 
-        selectRegion(state.region || "us-east-1")
+        var region = $location.path().substring(1)
+
+        selectRegion(region || "us-east-1")
+
+        trackPageview()
       }
 
       var selectRegion = function (r) {
         $scope.selectedRegion = $scope.pricing[r]
+      }
+
+      var trackPageview = function () {
+        _gaq.push(['_trackPageview', $location.path()])
+      }
+
+      var trackEvent = function (category, action) {
+        _gaq.push(['_trackEvent', category, action])
       }
       
       var stateFields = ["sortField", "sortAscending", "selectedRegion", "selectedOs", "selectedPeriod"]
@@ -201,11 +217,13 @@
       $scope.selectOs = function ($event, o) {
         $event.preventDefault()
         $scope.selectedOs = o
+        trackEvent("Select OS", o)
       }
 
       $scope.selectPeriod = function ($event, p) {
         $event.preventDefault()
         $scope.selectedPeriod = p
+        trackEvent("Select Period", p)
       }
 
       $scope.sortBy = function ($event, f) {
@@ -218,8 +236,9 @@
         }
 
         $scope.sortField = f
-      }
 
+        trackEvent("Sort By Column", f)
+      }
 
       $scope.regionTabClass = function (r) {
         return r == $scope.selectedRegion.api_name ? "active" : ""
@@ -262,7 +281,6 @@
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-259801-10']);
-    _gaq.push(['_trackPageview']);
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
