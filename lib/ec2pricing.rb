@@ -1,10 +1,14 @@
 require 'json'
 require 'open-uri'
 require 'nokogiri'
-require 'pp'
 
 
 class InstanceProperties
+  def clear_cache!
+    File.unlink(PRICING_CACHE_PATH) if File.exists?(PRICING_CACHE_PATH)
+    File.unlink(INSTANCE_PROPERTIES_CACHE_PATH) if File.exists?(INSTANCE_PROPERTIES_CACHE_PATH)
+  end
+
   def find_price(region, type, os='linux')
     d = pricing.find { |pr| pr[:region] == region && pr[:type] == type && pr[:os] == os }
     d[:price] if d
@@ -67,7 +71,7 @@ class InstanceProperties
               api_name = "#{api_type}.#{api_size}"
               api_name = 'cc2.8xlarge' if api_name == 'cc1.8xlarge'
               unless price.start_with?('N/A')
-                price = sprintf('$ %.3f', price.to_f)
+                price = sprintf('%.3f', price.to_f)
                 pricing << {:region => REGION_MAP[region], :type => api_name, :os => value, :price => price}
               end
             end
@@ -185,6 +189,3 @@ class InstanceProperties
     'sa-east-1'      => 'South America (Sao Paulo)'
   }
 end
-
-ip = InstanceProperties.new
-puts(JSON.pretty_generate(ip.by_region))

@@ -1,6 +1,19 @@
+$: << File.expand_path('../lib', __FILE__)
+
 require 'aws'
+require 'ec2pricing'
+
 
 task :update do
+  puts 'Updating public/pricing.json'
+  instance_properties = InstanceProperties.new
+  instance_properties.clear_cache!
+  File.open('public/pricing.json', 'w') do |io|
+    io.write(JSON.pretty_generate(instance_properties.by_region))
+  end
+end
+
+task :upload => :update do
   options = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
     :secret_access_key => ENV['AWS_SECRET_KEY'],
