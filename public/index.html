@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html ng-app="ec2Pricing">
+  <head>
+    <meta charset="utf-8" />
+    <title>EC2 Pricing</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-2.0.4-custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive-2.0.4.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome-2.0.css" />
+    <style type="text/css">
+    body {
+      margin-top: 1em;
+    }
+
+    .numeric {
+      text-align: right !important;
+    }
+
+    table.instance-properties {
+      width: 100%;
+    }
+
+    .region-tabs {
+      margin-bottom: 0;
+    }
+
+    tr.not-available {
+      opacity: 0.5;
+    }
+    </style>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
+    <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
+    <script type="text/javascript">
+    angular.module("ec2Pricing", [])
+
+    var ApplicationController = function ($scope, $http) {
+      var ioSortOrder = ["low", "moderate", "high", "very high"]
+      var typeClassSortOrder = ["m1", "t1", "c1", "m2", "cc1", "cc2", "cg1"]
+      var typeSizeSortOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
+
+      $scope.pricing = null
+      $scope.regions = null
+      $scope.selectedRegion = null
+      $scope.sortField = "type"
+      $scope.sortAscending = false
+      $scope.operatingSystems = {"linux": "Linux", "mswin": "Windows"}
+      $scope.selectedOs = "linux"
+
+      var sortInstanceTypes = function () {
+        if ($scope.selectedRegion) {
+          var field = $scope.sortField
+
+          var availableTypes = _($scope.selectedRegion.instance_types).select(function (instanceType) {
+            return !!instanceType.pricing[$scope.selectedOs]
+          })
+          var unavailableTypes = _($scope.selectedRegion.instance_types).select(function (instanceType) {
+            return !instanceType.pricing[$scope.selectedOs]
+          })
+
+          if (field == "type") {
+            availableTypes = sortInstanceTypesByType(availableTypes, $scope.sortAscending)
+          } else if (field == "price") {
+            availableTypes = sortInstanceTypesByPrice(availableTypes, $scope.selectedOs, $scope.sortAscending)
+          } else {
+            availableTypes = sortInstanceTypesBy(availableTypes, field, $scope.sortAscending)
+          }
+
+          $scope.selectedRegion.instance_types = availableTypes.concat(unavailableTypes)
+        }
+      }
+
+      var sortInstanceTypesByType = function (instanceTypes, sortAscending) {
+        instanceTypes.sort(function (i0, i1) {
+          var c0 = i0.type.split(".")
+          var c1 = i1.type.split(".")
+          var comp = typeClassSortOrder.indexOf(c0[0]) - typeClassSortOrder.indexOf(c1[0])
+          var order = comp
+          if (comp == 0) {
+            order = typeSizeSortOrder.indexOf(c0[1]) - typeSizeSortOrder.indexOf(c1[1])
+          }
+          return order * (sortAscending ? -1 : 1)
+        })
+        return instanceTypes
+      }
+
+      var sortInstanceTypesByPrice = function (instanceTypes, selectedOs, sortAscending) {
+        var sortedInstanceTypes = _(instanceTypes).sortBy(function (instance) {
+          var value = instance.pricing[selectedOs]
+          return value.replace(/^\$ ([\d.]+)$/, '$1')
+        })
+        if (!sortAscending) {
+          sortedInstanceTypes.reverse()
+        }
+        return sortedInstanceTypes
+      }
+
+      var sortInstanceTypesBy = function (instanceTypes, field, sortAscending) {
+        var sortedInstanceTypes = _(instanceTypes).sortBy(function (instance) {
+          var value = instance[field]
+          if (field == "ram" || field == "disk") {
+            if (!value) {
+              return 0
+            }
+            var m = value.match(/([\d.]+) ([GM]B)/)
+            var size = parseFloat(m[1])
+            if (m[2] == "MB") {
+              size = size/1024
+            }
+            return size
+          } else if (field == "io") {
+            return ioSortOrder.indexOf(value)
+          } else {
+            return instance[field]
+          }
+        })
+
+        if (!sortAscending) {
+          sortedInstanceTypes.reverse()
+        }
+        
+        return sortedInstanceTypes
+      }
+      
+      $scope.$watch("sortField", sortInstanceTypes)
+      $scope.$watch("sortAscending", sortInstanceTypes)
+      $scope.$watch("selectedRegion", sortInstanceTypes)
+      $scope.$watch("selectedOs", sortInstanceTypes)
+
+      $scope.isSelectedRegion = function (r) {
+        return r == $scope.isSelectedRegion
+      }
+
+      $scope.selectRegion = function (r) {
+        $scope.selectedRegion = $scope.pricing[r]
+      }
+
+      $scope.selectOs = function (o) {
+        $scope.selectedOs = o
+      }
+
+      $scope.regionTabClass = function (r) {
+        return r == $scope.selectedRegion.api_name ? "active" : ""
+      }
+
+      $scope.osSelectorClass = function (o) {
+        return o == $scope.selectedOs ? "active" : ""
+      }
+
+      $scope.instanceTypeRowClass = function (instanceType) {
+        return instanceType.pricing[$scope.selectedOs] ? "" : "not-available"
+      }
+      
+      $scope.sortBy = function (f) {
+        if ($scope.sortField == f) {
+          $scope.sortAscending =  !$scope.sortAscending
+        } else {
+          $scope.sortAscending = false
+        }
+
+        $scope.sortField = f
+      }
+
+      $http({method: "GET", url: "pricing.json"}).success(function (data, status, headers, config) {
+        $scope.pricing = data
+        $scope.regions = _(data).keys()
+        $scope.selectRegion($scope.regions[0])
+      })
+    }
+    </script>
+  </head>
+  <body ng-controller="ApplicationController">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <ul class="region-tabs nav nav-tabs">
+            <li ng-repeat="region in regions" ng-class="regionTabClass(region)">
+              <a href="#" ng-click="selectRegion(region)">{{region}}</a>
+            </li>
+          </ul>
+          <table class="instance-properties table table-striped">
+            <thead>
+              <tr>
+                <th><a href="#" ng-click="sortBy('type')">Name</a></th>
+                <th></th>
+                <th><a href="#" ng-click="sortBy('type')">API Name</a></th>
+                <th><a href="#" ng-click="sortBy('ecus')">ECUs</a></th>
+                <th><a href="#" ng-click="sortBy('cores')">Cores</a></th>
+                <th><a href="#" ng-click="sortBy('ram')">RAM</a></th>
+                <th><a href="#" ng-click="sortBy('disk')">Disk</a></th>
+                <th><a href="#" ng-click="sortBy('io')">IO</a></th>
+                <th><a href="#" ng-click="sortBy('price')">Price</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="instanceType in selectedRegion.instance_types" ng-class="instanceTypeRowClass(instanceType)">
+                <td>{{instanceType.name}}</td>
+                <td title="{{instanceType.notes.join(', ')}}">
+                  <i class="icon-info-sign" ng-show="instanceType.notes"></i>
+                </td>
+                <td>
+                  <span class="label label-info">
+                    {{instanceType.type}}
+                  </span>
+                </td>
+                <td class="numeric">{{instanceType.ecus}}</td>
+                <td class="numeric">{{instanceType.cores}}</td>
+                <td class="numeric">{{instanceType.ram}}</td>
+                <td class="numeric">{{instanceType.disk || 'n/a'}}</td>
+                <td>{{instanceType.io}}</td>
+                <td class="numeric">{{instanceType.pricing[selectedOs] || "n/a"}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ul class="nav nav-pills">
+            <li ng-repeat="(os, osName) in operatingSystems" ng-class="osSelectorClass(os)">
+              <a href="#" ng-click="selectOs(os)">{{osName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

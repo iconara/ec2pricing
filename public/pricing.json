@@ -1,0 +1,1619 @@
+{
+  "us-east-1": {
+    "name": "US East (Virginia)",
+    "api_name": "us-east-1",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.080",
+          "mswin": "$ 0.115"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.160",
+          "mswin": "$ 0.230"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.320",
+          "mswin": "$ 0.460"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.640",
+          "mswin": "$ 0.920"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.020",
+          "mswin": "$ 0.020"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.450",
+          "mswin": "$ 0.570"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 0.900",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 1.800",
+          "mswin": "$ 2.280"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.165",
+          "mswin": "$ 0.285"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.660",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": "$ 1.300",
+          "mswin": "$ 1.610"
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": "$ 2.400",
+          "mswin": "$ 2.970"
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": "$ 2.100",
+          "mswin": "$ 2.600"
+        }
+      }
+    ]
+  },
+  "us-west-2": {
+    "name": "US West (Oregon)",
+    "api_name": "us-west-2",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.080",
+          "mswin": "$ 0.115"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.160",
+          "mswin": "$ 0.230"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.320",
+          "mswin": "$ 0.460"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.640",
+          "mswin": "$ 0.920"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.020",
+          "mswin": "$ 0.020"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.450",
+          "mswin": "$ 0.570"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 0.900",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 1.800",
+          "mswin": "$ 2.280"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.165",
+          "mswin": "$ 0.285"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.660",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      }
+    ]
+  },
+  "us-west-1": {
+    "name": "US West (Northern California)",
+    "api_name": "us-west-1",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.090",
+          "mswin": "$ 0.125"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.180",
+          "mswin": "$ 0.250"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.360",
+          "mswin": "$ 0.500"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.720",
+          "mswin": "$ 1.000"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.025",
+          "mswin": "$ 0.035"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.506",
+          "mswin": "$ 0.626"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 1.012",
+          "mswin": "$ 1.252"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 2.024",
+          "mswin": "$ 2.504"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.186",
+          "mswin": "$ 0.306"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.744",
+          "mswin": "$ 1.224"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      }
+    ]
+  },
+  "eu-west-1": {
+    "name": "EU (Ireland)",
+    "api_name": "eu-west-1",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.085",
+          "mswin": "$ 0.115"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.170",
+          "mswin": "$ 0.230"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.340",
+          "mswin": "$ 0.460"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.680",
+          "mswin": "$ 0.920"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.020",
+          "mswin": "$ 0.020"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.506",
+          "mswin": "$ 0.570"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 1.012",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 2.024",
+          "mswin": "$ 2.280"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.186",
+          "mswin": "$ 0.285"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.744",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      }
+    ]
+  },
+  "ap-southeast-1": {
+    "name": "Asia Pacific (Singapore)",
+    "api_name": "ap-southeast-1",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.085",
+          "mswin": "$ 0.115"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.170",
+          "mswin": "$ 0.230"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.340",
+          "mswin": "$ 0.460"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.680",
+          "mswin": "$ 0.920"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.020",
+          "mswin": "$ 0.020"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.506",
+          "mswin": "$ 0.570"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 1.012",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 2.024",
+          "mswin": "$ 2.280"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.186",
+          "mswin": "$ 0.285"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.744",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      }
+    ]
+  },
+  "ap-northeast-1": {
+    "name": "Asia Pacific (Tokyo)",
+    "api_name": "ap-northeast-1",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.092",
+          "mswin": "$ 0.115"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.184",
+          "mswin": "$ 0.230"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.368",
+          "mswin": "$ 0.460"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.736",
+          "mswin": "$ 0.920"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.027",
+          "mswin": "$ 0.035"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.518",
+          "mswin": "$ 0.570"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 1.036",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 2.072",
+          "mswin": "$ 2.280"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.190",
+          "mswin": "$ 0.285"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.760",
+          "mswin": "$ 1.140"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      }
+    ]
+  },
+  "sa-east-1": {
+    "name": "South America (Sao Paulo)",
+    "api_name": "sa-east-1",
+    "instance_types": [
+      {
+        "name": "Small Instance",
+        "ram": "1.7 GB",
+        "ecus": 1.0,
+        "cores": 1,
+        "disk": "160 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.small",
+        "pricing": {
+          "linux": "$ 0.115",
+          "mswin": "$ 0.150"
+        }
+      },
+      {
+        "name": "Medium Instance",
+        "ram": "3.75 GB",
+        "ecus": 2.0,
+        "cores": 1,
+        "disk": "410 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "m1.medium",
+        "pricing": {
+          "linux": "$ 0.230",
+          "mswin": "$ 0.300"
+        }
+      },
+      {
+        "name": "Large Instance",
+        "ram": "7.5 GB",
+        "ecus": 4.0,
+        "cores": 2,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.large",
+        "pricing": {
+          "linux": "$ 0.460",
+          "mswin": "$ 0.600"
+        }
+      },
+      {
+        "name": "Extra Large Instance",
+        "ram": "15 GB",
+        "ecus": 8.0,
+        "cores": 4,
+        "disk": "690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m1.xlarge",
+        "pricing": {
+          "linux": "$ 0.920",
+          "mswin": "$ 1.200"
+        }
+      },
+      {
+        "name": "Micro Instance",
+        "notes": [
+          "Up to 2 EC2 Compute Units (for short periodic bursts)",
+          "EBS storage only"
+        ],
+        "ram": "613 MB",
+        "ecus": 0,
+        "cores": 1,
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "low",
+        "type": "t1.micro",
+        "pricing": {
+          "linux": "$ 0.027",
+          "mswin": "$ 0.037"
+        }
+      },
+      {
+        "name": "High-Memory Extra Large Instance",
+        "ram": "17.1 GB",
+        "ecus": 6.5,
+        "cores": 2,
+        "disk": "420 GB",
+        "architectures": [
+          64
+        ],
+        "io": "moderate",
+        "type": "m2.xlarge",
+        "pricing": {
+          "linux": "$ 0.680",
+          "mswin": "$ 0.800"
+        }
+      },
+      {
+        "name": "High-Memory Double Extra Large Instance",
+        "ram": "34.2 GB",
+        "ecus": 13.0,
+        "cores": 4,
+        "disk": "850 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.2xlarge",
+        "pricing": {
+          "linux": "$ 1.360",
+          "mswin": "$ 1.600"
+        }
+      },
+      {
+        "name": "High-Memory Quadruple Extra Large Instance",
+        "ram": "68.4 GB",
+        "ecus": 26.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "m2.4xlarge",
+        "pricing": {
+          "linux": "$ 2.720",
+          "mswin": "$ 3.200"
+        }
+      },
+      {
+        "name": "High-CPU Medium Instance",
+        "ram": "1.7 GB",
+        "ecus": 5.0,
+        "cores": 2,
+        "disk": "350 GB",
+        "architectures": [
+          32,
+          64
+        ],
+        "io": "moderate",
+        "type": "c1.medium",
+        "pricing": {
+          "linux": "$ 0.230",
+          "mswin": "$ 0.350"
+        }
+      },
+      {
+        "name": "High-CPU Extra Large Instance",
+        "ram": "7 GB",
+        "ecus": 20.0,
+        "cores": 8,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "high",
+        "type": "c1.xlarge",
+        "pricing": {
+          "linux": "$ 0.920",
+          "mswin": "$ 1.400"
+        }
+      },
+      {
+        "name": "Cluster Compute Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture"
+        ],
+        "ram": "23 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster Compute Eight Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon E5-2670, eight-core \"Sandy Bridge\" architecture"
+        ],
+        "ram": "60.5 GB",
+        "ecus": 88.0,
+        "cores": 2,
+        "disk": "3370 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cc2.8xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      },
+      {
+        "name": "Cluster GPU Quadruple Extra Large Instance",
+        "notes": [
+          "2 x Intel Xeon X5570, quad-core “Nehalem” architecture",
+          "2 x NVIDIA Tesla"
+        ],
+        "ram": "22 GB",
+        "ecus": 33.5,
+        "cores": 2,
+        "disk": "1690 GB",
+        "architectures": [
+          64
+        ],
+        "io": "very high",
+        "type": "cg1.4xlarge",
+        "pricing": {
+          "linux": null,
+          "mswin": null
+        }
+      }
+    ]
+  }
+}
