@@ -47,15 +47,7 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
     <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
     <script type="text/javascript">
-    angular.module("formatters", [])
-      .filter("formatDate", function () {
-        return function (input) {
-          var date = new Date(input)
-          return _.str.sprintf("%4d-%02d-%02d", date.getFullYear(), date.getMonth() + 1, date.getDate())
-        }
-      })
-
-    angular.module("ec2Pricing", ["formatters"])
+    angular.module("ec2Pricing", [])
 
     var ApplicationController = function ($scope, $http, $location) {
       var ioSortOrder = ["low", "moderate", "high", "very high"]
@@ -363,7 +355,7 @@
         <div class="span6">
           <p>
             Data from <a href="http://aws.amazon.com/ec2/pricing/">EC2 Pricing</a> and <a href="http://aws.amazon.com/ec2/instance-types/">EC2 Instance Types</a>,
-            last updated {{lastUpdated | formatDate}}
+            last updated {{lastUpdated | date}}
           </p>
         </div>
         <div class="span6 text-right">
