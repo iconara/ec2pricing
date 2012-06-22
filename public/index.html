@@ -135,6 +135,8 @@
               size = size/1024
             }
             return size
+          } else if (field == "architectures") {
+            return instance.architectures.join("/")
           } else if (field == "io") {
             return ioSortOrder.indexOf(value)
           } else {
@@ -283,6 +285,7 @@
                 <th><a href="#" ng-click="sortBy($event, 'type')">API Name</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'ecus')" title="EC2 Compute Units">ECUs</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'cores')">Cores</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'architectures')">Arch.</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'ram')">RAM</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'disk')">Disk</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'io')">IO Perf.</a></th>
@@ -302,6 +305,7 @@
                 </td>
                 <td class="numeric">{{instanceType.ecus}}</td>
                 <td class="numeric">{{instanceType.cores}}</td>
+                <td>{{instanceType.architectures.join("/")}}-bit</td>
                 <td class="numeric">{{instanceType.ram}}</td>
                 <td class="numeric">{{instanceType.disk || 'n/a'}}</td>
                 <td>{{instanceType.io}}</td>
