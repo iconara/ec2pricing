@@ -27,12 +27,32 @@
     tr.not-available {
       opacity: 0.5;
     }
+
+    .right {
+      text-align: right;
+    }
+
+    footer {
+      margin-top: 4em;
+      font-size: 80%;
+      border-top: 1px solid #EEE;
+      padding-top: 1em;
+    }
     </style>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
     <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
     <script type="text/javascript">
-    angular.module("ec2Pricing", [])
+    angular.module("formatters", [])
+      .filter("formatDateTime", function () {
+        return function (input) {
+          var date = new Date(input)
+          var tz = date.toString().replace(/^.+(GMT[+-]\d{4}).+$/, '$1')
+          return _.str.sprintf("%4d-%02d-%02d %02d:%02d:%02d %s", date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), tz)
+        }
+      })
+
+    angular.module("ec2Pricing", ["formatters"])
 
     var ApplicationController = function ($scope, $http, $location) {
       var ioSortOrder = ["low", "moderate", "high", "very high"]
@@ -135,8 +155,6 @@
       var restoreState = function () {
         var state = $location.search()
 
-        console.log(state)
-
         $scope.selectedOs = state.os || "linux"
         
         if (state.sort) {
@@ -205,6 +223,7 @@
       }
       
       $http({method: "GET", url: "pricing.json"}).success(function (data, status, headers, config) {
+        $scope.lastUpdated = new Date(headers("last-modified"))
         $scope.pricing = data
         $scope.regions = _(data).keys().sort()
         restoreState()
@@ -214,6 +233,13 @@
   </head>
   <body ng-controller="ApplicationController">
     <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div class="page-header">
+            <h1>EC2 Pricing</h1>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="span12">
           <ul class="region-tabs nav nav-tabs">
@@ -227,12 +253,12 @@
                 <th><a href="#" ng-click="sortBy($event, 'type')">Name</a></th>
                 <th></th>
                 <th><a href="#" ng-click="sortBy($event, 'type')">API Name</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'ecus')">ECUs</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'ecus')" title="EC2 Compute Units">ECUs</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'cores')">Cores</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'ram')">RAM</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'disk')">Disk</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'io')">IO</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'price')">Price</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'io')">IO Perf.</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'price')">Price/hour</a></th>
               </tr>
             </thead>
             <tbody>
@@ -263,6 +289,19 @@
           </ul>
         </div>
       </div>
+      <footer class="row">
+        <div class="span8">
+          <p>
+            Data from <a href="http://aws.amazon.com/ec2/pricing/">EC2 Pricing</a> and <a href="http://aws.amazon.com/ec2/instance-types/">EC2 Instance Types</a>,
+            last updated {{lastUpdated | formatDateTime}}
+          </p>
+        </div>
+        <div class="span4 right">
+          <p>
+            Created by <a href="http://twitter.com/iconara">Theo Hultberg / @iconara</a>
+          </p>
+        </div>
+      </footer>
     </div>
   </body>
 </html>
