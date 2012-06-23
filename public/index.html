@@ -3,6 +3,7 @@
 <html ng-app="ec2Pricing">
   <head>
     <meta charset="utf-8" />
+    <meta name="fragment" content="!" />
     <title>EC2 Instance Types &amp; Pricing</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap-2.0.4-custom.min.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive-2.0.4.min.css" />
@@ -48,6 +49,9 @@
     <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
     <script type="text/javascript">
     angular.module("ec2Pricing", [])
+      .config(function ($locationProvider) {
+        $locationProvider.hashPrefix('!')
+      })
 
     var ApplicationController = function ($scope, $http, $location) {
       var ioSortOrder = ["low", "moderate", "high", "very high"]
