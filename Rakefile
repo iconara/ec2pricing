@@ -13,7 +13,22 @@ task :update do
   end
 end
 
-task :upload => :update do
+MIME_TYPES = {
+  '.js'   => 'application/javascript',
+  '.html' => 'text/html',
+  '.css'  => 'text/css',
+  '.eot'  => 'application/vnd.ms-fontobject',
+  '.svg'  => 'image/svg+xml',
+  '.ttf'  => 'application/x-font-ttf',
+  '.woff' => 'application/x-font-woff',
+  '.png'  => 'image/png',
+  '.json' => 'application/json'
+}
+MIME_TYPES.default = 'application/octet-stream'
+
+task :upload => [:update, :just_upload]
+
+task :just_upload do
   options = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
     :secret_access_key => ENV['AWS_SECRET_KEY'],
@@ -25,8 +40,12 @@ task :upload => :update do
     unless File.directory?(local_path)
       remote_path = local_path.sub(/^public\//, '')
       puts "Sending #{local_path} -> #{remote_path}"
-      # TODO: fix mime-types!
-      bucket.objects[remote_path].write(:file => local_path, :acl => :public_read)
+      object_options = {
+        :file => local_path,
+        :acl => :public_read,
+        :content_type => MIME_TYPES[File.extname(local_path)]
+      }
+      bucket.objects[remote_path].write(object_options)
     end
   end
 end
