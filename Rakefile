@@ -7,7 +7,7 @@ require 'ec2_pricing'
 task :update do
   puts 'Updating public/pricing.json'
   pricing = Ec2Pricing::OnDemandPricing.new
-  File.open('public/pricing.json', 'w') do |io|
+  File.open('public/data/pricing.json', 'w') do |io|
     io.write(JSON.pretty_generate(pricing.by_region))
   end
 end

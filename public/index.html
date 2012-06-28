@@ -47,13 +47,17 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
     <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
+    <script type="text/javascript" src="app/ec2-pricing-parser.js"></script>
     <script type="text/javascript">
-    angular.module("ec2Pricing", [])
-      .config(function ($locationProvider) {
+    angular.module("ec2Pricing", []).
+      config(function ($locationProvider) {
         $locationProvider.hashPrefix('!')
+      }).
+      factory('parseEc2Pricing', function () {
+        return parseEc2Pricing
       })
 
-    var ApplicationController = function ($scope, $http, $location) {
+    var ApplicationController = function ($scope, $http, $location, parseEc2Pricing) {
       var ioSortOrder = ["low", "moderate", "high", "very high"]
       var typeClassSortOrder = ["m1", "t1", "c1", "m2", "cc1", "cc2", "cg1"]
       var typeSizeSortOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
@@ -83,6 +87,9 @@
           if (field == "type") {
             availableTypes = sortInstanceTypesByType(availableTypes, $scope.sortAscending)
           } else if (field == "price") {
+            availableTypes = sortInstanceTypesByPrice(availableTypes, $scope.selectedOs, $scope.sortAscending)
+          } else if (field == "spotPrice") {
+            // TODO: move instances without spotPrice to the unavailable list
             availableTypes = sortInstanceTypesByPrice(availableTypes, $scope.selectedOs, $scope.sortAscending)
           } else {
             availableTypes = sortInstanceTypesBy(availableTypes, field, $scope.sortAscending)
@@ -270,13 +277,44 @@
           return null
         }
       }
+
+      $scope.spotPrice = function (instanceType) {
+        if ($scope.spotInstancePricing) {
+          var regionPricing = $scope.spotInstancePricing[$scope.selectedRegion.api_name]
+          var foundInstanceType = _(regionPricing.instanceTypes).find(function (it) { return it.type == instanceType.type })
+          if (foundInstanceType) {
+            return $scope.calculatedPrice(foundInstanceType)
+          }
+        }
+        return null
+      }
+
+      $scope.inspectInstanceType = function (instanceType) {
+        console.log(instanceType)
+      }
       
-      $http({method: "GET", url: "pricing.json"}).success(function (data, status, headers, config) {
-        $scope.lastUpdated = new Date(headers("last-modified"))
-        $scope.pricing = data
-        $scope.regions = _(data).keys().sort()
-        restoreState()
-      })
+      var loadOnDemandPricing = function () {
+        $http({method: "GET", url: "data/pricing.json"}).success(function (data, status, headers, config) {
+          $scope.lastUpdated = new Date(headers("last-modified"))
+          $scope.pricing = data
+          $scope.regions = _(data).keys().sort()
+          restoreState()
+        })
+      }
+
+      var loadSpotInstancePricing = function () {
+        // callback name is hardcoded
+        window.callback = function (data) {
+          delete window.callback
+          $scope.$apply(function () {
+            $scope.spotInstancePricing = parseEc2Pricing(data)
+          })
+        }
+        $http.jsonp("http://spot-price.s3.amazonaws.com/spot.js")
+      }
+
+      loadOnDemandPricing()
+      loadSpotInstancePricing()
     }
     </script>
     <script type="text/javascript">
@@ -319,10 +357,13 @@
                 <th><a href="#" ng-click="sortBy($event, 'disk')">Disk</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'io')">IO Perf.</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'price')">Price</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'spotPrice')">Spot price</a></th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="instanceType in selectedRegion.instance_types" ng-class="instanceTypeRowClass(instanceType)">
+              <tr ng-repeat="instanceType in selectedRegion.instance_types"
+                   ng-class="instanceTypeRowClass(instanceType)"
+                   ng-click="inspectInstanceType(instanceType)">
                 <td>{{instanceType.name}}</td>
                 <td title="{{instanceType.notes.join(', ')}}">
                   <i class="icon-info-sign" ng-show="instanceType.notes"></i>
@@ -339,6 +380,7 @@
                 <td class="numeric">{{instanceType.disk || 'n/a'}}</td>
                 <td>{{instanceType.io}}</td>
                 <td class="numeric">{{calculatedPrice(instanceType) || "n/a"}}</td>
+                <td class="numeric">{{spotPrice(instanceType) || "n/a"}}</td>
               </tr>
             </tbody>
           </table>
