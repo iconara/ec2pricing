@@ -263,8 +263,12 @@
         } else if (multiplier > 1) {
           decimals = 2
         }
-        // TODO: thousands-separators!
-        return _.str.sprintf("%." + decimals + "f", price)
+        if (price > 0.0001) {
+          // TODO: thousands-separators!
+          return _.str.sprintf("$%." + decimals + "f", price)
+        } else {
+          return null
+        }
       }
       
       $http({method: "GET", url: "pricing.json"}).success(function (data, status, headers, config) {
@@ -334,7 +338,7 @@
                 <td class="numeric">{{instanceType.ram}}</td>
                 <td class="numeric">{{instanceType.disk || 'n/a'}}</td>
                 <td>{{instanceType.io}}</td>
-                <td class="numeric">${{calculatedPrice(instanceType) || "n/a"}}</td>
+                <td class="numeric">{{calculatedPrice(instanceType) || "n/a"}}</td>
               </tr>
             </tbody>
           </table>
