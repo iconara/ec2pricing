@@ -72,6 +72,7 @@
       $scope.selectedOs = null
       $scope.periods = ["hourly", "daily", "weekly", "monthly", "yearly"]
       $scope.selectedPeriod = null
+      $scope.singularPeriods = {"hourly": "hour", "daily": "day", "weekly": "week", "monthly": "month", "yearly": "year"}
 
       var sortInstanceTypes = function () {
         if ($scope.selectedRegion) {
@@ -349,15 +350,15 @@
               <tr>
                 <th><a href="#" ng-click="sortBy($event, 'type')">Name</a></th>
                 <th></th>
-                <th><a href="#" ng-click="sortBy($event, 'type')">API Name</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'ecus')" title="EC2 Compute Units">ECUs</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'cores')">Cores</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'architectures')">Arch.</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'ram')">RAM</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'disk')">Disk</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'io')">IO Perf.</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'price')">Price</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'spotPrice')">Spot price</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'type')">API Name</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'ecus')" title="EC2 Compute Units">ECUs</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'cores')" title="Logical cores">Cores</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'architectures')" title="Processor architecture">Arch.</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'ram')" title="RAM">RAM</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'disk')" title="Total disk size (most instances have multiple disks)">Disk</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'io')" title="IO Performance">IO Perf.</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'price')" title="On Demand Price per {{singularPeriods[selectedPeriod]}}">Price</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'spotPrice')" title="Current spot price per {{singularPeriods[selectedPeriod]}} (updated every five minutes)">Spot price</a></th>
               </tr>
             </thead>
             <tbody>
