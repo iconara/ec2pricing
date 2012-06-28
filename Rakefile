@@ -1,15 +1,14 @@
 $: << File.expand_path('../lib', __FILE__)
 
 require 'aws'
-require 'ec2pricing'
+require 'ec2_pricing'
 
 
 task :update do
   puts 'Updating public/pricing.json'
-  instance_properties = InstanceProperties.new
-  instance_properties.clear_cache!
+  pricing = Ec2Pricing::OnDemandPricing.new
   File.open('public/pricing.json', 'w') do |io|
-    io.write(JSON.pretty_generate(instance_properties.by_region))
+    io.write(JSON.pretty_generate(pricing.by_region))
   end
 end
 
