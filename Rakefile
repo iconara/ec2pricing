@@ -4,12 +4,16 @@ require 'aws'
 require 'ec2_pricing'
 
 
-task :update do
+task :pricing do
+  pricing = Ec2Pricing::OnDemandPricing.new(false)
+  @pricing_json = JSON.pretty_generate(pricing.by_region)
+end
+
+task :update => :pricing do
   puts 'Updating public/pricing.json'
-  pricing = Ec2Pricing::OnDemandPricing.new
   Dir.mkdir('public/data') unless Dir.exists?('public/data')
   File.open('public/data/pricing.json', 'w') do |io|
-    io.write(JSON.pretty_generate(pricing.by_region))
+    io.write(@pricin_json)
   end
 end
 
@@ -26,26 +30,36 @@ MIME_TYPES = {
 }
 MIME_TYPES.default = 'application/octet-stream'
 
-task :upload => [:update, :just_upload]
+task :upload => [:update, 'upload:data', 'upload:site']
 
-task :just_upload do
-  options = {
-    :access_key_id => ENV['AWS_ACCESS_KEY'],
-    :secret_access_key => ENV['AWS_SECRET_KEY'],
-    :s3_endpoint => 's3-eu-west-1.amazonaws.com'
-  }
-  s3 = AWS::S3.new(options)
-  bucket = s3.buckets['ec2pricing.iconara.info']
-  Dir['public/**/*'].each do |local_path|
-    unless File.directory?(local_path)
-      remote_path = local_path.sub(/^public\//, '')
-      puts "Sending #{local_path} -> #{remote_path}"
-      object_options = {
-        :file => local_path,
-        :acl => :public_read,
-        :content_type => MIME_TYPES[File.extname(local_path)]
-      }
-      bucket.objects[remote_path].write(object_options)
+namespace :upload do
+  task :connect do
+    # the S3 driver will pick up the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables
+    @s3 ||= AWS::S3.new(:s3_endpoint => 's3-eu-west-1.amazonaws.com')
+    @bucket ||= @s3.buckets['ec2pricing.iconara.info']
+  end
+
+  task :site => :connect do
+    Dir['public/**/*'].each do |local_path|
+      unless File.directory?(local_path) || File.dirname(local_path) == 'public/data'
+        remote_path = local_path.sub(/^public\//, '')
+        puts "Sending #{local_path} -> #{remote_path}"
+        object_options = {
+          :file => local_path,
+          :acl => :public_read,
+          :content_type => MIME_TYPES[File.extname(local_path)]
+        }
+        @bucket.objects[remote_path].write(object_options)
+      end
     end
+  end
+
+  task :data => [:pricing, :connect] do
+    object_options = {
+      :data => @pricing_json,
+      :acl => :public_read,
+      :content_type => MIME_TYPES['.json']
+    }
+    @bucket.objects['data/pricing.json'].write(object_options)
   end
 end

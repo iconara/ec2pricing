@@ -9,6 +9,10 @@ module Ec2Pricing
 
     PRICING_DATA_URL = 'http://aws.amazon.com/ec2/pricing/pricing-on-demand-instances.json'
 
+    def initialize(cache=true)
+      @cache = cache
+    end
+
     def by_region
       load!
       regions.each_with_object({}) do |region, region_output|
@@ -51,7 +55,7 @@ module Ec2Pricing
     def load!
       return if defined? @pricing
       @instance_types = InstanceTypes.new.types
-      data = cached('on_demand_pricing') do
+      data = cached('on_demand_pricing', :cache? => @cache) do
         open(PRICING_DATA_URL).read
       end
       raw_pricing_data = JSON.parse(data)
