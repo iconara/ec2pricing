@@ -65,7 +65,7 @@ namespace :upload do
     Dir['public/**/*'].each do |local_path|
       unless File.directory?(local_path) || File.dirname(local_path) == 'public/data'
         remote_path = local_path.sub(/^public\//, '')
-        puts "Sending #{local_path} -> #{remote_path}"
+        puts "Uploading #{local_path} to #{remote_path}"
         object_options = {
           :file => local_path,
           :acl => :public_read,
