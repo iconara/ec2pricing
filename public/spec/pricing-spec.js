@@ -30,32 +30,32 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
     var sharedPricingExamples = function (type) {
       describe("(shared)", function () {
         it("returns an object with the API name of the regions as keys", function () {
-          expect(pricing[type]["us-east-1"]).toBeDefined()
-          expect(pricing[type]["eu-west-1"]).toBeDefined()
+          expect(pricing[type].regions["us-east-1"]).toBeDefined()
+          expect(pricing[type].regions["eu-west-1"]).toBeDefined()
         })
 
         it("sets the name property of the regions", function () {
-          expect(pricing[type]["us-east-1"].name).toMatch(/US East/)
-          expect(pricing[type]["eu-west-1"].name).toMatch(/Ireland/)
+          expect(pricing[type].regions["us-east-1"].name).toMatch(/US East/)
+          expect(pricing[type].regions["eu-west-1"].name).toMatch(/Ireland/)
         })
 
         it("sets the API name property of the regions", function () {
-          expect(pricing[type]["us-east-1"].apiName).toMatch("us-east-1")
-          expect(pricing[type]["eu-west-1"].apiName).toMatch("eu-west-1")
+          expect(pricing[type].regions["us-east-1"].apiName).toMatch("us-east-1")
+          expect(pricing[type].regions["eu-west-1"].apiName).toMatch("eu-west-1")
         })
 
         it("creates a list of instance types for each region", function () {
-          expect(pricing[type]["eu-west-1"].instanceTypes.length).toBeGreaterThan(0)
+          expect(pricing[type].regions["eu-west-1"].instanceTypes.length).toBeGreaterThan(0)
         })
 
         it("correctly maps the cc2.8xlarge instance type", function () {
-          var instanceTypes = pricing[type]["eu-west-1"].instanceTypes
+          var instanceTypes = pricing[type].regions["eu-west-1"].instanceTypes
           var cc2_8xlarge = findByType(instanceTypes, "cc2.8xlarge")
           expect(cc2_8xlarge).toBeDefined()
         })
 
         it("sets the price to null where N/A", function () {
-          var instanceTypes = pricing.onDemandInstance["eu-west-1"].instanceTypes
+          var instanceTypes = pricing.onDemandInstance.regions["eu-west-1"].instanceTypes
           var instanceType = findByType(instanceTypes, "cg1.4xlarge")
           expect(instanceType.pricing.linux).toBeNull()
         })
@@ -66,7 +66,7 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       sharedPricingExamples("spotInstance")
 
       it("creates an instance type object for each instance type and region", function () {
-        var instanceType = pricing.spotInstance['eu-west-1'].instanceTypes[0]
+        var instanceType = pricing.spotInstance.regions['eu-west-1'].instanceTypes[0]
         expect(instanceType.type).toEqual("m1.small")
         expect(instanceType.pricing).toEqual({linux: 0.016, mswin: 0.032})
       })
@@ -76,7 +76,7 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       sharedPricingExamples("onDemandInstance")
 
       it("creates an instance type object for each instance type and region", function () {
-        var instanceType = pricing.onDemandInstance["eu-west-1"].instanceTypes[0]
+        var instanceType = pricing.onDemandInstance.regions["eu-west-1"].instanceTypes[0]
         expect(instanceType.type).toEqual("m1.small")
         expect(instanceType.pricing).toEqual({linux: 0.085, mswin: 0.115})
       })
@@ -86,17 +86,17 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
 
 angular.module("ec2PricingMock", []).factory("pricingParser", function () {
   return function (pricing) {
-    return {parsed: pricing}
+    return {regions: pricing}
   }
 })
 
 angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(function ($httpBackend, $http, $window, pricingLoader, pricingParser) {
   describe("pricingLoader", function () {
-    var fakeOnDemandResponse = "FAKE_ON_DEMAND_PRICING"
-    var fakeSpotResponse = "FAKE_SPOT_PRICING"
+    var fakeOnDemandResponse = "FAKE ON DEMAND RESPONSE"
+    var fakeSpotResponse = "FAKE SPOT RESPONSE"
 
     beforeEach(function () {
-      $httpBackend.when("GET", "data/pricing-on-demand-instances.json").respond(fakeOnDemandResponse)
+      $httpBackend.when("GET", "data/pricing-on-demand-instances.json").respond(fakeOnDemandResponse, {"Last-Modified": "Sat, 30 Jun 2012 18:47:26 GMT"})
       $httpBackend.whenJSONP("http://spot-price.s3.amazonaws.com/spot.js").respond(null) // see test for explanation for null here
     })
 
@@ -105,29 +105,48 @@ angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(functi
       $httpBackend.verifyNoOutstandingRequest()
     })
 
-    it("loads on-demand pricing data and parses it with pricingParser", function () {
+    describe("when loading on demand instance pricing", function () {
       var pricing
-      pricingLoader.onDemand().then(function (p) { pricing = p })
-      $httpBackend.flush()
-      expect(pricing).toEqual(pricingParser(fakeOnDemandResponse))
-    })
 
-    it("loads spot pricing data and parses it with pricingParser", function () {
-      // the spot prices are loaded with JSONP, but the resource has a fixed 
-      // callback name, so we need to jump though some hoops to emulate that here
-      var pricing
-      runs(function () {
-        pricingLoader.spot().then(function (p) { pricing = p })
+      beforeEach(function () {
+        pricingLoader.onDemand().then(function (p) { pricing = p })
         $httpBackend.flush()
       })
-      waitsFor(function () {
-        if ($window.callback) {
-          $window.callback(fakeSpotResponse)
-        }
-        return !!pricing
+
+      it("loads data and parses it with pricingParser", function () {
+        expect(pricing.regions).toEqual(fakeOnDemandResponse)
       })
-      runs(function () {
-        expect(pricing).toEqual(pricingParser(fakeSpotResponse))
+      
+      it("sets the lastUpdated property", function () {
+        expect(pricing.lastUpdated).toEqual(new Date("Sat, 30 Jun 2012 18:47:26 GMT"))
+      })
+    })
+
+    describe("when loading spot instance pricing", function () {
+      var pricing
+
+      beforeEach(function () {
+        // the spot prices are loaded with JSONP, but the resource has a fixed 
+        // callback name, so we need to jump though some hoops to emulate that here
+        runs(function () {
+          pricingLoader.spot().then(function (p) { pricing = p })
+          $httpBackend.flush()
+        })
+        waitsFor(function () {
+          if ($window.callback) {
+            $window.callback(fakeSpotResponse)
+          }
+          return !!pricing
+        })
+      })
+
+      it("loads data and parses it with pricingParser", function () {
+        expect(pricing.regions).toEqual(fakeSpotResponse)
+      })
+
+      it("sets the lastUpdated property to the current time", function () {
+        var timeDiff = new Date().getTime() - pricing.lastUpdated.getTime()
+        expect(timeDiff).toBeLessThan(100)
       })
     })
   })

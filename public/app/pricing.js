@@ -65,7 +65,9 @@
     return {
       onDemand: function () {
         return $http.get(ON_DEMAND_PRICING_URL).then(function (response) {
-          return pricingParser(response.data)
+          var data = pricingParser(response.data)
+          data.lastUpdated = new Date(response.headers("last-modified"))
+          return data
         })
       },
       spot: function () {
@@ -75,7 +77,11 @@
           $rootScope.$apply(function () { deferred.resolve(response) })
         }
         $http.jsonp(SPOT_PRICING_URL)
-        return deferred.promise.then(pricingParser)
+        return deferred.promise.then(function (data) {
+          data = pricingParser(data)
+          data.lastUpdated = new Date()
+          return data
+        })
       }
     }
   })
@@ -111,7 +117,7 @@
           })
         })
       })
-      return byRegion
+      return {regions: byRegion}
     }
   })
 })()

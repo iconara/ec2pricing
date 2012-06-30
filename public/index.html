@@ -293,13 +293,13 @@
 
       var startUpdateSpotPricing = function () {
         pricingLoader.spot().then(function (spotPricing) {
-          $scope.spotInstancePricing = spotPricing
+          $scope.spotInstancePricing = spotPricing.regions
         })
         $timeout(arguments.callee, 300000)
       }
 
       var mergeInstanceTypesIntoPricing = function (instanceTypes, pricing) {
-        _(pricing).each(function (region) {
+        _(pricing.regions).each(function (region) {
           _(region.instanceTypes).each(function (instanceType) {
             if (instanceType.type in instanceTypes) {
               _(instanceType).extend(instanceTypes[instanceType.type])
@@ -313,10 +313,10 @@
       instanceTypesLoader.instanceTypes().then(function (instanceTypes) {
           pricingLoader.onDemand()
             .then(function (onDemandPricing) {
-              $scope.lastUpdated = new Date() // TODO
+              $scope.lastUpdated = onDemandPricing.lastUpdated
               $scope.instanceTypes = instanceTypes
-              $scope.regions = _(onDemandPricing).keys().sort()
-              $scope.pricing = onDemandPricing
+              $scope.regions = _(onDemandPricing.regions).keys().sort()
+              $scope.pricing = onDemandPricing.regions
               mergeInstanceTypesIntoPricing(instanceTypes, onDemandPricing)
             })
             .then(startUpdateSpotPricing)
