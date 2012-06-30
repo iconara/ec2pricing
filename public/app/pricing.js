@@ -46,25 +46,20 @@
     "sa-east-1":      "South America (Sao Paulo)"
   }
 
-  // TODO: move these to module values (?)
-  var INSTANCE_TYPES_URL = "data/instance-types.json"
-  var ON_DEMAND_PRICING_URL = "data/pricing-on-demand-instances.json"
-  var SPOT_PRICING_URL = "http://spot-price.s3.amazonaws.com/spot.js"
-
   var module = angular.module("ec2Pricing")
 
-  module.factory("instanceTypesLoader", function ($http) {
+  module.factory("instanceTypesLoader", function ($http, instanceTypesUrl) {
     return {
       instanceTypes: function () {
-        return $http.get(INSTANCE_TYPES_URL).then(function (response) { return response.data })
+        return $http.get(instanceTypesUrl).then(function (response) { return response.data })
       }
     }
   })
 
-  module.factory("pricingLoader", function ($http, $window, $q, $rootScope, pricingParser) {
+  module.factory("pricingLoader", function ($http, $window, $q, $rootScope, onDemandPricingUrl, spotPricingUrl, pricingParser) {
     return {
       onDemand: function () {
-        return $http.get(ON_DEMAND_PRICING_URL).then(function (response) {
+        return $http.get(onDemandPricingUrl).then(function (response) {
           var data = pricingParser(response.data)
           data.lastUpdated = new Date(response.headers("last-modified"))
           return data
@@ -76,7 +71,7 @@
           $window.callback = undefined
           $rootScope.$apply(function () { deferred.resolve(response) })
         }
-        $http.jsonp(SPOT_PRICING_URL)
+        $http.jsonp(spotPricingUrl)
         return deferred.promise.then(function (data) {
           data = pricingParser(data)
           data.lastUpdated = new Date()

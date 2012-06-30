@@ -90,14 +90,14 @@ angular.module("ec2PricingMock", []).factory("pricingParser", function () {
   }
 })
 
-angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(function ($httpBackend, $http, $window, pricingLoader, pricingParser) {
+angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(function ($httpBackend, $http, $window, onDemandPricingUrl, spotPricingUrl, pricingLoader, pricingParser) {
   describe("pricingLoader", function () {
     var fakeOnDemandResponse = "FAKE ON DEMAND RESPONSE"
     var fakeSpotResponse = "FAKE SPOT RESPONSE"
 
     beforeEach(function () {
-      $httpBackend.when("GET", "data/pricing-on-demand-instances.json").respond(fakeOnDemandResponse, {"Last-Modified": "Sat, 30 Jun 2012 18:47:26 GMT"})
-      $httpBackend.whenJSONP("http://spot-price.s3.amazonaws.com/spot.js").respond(null) // see test for explanation for null here
+      $httpBackend.when("GET", onDemandPricingUrl).respond(fakeOnDemandResponse, {"Last-Modified": "Sat, 30 Jun 2012 18:47:26 GMT"})
+      $httpBackend.whenJSONP(spotPricingUrl).respond(null) // see test for explanation for null here
     })
 
     afterEach(function() {
@@ -152,10 +152,10 @@ angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(functi
   })
 })
 
-angular.injector(["ng", "ngMock", "ec2Pricing"]).invoke(function ($httpBackend, instanceTypesLoader) {
+angular.injector(["ng", "ngMock", "ec2Pricing"]).invoke(function ($httpBackend, instanceTypesUrl, instanceTypesLoader) {
   describe("instanceTypesLoader", function () {
     beforeEach(function () {
-      $httpBackend.when("GET", "data/instance-types.json").respond({"m1.small": {}})
+      $httpBackend.when("GET", instanceTypesUrl).respond({"m1.small": {}})
     })
 
     afterEach(function() {
