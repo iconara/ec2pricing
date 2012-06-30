@@ -4,35 +4,44 @@ require 'aws'
 require 'ec2_pricing'
 
 
+task :types do
+  types = Ec2Pricing::InstanceTypes.new(false)
+  @types_json = JSON.pretty_generate(types.types)
+end
+
 task :pricing do
   pricing = Ec2Pricing::OnDemandPricing.new(false)
   @pricing_json = JSON.pretty_generate(pricing.by_region)
 end
 
-task :update => :pricing do
-  puts 'Updating public/pricing.json'
+task :update => [:pricing, :types] do
   Dir.mkdir('public/data') unless Dir.exists?('public/data')
+  puts 'Updating public/pricing.json'
   File.open('public/data/pricing.json', 'w') do |io|
-    io.write(@pricin_json)
+    io.write(@pricing_json)
+  end
+  puts 'Updating public/types.json'
+  File.open('public/data/types.json', 'w') do |io|
+    io.write(@types_json)
   end
 end
-
-MIME_TYPES = {
-  '.js'   => 'application/javascript',
-  '.html' => 'text/html',
-  '.css'  => 'text/css',
-  '.eot'  => 'application/vnd.ms-fontobject',
-  '.svg'  => 'image/svg+xml',
-  '.ttf'  => 'application/x-font-ttf',
-  '.woff' => 'application/x-font-woff',
-  '.png'  => 'image/png',
-  '.json' => 'application/json'
-}
-MIME_TYPES.default = 'application/octet-stream'
 
 task :upload => [:update, 'upload:data', 'upload:site']
 
 namespace :upload do
+  MIME_TYPES = {
+    '.js'   => 'application/javascript',
+    '.html' => 'text/html',
+    '.css'  => 'text/css',
+    '.eot'  => 'application/vnd.ms-fontobject',
+    '.svg'  => 'image/svg+xml',
+    '.ttf'  => 'application/x-font-ttf',
+    '.woff' => 'application/x-font-woff',
+    '.png'  => 'image/png',
+    '.json' => 'application/json'
+  }
+  MIME_TYPES.default = 'application/octet-stream'
+
   task :connect do
     # the S3 driver will pick up the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables
     @s3 ||= AWS::S3.new(:s3_endpoint => 's3-eu-west-1.amazonaws.com')

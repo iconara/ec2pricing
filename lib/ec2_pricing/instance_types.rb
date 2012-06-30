@@ -9,6 +9,10 @@ module Ec2Pricing
 
     INSTANCE_TYPES_DATA_URL = 'http://aws.amazon.com/ec2/instance-types/'
 
+    def initialize(cache=true)
+      @cache = cache
+    end
+
     def types
       load!
       @instance_types
@@ -17,7 +21,7 @@ module Ec2Pricing
     def load!
       return if defined? @instance_type
 
-      data = cached('instance_types') do
+      data = cached('instance_types', :cache? => @cache) do
         open(INSTANCE_TYPES_DATA_URL).read
       end
 
