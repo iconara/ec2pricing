@@ -9,25 +9,32 @@ task :update => 'data:update'
 
 namespace :data do
   task :types do
+    puts "Updating instance-types.json"
     types = Ec2Pricing::InstanceTypes.new(false)
     @types_file_name = 'instance-types.json'
     @types_json = JSON.pretty_generate(types.types)
   end
 
   task :pricing do
-    @pricing_file_name = Ec2Pricing::OnDemandPricing::PRICING_DATA_URL.split('/').last
-    @pricing_json = open(Ec2Pricing::OnDemandPricing::PRICING_DATA_URL).read
+    base_url = 'http://aws.amazon.com/ec2/pricing/'
+    files = %w[pricing-on-demand-instances.json ri-light-linux.json ri-light-mswin.json ri-medium-linux.json ri-medium-mswin.json ri-heavy-linux.json ri-heavy-mswin.json]
+    @pricing_json = files.each_with_object({}) do |file, pricing|
+      puts "Updating #{file}"
+      pricing[file] = open(base_url + file).read
+    end
   end
 
   task :update => [:pricing, :types] do
     Dir.mkdir('public/data') unless Dir.exists?('public/data')
-    puts "Updating public/data/#{@types_file_name}"
+    puts "Writing public/data/#{@types_file_name}"
     File.open("public/data/#{@types_file_name}", 'w') do |io|
       io.write(@types_json)
     end
-    puts "Updating public/data/#{@pricing_file_name}"
-    File.open("public/data/#{@pricing_file_name}", 'w') do |io|
-      io.write(@pricing_json)
+    @pricing_json.each do |file, data|
+      puts "Writing public/data/#{file}"
+      File.open("public/data/#{file}", 'w') do |io|
+        io.write(data)
+      end
     end
   end
 end
@@ -71,7 +78,11 @@ namespace :upload do
 
   task :data => ['data:pricing', 'data:types', :connect] do
     options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
+    puts "Uploading to data/#{@types_file_name}"
     @bucket.objects["data/#{@types_file_name}"].write(@types_json, options)
-    @bucket.objects["data/#{@pricing_file_name}"].write(@pricing_json, options)
+    @pricing_json.each do |file, data|
+      puts "Uploading to data/#{file}"
+      @bucket.objects["data/#{file}"].write(data, options)
+    end
   end
 end
