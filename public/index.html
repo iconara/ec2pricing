@@ -55,7 +55,7 @@
         $locationProvider.hashPrefix('!')
       })
 
-    var ApplicationController = function ($scope, $http, $location, pricingParser) {
+    var ApplicationController = function ($scope, $http, $location, $timeout, instanceTypesLoader, pricingLoader, pricingParser) {
       var ioSortOrder = ["low", "moderate", "high", "very high"]
       var typeClassSortOrder = ["m1", "t1", "c1", "m2", "cc1", "cc2", "cg1"]
       var typeSizeSortOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
@@ -76,10 +76,10 @@
         if ($scope.selectedRegion) {
           var field = $scope.sortField
 
-          var availableTypes = _($scope.selectedRegion.instance_types).select(function (instanceType) {
+          var availableTypes = _($scope.selectedRegion.instanceTypes).select(function (instanceType) {
             return !!instanceType.pricing[$scope.selectedOs]
           })
-          var unavailableTypes = _($scope.selectedRegion.instance_types).select(function (instanceType) {
+          var unavailableTypes = _($scope.selectedRegion.instanceTypes).select(function (instanceType) {
             return !instanceType.pricing[$scope.selectedOs]
           })
 
@@ -94,7 +94,7 @@
             availableTypes = sortInstanceTypesBy(availableTypes, field, $scope.sortAscending)
           }
 
-          $scope.selectedRegion.instance_types = availableTypes.concat(unavailableTypes)
+          $scope.selectedRegion.instanceTypes = availableTypes.concat(unavailableTypes)
         }
       }
 
@@ -114,8 +114,7 @@
 
       var sortInstanceTypesByPrice = function (instanceTypes, selectedOs, sortAscending) {
         var sortedInstanceTypes = _(instanceTypes).sortBy(function (instance) {
-          var value = instance.pricing[selectedOs]
-          return value.replace(/^\$ ([\d.]+)$/, '$1')
+          return instance.pricing[selectedOs]
         })
         if (!sortAscending) {
           sortedInstanceTypes.reverse()
@@ -155,7 +154,7 @@
       var updateState = function (firstTime) {
         if ($scope.selectedRegion) {
           var oldPath = $location.path()
-          $location.path($scope.selectedRegion.api_name)
+          $location.path($scope.selectedRegion.apiName)
           $location.search({
             sort: $scope.sortField + ":" + ($scope.sortAscending ? "asc" : "desc"),
             os: $scope.selectedOs,
@@ -243,7 +242,7 @@
       }
 
       $scope.regionTabClass = function (r) {
-        return r == $scope.selectedRegion.api_name ? "active" : ""
+        return r == $scope.selectedRegion.apiName ? "active" : ""
       }
 
       $scope.osSelectorClass = function (o) {
@@ -279,7 +278,7 @@
 
       $scope.spotPrice = function (instanceType) {
         if ($scope.spotInstancePricing) {
-          var regionPricing = $scope.spotInstancePricing[$scope.selectedRegion.api_name]
+          var regionPricing = $scope.spotInstancePricing[$scope.selectedRegion.apiName]
           var foundInstanceType = _(regionPricing.instanceTypes).find(function (it) { return it.type == instanceType.type })
           if (foundInstanceType) {
             return $scope.calculatedPrice(foundInstanceType)
@@ -291,40 +290,51 @@
       $scope.inspectInstanceType = function (instanceType) {
         console.log(instanceType)
       }
-      
-      var loadOnDemandPricing = function () {
-        $http({method: "GET", url: "data/pricing.json"}).success(function (data, status, headers, config) {
-          $scope.lastUpdated = new Date(headers("last-modified"))
-          $scope.pricing = data
-          $scope.regions = _(data).keys().sort()
-          restoreState()
+
+      var startUpdateSpotPricing = function () {
+        pricingLoader.spot().then(function (spotPricing) {
+          $scope.spotInstancePricing = spotPricing
+        })
+        $timeout(arguments.callee, 300000)
+      }
+
+      var mergeInstanceTypesIntoPricing = function (instanceTypes, pricing) {
+        _(pricing).each(function (region) {
+          _(region.instanceTypes).each(function (instanceType) {
+            if (instanceType.type in instanceTypes) {
+              _(instanceType).extend(instanceTypes[instanceType.type])
+            } else {
+              console.log("No instance type data for", instanceType.type)
+            }
+          })
         })
       }
 
-      var loadSpotInstancePricing = function () {
-        // callback name is hardcoded
-        window.callback = function (data) {
-          delete window.callback
-          $scope.$apply(function () {
-            $scope.spotInstancePricing = pricingParser(data)
-          })
-        }
-        $http.jsonp("http://spot-price.s3.amazonaws.com/spot.js")
-      }
-
-      loadOnDemandPricing()
-      loadSpotInstancePricing()
+      instanceTypesLoader.instanceTypes().then(function (instanceTypes) {
+          pricingLoader.onDemand()
+            .then(function (onDemandPricing) {
+              $scope.lastUpdated = new Date() // TODO
+              $scope.instanceTypes = instanceTypes
+              $scope.regions = _(onDemandPricing).keys().sort()
+              $scope.pricing = onDemandPricing
+              mergeInstanceTypesIntoPricing(instanceTypes, onDemandPricing)
+            })
+            .then(startUpdateSpotPricing)
+            .then(restoreState)
+        })
     }
     </script>
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-259801-10']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+    
+    if (window.location.host != "localhost") {
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    }
     </script>
   </head>
   <body ng-controller="ApplicationController">
@@ -360,7 +370,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="instanceType in selectedRegion.instance_types"
+              <tr ng-repeat="instanceType in selectedRegion.instanceTypes"
                    ng-class="instanceTypeRowClass(instanceType)"
                    ng-click="inspectInstanceType(instanceType)">
                 <td>{{instanceType.name}}</td>

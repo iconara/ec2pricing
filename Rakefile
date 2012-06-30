@@ -1,32 +1,38 @@
 $: << File.expand_path('../lib', __FILE__)
 
+require 'open-uri'
 require 'aws'
 require 'ec2_pricing'
 
 
-task :types do
-  types = Ec2Pricing::InstanceTypes.new(false)
-  @types_json = JSON.pretty_generate(types.types)
-end
+task :update => 'data:update'
 
-task :pricing do
-  pricing = Ec2Pricing::OnDemandPricing.new(false)
-  @pricing_json = JSON.pretty_generate(pricing.by_region)
-end
-
-task :update => [:pricing, :types] do
-  Dir.mkdir('public/data') unless Dir.exists?('public/data')
-  puts 'Updating public/pricing.json'
-  File.open('public/data/pricing.json', 'w') do |io|
-    io.write(@pricing_json)
+namespace :data do
+  task :types do
+    types = Ec2Pricing::InstanceTypes.new(false)
+    @types_file_name = 'instance-types.json'
+    @types_json = JSON.pretty_generate(types.types)
   end
-  puts 'Updating public/types.json'
-  File.open('public/data/types.json', 'w') do |io|
-    io.write(@types_json)
+
+  task :pricing do
+    @pricing_file_name = Ec2Pricing::OnDemandPricing::PRICING_DATA_URL.split('/').last
+    @pricing_json = open(Ec2Pricing::OnDemandPricing::PRICING_DATA_URL).read
+  end
+
+  task :update => [:pricing, :types] do
+    Dir.mkdir('public/data') unless Dir.exists?('public/data')
+    puts "Updating public/data/#{@types_file_name}"
+    File.open("public/data/#{@types_file_name}", 'w') do |io|
+      io.write(@types_json)
+    end
+    puts "Updating public/data/#{@pricing_file_name}"
+    File.open("public/data/#{@pricing_file_name}", 'w') do |io|
+      io.write(@pricing_json)
+    end
   end
 end
 
-task :upload => [:update, 'upload:data', 'upload:site']
+task :upload => ['data:update', 'upload:data', 'upload:site']
 
 namespace :upload do
   MIME_TYPES = {
@@ -63,12 +69,9 @@ namespace :upload do
     end
   end
 
-  task :data => [:pricing, :connect] do
-    object_options = {
-      :data => @pricing_json,
-      :acl => :public_read,
-      :content_type => MIME_TYPES['.json']
-    }
-    @bucket.objects['data/pricing.json'].write(object_options)
+  task :data => ['data:pricing', 'data:types', :connect] do
+    options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
+    @bucket.objects["data/#{@types_file_name}"].write(@types_json, options)
+    @bucket.objects["data/#{@pricing_file_name}"].write(@pricing_json, options)
   end
 end

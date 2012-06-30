@@ -21,6 +21,12 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       waitsFor(check)
     })
 
+    var findByType = function (instanceTypes, type) {
+      return _(instanceTypes).find(function (instanceType) {
+        return instanceType.type == type
+      })
+    }
+
     var sharedPricingExamples = function (type) {
       describe("(shared)", function () {
         it("returns an object with the API name of the regions as keys", function () {
@@ -41,6 +47,18 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
         it("creates a list of instance types for each region", function () {
           expect(pricing[type]["eu-west-1"].instanceTypes.length).toBeGreaterThan(0)
         })
+
+        it("correctly maps the cc2.8xlarge instance type", function () {
+          var instanceTypes = pricing[type]["eu-west-1"].instanceTypes
+          var cc2_8xlarge = findByType(instanceTypes, "cc2.8xlarge")
+          expect(cc2_8xlarge).toBeDefined()
+        })
+
+        it("sets the price to null where N/A", function () {
+          var instanceTypes = pricing.onDemandInstance["eu-west-1"].instanceTypes
+          var instanceType = findByType(instanceTypes, "cg1.4xlarge")
+          expect(instanceType.pricing.linux).toBeNull()
+        })
       })
     }
 
@@ -50,7 +68,7 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       it("creates an instance type object for each instance type and region", function () {
         var instanceType = pricing.spotInstance['eu-west-1'].instanceTypes[0]
         expect(instanceType.type).toEqual("m1.small")
-        expect(instanceType.pricing).toEqual({linux: "0.016", mswin: "0.032"})
+        expect(instanceType.pricing).toEqual({linux: 0.016, mswin: 0.032})
       })
     })
 
@@ -60,7 +78,7 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       it("creates an instance type object for each instance type and region", function () {
         var instanceType = pricing.onDemandInstance["eu-west-1"].instanceTypes[0]
         expect(instanceType.type).toEqual("m1.small")
-        expect(instanceType.pricing).toEqual({linux: "0.085", mswin: "0.115"})
+        expect(instanceType.pricing).toEqual({linux: 0.085, mswin: 0.115})
       })
     })
   })
@@ -99,7 +117,7 @@ angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(functi
       // callback name, so we need to jump though some hoops to emulate that here
       var pricing
       runs(function () {
-        pricingLoader.spot().then(function (p) { console.log("got p"); pricing = p })
+        pricingLoader.spot().then(function (p) { pricing = p })
         $httpBackend.flush()
       })
       waitsFor(function () {
@@ -111,6 +129,28 @@ angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(functi
       runs(function () {
         expect(pricing).toEqual(pricingParser(fakeSpotResponse))
       })
+    })
+  })
+})
+
+angular.injector(["ng", "ngMock", "ec2Pricing"]).invoke(function ($httpBackend, instanceTypesLoader) {
+  describe("instanceTypesLoader", function () {
+    beforeEach(function () {
+      $httpBackend.when("GET", "data/instance-types.json").respond({"m1.small": {}})
+    })
+
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation()
+      $httpBackend.verifyNoOutstandingRequest()
+    })
+
+    it("loads instance type data", function () {
+      var instanceTypes
+      instanceTypesLoader.instanceTypes().then(function (types) {
+        instanceTypes = types
+      })
+      $httpBackend.flush()
+      expect(instanceTypes).toEqual({"m1.small": {}})
     })
   })
 })

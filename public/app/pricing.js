@@ -6,7 +6,7 @@
     "uODI":            "t1",
     "hiMemODI":        "m2",
     "hiCPUODI":        "c1",
-    "clusterComputeI": "cc1",
+    "clusterComputeI": "cc1", // except 8xlarge which is "cc2"
     "clusterGPUI":     "cg1",
 
     "stdSpot":         "m1",
@@ -46,10 +46,20 @@
     "sa-east-1":      "South America (Sao Paulo)"
   }
 
+  // TODO: move these to module values (?)
+  var INSTANCE_TYPES_URL = "data/instance-types.json"
   var ON_DEMAND_PRICING_URL = "data/pricing-on-demand-instances.json"
   var SPOT_PRICING_URL = "http://spot-price.s3.amazonaws.com/spot.js"
 
   var module = angular.module("ec2Pricing")
+
+  module.factory("instanceTypesLoader", function ($http) {
+    return {
+      instanceTypes: function () {
+        return $http.get(INSTANCE_TYPES_URL).then(function (response) { return response.data })
+      }
+    }
+  })
 
   module.factory("pricingLoader", function ($http, $window, $q, $rootScope, pricingParser) {
     return {
@@ -85,12 +95,17 @@
         }
         _(region.instanceTypes).each(function (instanceType) {
           _(instanceType.sizes).each(function (size) {
+            var typeGroup = TYPE_MAP[instanceType.type]
+            var typeSize = SIZE_MAP[size.size]
+            if (typeGroup == "cc1" && typeSize == "8xlarge") {
+              typeGroup = "cc2"
+            }
             var instanceTypeData = {
-              type: TYPE_MAP[instanceType.type] + "." + SIZE_MAP[size.size],
+              type: typeGroup + "." + typeSize,
               pricing: {}
             }
             _(size.valueColumns).each(function (valueColumn) {
-              instanceTypeData.pricing[valueColumn.name] = valueColumn.prices.USD
+              instanceTypeData.pricing[valueColumn.name] = parseFloat(valueColumn.prices.USD) || null
             })
             regionData.instanceTypes.push(instanceTypeData)
           })
