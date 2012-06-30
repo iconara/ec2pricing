@@ -49,6 +49,7 @@
     <script type="text/javascript" src="lib/angular-1.0.1/angular-1.0.1.min.js"></script>
     <script type="text/javascript" src="app/module.js"></script>
     <script type="text/javascript" src="app/pricing.js"></script>
+    <script type="text/javascript" src="app/formatting.js"></script>
     <script type="text/javascript">
     angular.module("ec2Pricing").
       config(function ($locationProvider) {
@@ -416,7 +417,7 @@
           <p>
             Data from <a href="http://aws.amazon.com/ec2/pricing/">EC2 Pricing</a>
             and <a href="http://aws.amazon.com/ec2/instance-types/">EC2 Instance Types</a>
-            last updated {{lastUpdated | date}}
+            last updated {{lastUpdated | timeAgo}}
           </p>
         </div>
         <div class="span6 text-right">
