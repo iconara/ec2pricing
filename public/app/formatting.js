@@ -1,40 +1,33 @@
-angular.module("ec2Pricing")
-  .filter("timeAgo", function () {
-    return function (input, reference) {
-      reference = reference || new Date()
-      var diff = (reference.getTime() - input.getTime())/1000
-      if (diff < 60) {
-        return "seconds ago"
-      } else if (diff < 60 * 5) {
-        return "minutes ago"
-      } else if (diff < 60 * 50) {
-        return Math.floor(diff/60) + " minutes ago"
-      } else if (diff < 60 * 80) {
-        return "about an hour ago"
-      } else if (diff < 60 * 120) {
-        return "more than an hour ago"
-      } else if (diff < 60 * 60 * 18) {
-        return "about " + Math.floor(diff/(60 * 60)) + " hours ago"
-      } else if (diff < 60 * 60 * 26) {
-        return "about a day ago"
-      } else if (diff < 60 * 60 * 40) {
-        return "yesterday"
-      } else if (diff < 60 * 60 * 24 * 6) {
-        return Math.floor(diff/(60 * 60 * 24)) + " days ago"
-      } else if (diff < 60 * 60 * 24 * 10) {
-        return "about a week ago"
-      } else if (diff < 60 * 60 * 24 * 14) {
-        return "more than a week ago"
-      } else if (diff < 60 * 60 * 24 * 25) {
-        return Math.round(diff/(60 * 60 * 24 * 7)) + " weeks ago"
-      } else if (diff < 60 * 60 * 24 * 40) {
-        return "about a month ago"
-      } else if (diff < 60 * 60 * 24 * 340) {
-        return Math.ceil(diff/(60 * 60 * 24 * 30)) + " months ago"
-      } else if (diff < 60 * 60 * 24 * 380) {
-        return "about a year ago"
-      } else {
-        return "in the distant past"
+(function () {
+  var TIMES_AGO = [
+    [60,                  "seconds ago",            0               , "round"],
+    [60 *   5,            "minutes ago",            0               , "round"],
+    [60 *  50,            "%d minutes ago",        60               , "round"],
+    [60 *  80,            "about an hour ago",      0               , "round"],
+    [60 * 120,            "more than an hour ago",  0               , "round"],
+    [60 *  60 * 18,       "about %d hours ago",    60 * 60          , "round"],
+    [60 *  60 * 26,       "about a day ago",        0               , "round"],
+    [60 *  60 * 40,       "yesterday",              0               , "round"],
+    [60 *  60 * 24 *   6, "%d days ago",           60 * 60 * 24     , "round"],
+    [60 *  60 * 24 *  10, "about a week ago",       0               , "round"],
+    [60 *  60 * 24 *  14, "more than a week ago",   0               , "round"],
+    [60 *  60 * 24 *  25, "%d weeks ago",          60 * 60 * 24 *  7,  "ceil"],
+    [60 *  60 * 24 *  40, "about a month ago",      0               ,  "ceil"],
+    [60 *  60 * 24 * 340, "%d months ago",         60 * 60 * 24 * 30,  "ceil"],
+    [60 *  60 * 24 * 380, "about a year ago",       0               ,  "ceil"],
+    [Infinity,            "in the distant past",    0               ,  "ceil"]
+  ]
+
+  angular.module("ec2Pricing")
+    .filter("timeAgo", function () {
+      return function (input, reference) {
+        reference = reference || new Date()
+        var diff = (reference.getTime() - input.getTime())/1000
+        var e = _(TIMES_AGO).find(function (e) { return diff < e[0] })
+        var text = e[1]
+        var period = e[2]
+        var rounding = e[3]
+        return _.str.sprintf(text, Math[rounding](diff/period))
       }
-    }
-  })
+    })
+})()
