@@ -62,7 +62,7 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       })
     }
 
-    describe("spot instance pricing", function () {
+    describe("with spot instance pricing data", function () {
       sharedPricingExamples("spotInstance")
 
       it("creates an instance type object for each instance type and region", function () {
@@ -72,7 +72,7 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
       })
     })
 
-    describe("on demand instance pricing", function () {
+    describe("with on demand instance pricing data", function () {
       sharedPricingExamples("onDemandInstance")
 
       it("creates an instance type object for each instance type and region", function () {
