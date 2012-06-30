@@ -46,18 +46,16 @@
     </style>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
-    <script type="text/javascript" src="lib/angular-1.0.0.min.js"></script>
-    <script type="text/javascript" src="app/ec2-pricing-parser.js"></script>
+    <script type="text/javascript" src="lib/angular-1.0.1/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="app/module.js"></script>
+    <script type="text/javascript" src="app/pricing.js"></script>
     <script type="text/javascript">
-    angular.module("ec2Pricing", []).
+    angular.module("ec2Pricing").
       config(function ($locationProvider) {
         $locationProvider.hashPrefix('!')
-      }).
-      factory('parseEc2Pricing', function () {
-        return parseEc2Pricing
       })
 
-    var ApplicationController = function ($scope, $http, $location, parseEc2Pricing) {
+    var ApplicationController = function ($scope, $http, $location, pricingParser) {
       var ioSortOrder = ["low", "moderate", "high", "very high"]
       var typeClassSortOrder = ["m1", "t1", "c1", "m2", "cc1", "cc2", "cg1"]
       var typeSizeSortOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
@@ -308,7 +306,7 @@
         window.callback = function (data) {
           delete window.callback
           $scope.$apply(function () {
-            $scope.spotInstancePricing = parseEc2Pricing(data)
+            $scope.spotInstancePricing = pricingParser(data)
           })
         }
         $http.jsonp("http://spot-price.s3.amazonaws.com/spot.js")

@@ -1,0 +1,1 @@
+angular.module("ec2Pricing", [])
