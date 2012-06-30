@@ -16,6 +16,10 @@ angular.injector(["ng", "ec2Pricing"]).invoke(function ($filter) {
       referenceTime = new Date("Sat Jun 30 2012 22:10:28 GMT+0200 (CEST)")
     })
 
+    it("returns an empty string when the date is null", function () {
+      expect(timeAgoFilter(null, referenceTime)).toEqual("")
+    })
+
     it("returns \"seconds ago\" when the difference is less than a minute", function () {
       expect(timeAgoFilter(secondsAgo(3), referenceTime)).toEqual("seconds ago")
     })

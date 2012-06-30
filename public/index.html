@@ -293,8 +293,11 @@
       }
 
       var startUpdateSpotPricing = function () {
+        $scope.spotInstancePricingLoading = true
         pricingLoader.spot().then(function (spotPricing) {
+          $scope.spotInstancePricingLastUpdated = spotPricing.lastUpdated
           $scope.spotInstancePricing = spotPricing.regions
+          $scope.spotInstancePricingLoading = false
         })
         $timeout(arguments.callee, 300000)
       }
@@ -418,6 +421,7 @@
             Data from <a href="http://aws.amazon.com/ec2/pricing/">EC2 Pricing</a>
             and <a href="http://aws.amazon.com/ec2/instance-types/">EC2 Instance Types</a>
             last updated {{lastUpdated | timeAgo}}
+            (spot prices <span ng-hide="spotInstancePricingLoading">updated {{spotInstancePricingLastUpdated | timeAgo}}</span><span ng-show="spotInstancePricingLoading">updating…</span>)
           </p>
         </div>
         <div class="span6 text-right">

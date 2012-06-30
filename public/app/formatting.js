@@ -21,6 +21,7 @@
   angular.module("ec2Pricing")
     .filter("timeAgo", function () {
       return function (input, reference) {
+        if (input == null) return ""
         reference = reference || new Date()
         var diff = (reference.getTime() - input.getTime())/1000
         var e = _(TIMES_AGO).find(function (e) { return diff < e[0] })
