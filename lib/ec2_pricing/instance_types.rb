@@ -49,7 +49,7 @@ module Ec2Pricing
         case line
         when /([\d.]+ [MG]B) (?:of )?memory/
           properties[:ram] = $1
-        when /([\d.]+) EC2 Compute Units? \((\d) virtual core/
+        when /([\d.]+) EC2 Compute Units? \((\d+) virtual core/
           properties[:ecus] = $1.to_f
           properties[:cores] = $2.to_i
         when /([\d.]+) EC2 Compute Units? \((\d)([^\)]+)\)/
@@ -60,12 +60,18 @@ module Ec2Pricing
           properties[:ecus] = 0
           properties[:cores] = 1
           properties[:notes] << line
+        when /(\d+) SSD-based volumes each with (\d+) GB of instance storage/
+          properties[:disk] = "#{$1.to_i * $2.to_i} GB"
+          properties[:notes] << "#{$1} SSD-based volumes each with #{$2} GB"
         when /([\d.]+ GB) (?:of )?instance storage/
           properties[:disk] = $1
         when /32-bit or 64-bit platform/
           properties[:architectures] = [32, 64]
         when /64-bit platform/
           properties[:architectures] = [64]
+        when /I\/O Performance: ([\w\s]+) \(([^\)]+)\)/
+          properties[:io] = $1.downcase.strip
+          properties[:notes] << $2
         when /I\/O Performance: ([\w\s]+)/
           properties[:io] = $1.downcase.strip
         when /API name: (\S+)/

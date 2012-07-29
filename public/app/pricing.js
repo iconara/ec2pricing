@@ -8,6 +8,7 @@
     "hiCPUODI":        "c1",
     "clusterComputeI": "cc1", // except 8xlarge which is "cc2"
     "clusterGPUI":     "cg1",
+    "hiIoODI":         "hi1",
 
     "stdSpot":         "m1",
     "uSpot":           "t1",
