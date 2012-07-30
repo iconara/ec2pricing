@@ -62,16 +62,23 @@ namespace :upload do
   end
 
   task :site => :connect do
+    etags = Hash[@bucket.objects.reject { |obj| obj.key =~ /^(?:logs|data)/ }.map { |obj| [obj.key, obj.etag[1...-1]] }]
     Dir['public/**/*'].each do |local_path|
       unless File.directory?(local_path) || File.dirname(local_path) == 'public/data'
+        local_data = File.read(local_path)
+        local_md5 = Digest::MD5.hexdigest(local_data)
         remote_path = local_path.sub(/^public\//, '')
-        puts "Uploading #{local_path} to #{remote_path}"
-        object_options = {
-          :file => local_path,
-          :acl => :public_read,
-          :content_type => MIME_TYPES[File.extname(local_path)]
-        }
-        @bucket.objects[remote_path].write(object_options)
+        if local_md5 == etags[remote_path]
+          puts "Skipping #{local_path}"
+        else
+          puts "Uploading #{local_path} to #{remote_path}"
+          object_options = {
+            :data => local_data,
+            :acl => :public_read,
+            :content_type => MIME_TYPES[File.extname(local_path)]
+          }
+          @bucket.objects[remote_path].write(object_options)
+        end
       end
     end
   end
