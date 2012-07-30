@@ -18,7 +18,7 @@
     [Infinity,            "in the distant past",    0               ,  "ceil"]
   ]
 
-  angular.module("ec2Pricing")
+  angular.module("ec2pricing.formatting", [])
     .filter("timeAgo", function () {
       return function (input, reference) {
         if (input == null) return ""

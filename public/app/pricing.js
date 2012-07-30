@@ -47,7 +47,7 @@
     "sa-east-1":      "South America (Sao Paulo)"
   }
 
-  var module = angular.module("ec2Pricing")
+  var module = angular.module("ec2pricing.pricing", [])
 
   module.factory("instanceTypesLoader", function ($http, instanceTypesUrl) {
     return {
