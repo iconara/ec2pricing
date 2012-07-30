@@ -1,4 +1,4 @@
-angular.injector(["ng", "ec2Pricing"]).invoke(function ($filter) {
+angular.injector(["ng", "ec2pricing.formatting"]).invoke(function ($filter) {
   describe("timeAgo", function () {
     var timeAgo
     var referenceTime

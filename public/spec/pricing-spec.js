@@ -1,4 +1,4 @@
-angular.injector(["ng", "ec2Pricing"]).invoke(function ($http, pricingParser) {
+angular.injector(["ng", "ec2pricing.pricing"]).invoke(function ($http, pricingParser) {
   var pricing = {}
 
   describe("pricingParser", function () {
