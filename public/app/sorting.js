@@ -5,7 +5,7 @@
 
   var module = angular.module("ec2pricing.sorting", [])
 
-  module.value("instaceTypeSorter", function (instanceTypes, sortField, sortAscending, selectedOs) {
+  module.value("instanceTypeSorter", function (instanceTypes, sortField, sortAscending, selectedOs) {
     var availableTypes = _(instanceTypes).select(function (instanceType) {
       return !!instanceType.pricing[selectedOs]
     })
@@ -65,7 +65,7 @@
         }
         return size
       } else if (field == "architectures") {
-        return instance.architectures.join("/")
+        return value.join("/")
       } else if (field == "io") {
         return IO_SORT_ORDER.indexOf(value)
       } else {

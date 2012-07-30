@@ -5,8 +5,10 @@
   var DEFAULT_SORT_FIELD = "type"
   var DEFAULT_REGION = "us-east-1"
   var STATE_FIELDS = ["sortField", "sortAscending", "selectedRegion", "selectedOs", "selectedPeriod"]
+  var ASCENDING_ORDER = "asc"
+  var DESCENDING_ORDER = "desc"
 
-  window.ApplicationController = function ($scope, $http, $location, $timeout, $log, instanceTypesLoader, pricingLoader, pricingParser, instaceTypeSorter, tracker) {
+  window.ApplicationController = function ($scope, $http, $location, $timeout, $log, instanceTypesLoader, pricingLoader, pricingParser, instanceTypeSorter, tracker) {
     $scope.pricing = null
     $scope.regions = null
     $scope.selectedRegion = null
@@ -23,7 +25,7 @@
         var oldPath = $location.path()
         $location.path($scope.selectedRegion.apiName)
         $location.search({
-          sort: $scope.sortField + ":" + ($scope.sortAscending ? "asc" : "desc"),
+          sort: $scope.sortField + ":" + ($scope.sortAscending ? ASCENDING_ORDER : DESCENDING_ORDER),
           os: $scope.selectedOs,
           period: $scope.selectedPeriod
         })
@@ -42,7 +44,7 @@
       if (state.sort) {
         var sortState = state.sort.split(":")
         $scope.sortField = sortState[0]
-        $scope.sortAscending = sortState[1].toLowerCase() == "asc"
+        $scope.sortAscending = sortState[1].toLowerCase() == ASCENDING_ORDER
       } else {
         $scope.sortField = DEFAULT_SORT_FIELD
         $scope.sortAscending = false
@@ -61,7 +63,7 @@
 
     var sortInstanceTypes = function () {
       if ($scope.selectedRegion) {
-        $scope.selectedRegion.instanceTypes = instaceTypeSorter($scope.selectedRegion.instanceTypes, $scope.sortField, $scope.sortAscending, $scope.selectedOs)
+        $scope.selectedRegion.instanceTypes = instanceTypeSorter($scope.selectedRegion.instanceTypes, $scope.sortField, $scope.sortAscending, $scope.selectedOs)
       }
     }
     
