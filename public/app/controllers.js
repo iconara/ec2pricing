@@ -167,6 +167,11 @@
       $timeout(arguments.callee, 300000)
     }
 
+    var startUpdateSpotPricingLabel = function () {
+      $scope.spotInstancePricingLastUpdated = $scope.spotInstancePricingLastUpdated
+      $timeout(arguments.callee, 5000)
+    }
+
     var mergeInstanceTypesIntoPricing = function (instanceTypes, pricing) {
       _(pricing.regions).each(function (region) {
         _(region.instanceTypes).each(function (instanceType) {
@@ -189,6 +194,7 @@
             mergeInstanceTypesIntoPricing(instanceTypes, onDemandPricing)
           })
           .then(startUpdateSpotPricing)
+          .then(startUpdateSpotPricingLabel)
           .then(restoreState)
       })
   }
