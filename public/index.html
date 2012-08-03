@@ -125,11 +125,11 @@
                 <td class="numeric">{{instanceType.ram}}</td>
                 <td class="numeric">
                   <i class="icon-bolt" title="SSD" ng-show="instanceType.ssd"></i>
-                  {{instanceType.disk | "n/a"}}
+                  {{instanceType.disk | naIfNull}}
                 </td>
                 <td>{{instanceType.io}}</td>
-                <td class="numeric">{{calculatedPrice(instanceType) || "n/a"}}</td>
-                <td class="numeric">{{spotPrice(instanceType) || "n/a"}}</td>
+                <td class="numeric">{{calculatedPrice(instanceType) | naIfNull}}</td>
+                <td class="numeric">{{spotPrice(instanceType) | naIfNull}}</td>
               </tr>
             </tbody>
           </table>
