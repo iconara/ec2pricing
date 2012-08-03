@@ -123,7 +123,10 @@
                 <td class="numeric">{{instanceType.cores}}</td>
                 <td class="numeric">{{instanceType.architectures.join("/")}}-bit</td>
                 <td class="numeric">{{instanceType.ram}}</td>
-                <td class="numeric">{{instanceType.disk || 'n/a'}}</td>
+                <td class="numeric">
+                  <i class="icon-bolt" title="SSD" ng-show="instanceType.ssd"></i>
+                  {{instanceType.disk | "n/a"}}
+                </td>
                 <td>{{instanceType.io}}</td>
                 <td class="numeric">{{calculatedPrice(instanceType) || "n/a"}}</td>
                 <td class="numeric">{{spotPrice(instanceType) || "n/a"}}</td>

@@ -63,6 +63,7 @@ module Ec2Pricing
         when /(\d+) SSD-based volumes each with (\d+) GB of instance storage/
           properties[:disk] = "#{$1.to_i * $2.to_i} GB"
           properties[:notes] << "#{$1} SSD-based volumes each with #{$2} GB"
+          properties[:ssd] = true
         when /([\d.]+ GB) (?:of )?instance storage/
           properties[:disk] = $1
         when /32-bit or 64-bit platform/
