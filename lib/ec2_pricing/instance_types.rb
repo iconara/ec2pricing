@@ -31,7 +31,7 @@ module Ec2Pricing
       until paragraphs.empty?
         paragraph = paragraphs.shift
         text = paragraph.text
-        if text.include?('Instance') && (text.end_with?('Instance') || text.end_with?('default*'))
+        if text.include?('Instance') && (text.end_with?('Instance') || text.start_with?('Small Instance'))
           text.sub!(/(?<=Instance).+$/, '')
           instance_properties << {:name => text}.merge(parse_description(paragraphs.shift.text.split("\n")))
         end
@@ -80,6 +80,8 @@ module Ec2Pricing
           properties[:notes] << $&
         when /2 x NVIDIA Tesla/
           properties[:notes] << $&
+        when /EBS-Optimized Available: (.+)\**\s*$/
+          properties[:ebs_optimized] = $1
         else
           $stderr.puts("Unmatched description line: #{line}")
         end
