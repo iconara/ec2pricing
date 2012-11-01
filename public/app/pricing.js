@@ -3,6 +3,7 @@
 
   var TYPE_MAP = {
     "stdODI":          "m1",
+    "secgenstdODI":    "m3",
     "uODI":            "t1",
     "hiMemODI":        "m2",
     "hiCPUODI":        "c1",
@@ -11,6 +12,7 @@
     "hiIoODI":         "hi1",
 
     "stdSpot":         "m1",
+    "secgenstdSpot":   "m3",
     "uSpot":           "t1",
     "hiMemSpot":       "m2",
     "hiCPUSpot":       "c1"

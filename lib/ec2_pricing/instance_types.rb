@@ -31,7 +31,7 @@ module Ec2Pricing
       until paragraphs.empty?
         paragraph = paragraphs.shift
         text = paragraph.text
-        if text.include?('Instance') && (text.end_with?('Instance') || text.start_with?('Small Instance'))
+        if text.include?('Instance') && (text.end_with?('Instance') || text.start_with?('Small Instance') || text.start_with?('M1 Small Instance'))
           text.sub!(/(?<=Instance).+$/, '')
           instance_properties << {:name => text}.merge(parse_description(paragraphs.shift.text.split("\n")))
         end
@@ -47,7 +47,7 @@ module Ec2Pricing
       properties = {:notes => []}
       description_lines.each do |line|
         case line
-        when /([\d.]+ [MG]B) (?:of )?memory/
+        when /([\d.]+ [MG]i?B) (?:of )?memory/
           properties[:ram] = $1
         when /([\d.]+) EC2 Compute Units? \((\d+) virtual core/
           properties[:ecus] = $1.to_f
@@ -79,6 +79,7 @@ module Ec2Pricing
           properties[:type] = $1
         when /EBS storage only/
           properties[:notes] << $&
+          properties[:ebs_only] = true
         when /2 x NVIDIA Tesla/
           properties[:notes] << $&
         when /EBS-Optimized Available: (.+)\**\s*$/

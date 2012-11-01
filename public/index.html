@@ -125,6 +125,7 @@
                 <td class="numeric">{{instanceType.ram}}</td>
                 <td class="numeric">
                   <i class="icon-bolt" title="SSD" ng-show="instanceType.ssd"></i>
+                  <i class="icon-warning-sign" title="EBS Only" ng-show="instanceType.ebs_only"></i>
                   {{instanceType.disk | naIfNull}}
                 </td>
                 <td>{{instanceType.io}}</td>
