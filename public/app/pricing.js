@@ -36,6 +36,7 @@
     "eu-ireland": "eu-west-1",
     "apac-sin":   "ap-southeast-1",
     "apac-tokyo": "ap-northeast-1",
+    "apac-syd":   "ap-southeast-2",
     "sa-east-1":  "sa-east-1"
   }
 
@@ -46,6 +47,7 @@
     "eu-west-1":      "EU (Ireland)",
     "ap-southeast-1": "Asia Pacific (Singapore)",
     "ap-northeast-1": "Asia Pacific (Tokyo)",
+    "ap-southeast-2": "Asia Pacific (Sydney)",
     "sa-east-1":      "South America (Sao Paulo)"
   }
 
