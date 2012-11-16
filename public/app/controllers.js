@@ -55,6 +55,12 @@
       selectRegion(region || DEFAULT_REGION)
 
       tracker.trackPageview()
+
+      if (!$scope.autoRestoreSetup) {
+        $scope.$watch(function () { return $location.path() }, restoreState)
+        $scope.$watch(function () { return $location.search() }, restoreState)
+        $scope.autoRestoreSetup = true
+      }
     }
 
     var selectRegion = function (r) {
