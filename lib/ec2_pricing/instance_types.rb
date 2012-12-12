@@ -43,6 +43,14 @@ module Ec2Pricing
 
     INSTANCE_TYPES_CACHE_PATH = File.join(CACHE_DIR, 'instance-types.html')
 
+    def core_multiplier(str)
+      case str
+      when /quad-core/ then 4
+      when /eight-core/ then 8
+      else 1
+      end
+    end
+
     def parse_description(description_lines)
       properties = {:notes => []}
       description_lines.each do |line|
@@ -54,7 +62,7 @@ module Ec2Pricing
           properties[:cores] = $2.to_i
         when /([\d.]+) EC2 Compute Units? \((\d)([^\)]+)\)/
           properties[:ecus] = $1.to_f
-          properties[:cores] = $2.to_i
+          properties[:cores] = $2.to_i * core_multiplier($3)
           properties[:notes] << "#{$2}#{$3}"
         when /Up to \d+ EC2 Compute Units/
           properties[:ecus] = 0
