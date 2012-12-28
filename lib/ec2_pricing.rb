@@ -23,5 +23,6 @@ module Ec2Pricing
   end
 end
 
+require 'ec2_pricing/pricing_parser'
 require 'ec2_pricing/instance_types'
 require 'ec2_pricing/on_demand_pricing'
