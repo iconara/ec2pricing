@@ -1,6 +1,7 @@
 $: << File.expand_path('../lib', __FILE__)
 
 require 'open-uri'
+require 'fileutils'
 require 'aws'
 require 'ec2_pricing'
 
@@ -25,14 +26,14 @@ namespace :data do
   end
 
   task :update => [:pricing, :types] do
-    Dir.mkdir('public/data') unless Dir.exists?('public/data')
+    FileUtils.mkdir_p('public/data/aws')
     puts "Writing public/data/#{@types_file_name}"
     File.open("public/data/#{@types_file_name}", 'w') do |io|
       io.write(@types_json)
     end
     @pricing_json.each do |file, data|
-      puts "Writing public/data/#{file}"
-      File.open("public/data/#{file}", 'w') do |io|
+      puts "Writing public/data/aws/#{file}"
+      File.open("public/data/aws/#{file}", 'w') do |io|
         io.write(data)
       end
     end
@@ -88,8 +89,8 @@ namespace :upload do
     puts "Uploading to data/#{@types_file_name}"
     @bucket.objects["data/#{@types_file_name}"].write(@types_json, options)
     @pricing_json.each do |file, data|
-      puts "Uploading to data/#{file}"
-      @bucket.objects["data/#{file}"].write(data, options)
+      puts "Uploading to data/aws/#{file}"
+      @bucket.objects["data/aws/#{file}"].write(data, options)
     end
   end
 end
