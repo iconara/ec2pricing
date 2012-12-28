@@ -3,6 +3,7 @@ $: << File.expand_path('../lib', __FILE__)
 require 'open-uri'
 require 'fileutils'
 require 'aws'
+require 'multi_json'
 require 'ec2_pricing'
 
 
@@ -13,16 +14,20 @@ namespace :data do
     puts "Updating instance-types.json"
     types = Ec2Pricing::InstanceTypes.new(false)
     @types_file_name = 'instance-types.json'
-    @types_json = JSON.pretty_generate(types.types)
+    @types_json = MultiJson.dump(types.types, pretty: true)
   end
 
   task :pricing do
+    pricing_parser = Ec2Pricing::PricingParser.new
     base_url = 'http://aws.amazon.com/ec2/pricing/'
     files = %w[pricing-on-demand-instances.json ri-light-linux.json ri-light-mswin.json ri-medium-linux.json ri-medium-mswin.json ri-heavy-linux.json ri-heavy-mswin.json]
-    @pricing_json = files.each_with_object({}) do |file, pricing|
+    @raw_pricing_json = files.each_with_object({}) do |file, pricing|
       puts "Updating #{file}"
       pricing[file] = open(base_url + file).read
     end
+    @pricing_json = {
+      'on-demand-pricing.json' => MultiJson.dump(pricing_parser.parse(MultiJson.load(@raw_pricing_json['pricing-on-demand-instances.json'])), pretty: true)
+    }
   end
 
   task :update => [:pricing, :types] do
@@ -31,11 +36,15 @@ namespace :data do
     File.open("public/data/#{@types_file_name}", 'w') do |io|
       io.write(@types_json)
     end
-    @pricing_json.each do |file, data|
+    @raw_pricing_json.each do |file, data|
       puts "Writing public/data/aws/#{file}"
       File.open("public/data/aws/#{file}", 'w') do |io|
         io.write(data)
       end
+    end
+    @pricing_json.each do |file, data|
+      puts "Writing public/data/#{file}"
+      File.write("public/data/#{file}", data)
     end
   end
 end
@@ -88,9 +97,13 @@ namespace :upload do
     options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
     puts "Uploading to data/#{@types_file_name}"
     @bucket.objects["data/#{@types_file_name}"].write(@types_json, options)
-    @pricing_json.each do |file, data|
+    @raw_pricing_json.each do |file, data|
       puts "Uploading to data/aws/#{file}"
       @bucket.objects["data/aws/#{file}"].write(data, options)
+    end
+    @pricing_json.each do |file, data|
+      puts "Uploading to data/#{file}"
+      @bucket.objects["data/#{file}"].write(data, options)
     end
   end
 end
