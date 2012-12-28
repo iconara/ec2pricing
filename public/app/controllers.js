@@ -183,22 +183,9 @@
         _(region.instanceTypes).each(function (instanceType) {
           if (instanceType.type in instanceTypes) {
             _(instanceType).extend(instanceTypes[instanceType.type])
+          } else {
+            $log.warn("Missing info for " + instanceType.type + " in " + region.apiName)
           }
-        })
-      })
-    }
-
-    var pruneInstanceTypesWithMissingData = function (pricing) {
-      _(pricing.regions).each(function (region) {
-        region.instanceTypes = _(region.instanceTypes).filter(function (instanceType) {
-          if (!instanceType.pricing) {
-            $log.warn("Missing pricing for " + instanceType.type + " in " + region.apiName)
-            return false
-          } else if (!instanceType.name) {
-            $log.warn("Missing name for " + instanceType.type + " in " + region.apiName)
-            return false
-          }
-          return true
         })
       })
     }
@@ -211,7 +198,6 @@
             $scope.regions = _(onDemandPricing.regions).keys().sort()
             $scope.pricing = onDemandPricing.regions
             mergeInstanceTypesIntoPricing(instanceTypes, onDemandPricing)
-            pruneInstanceTypesWithMissingData(onDemandPricing)
           })
           .then(startUpdateSpotPricing)
           .then(startUpdateSpotPricingLabel)

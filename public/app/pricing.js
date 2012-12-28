@@ -10,6 +10,7 @@
     "clusterComputeI": "cc1", // except 8xlarge which is "cc2"
     "clusterGPUI":     "cg1",
     "hiIoODI":         "hi1",
+    "hiStoreODI":      "hs1",
 
     "stdSpot":         "m1",
     "secgenstdSpot":   "m3",
@@ -86,7 +87,7 @@
     }
   })
 
-  module.factory("pricingParser", function () {
+  module.factory("pricingParser", function ($log) {
     return function (pricingData) {
       var byRegion = {}
       _(pricingData.config.regions).each(function (region) {
@@ -101,19 +102,23 @@
         }
         _(region.instanceTypes).each(function (instanceType) {
           _(instanceType.sizes).each(function (size) {
-            var typeGroup = TYPE_MAP[instanceType.type]
-            var typeSize = SIZE_MAP[size.size]
-            if (typeGroup == "cc1" && typeSize == "8xlarge") {
-              typeGroup = "cc2"
+            if (instanceType.type in TYPE_MAP) {
+              var typeGroup = TYPE_MAP[instanceType.type]
+              var typeSize = SIZE_MAP[size.size]
+              if (typeGroup == "cc1" && typeSize == "8xlarge") {
+                typeGroup = "cc2"
+              }
+              var instanceTypeData = {
+                type: typeGroup + "." + typeSize,
+                pricing: {}
+              }
+              _(size.valueColumns).each(function (valueColumn) {
+                instanceTypeData.pricing[valueColumn.name] = parseFloat(valueColumn.prices.USD) || null
+              })
+              regionData.instanceTypes.push(instanceTypeData)
+            } else {
+              $log.warn("Unknown type group: " + instanceType.type)
             }
-            var instanceTypeData = {
-              type: typeGroup + "." + typeSize,
-              pricing: {}
-            }
-            _(size.valueColumns).each(function (valueColumn) {
-              instanceTypeData.pricing[valueColumn.name] = parseFloat(valueColumn.prices.USD) || null
-            })
-            regionData.instanceTypes.push(instanceTypeData)
           })
         })
       })

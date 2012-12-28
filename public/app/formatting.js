@@ -42,4 +42,14 @@
       }
     }
   })
+
+  module.filter("dashIfNull", function () {
+    return function (input) {
+      if (!input) {
+        return "-"
+      } else {
+        return input
+      }
+    }
+  })
 })()

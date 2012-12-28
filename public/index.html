@@ -38,6 +38,11 @@
       float: right;
     }
 
+    a.tooltip-icon, a.tooltip-icon:hover {
+      color: black;
+      text-decoration: none;
+    }
+
     footer {
       margin-top: 4em;
       font-size: 80%;
@@ -110,25 +115,42 @@
               <tr ng-repeat="instanceType in selectedRegion.instanceTypes"
                    ng-class="instanceTypeRowClass(instanceType)"
                    ng-click="inspectInstanceType(instanceType)">
-                <td>{{instanceType.name}}</td>
-                <td title="{{instanceType.notes.join(', ')}}">
-                  <i class="icon-info-sign" ng-show="instanceType.notes"></i>
+                <td>{{instanceType.name | dashIfNull}}</td>
+                <td>
+                  <a ng-show="instanceType.notes" class="tooltip-icon" href="#" onclick="return false">
+                    <i class="icon-info-sign" title="{{instanceType.notes.join(', ')}}"></i>
+                  </a>
+                  <a ng-hide="instanceType.name" class="tooltip-icon" href="#" onclick="return false">
+                    <i class="icon-warning-sign" title="Cannot find details in the instance type description"></i>
+                  </a>
                 </td>
                 <td>
                   <span class="label label-info">
                     {{instanceType.type}}
                   </span>
                 </td>
-                <td class="numeric">{{instanceType.ecus}}</td>
-                <td class="numeric">{{instanceType.cores}}</td>
-                <td class="numeric">{{instanceType.architectures.join("/")}}-bit</td>
-                <td class="numeric">{{instanceType.ram}}</td>
+                <td class="numeric">{{instanceType.ecus | dashIfNull}}</td>
+                <td class="numeric">{{instanceType.cores | dashIfNull}}</td>
                 <td class="numeric">
-                  <i class="icon-bolt" title="SSD" ng-show="instanceType.ssd"></i>
-                  <i class="icon-warning-sign" title="EBS Only" ng-show="instanceType.ebs_only"></i>
-                  {{instanceType.disk | naIfNull}}
+                  <span ng-show="instanceType.architectures">
+                    {{instanceType.architectures.join("/")}}-bit
+                  </span>
+                  <span ng-hide="instanceType.architectures">
+                    -
+                  </span>
                 </td>
-                <td>{{instanceType.io}}</td>
+                <td class="numeric">{{instanceType.ram | dashIfNull}}</td>
+                <td class="numeric">
+                  <span ng-show="instanceType.name">
+                    <i class="icon-bolt" title="SSD" ng-show="instanceType.ssd"></i>
+                    <i class="icon-warning-sign" title="EBS Only" ng-show="instanceType.ebs_only"></i>
+                    {{instanceType.disk | naIfNull}}
+                  </span>
+                  <span ng-hide="instanceType.name">
+                    -
+                  </span>
+                </td>
+                <td>{{instanceType.io | dashIfNull}}</td>
                 <td class="numeric">{{calculatedPrice(instanceType) | naIfNull}}</td>
                 <td class="numeric">{{spotPrice(instanceType) | naIfNull}}</td>
               </tr>
