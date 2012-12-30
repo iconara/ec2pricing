@@ -13,7 +13,7 @@ module Ec2Pricing
 
     helpers do
       def logger
-        API.logger
+        Api.logger
       end
 
       def pricing_url
@@ -22,6 +22,7 @@ module Ec2Pricing
 
       def pricing_data
         @pricing_data ||= begin
+          logger.info("Loading pricing data from #{pricing_url}")
           data = open(pricing_url).read
           PricingParser.new.parse(MultiJson.load(data))
         end
