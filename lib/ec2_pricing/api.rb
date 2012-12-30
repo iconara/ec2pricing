@@ -2,6 +2,7 @@
 
 require 'grape'
 require 'open-uri'
+require 'ec2_pricing/heap_cache'
 require 'ec2_pricing/pricing_parser'
 
 
@@ -20,8 +21,12 @@ module Ec2Pricing
         ENV['AWS_PRICING_URL']
       end
 
+      def cache
+        @pricing_cache ||= HeapCache.new
+      end
+
       def pricing_data
-        @pricing_data ||= begin
+        cache['pricing'] ||= begin
           logger.info("Loading pricing data from #{pricing_url}")
           data = open(pricing_url).read
           PricingParser.new.parse(MultiJson.load(data))
