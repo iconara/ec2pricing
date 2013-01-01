@@ -28,7 +28,7 @@ module Ec2Pricing
       end
 
       def cache
-        @pricing_cache ||= HeapCache.new
+        @pricing_cache ||= HeapCache.new(ttl: 30 * 60)
       end
 
       def instance_types
