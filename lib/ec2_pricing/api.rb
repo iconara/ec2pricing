@@ -2,8 +2,10 @@
 
 require 'grape'
 require 'open-uri'
+require 'nokogiri'
 require 'ec2_pricing/heap_cache'
 require 'ec2_pricing/pricing_parser'
+require 'ec2_pricing/instance_types_parser'
 
 
 module Ec2Pricing
@@ -21,20 +23,50 @@ module Ec2Pricing
         ENV['AWS_PRICING_URL']
       end
 
+      def instance_types_url
+        ENV['AWS_INSTANCE_TYPES_URL']
+      end
+
       def cache
         @pricing_cache ||= HeapCache.new
       end
 
+      def instance_types
+        cache['instance_types'] ||= begin
+          instance_types = pricing_data.dup
+          instance_types.each do |region|
+            region[:instance_types].each do |instance_type|
+              data = instance_type_data[instance_type[:api_name]]
+              if data
+                instance_type.merge!(data)
+              else
+                logger.warn("No data for #{instance_type[:api_name]} (in region #{region[:region]})")
+              end
+            end
+          end
+          instance_types
+        end
+      end
+
       def pricing_data
-        cache['pricing'] ||= begin
+        cache['pricing_data'] ||= begin
           logger.info("Loading pricing data from #{pricing_url}")
           data = open(pricing_url).read
           PricingParser.new.parse(MultiJson.load(data))
         end
       end
 
+      def instance_type_data
+        cache['instance_type_data'] ||= begin
+          logger.info("Loading instance types #{instance_types_url}")
+          data = open(instance_types_url).read
+          parsed = InstanceTypesParser.new.parse(Nokogiri::HTML(data))
+          instance_types = Hash[parsed.map { |type| [type[:api_name], type] }]
+        end
+      end
+
       def find_region(region_name)
-        pricing_data.find { |region| region[:region] == region_name }
+        instance_types.find { |region| region[:region] == region_name }
       end
 
       def find_instance_type(region_name, api_name)
@@ -53,7 +85,7 @@ module Ec2Pricing
 
     desc 'Returns pricing for all instance types in all regions'
     get '/' do
-      pricing_data
+      instance_types
     end
 
     desc 'Return pricing for all instance types for a region'

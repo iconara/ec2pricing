@@ -17,6 +17,7 @@ module Ec2Pricing
 
     before do
       ENV['AWS_PRICING_URL'] = File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)
+      ENV['AWS_INSTANCE_TYPES_URL'] = File.expand_path('../../resources/instance-types.html', __FILE__)
     end
 
     shared_examples_for 'a GET URI' do
@@ -85,6 +86,12 @@ module Ec2Pricing
         it 'returns pricing for the specified instance type in the specified region' do
           expect(response_body['api_name']).to eql('m1.xlarge')
           expect(response_body).to have_key('pricing')
+        end
+
+        it 'returns instance type data for the specified instance type in the specified region' do
+          expect(response_body['ram']).to eql('15 GiB')
+          expect(response_body['ecus']).to eql(8)
+          expect(response_body['io_performance']).to eql('high')
         end
 
         it 'responds with Not Found when the instance type cannot be found in the region' do
