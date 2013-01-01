@@ -27,8 +27,12 @@ module Ec2Pricing
         ENV['AWS_INSTANCE_TYPES_URL']
       end
 
+      def data_ttl
+        30 * 60
+      end
+
       def cache
-        @pricing_cache ||= HeapCache.new(ttl: 30 * 60)
+        @pricing_cache ||= HeapCache.new(ttl: data_ttl)
       end
 
       def instance_types
@@ -81,6 +85,10 @@ module Ec2Pricing
     before do
       header['Access-Control-Allow-Origin'] = '*'
       header['Access-Control-Request-Method'] = 'GET, HEAD, OPTIONS'
+    end
+
+    before do
+      header['Cache-Control'] = "public, max-age=#{data_ttl}"
     end
 
     desc 'Returns pricing for all instance types in all regions'

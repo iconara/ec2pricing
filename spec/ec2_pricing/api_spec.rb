@@ -41,6 +41,10 @@ module Ec2Pricing
         expect(last_response.headers['Access-Control-Request-Method']).to_not include('PUT')
         expect(last_response.headers['Access-Control-Request-Method']).to_not include('DELETE')
       end
+
+      it 'responds with appropriate cache headers' do
+        expect(last_response.headers['Cache-Control']).to eql('public, max-age=1800')
+      end
     end
 
     describe '/api/v1/' do
