@@ -14,7 +14,11 @@ module Ec2Pricing
     end
 
     before do
-      fake_time.stub(:now).and_return(1)
+      fake_time.stub(:now).and_return(Time.at(1))
+    end
+
+    before do
+      cache.clear!
     end
 
     it 'stores stuff' do
@@ -30,8 +34,37 @@ module Ec2Pricing
 
     it 'expires stuff' do
       cache['something'] = 3
-      fake_time.stub(:now).and_return(6)
+      fake_time.stub(:now).and_return(Time.at(6))
       expect(cache['something']).to be_nil
+    end
+
+    describe '#ttl' do
+      it 'returns the TTL' do
+        expect(cache.ttl).to eql(5)
+      end
+    end
+
+    describe '#clear!' do
+      it 'clears all keys from all instances' do
+        cache['hello'] = 'world'
+        another_cache = described_class.new
+        another_cache.clear!
+        expect(another_cache['hello']).to be_nil
+        expect(cache['hello']).to be_nil
+      end
+    end
+
+    describe '#expire_time' do
+      it 'returns when a key expires' do
+        cache['something'] = 'hello'
+        expect(cache.expire_time('something')).to eql(Time.at(6))
+      end
+
+      it 'returns nil if a key does not expire' do
+        another_cache = described_class.new(time: fake_time)
+        another_cache['stuff'] = 42
+        expect(another_cache.expire_time('stuff')).to be_nil
+      end
     end
   end
 end
