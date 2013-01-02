@@ -27,12 +27,8 @@ module Ec2Pricing
         ENV['AWS_INSTANCE_TYPES_URL']
       end
 
-      def data_ttl
-        30 * 60
-      end
-
       def cache
-        @pricing_cache ||= HeapCache.new(ttl: data_ttl)
+        @cache ||= HeapCache.new(ttl: 30 * 60)
       end
 
       def instance_types
@@ -49,6 +45,14 @@ module Ec2Pricing
             end
           end
           instance_types
+        end
+      end
+
+      def instance_types_etag
+        @instance_types_etag ||= begin
+          ts1 = cache.expire_time('pricing_data').to_i
+          ts2 = cache.expire_time('instance_type_data').to_i
+          ((ts1 * 5023399) ^ ts2).to_s(16)
         end
       end
 
@@ -88,7 +92,16 @@ module Ec2Pricing
     end
 
     before do
-      header['Cache-Control'] = "public, max-age=#{data_ttl}"
+      header['Cache-Control'] = "public, max-age=#{cache.ttl}"
+    end
+
+    before do
+      request_etag = request.env['HTTP_IF_NONE_MATCH']
+      if instance_types_etag == request_etag
+        error!('Not Modified', 304)
+      else
+        header['ETag'] = instance_types_etag
+      end
     end
 
     desc 'Returns pricing for all instance types in all regions'

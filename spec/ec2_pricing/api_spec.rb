@@ -42,8 +42,17 @@ module Ec2Pricing
         expect(last_response.headers['Access-Control-Request-Method']).to_not include('DELETE')
       end
 
-      it 'responds with appropriate cache headers' do
+      it 'responds with an appropriate Cache-Control header' do
         expect(last_response.headers['Cache-Control']).to eql('public, max-age=1800')
+      end
+
+      it 'sets an ETag header' do
+        expect(last_response.headers['ETag']).to_not be_nil
+      end
+
+      it 'responds with Not Modified if the same request is sent again with If-None-Match' do
+        get "/api/v1#{last_request.path}", last_request.params, {'HTTP_IF_NONE_MATCH' => last_response.headers['ETag']}
+        expect(last_response.status).to eql(304)
       end
     end
 
