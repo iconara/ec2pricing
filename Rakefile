@@ -4,6 +4,7 @@ require 'open-uri'
 require 'fileutils'
 require 'aws'
 require 'multi_json'
+require 'nokogiri'
 require 'ec2_pricing'
 
 
@@ -11,10 +12,12 @@ task :update => 'data:update'
 
 namespace :data do
   task :types do
-    puts "Updating instance-types.json"
-    types = Ec2Pricing::InstanceTypes.new(false)
+    puts 'Loading instance types data'
+    doc = Nokogiri::HTML(open('http://aws.amazon.com/ec2/instance-types/'))
+    parser = Ec2Pricing::InstanceTypesParser.new
+    types = parser.parse(doc)
     @types_file_name = 'instance-types.json'
-    @types_json = MultiJson.dump(types.types, pretty: true)
+    @types_json = MultiJson.dump(types, pretty: true)
   end
 
   task :pricing do

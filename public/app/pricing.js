@@ -57,7 +57,11 @@
   module.factory("instanceTypesLoader", function ($http, instanceTypesUrl) {
     return {
       instanceTypes: function () {
-        return $http.get(instanceTypesUrl).then(function (response) { return response.data })
+        return $http.get(instanceTypesUrl)
+          .then(function (response) { return response.data })
+          .then(function (instanceTypes) {
+            return _.reduce(instanceTypes, function (acc, instanceType) { acc[instanceType.api_name] = instanceType; return acc }, {})
+          })
       }
     }
   })
