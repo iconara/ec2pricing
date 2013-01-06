@@ -13,7 +13,7 @@
       return !instanceType.pricing[selectedOs]
     })
 
-    if (sortField == "type") {
+    if (sortField == "api_name") {
       availableTypes = sortInstanceTypesByType(availableTypes, sortAscending)
     } else if (sortField == "price") {
       availableTypes = sortInstanceTypesByPrice(availableTypes, selectedOs, sortAscending)
@@ -39,8 +39,8 @@
 
   var sortInstanceTypesByType = function (instanceTypes, sortAscending) {
     instanceTypes.sort(function (i0, i1) {
-      var c0 = i0.type.split(".")
-      var c1 = i1.type.split(".")
+      var c0 = i0.api_name.split(".")
+      var c1 = i1.api_name.split(".")
       var comp = TYPE_CLASS_SORT_ORDER.indexOf(c0[0]) - TYPE_CLASS_SORT_ORDER.indexOf(c1[0])
       var order = comp
       if (comp == 0) {

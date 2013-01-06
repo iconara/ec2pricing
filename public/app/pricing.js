@@ -41,40 +41,20 @@
     "sa-east-1":  "sa-east-1"
   }
 
-  var REGION_NAMES = {
-    "us-east-1":      "US East (Virginia)",
-    "us-west-2":      "US West (Oregon)",
-    "us-west-1":      "US West (Northern California)",
-    "eu-west-1":      "EU (Ireland)",
-    "ap-southeast-1": "Asia Pacific (Singapore)",
-    "ap-northeast-1": "Asia Pacific (Tokyo)",
-    "ap-southeast-2": "Asia Pacific (Sydney)",
-    "sa-east-1":      "South America (Sao Paulo)"
-  }
-
   var module = angular.module("ec2pricing.pricing", [])
 
-  module.factory("instanceTypesLoader", function ($http, instanceTypesUrl) {
+  module.factory("instanceTypesLoader", function ($http, instanceTypesByRegionUrl) {
     return {
-      instanceTypes: function () {
-        return $http.get(instanceTypesUrl)
-          .then(function (response) { return response.data })
-          .then(function (instanceTypes) {
-            return _.reduce(instanceTypes, function (acc, instanceType) { acc[instanceType.api_name] = instanceType; return acc }, {})
-          })
+      instanceTypesByRegion: function () {
+        return $http.get(instanceTypesByRegionUrl).then(function (response) {
+          return response.data
+        })
       }
     }
   })
 
-  module.factory("pricingLoader", function ($http, $window, $q, $rootScope, onDemandPricingUrl, spotPricingUrl, pricingParser) {
+  module.factory("pricingLoader", function ($http, $window, $q, $rootScope, spotPricingUrl, pricingParser) {
     return {
-      onDemand: function () {
-        return $http.get(onDemandPricingUrl).then(function (response) {
-          var data = pricingParser(response.data)
-          data.lastUpdated = new Date(response.headers("last-modified"))
-          return data
-        })
-      },
       spot: function () {
         var deferred = $q.defer()
         $window.callback = function (response) {
@@ -98,11 +78,7 @@
         var canonicalRegion = REGION_MAP[region.region]
         var regionData = byRegion[canonicalRegion]
         if (!regionData) {
-          regionData = byRegion[canonicalRegion] = {
-            name: REGION_NAMES[canonicalRegion],
-            apiName: canonicalRegion,
-            instanceTypes: []
-          }
+          regionData = byRegion[canonicalRegion] = {}
         }
         _(region.instanceTypes).each(function (instanceType) {
           _(instanceType.sizes).each(function (size) {
@@ -112,14 +88,11 @@
               if (typeGroup == "cc1" && typeSize == "8xlarge") {
                 typeGroup = "cc2"
               }
-              var instanceTypeData = {
-                type: typeGroup + "." + typeSize,
-                pricing: {}
-              }
+              var pricing = {}
               _(size.valueColumns).each(function (valueColumn) {
-                instanceTypeData.pricing[valueColumn.name] = parseFloat(valueColumn.prices.USD) || null
+                pricing[valueColumn.name] = parseFloat(valueColumn.prices.USD) || null
               })
-              regionData.instanceTypes.push(instanceTypeData)
+              regionData[typeGroup + "." + typeSize] = pricing
             } else {
               $log.warn("Unknown type group: " + instanceType.type)
             }
