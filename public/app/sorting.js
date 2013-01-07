@@ -20,6 +20,16 @@
     } else if (sortField == "spotPrice") {
       // TODO: move instances without spotPrice to the unavailable list
       availableTypes = sortInstanceTypesByPrice(availableTypes, selectedOs, sortAscending)
+    } else if (sortField == "disk_size") {
+      var newAvailableTypes = []
+      _(availableTypes).each(function (instanceType) {
+        if (instanceType[sortField]) {
+          newAvailableTypes.push(instanceType)
+        } else {
+          unavailableTypes.push(instanceType)
+        }
+      })
+      availableTypes = sortInstanceTypesBy(newAvailableTypes, sortField, sortAscending)
     } else {
       availableTypes = sortInstanceTypesBy(availableTypes, sortField, sortAscending)
     }

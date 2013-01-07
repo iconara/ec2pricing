@@ -40,9 +40,11 @@ angular.injector(["ng", "ec2pricing.sorting"]).invoke(function (instanceTypeSort
       expect(sorted).toEqual([micro, medium, xlarge, cluster])
     })
 
-    it("sorts by disk size, taking unit into account, and putting null last", function () {
-      var sorted = instanceTypeSorter(unsorted, "disk_size", true, "linux")
-      expect(sorted).toEqual([medium, xlarge, cluster, micro])
+    it("sorts by disk size, taking unit into account, and always putting null last", function () {
+      var sortedAscending = instanceTypeSorter(unsorted, "disk_size", true, "linux")
+      var sortedDescending = instanceTypeSorter(unsorted, "disk_size", false, "linux")
+      expect(sortedAscending).toEqual([medium, xlarge, cluster, micro])
+      expect(sortedDescending).toEqual([cluster, xlarge, medium, micro])
     })
 
     it("sorts by disk count", function () {
