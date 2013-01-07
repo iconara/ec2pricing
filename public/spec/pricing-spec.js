@@ -155,7 +155,7 @@ angular.injector(["ng", "ngMock", "ec2Pricing", "ec2PricingMock"]).invoke(functi
 angular.injector(["ng", "ngMock", "ec2Pricing"]).invoke(function ($httpBackend, instanceTypesUrl, instanceTypesLoader) {
   describe("instanceTypesLoader", function () {
     beforeEach(function () {
-      $httpBackend.when("GET", instanceTypesUrl).respond({"m1.small": {}})
+      $httpBackend.when("GET", instanceTypesUrl).respond([{"api_name": "m1.small"}])
     })
 
     afterEach(function() {
@@ -169,7 +169,7 @@ angular.injector(["ng", "ngMock", "ec2Pricing"]).invoke(function ($httpBackend, 
         instanceTypes = types
       })
       $httpBackend.flush()
-      expect(instanceTypes).toEqual({"m1.small": {}})
+      expect(instanceTypes).toEqual({"m1.small": {"api_name": "m1.small"}})
     })
   })
 })
