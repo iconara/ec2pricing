@@ -66,12 +66,6 @@
           size = size * 1024
         }
         return size
-      } else if (field == "disk_count") {
-        if (value == 0) {
-          return Number.MAX_VALUE
-        } else {
-          return value
-        }
       } else if (field == "architectures") {
         return value.join("/")
       } else if (field == "io_performance") {
