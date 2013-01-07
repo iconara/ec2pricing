@@ -91,16 +91,16 @@
       <div class="row">
         <div class="span12">
           <ul class="region-tabs nav nav-tabs">
-            <li ng-repeat="region in regions" ng-class="regionTabClass(region)">
-              <a href="#" ng-click="selectRegion($event, region)" title="{{pricing[region].name}}">{{region}}</a>
+            <li ng-repeat="region in regions" ng-class="{active: region == selectedRegion}">
+              <a href="#" ng-click="selectRegion($event, region)" title="{{regionName(region)}}">{{region}}</a>
             </li>
           </ul>
           <table class="instance-properties table table-striped">
             <thead>
               <tr>
-                <th><a href="#" ng-click="sortBy($event, 'type')">Name</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'api_name')">Name</a></th>
                 <th></th>
-                <th class="numeric"><a href="#" ng-click="sortBy($event, 'type')">API Name</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'api_name')">API Name</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'ecus')" title="EC2 Compute Units">ECUs</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'cores')" title="Logical cores">Cores</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'architectures')" title="Processor architecture">Arch.</a></th>
@@ -113,8 +113,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="instanceType in selectedRegion.instanceTypes"
-                   ng-class="instanceTypeRowClass(instanceType)"
+              <tr ng-repeat="instanceType in selectedInstanceTypes"
+                   ng-class="{'not-available': instanceType.pricing[$scope.selectedOs]}"
                    ng-click="inspectInstanceType(instanceType)">
                 <td>{{instanceType.name | dashIfNull}}</td>
                 <td>
@@ -127,7 +127,7 @@
                 </td>
                 <td>
                   <span class="label label-info">
-                    {{instanceType.type}}
+                    {{instanceType.api_name}}
                   </span>
                 </td>
                 <td class="numeric">{{instanceType.ecus | dashIfNull}}</td>
@@ -169,14 +169,14 @@
       <div class="row">
         <div class="span6">
           <ul class="nav nav-pills">
-            <li ng-repeat="(os, osName) in operatingSystems" ng-class="osSelectorClass(os)">
+            <li ng-repeat="(os, osName) in operatingSystems" ng-class="{active: os == selectedOs}">
               <a href="#" ng-click="selectOs($event, os)">{{osName}}</a>
             </li>
           </ul>
         </div>
         <div class="span6">
           <ul class="nav nav-pills component-right">
-            <li ng-repeat="period in periods" ng-class="periodSelectorClass(period)">
+            <li ng-repeat="period in periods" ng-class="{active: period == selectedPeriod}">
               <a href="#" ng-click="selectPeriod($event, period)">{{period}}</a>
             </li>
           </ul>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tests</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
+    <script src="lib/angular-1.0.1/angular-1.0.1.min.js"></script>
+    <script src="lib/angular-1.0.1/angular-mocks-1.0.1.js"></script>
+    <script src="lib/mocha.js"></script>
+    <script src="lib/chai.js"></script>
+    
+    <script>mocha.setup("bdd")</script>
+    
+
+    <script src="app/module.js"></script>
+    <script src="app/sorting.js"></script>
+    <script src="app/formatting.js"></script>
+    <script src="app/pricing.js"></script>
+    <script src="app/tracking.js"></script>
+
+    <script src="tests/sorting.spec.js"></script>
+    <script src="tests/formatting.spec.js"></script>
+    <script src="tests/pricing.spec.js"></script>
+    
+    <script>
+    // var assert = chai.assert
+    var expect = chai.expect
+    // var should = chai.should()
+    mocha.run()
+    </script>
+  </body>
+</html>

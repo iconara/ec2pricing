@@ -8,51 +8,25 @@ require 'nokogiri'
 require 'ec2_pricing'
 
 
-task :update => 'data:update'
+task :upload => ['upload:data', 'upload:site']
 
-namespace :data do
-  task :types do
-    puts 'Loading instance types data'
-    doc = Nokogiri::HTML(open('http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html'))
-    parser = Ec2Pricing::InstanceTypesParser.new
-    types = parser.parse(doc)
-    @types_file_name = 'instance-types.json'
-    @types_json = MultiJson.dump(types, pretty: true)
-  end
-
-  task :pricing do
-    pricing_parser = Ec2Pricing::PricingParser.new
-    base_url = 'http://aws.amazon.com/ec2/pricing/'
-    files = %w[pricing-on-demand-instances.json ri-light-linux.json ri-light-mswin.json ri-medium-linux.json ri-medium-mswin.json ri-heavy-linux.json ri-heavy-mswin.json]
-    @raw_pricing_json = files.each_with_object({}) do |file, pricing|
-      puts "Updating #{file}"
-      pricing[file] = open(base_url + file).read
-    end
-    @pricing_json = {
-      'on-demand-pricing.json' => MultiJson.dump(pricing_parser.parse(MultiJson.load(@raw_pricing_json['pricing-on-demand-instances.json'])), pretty: true)
-    }
-  end
-
-  task :update => [:pricing, :types] do
-    FileUtils.mkdir_p('public/data/aws')
-    puts "Writing public/data/#{@types_file_name}"
-    File.open("public/data/#{@types_file_name}", 'w') do |io|
-      io.write(@types_json)
-    end
-    @raw_pricing_json.each do |file, data|
-      puts "Writing public/data/aws/#{file}"
-      File.open("public/data/aws/#{file}", 'w') do |io|
-        io.write(data)
-      end
-    end
-    @pricing_json.each do |file, data|
-      puts "Writing public/data/#{file}"
-      File.write("public/data/#{file}", data)
-    end
+namespace :cache do
+  task :data do
+    api_host = ENV['API_HOST'] || 'ec2pricing.heroku.com'
+    api_url =  "http://#{api_host}/api/v1"
+    $stderr.puts("Downloading #{api_url}")
+    @data = open(api_url).read
   end
 end
 
-task :upload => ['data:update', 'upload:data', 'upload:site']
+namespace :update do
+  task :data => 'cache:data' do
+    local_path = 'public/data/data.json'
+    $stderr.puts("Writing #{local_path}")
+    FileUtils.mkdir_p(File.dirname(local_path))
+    File.write(local_path, @data)
+  end
+end
 
 namespace :upload do
   MIME_TYPES = {
@@ -96,17 +70,9 @@ namespace :upload do
     end
   end
 
-  task :data => ['data:pricing', 'data:types', :connect] do
+  task :data => ['cache:data', :connect] do
+    $stderr.puts("Writing s3://#{@bucket.name}/data/data.json")
     options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
-    puts "Uploading to data/#{@types_file_name}"
-    @bucket.objects["data/#{@types_file_name}"].write(@types_json, options)
-    @raw_pricing_json.each do |file, data|
-      puts "Uploading to data/aws/#{file}"
-      @bucket.objects["data/aws/#{file}"].write(data, options)
-    end
-    @pricing_json.each do |file, data|
-      puts "Uploading to data/#{file}"
-      @bucket.objects["data/#{file}"].write(data, options)
-    end
+    @bucket.objects['data/data.json'].write(@data, options)
   end
 end

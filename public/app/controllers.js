@@ -2,16 +2,30 @@
   var PERIOD_MULTIPLIERS = {"hourly": 1, "daily": 24, "weekly": 7 * 24, "monthly": 30.4 * 24, "yearly": 365.25 * 24}
   var DEFAULT_OS = "linux"
   var DEFAULT_PERIOD = "hourly"
-  var DEFAULT_SORT_FIELD = "type"
+  var DEFAULT_SORT_FIELD = "api_name"
   var DEFAULT_REGION = "us-east-1"
   var STATE_FIELDS = ["sortField", "sortAscending", "selectedRegion", "selectedOs", "selectedPeriod"]
   var ASCENDING_ORDER = "asc"
   var DESCENDING_ORDER = "desc"
+  var REGION_NAMES = {
+    "us-east-1":      "US East (Virginia)",
+    "us-west-2":      "US West (Oregon)",
+    "us-west-1":      "US West (Northern California)",
+    "eu-west-1":      "EU (Ireland)",
+    "ap-southeast-1": "Asia Pacific (Singapore)",
+    "ap-northeast-1": "Asia Pacific (Tokyo)",
+    "ap-southeast-2": "Asia Pacific (Sydney)",
+    "sa-east-1":      "South America (Sao Paulo)"
+  }
 
-  window.ApplicationController = function ($scope, $http, $location, $timeout, $log, instanceTypesLoader, pricingLoader, pricingParser, instanceTypeSorter, tracker) {
-    $scope.pricing = null
+  window.ApplicationController = function ($scope, $http, $location, $timeout, $log, instanceTypesLoader, instanceTypeSorter, pricingLoader, tracker) {
+    var instanceTypesByRegion = null
+    var spotInstancePricingByRegion = null
+
     $scope.regions = null
     $scope.selectedRegion = null
+    $scope.selectedInstanceTypes = null
+
     $scope.sortField = null
     $scope.sortAscending = false
     $scope.operatingSystems = {"linux": "Linux", "mswin": "Windows"}
@@ -23,7 +37,7 @@
     var updateState = function (firstTime) {
       if ($scope.selectedRegion) {
         var oldPath = $location.path()
-        $location.path($scope.selectedRegion.apiName)
+        $location.path($scope.selectedRegion)
         $location.search({
           sort: $scope.sortField + ":" + ($scope.sortAscending ? ASCENDING_ORDER : DESCENDING_ORDER),
           os: $scope.selectedOs,
@@ -63,13 +77,23 @@
       }
     }
 
-    var selectRegion = function (r) {
-      $scope.selectedRegion = $scope.pricing[r]
+    var selectRegion = function (region) {
+      if ($scope.regions.indexOf(region) != -1) {
+        $scope.selectedRegion = region
+        $scope.selectedInstanceTypes = _.find(instanceTypesByRegion, function (r) { return r.region == region }).instance_types
+      } else {
+        $log.warn("Attempt to select non-existent region: \"" + region + "\"")
+      }
     }
 
     var sortInstanceTypes = function () {
-      if ($scope.selectedRegion) {
-        $scope.selectedRegion.instanceTypes = instanceTypeSorter($scope.selectedRegion.instanceTypes, $scope.sortField, $scope.sortAscending, $scope.selectedOs)
+      if ($scope.selectedInstanceTypes) {
+        $scope.selectedInstanceTypes = instanceTypeSorter(
+          $scope.selectedInstanceTypes,
+          $scope.sortField,
+          $scope.sortAscending,
+          $scope.selectedOs
+        )
       }
     }
     
@@ -78,8 +102,8 @@
       $scope.$watch(property, updateState)
     })
 
-    $scope.isSelectedRegion = function (r) {
-      return r == $scope.isSelectedRegion
+    $scope.regionName = function (region) {
+      return REGION_NAMES[region]
     }
 
     $scope.selectRegion = function ($event, r) {
@@ -113,22 +137,6 @@
       tracker.trackEvent("Sort By Column", f)
     }
 
-    $scope.regionTabClass = function (r) {
-      return r == $scope.selectedRegion.apiName ? "active" : ""
-    }
-
-    $scope.osSelectorClass = function (o) {
-      return o == $scope.selectedOs ? "active" : ""
-    }
-
-    $scope.instanceTypeRowClass = function (instanceType) {
-      return instanceType.pricing[$scope.selectedOs] ? "" : "not-available"
-    }
-
-    $scope.periodSelectorClass = function (p) {
-      return p == $scope.selectedPeriod ? "active" : ""
-    }
-
     $scope.calculatedPrice = function (instanceType) {
       var basePrice = instanceType.pricing[$scope.selectedOs]
       var multiplier = PERIOD_MULTIPLIERS[$scope.selectedPeriod]
@@ -149,12 +157,9 @@
     }
 
     $scope.spotPrice = function (instanceType) {
-      if ($scope.spotInstancePricing) {
-        var regionPricing = $scope.spotInstancePricing[$scope.selectedRegion.apiName]
-        var foundInstanceType = _(regionPricing.instanceTypes).find(function (it) { return it.type == instanceType.type })
-        if (foundInstanceType) {
-          return $scope.calculatedPrice(foundInstanceType)
-        }
+      if (spotInstancePricingByRegion) {
+        var instanceTypePricing = spotInstancePricingByRegion[$scope.selectedRegion][instanceType.api_name]
+        return instanceTypePricing && $scope.calculatedPrice({pricing: instanceTypePricing})
       }
       return null
     }
@@ -165,9 +170,9 @@
 
     var startUpdateSpotPricing = function () {
       $scope.spotInstancePricingLoading = true
-      pricingLoader.spot().then(function (spotPricing) {
-        $scope.spotInstancePricingLastUpdated = spotPricing.lastUpdated
-        $scope.spotInstancePricing = spotPricing.regions
+      pricingLoader.spot().then(function (loadedSpotInstancePricingByRegion) {
+        spotInstancePricingByRegion = loadedSpotInstancePricingByRegion.regions
+        $scope.spotInstancePricingLastUpdated = loadedSpotInstancePricingByRegion.lastUpdated
         $scope.spotInstancePricingLoading = false
       })
       $timeout(arguments.callee, 300000)
@@ -178,30 +183,15 @@
       $timeout(arguments.callee, 5000)
     }
 
-    var mergeInstanceTypesIntoPricing = function (instanceTypes, pricing) {
-      _(pricing.regions).each(function (region) {
-        _(region.instanceTypes).each(function (instanceType) {
-          if (instanceType.type in instanceTypes) {
-            _(instanceType).extend(instanceTypes[instanceType.type])
-          } else {
-            $log.warn("Missing info for " + instanceType.type + " in " + region.apiName)
-          }
-        })
-      })
-    }
+    instanceTypesLoader.instanceTypesByRegion()
+      .then(function (loadedInstanceTypesByRegion) {
+        instanceTypesByRegion = loadedInstanceTypesByRegion
 
-    instanceTypesLoader.instanceTypes().then(function (instanceTypes) {
-        pricingLoader.onDemand()
-          .then(function (onDemandPricing) {
-            $scope.lastUpdated = onDemandPricing.lastUpdated
-            $scope.instanceTypes = instanceTypes
-            $scope.regions = _(onDemandPricing.regions).keys().sort()
-            $scope.pricing = onDemandPricing.regions
-            mergeInstanceTypesIntoPricing(instanceTypes, onDemandPricing)
-          })
-          .then(startUpdateSpotPricing)
-          .then(startUpdateSpotPricingLabel)
-          .then(restoreState)
+        $scope.lastUpdated = new Date() // TODO
+        $scope.regions = _.map(instanceTypesByRegion, function (region) { return region.region }).sort()
       })
+      .then(startUpdateSpotPricing)
+      .then(startUpdateSpotPricingLabel)
+      .then(restoreState)
   }
 })()
