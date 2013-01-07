@@ -13,7 +13,7 @@ task :update => 'data:update'
 namespace :data do
   task :types do
     puts 'Loading instance types data'
-    doc = Nokogiri::HTML(open('http://aws.amazon.com/ec2/instance-types/'))
+    doc = Nokogiri::HTML(open('http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html'))
     parser = Ec2Pricing::InstanceTypesParser.new
     types = parser.parse(doc)
     @types_file_name = 'instance-types.json'

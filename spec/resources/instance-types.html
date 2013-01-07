@@ -1,1205 +1,544 @@
-  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=8"><title>Instance Families and Types - Amazon Elastic Compute Cloud</title><link rel="home" href="#top" title="Amazon Elastic Compute Cloud"><link rel="up" href="instance-basics.html" title="Instance Basics"><link rel="prev" href="instance-basics.html" title="Instance Basics"><link rel="next" href="concepts_micro_instances.html" title="Micro Instances"><meta http-equiv="X-UA-Compatible" content="IE=8"><meta name="description" content="Amazon Elastic Compute Cloud (Amazon EC2) instances are grouped into the general families described in the following table."><meta name="keywords" content="instances,types,sizes,types of instances,sizes of instances,Windows,concepts,compute resources, measuring,resources,"><link rel="icon" type="image/ico" href="//d36cz9buwru1tt.cloudfront.net/favicon.ico"><link rel="shortcut icon" type="image/ico" href="//d36cz9buwru1tt.cloudfront.net/favicon.ico"><link rel="canonical" href="http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/instance-types.html"><link rel="stylesheet" type="text/css" href="aws-docs2.css"><script type="text/javascript" src="https://d36cz9buwru1tt.cloudfront.net/amznUrchin.js"></script><script src="all_1.js" type="text/javascript"></script><script src="awstoc.js" type="text/javascript"></script></head><script type="text/javascript" src="languagefilter.js"> // </script><body id="top" class="yui-skin-sam noJS" onLoad="doFilterOnLoad()"><div id="divHeader"><form method="get" action="http://aws.amazon.com/search"><div id="ad"><a id="adl" target="_top" href="http://aws.amazon.com/documentation/"><img id="adi" alt="Amazon Web Services" src="images/documentation_logo200x29.png"></a></div><div id="txt"><div id="srv">Amazon Elastic Compute Cloud</div><div id="gd">User Guide (API Version 2012-12-01)</div></div><div id="sfrm"><span id="lbl"><label>Search: </label></span><select id="sel" name="searchPath"><option value="all">Entire Site</option><option value="amis">AMIs</option><option value="articles">Articles &amp; Tutorials</option><option value="products_and_info">AWS Product Information</option><option value="case_studies">Case Studies</option><option value="customerapps">Customer Apps</option><option value="developertools">Developer Tools</option><option value="documentation" selected>Documentation</option><option value="datasets">Public Data Sets</option><option value="releasenotes">Release Notes</option><option value="solution_providers">Solution Providers</option><option value="code">Sample Code &amp; Libraries</option></select><input id="sq" name="searchQuery" type="text"><input id="sb" src="images/search-button.png" alt="Go" type="image"></div></form></div><script type="text/javascript"><!--
+						var thispage = "instance-types.html";
+						var tocroot = location.protocol + '//' + location.hostname + location.pathname;
+						--></script><div id="divLeft"><div id="divTOC"><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="Welcome.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Welcome.html');">Welcome</a></li><li class="awstoc leaf"><a class="awstoc" href="concepts.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts.html');">What is Amazon EC2?</a></li><li class="awstoc leaf"><a class="awstoc" href="EC2_GetStarted.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-EC2_GetStarted.html');">Getting Started</a></li><li class="awstoc closed"><a class="awstoc" href="AMIs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AMIs.html');">Amazon Machine Images</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="ComponentsAMIs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ComponentsAMIs.html');">AMI Basics</a></li><li class="awstoc leaf"><a class="awstoc" href="finding-an-ami.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-finding-an-ami.html');">Finding a Suitable AMI</a></li><li class="awstoc leaf"><a class="awstoc" href="AESDG-chapter-usingsharedamis.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AESDG-chapter-usingsharedamis.html');">Shared AMIs</a></li><li class="awstoc leaf"><a class="awstoc" href="AESDG-chapter-using-paidamis.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AESDG-chapter-using-paidamis.html');">Paid AMIs</a></li><li class="awstoc leaf"><a class="awstoc" href="Tutorial_CreateImage.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Tutorial_CreateImage.html');">Creating Amazon EBS-Backed AMIs Using the Console</a></li><li class="awstoc closed"><a class="awstoc" href="creating-an-ami.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-creating-an-ami.html');">Creating Your Own AMIs</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="creating-an-ami-ebs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-creating-an-ami-ebs.html');">Creating Amazon EBS-Backed AMIs</a></li><li class="awstoc closed"><a class="awstoc" href="creating-an-ami-s3-linux.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-creating-an-ami-s3-linux.html');">Creating Instance Store-Backed Linux/UNIX AMIs </a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="ami-tools-bundling-s3-linux.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ami-tools-bundling-s3-linux.html');">Tools You Need</a></li><li class="awstoc leaf"><a class="awstoc" href="creating-snapshot-s3-linux.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-creating-snapshot-s3-linux.html');">From an Existing AMI</a></li><li class="awstoc leaf"><a class="awstoc" href="creating-loopback-s3-linux.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-creating-loopback-s3-linux.html');">From a Loopback</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="AESDG-chapter-paidamis.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AESDG-chapter-paidamis.html');">Creating Paid AMIs</a></li><li class="awstoc leaf"><a class="awstoc" href="AESDG-chapter-sharingamis.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AESDG-chapter-sharingamis.html');">Sharing AMIs Safely</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="AmazonLinuxAMIBasics.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AmazonLinuxAMIBasics.html');">Amazon Linux AMIs</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="UserProvidedkernels.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-UserProvidedkernels.html');">Enabling Your Own Linux Kernels</a></li></ul></li></ul></li><li class="awstoc opened"><a class="awstoc" href="Instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Instances.html');">Instances</a><ul class="awstoc"><li class="awstoc opened"><a class="awstoc" href="instance-basics.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-instance-basics.html');">Instance Basics</a><ul class="awstoc"><li class="awstoc opened"><a class="awstoc selected" href="instance-types.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-instance-types.html');">Families and Types</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="concepts_micro_instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts_micro_instances.html');">Micro Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="storage_instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-storage_instances.html');">High I/O Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="high_storage_instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-high_storage_instances.html');">High Storage Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="using_cluster_computing.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using_cluster_computing.html');">Cluster Instances</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="using-regions-availability-zones.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-regions-availability-zones.html');">Regions and Availability Zones</a></li><li class="awstoc leaf"><a class="awstoc" href="RootDeviceStorage.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-RootDeviceStorage.html');">Root Device Volume</a></li><li class="awstoc leaf"><a class="awstoc" href="instance-overview.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-instance-overview.html');">Best Practices</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="using-spot-instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances.html');">Spot Instances</a><ul class="awstoc"><li class="awstoc closed"><a class="awstoc" href="using-spot-instances-getting-started.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-getting-started.html');">Getting Started with Spot Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-history.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-history.html');">Viewing Spot Price History</a></li><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-request.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-request.html');">Creating a Spot Instance Request</a></li><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-running.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-running.html');">Finding Running Spot Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-view.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-view.html');">Canceling Spot Instance
+			Requests</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="using-spot-with-awsservices.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-with-awsservices.html');">Walkthroughs: Using Spot Instances with AWS Services</a><ul class="awstoc"><li class="awstoc closed"><a class="awstoc" href="spot-and-autoscaling.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-and-autoscaling.html');">Managing Spot Instances with Auto Scaling</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="spot-as-tools.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-as-tools.html');">Tools for Managing Auto Scaling with Spot Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="spot-launching-autoscaling.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-launching-autoscaling.html');">Launching Spot Instances with Auto Scaling</a></li><li class="awstoc leaf"><a class="awstoc" href="spot-as-confirm-actions.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-as-confirm-actions.html');">Obtaining Information About the Instances Launched by Auto Scaling</a></li><li class="awstoc leaf"><a class="awstoc" href="spot-as-update-bid.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-as-update-bid.html');">Updating the Bid Price for the Spot Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="spot-autoscaling-scheduledactions.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-autoscaling-scheduledactions.html');">Scheduling Spot Bid Requests</a></li><li class="awstoc leaf"><a class="awstoc" href="spot-autoscaling-notifications.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-autoscaling-notifications.html');">Using Auto Scaling to Get Notifications for Spot Instances</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="spot-cloudformation-template.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-cloudformation-template.html');">Using CloudFormation Templates to Launch Spot Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-emr.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-emr.html');">Launching Amazon Elastic MapReduce Job Flows with Spot Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="concepts-spot-instances-vpcs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-spot-instances-vpcs.html');">Launching Spot Instances in Amazon Virtual Private Cloud</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="using-spot-instances-managing-interruptions.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-managing-interruptions.html');">Planning for Interruptions</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-cluster.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-cluster.html');">Starting Clusters on Spot Instances</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="using-spot-instances-bid-management.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-bid-management.html');">Managing Bid Requests for Spot Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-bid-status.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-bid-status.html');">Spot Bid Request Status</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="using-spot-instances-advance.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-advance.html');">Advanced Tasks</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="concepts-spot-instances-applications-ebs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-spot-instances-applications-ebs.html');">Persist Your Root EBS Partition</a></li><li class="awstoc leaf"><a class="awstoc" href="concepts-spot-instances-request-tags.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-spot-instances-request-tags.html');">Tag Spot Instance Requests</a></li><li class="awstoc leaf"><a class="awstoc" href="using-spot-instances-datafeed.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-spot-instances-datafeed.html');">Subscribe to Your Spot Instance Data
+			Feed</a></li><li class="awstoc closed"><a class="awstoc" href="spot-programming-awsjavasdk.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-spot-programming-awsjavasdk.html');">Programming Spot with AWS Java SDK</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="tutorial-spot-instances-java.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-tutorial-spot-instances-java.html');">Tutorial: Amazon EC2 Spot Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="tutorial-spot-adv-java.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-tutorial-spot-adv-java.html');">Tutorial: Advanced Amazon EC2 Spot Request
+    Management</a></li></ul></li></ul></li></ul></li><li class="awstoc closed"><a class="awstoc" href="concepts-on-demand-reserved-instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-on-demand-reserved-instances.html');">Reserved Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-ri-prereqs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-ri-prereqs.html');">Tools and Prerequisites</a></li><li class="awstoc closed"><a class="awstoc" href="concepts-reserved-instances-applicationandblilling.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-reserved-instances-applicationandblilling.html');">Understanding the Pricing Benefit and Consolidated Billing</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="concepts-reserved-instances-billing.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-reserved-instances-billing.html');">Reserved Instances and Consolidated Billing</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="concepts-reserved-instances-tiers.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-concepts-reserved-instances-tiers.html');">Understanding Reserved Instance Pricing Tiers</a></li><li class="awstoc leaf"><a class="awstoc" href="using-reserved-instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-reserved-instances.html');">Working with Reserved Instances</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="ri-market-general.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-general.html');">Reserved Instance Marketplace</a><ul class="awstoc"><li class="awstoc closed"><a class="awstoc" href="ri-market-selling-guide.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-selling-guide.html');">Selling in the Reserved Instance Marketplace</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="ri-market-seller-profile.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-seller-profile.html');">Registering as a Seller</a></li><li class="awstoc leaf"><a class="awstoc" href="ri-market-selling-listing.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-selling-listing.html');">Selling Your Reserved Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="ri-market-concepts-sold.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-concepts-sold.html');">After Your Reserved Instance Is Sold</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="ri-market-buying-guide.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-buying-guide.html');">Buying in the Reserved Instance Marketplace</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="ri-market-buying-concepts.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-buying-concepts.html');">Becoming a Buyer</a></li><li class="awstoc leaf"><a class="awstoc" href="ri-market-concepts-buying.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-concepts-buying.html');">Purchasing Your Reserved Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="ri-market-buyer-billing.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ri-market-buyer-billing.html');">Reading Your Statement (Invoice)</a></li></ul></li></ul></li><li class="awstoc closed"><a class="awstoc" href="LaunchingAndUsingInstances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-LaunchingAndUsingInstances.html');">Launching Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="launching-an-instance.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-launching-an-instance.html');">Launching an Instance from an AMI</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_LaunchingInstaceFromSnapshot.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_LaunchingInstaceFromSnapshot.html');">Launching an Instance from a Snapshot</a></li><li class="awstoc closed"><a class="awstoc" href="instances_of_your_vm.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-instances_of_your_vm.html');">Launching an Instance from a Virtual Machine</a><ul class="awstoc"><li class="awstoc closed"><a class="awstoc" href="UsingVirtualMachinesinAmazonEC2.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-UsingVirtualMachinesinAmazonEC2.html');">Using Instances of 
+        Your Virtual Machine in Amazon EC2</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="VMImportPrerequisites.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-VMImportPrerequisites.html');">Before You Get Started</a></li><li class="awstoc leaf"><a class="awstoc" href="UsingEC2VMImportConnector.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-UsingEC2VMImportConnector.html');">Using the Amazon EC2 VM Import Connector to Import Your Virtual Machine to Amazon EC2</a></li><li class="awstoc leaf"><a class="awstoc" href="UploadingYourInstancesandVolumes.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-UploadingYourInstancesandVolumes.html');">Using the Command Line Tools to Import Your Virtual Machine to Amazon EC2</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="ExportingEC2Instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ExportingEC2Instances.html');">Exporting EC2 Instances</a></li></ul></li></ul></li><li class="awstoc closed"><a class="awstoc" href="AccessingInstances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AccessingInstances.html');">Connecting to Amazon EC2 Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="generating-a-keypair.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-generating-a-keypair.html');">Getting an SSH Key Pair</a></li><li class="awstoc leaf"><a class="awstoc" href="authorizing-access-to-an-instance.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-authorizing-access-to-an-instance.html');">Authorizing
+			Network Access to Your Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="AccessingInstancesLinux.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AccessingInstancesLinux.html');">Connecting to Linux/UNIX Instances Using SSH</a></li><li class="awstoc leaf"><a class="awstoc" href="putty.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-putty.html');">Connecting to Linux/UNIX Instances from Windows Using
+			PuTTY</a></li><li class="awstoc leaf"><a class="awstoc" href="LaunchingAndUsingInstancesWindows.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-LaunchingAndUsingInstancesWindows.html');">Connecting to
+		Windows Instances</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="EC2_Instances_Managing.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-EC2_Instances_Managing.html');">Managing Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-auto-scaling-elb.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-auto-scaling-elb.html');">Auto Scaling and Load Balancing Your Instances</a></li><li class="awstoc closed"><a class="awstoc" href="using-monitoring.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-monitoring.html');">Monitoring Your Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-cloudwatch.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-cloudwatch.html');">Monitoring Your Instances with CloudWatch</a></li><li class="awstoc closed"><a class="awstoc" href="monitoring-instances-status-check.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-monitoring-instances-status-check.html');">Monitoring the Status of Your Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="monitoring-system-instance-status-check.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-monitoring-system-instance-status-check.html');">Monitoring Instances with Status Checks</a></li><li class="awstoc leaf"><a class="awstoc" href="monitoring-instances-status-check_sched.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-monitoring-instances-status-check_sched.html');">Monitoring Events for Your
+            Instances</a></li></ul></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="Run_Instance_Idempotency.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Run_Instance_Idempotency.html');">Ensuring Idempotency</a></li><li class="awstoc leaf"><a class="awstoc" href="AESDG-chapter-instancedata.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AESDG-chapter-instancedata.html');">Instance Metadata</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="Stop_Start.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Stop_Start.html');">Stopping Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="starting-stopping-instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-starting-stopping-instances.html');">Stopping and Starting Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="terminating-instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-terminating-instances.html');">Terminating Instances</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_ChangingDisableAPITermination.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_ChangingDisableAPITermination.html');">Enabling Termination Protection</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_ChangingInstanceInitiatedShutdownBehavior.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_ChangingInstanceInitiatedShutdownBehavior.html');">Changing the Shutdown Behavior</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_ChangingAttributesWhileInstanceStopped.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_ChangingAttributesWhileInstanceStopped.html');">Modifying Attributes of a Stopped
+			Instance</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="ec2-instance-troubleshoot.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ec2-instance-troubleshoot.html');">Troubleshooting Instances</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="TroubleshootingInstances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-TroubleshootingInstances.html');">Instances with Failed Status Checks</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_InstanceStraightToTerminated.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_InstanceStraightToTerminated.html');">What to Do If an Instance Immediately
+   Terminates</a></li><li class="awstoc leaf"><a class="awstoc" href="instance-console.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-instance-console.html');">Getting Console Output and Rebooting Instances</a></li></ul></li></ul></li><li class="awstoc closed"><a class="awstoc" href="EC2_Network_and_Security.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-EC2_Network_and_Security.html');">Network and Security</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="using-network-security.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-network-security.html');">Security Groups</a></li><li class="awstoc leaf"><a class="awstoc" href="using-credentials.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-credentials.html');">Amazon EC2 Credentials</a></li><li class="awstoc leaf"><a class="awstoc" href="UsingIAM.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-UsingIAM.html');">AWS Identity and Access Management</a></li><li class="awstoc leaf"><a class="awstoc" href="using-vpc.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-vpc.html');">Amazon Virtual Private Cloud</a></li><li class="awstoc leaf"><a class="awstoc" href="using-instance-addressing.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-instance-addressing.html');">Instance IP Addressing</a></li><li class="awstoc leaf"><a class="awstoc" href="elastic-ip-addresses-eip.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-elastic-ip-addresses-eip.html');">Elastic IP Addresses</a></li><li class="awstoc leaf"><a class="awstoc" href="using-eni.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-eni.html');">Elastic Network Interfaces</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="Storage.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Storage.html');">Storage</a><ul class="awstoc"><li class="awstoc closed"><a class="awstoc" href="AmazonEBS.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AmazonEBS.html');">Amazon EBS</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="EBSPerformance.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-EBSPerformance.html');">Increasing EBS Performance</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-creating-volume.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-creating-volume.html');">Creating a Volume</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-attaching-volume.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-attaching-volume.html');">Attaching a Volume to an Instance</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-describing-volumes.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-describing-volumes.html');">Describing Volumes</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-using-volumes.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-using-volumes.html');">Making an Amazon EBS Volume Available for Use</a></li><li class="awstoc leaf"><a class="awstoc" href="monitoring-volume-status.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-monitoring-volume-status.html');">Monitoring the Status of Your Volumes</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-detaching-volume.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-detaching-volume.html');">Detaching a Volume from an Instance</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-deleting-volume.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-deleting-volume.html');">Deleting a Volume</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-creating-snapshot.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-creating-snapshot.html');">Creating a Snapshot</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-copy-snapshot.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-copy-snapshot.html');">Copying a Snapshot</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-describing-snapshots.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-describing-snapshots.html');">Describing Snapshots</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-modifying-snapshot-permissions.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-modifying-snapshot-permissions.html');">Modifying Snapshot Permissions</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-deleting-snapshot.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-deleting-snapshot.html');">Deleting a Snapshot</a></li><li class="awstoc leaf"><a class="awstoc" href="using-public-data-sets.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-public-data-sets.html');">Using Public Data Sets</a></li><li class="awstoc leaf"><a class="awstoc" href="ebs-api-cli-overview.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-ebs-api-cli-overview.html');">API and Command Overview</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="InstanceStorage.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-InstanceStorage.html');">Instance Store</a></li><li class="awstoc leaf"><a class="awstoc" href="AmazonS3.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-AmazonS3.html');">Amazon S3</a></li><li class="awstoc leaf"><a class="awstoc" href="block-device-mapping-concepts.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-block-device-mapping-concepts.html');">Block Device Mapping</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="EC2_Resources.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-EC2_Resources.html');">Resources and Tags</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="resources.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-resources.html');">Resource Locations</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_Filtering.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_Filtering.html');">Listing and Filtering Your Resources</a></li><li class="awstoc leaf"><a class="awstoc" href="Using_Tags.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_Tags.html');">Tagging Your Resources</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="SettingUp_CommandLine.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-SettingUp_CommandLine.html');">Setting Up the Tools</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="verify-signature.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-verify-signature.html');">Verify the Signature</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="available-apis.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-available-apis.html');">Making API Requests</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="Using_Endpoints.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Using_Endpoints.html');">Endpoints</a></li><li class="awstoc leaf"><a class="awstoc" href="using-query-api.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-query-api.html');">Making Query Requests</a></li><li class="awstoc leaf"><a class="awstoc" href="using-soap-api.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-soap-api.html');">Making SOAP Requests</a></li><li class="awstoc leaf"><a class="awstoc" href="api-responses.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-api-responses.html');">The Response Structure</a></li><li class="awstoc leaf"><a class="awstoc" href="using-libraries.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-using-libraries.html');">Available Libraries</a></li></ul></li><li class="awstoc closed"><a class="awstoc" href="TechnicalFAQ.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-TechnicalFAQ.html');">Technical FAQ</a><ul class="awstoc"><li class="awstoc leaf"><a class="awstoc" href="General_Information.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-General_Information.html');">General Information FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="Instance_AMI_Information.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Instance_AMI_Information.html');">Instances and AMIs Information FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="Operation_Information.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Operation_Information.html');">Operation Information FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="Instance_Types_and_Architectures.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Instance_Types_and_Architectures.html');">Instance Types and Architectures FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="IP_Information.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-IP_Information.html');">IP Information FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="FAQ_Regions_Availability_Zones.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-FAQ_Regions_Availability_Zones.html');">Region and Availability Zone FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="FAQ_Windows.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-FAQ_Windows.html');">Windows Instances FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="Monitoring_Errors_Unexpected.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Monitoring_Errors_Unexpected.html');">Monitoring, Errors, and Unexpected Behavior FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="FAQs_Reserved_Instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-FAQs_Reserved_Instances.html');">Reserved Instances FAQs</a></li><li class="awstoc leaf"><a class="awstoc" href="Paid_AMIs.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Paid_AMIs.html');">Paid AMIs FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="FAQs_Kernel.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-FAQs_Kernel.html');">Kernel FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="Error_Messages.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Error_Messages.html');">Error Messages FAQ</a></li><li class="awstoc leaf"><a class="awstoc" href="Miscellaneous.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-Miscellaneous.html');">Miscellaneous FAQ</a></li></ul></li><li class="awstoc leaf"><a class="awstoc" href="DocumentHistory.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-toc', 'aws-docs-click', tocroot + '-DocumentHistory.html');">Document History</a></li></ul></div></div><div id="divRight"><div id="divContent"><table width="100%" summary="Navigation header" cellspacing="0" cellpadding="2" style="margin-top:12px;"><tr><td valign="top"><div class="navheader"><div class="breadcrumb"><a href="http://aws.amazon.com/documentation/" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-breadcrumbs', 'aws-docs-click', 'http://aws.amazon.com/documentation/');">AWS Documentation</a> &raquo; <a href="http://aws.amazon.com/documentation/ec2/" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-breadcrumbs', 'aws-docs-click', 'http://aws.amazon.com/documentation/ec2/');">Amazon EC2</a> &raquo; <a href="http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-breadcrumbs', 'aws-docs-click', 'http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/');">User Guide</a> &raquo; <a href="Instances.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-breadcrumbs', 'aws-docs-click', location.protocol + '//' + location.hostname + '/Instances.html');">Amazon EC2 Instances</a> &raquo; <a href="instance-basics.html" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-breadcrumbs', 'aws-docs-click', location.protocol + '//' + location.hostname + '/instance-basics.html');">Instance Basics</a> &raquo; <span class="breadcrumb">Instance Families and Types</span></div></div></td><td width="350px" align="right" valign="top"><a class="awstoc" accesskey="p" style="margin-right:12px;" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-previous', 'aws-docs-click', location.protocol + '//' + location.hostname + '/instance-basics.html');" href="instance-basics.html">&laquo; Previous</a><a class="awstoc" accesskey="n" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-next', 'aws-docs-click', location.protocol + '//' + location.hostname + '/concepts_micro_instances.html');" href="concepts_micro_instances.html">Next &raquo;</a></td></tr><tr><td><a href="http://awsdocs.s3.amazonaws.com/EC2/latest/ec2-ug.pdf" style="padding-right: 8px;" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-pdf-link', 'aws-docs-click', 'http://awsdocs.s3.amazonaws.com/EC2/latest/ec2-ug.pdf');"><img src="images/pdf_button.png" alt="View the PDF for this guide." title="View the PDF for this guide."></a><a target="_blank" style="padding-right: 8px;" href="http://forums.aws.amazon.com/forum.jspa?forumID=30" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-forums-link', 'aws-docs-click', 'http://forums.aws.amazon.com/forum.jspa?forumID=30');"><img src="images/forum_button.png" alt="Go to the AWS Discussion Forum for this product." title="Go to the AWS Discussion Forum for this product."></a><a target="_blank" href="http://www.amazon.com/dp/B007Q4H9JI" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-kindle-link', 'aws-docs-click', 'http://www.amazon.com/dp/B007Q4H9JI');"><img src="images/download_to_kindle.png" alt="Go to the Kindle Store to download this guide in Kindle format." title="Go to the Kindle Store to download this guide in Kindle format."></a></td><td width="350px" align="right" valign="top">Did this page help you?&nbsp;&nbsp;<a class="awstoc" target="_blank" href="feedbackyes.html?topic_id=instance-types">Yes</a>&nbsp;|&nbsp;<a class="awstoc" target="_blank" href="feedbackno.html?topic_id=instance-types">No</a>&nbsp;|&nbsp;&nbsp;<a class="awstoc" target="_blank" href="https://aws-portal.amazon.com/gp/aws/html-forms-controller/documentation/aws_doc_feedback_04?service_name=EC2&amp;guide_name=User%20Guide&amp;api_version=2012-12-01&amp;file_name=instance-types">Tell us about it...</a></td></tr></table><div class="section"><div class="titlepage"><div><div><div id="language-filter" class="page-header"><form> Filter View: <select name="filter-select" id="filter-select" onChange="doFilter(this.value);(location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-filtering', 'aws-docs-click', location.protocol + '//' + location.hostname + location.pathname + '#' + this.value))"><option value="All" selected="1">All</option></select></form></div><script type="text/javascript"><!--
+var filterNames = new Array("AWS Management Console", "Command Line Tools", "API");
 
+var filterOpt = null;
+var filterText = null;
+var filterAttr = null;
+var filterN = 0;
 
+for (filterN=0; filterN<filterNames.length; filterN++) {
+        filterOpt = document.createElement('option');
+        filterOpt.setAttribute('value', filterNames[filterN]);
+        filterText = document.createTextNode(filterNames[filterN]);
+        filterOpt.appendChild(filterText);
+        document.getElementById('filter-select').appendChild(filterOpt);
+}
+--></script><h1 class="topictitle">Instance Families and Types</h1></div></div></div><div class="highlights"><p><strong>Topics</strong></p><ul><li><a href="instance-types.html#AvailableInstanceTypes">Available Instance Types</a></li><li><a href="instance-types.html#EBSOptimized">EBS-Optimized Instances</a></li><li><a href="instance-types.html#AvailableIpPerENI">Private IP Addresses Per ENI Per Instance
+				Type</a></li><li><a href="instance-types.html#concepts-windows">Windows Instance Types</a></li><li><a href="instance-types.html#MeasuringComputeResources">Compute Resources Measurement</a></li><li><a href="instance-types.html#IOResources">I/O Resources</a></li><li><a href="instance-types.html#Instances_Tags">Instance Tags</a></li><li><a href="concepts_micro_instances.html">Micro Instances</a></li><li><a href="storage_instances.html">High I/O Instances</a></li><li><a href="high_storage_instances.html">Amazon EC2 High Storage Instances</a></li><li><a href="using_cluster_computing.html">Cluster Instances</a></li></ul></div><a class="indexterm" name="d0e7768"></a><a class="indexterm" name="d0e7773"></a><a class="indexterm" name="d0e7778"></a><a class="indexterm" name="d0e7781"></a><p>Amazon Elastic Compute Cloud (Amazon EC2) instances are grouped into the general families described in the following table.</p><div class="informaltable"><table cellspacing="0" border="0"><colgroup><col class="col1"><col class="col2"></colgroup><thead><tr><th>Family</th><th>Description</th></tr></thead><tbody><tr><td>
+							<p>Micro</p>
+						</td><td>
+							<p>Provide a small amount of consistent CPU resources and enable you to burst CPU capacity
+									when additional cycles are available. They're well-suited for
+									lower throughput applications and websites that consume
+									significant compute cycles periodically. For more information,
+										<span>see <a class="xref" href="concepts_micro_instances.html" title="Micro Instances">Micro Instances</a>.</span>
+									</p>
+						</td></tr><tr><td>
+							<p>Standard</p>
+						</td><td>
+							<p>Have memory-to-CPU ratios suitable for most general-purpose applications.</p>
+						</td></tr><tr><td>
+							<p>High-CPU</p>
+						</td><td>
+							<p>Have proportionally more CPU resources than memory (RAM). They're well-suited for
+									compute-intensive applications.</p>
+						</td></tr><tr><td>
+							<p>High-Memory</p>
+						</td><td>
+							<p>Have proportionally more memory resources. They're well suited for high-throughput
+								applications, such as database and memory caching
+								applications.</p>
+						</td></tr><tr><td>High I/O</td><td>Provide tens of thousands of low-latency, random I/O operations per second (IOPS) to an
+								application. They're well-suited for NoSQL databases, clustered
+								databases, and OLTP (online transaction processing) systems. For
+								more information, see <a class="xref" href="storage_instances.html" title="High I/O Instances">High I/O Instances</a>.</td></tr><tr><td>High Storage</td><td>Provide very high storage density and high sequential read and write performance per
+								instance. They are well-suited for data warehousing,
+								Hadoop/MapReduce, and parallel file systems. For more information,
+								see <a class="xref" href="high_storage_instances.html" title="Amazon EC2 High Storage Instances">Amazon EC2 High Storage Instances</a>.</td></tr><tr><td>
+							<p>Cluster Compute</p>
+						</td><td>
+							<p>Have a very large amount of CPU coupled with increased networking performance. They're
+									well-suited for High Performance Compute (HPC) applications and
+									other demanding network-bound applications. For more
+									information, <span>see <a class="xref" href="using_cluster_computing.html#concepts_cluster_compute" title="Overview">Overview</a>.</span>
+									</p>
+						</td></tr><tr><td>
+							<p>Cluster GPU</p>
+						</td><td>
+							<p>Provide general-purpose graphics processing units (GPUs), with proportionally high CPU
+									and increased network performance for applications that benefit
+									from highly parallelized processing. They're well-suited for HPC
+									applications as well as rendering and media processing
+									applications. For more information, <span>see <a class="xref" href="using_cluster_computing.html#concepts_cluster_compute" title="Overview">Overview</a>.</span>
+									</p>
+						</td></tr></tbody></table></div><div class="aws-note"><p class="aws-note">Tip</p><p class="simpara">One of the advantages of Amazon EC2 is that you pay by the instance hour, which makes it
+				convenient and inexpensive to test the performance of your application on different
+				instance families and types. A good way to determine the most appropriate instance
+				family and instance type is to launch test instances and benchmark your application. </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="AvailableInstanceTypes">Available Instance Types</h2></div></div></div><p>When you launch an instance, you specify the <span class="emphasis"><em>instance type</em></span> (the value in the <span class="emphasis"><em>Name</em></span> column
+				in the following table). We launch an m1.small if you don't specify a particular instance type.</p><div class="informaltable"><table cellspacing="0" border="0"><colgroup><col class="col1"><col class="col2"><col class="col3"><col class="col3"><col class="col4"><col class="col5"><col class="col6"><col class="col7"></colgroup><thead><tr><th>Type</th><th>Name</th><th>EC2 Compute Units (ECU)</th><th>Virtual Cores</th><th>Memory</th><th>Instance Store Volumes</th><th>Platform</th><th>I/O</th></tr></thead><tbody><tr><td>
+									<p>Micro</p>
+								</td><td>
+									<p>t1.micro</p>
+								</td><td>
+									<p>Up to 2 (for short periodic bursts)</p>
+								</td><td>1</td><td>
+									<p>615 MiB</p>
+								</td><td>
+									<p>None (use Amazon EBS volumes for storage)</p>
+								</td><td>
+									<p>32-bit and 64-bit</p>
+								</td><td>
+									<p>Low</p>
+								</td></tr><tr><td>
+									<p>M1 Small</p>
+								</td><td>
+									<p>m1.small</p>
+								</td><td>
+									<p>1</p>
+								</td><td>1</td><td>
+									<p>1.7 GiB</p>
+								</td><td>
+									<p>150 GiB (1 x 150 GiB)</p>
+								</td><td>
+									<p>32-bit and 64-bit</p>
+								</td><td>
+									<p>Moderate</p>
+								</td></tr><tr><td>
+									<p>M1 Medium</p>
+								</td><td>
+									<p>m1.medium</p>
+								</td><td>
+									<p>2</p>
+								</td><td>1</td><td>
+									<p>3.75 GiB</p>
+								</td><td>
+									<p>400 GiB (1 x 400 GiB)</p>
+								</td><td>
+									<p>32-bit and 64-bit</p>
+								</td><td>
+									<p>Moderate</p>
+								</td></tr><tr><td>
+									<p>M1 Large</p>
+								</td><td>
+									<p>m1.large</p>
+								</td><td>
+									<p>4</p>
+								</td><td>2 (with 2 ECUs each)</td><td>
+									<p>7.5 GiB</p>
+								</td><td>
+									<p>840 GiB (2 x 420 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Moderate</p>
+								</td></tr><tr><td>
+									<p>M1 Extra Large</p>
+								</td><td>
+									<p>m1.xlarge</p>
+								</td><td>
+									<p>8 </p>
+								</td><td>4 (with 2 ECUs each)</td><td>
+									<p>15 GiB</p>
+								</td><td>
+									<p>1680 GB (4 x 420 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>High</p>
+								</td></tr><tr><td>
+									<p>M3 Extra Large</p>
+								</td><td>
+									<p>m3.xlarge</p>
+								</td><td>
+									<p>13</p>
+								</td><td>4 (with 3.25 ECUs each)</td><td>
+									<p>15 GiB</p>
+								</td><td>
+									<p>EBS storage only</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Moderate</p>
+								</td></tr><tr><td>
+									<p>M3 Double Extra Large</p>
+								</td><td>
+									<p>m3.2xlarge</p>
+								</td><td>
+									<p>26</p>
+								</td><td>8 (with 3.25 ECUs each)</td><td>
+									<p>30 GiB</p>
+								</td><td>
+									<p>EBS storage only</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>High</p>
+								</td></tr><tr><td>
+									<p>High-CPU Medium</p>
+								</td><td>
+									<p>c1.medium</p>
+								</td><td>
+									<p>5 </p>
+								</td><td>2 (with 2.5 ECUs each)</td><td>
+									<p>1.7 GiB</p>
+								</td><td>
+									<p>340 GiB (1 x 340 GiB)</p>
+								</td><td>
+									<p>32-bit and 64-bit</p>
+								</td><td>
+									<p>Moderate</p>
+								</td></tr><tr><td>
+									<p>High-CPU Extra Large</p>
+								</td><td>
+									<p>c1.xlarge</p>
+								</td><td>
+									<p>20</p>
+								</td><td>8 (with 2.5 ECUs each)</td><td>
+									<p>7 GiB</p>
+								</td><td>
+									<p>1680 GiB (4 x 420 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>High</p>
+								</td></tr><tr><td>
+									<p>High-Memory Extra Large</p>
+								</td><td>
+									<p>m2.xlarge</p>
+								</td><td>
+									<p>6.5 </p>
+								</td><td>2 (with 3.25 ECUs each)</td><td>
+									<p>17.1 GiB</p>
+								</td><td>
+									<p>410 GiB (1 x 410 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Moderate</p>
+								</td></tr><tr><td>
+									<p>High-Memory Double Extra Large</p>
+								</td><td>
+									<p>m2.2xlarge</p>
+								</td><td>
+									<p>13 </p>
+								</td><td>4 (with 3.25 ECUs each)</td><td>
+									<p>34.2 GiB</p>
+								</td><td>
+									<p>840 GiB (1 x 840 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>High</p>
+								</td></tr><tr><td>
+									<p>High-Memory Quadruple Extra Large</p>
+								</td><td>
+									<p>m2.4xlarge</p>
+								</td><td>
+									<p>26 </p>
+								</td><td>8 (with 3.25 ECUs each)</td><td>
+									<p>68.4 GiB</p>
+								</td><td>
+									<p>1680 GiB (2 x 840 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>High</p>
+								</td></tr><tr><td>
+									<p>High I/O Quadruple Extra Large</p>
+								</td><td>
+									<p>hi1.4xlarge</p>
+								</td><td><p>35</p>
+								</td><td>
+									<p>8 (with 4.37 ECUs each)</p>
+								</td><td>
+									<p>60.5 GiB</p>
+								</td><td>
+									<p>2 TiB (2 x 1 TiB SSD)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Very high (10 Gbps Ethernet)</p>
+								</td></tr><tr><td>
+									<p>High Storage Eight Extra Large</p>
+								</td><td>
+									<p>hs1.8xlarge</p>
+								</td><td><p>35</p>
+								</td><td>
+									<p>16 (with 8 cores + 8 hyperthreads)</p>
+								</td><td>
+									<p>117 GiB</p>
+								</td><td>
+									<p>48 TiB (2 x 24 TiB hard disk drives)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Very high (10 Gbps Ethernet)</p>
+								</td></tr><tr><td>
+									<p>Cluster Compute Quadruple Extra Large</p>
+								</td><td>
+									<p>cc1.4xlarge</p>
+								</td><td>
+									<p>33.5 </p>
+								</td><td>8 (2 x Intel Xeon X5570, quad-core "Nehalem" architecture)</td><td>
+									<p>22.5 GiB</p>
+								</td><td>
+									<p>1690 GiB (2 x 840 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Very high (10 Gbps Ethernet)</p>
+								</td></tr><tr><td>
+									<p>Cluster Compute Eight Extra Large</p>
+								</td><td>
+									<p>cc2.8xlarge</p>
+								</td><td>
+									<p>88  </p>
+								</td><td>16 (2 x Intel Xeon E5-2670, eight-core "Sandy Bridge" architecture)</td><td>
+									<p>60.5 GiB</p>
+								</td><td>
+									<p>3360 GiB (4 x 840 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Very high (10 Gbps Ethernet)</p>
+								</td></tr><tr><td>
+									<p>Cluster GPU Quadruple Extra Large</p>
+								</td><td>
+									<p>cg1.4xlarge</p>
+								</td><td>
+									<p>33.5 </p>
+								</td><td>8 (2 x Intel Xeon X5570, quad-core "Nehalem" architecture), plus 2 NVIDIA Tesla M2050
+									"Fermi" GPUs</td><td>
+									<p>22.5 GiB (see note after this table)</p>
+								</td><td>
+									<p>1680 GiB (2 x 840 GiB)</p>
+								</td><td>
+									<p>64-bit</p>
+								</td><td>
+									<p>Very high (10 Gbps Ethernet)</p>
+								</td></tr></tbody></table></div><div class="aws-note"><p class="aws-note">Note</p><p class="simpara">The hi1.4xlarge instance type is based on solid-state drive (SSD)
+					technology. For more information, see <a class="xref" href="storage_instances.html" title="High I/O Instances">High I/O Instances</a>.</p></div><div class="aws-note"><p class="aws-note">Note</p><p class="simpara">The cg1.x4large instance type has 1 GiB reserved for GPU operation. The 21.5 GiB doesn't include the
+					on-board memory of the GPUs, which is 3 GiB per GPU for the NVIDIA Tesla M2050.</p></div><p>For more information about instance store volumes, see <a class="xref" href="InstanceStorage.html#InstanceStoreDeviceNames" title="Instance Store Device Names">Instance Store Device Names</a>.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="EBSOptimized">EBS-Optimized Instances</h2></div></div></div><p>An EBS-Optimized instance uses an optimized configuration stack and provides additional,
+					dedicated capacity for EBS I/O. This optimization provides the best performance
+					for your EBS volumes by minimizing contention between EBS I/O and other traffic
+					from your Amazon EC2 instance.</p><p>EBS optimization enables instances to fully utilize the IOPS provisioned on an EBS volume.
+					EBS-Optimized instances deliver dedicated throughput to EBS, with options
+					between 500 Mbps and 1,000 Mbps, depending on the instance type you use. When
+					attached to an EBS-Optimized instance, Provisioned IOPS volumes are designed to
+					deliver within 10 percent of their provisioned performance 99.9 percent of the
+					time in a given year. For more information, see <a class="xref" href="AmazonEBS.html#EBSVolumeTypes_piops" title="Provisioned IOPS Volumes">Provisioned IOPS Volumes</a>.</p><p>The following instance types can be launched as EBS-Optimized instances:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Large (m1.large)</p></li><li class="listitem"><p>Extra Large (m1.xlarge)</p></li><li class="listitem"><p>High-Memory Quadruple Extra Large (m2.4xlarge)</p></li></ul></div><p>When you use an EBS-Optimized instance, you pay an additional low, hourly fee for the
+					dedicated capacity.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="AvailableIpPerENI">Private IP Addresses Per ENI Per Instance
+				Type</h2></div></div></div><p>The following table lists the maximum number of Elastic Network Interfaces (ENI) per EC2
+					instance type and the maximum number of private IP addresses per ENI. ENIs and
+					multiple private IP addresses are only available in EC2 instances running in
+					Amazon Virtual Private Cloud. For more information, see <a class="xref" href="using-instance-addressing.html#MultipleIP" title="Multiple IP Addresses">Multiple IP Addresses</a>.</p><div class="informaltable"><table cellspacing="0" border="0"><colgroup><col class="col1"><col class="col2"><col class="col3"><col class="col4"></colgroup><thead><tr><th>Type</th><th>Name</th><th>Elastic Network Interfaces (ENI)</th><th>Private IP Addresses per ENI</th></tr></thead><tbody><tr><td>
+								<p>Micro</p>
+							</td><td>
+								<p>t1.micro</p>
+							</td><td>
+								<p>2</p>
+							</td><td>
+								<p>2</p>
+							</td></tr><tr><td>
+								<p>M1 Small</p>
+							</td><td>
+								<p>m1.small</p>
+							</td><td>
+								<p>2</p>
+							</td><td>
+								<p>4</p>
+							</td></tr><tr><td>
+								<p>M1 Medium</p>
+							</td><td>
+								<p>m1.medium</p>
+							</td><td>
+								<p>2</p>
+							</td><td>
+								<p>6</p>
+							</td></tr><tr><td>
+								<p>M1 Large</p>
+							</td><td>
+								<p>m1.large</p>
+							</td><td>
+								<p>3</p>
+							</td><td>
+								<p>10</p>
+							</td></tr><tr><td>
+								<p>M1 Extra Large</p>
+							</td><td>
+								<p>m1.xlarge</p>
+							</td><td>
+								<p>4</p>
+							</td><td>
+								<p>15</p>
+							</td></tr><tr><td>
+								<p>M3 Extra Large</p>
+							</td><td>
+								<p>m3.xlarge</p>
+							</td><td>
+								<p>4</p>
+							</td><td>
+								<p>15</p>
+							</td></tr><tr><td>
+								<p>M3 Double Extra Large</p>
+							</td><td>
+								<p>m3.2xlarge</p>
+							</td><td>
+								<p>4</p>
+							</td><td>
+								<p>30</p>
+							</td></tr><tr><td>
+								<p>High-CPU Medium</p>
+							</td><td>
+								<p>c1.medium</p>
+							</td><td>
+								<p>2</p>
+							</td><td>
+								<p>6</p>
+							</td></tr><tr><td>
+								<p>High-CPU Extra Large</p>
+							</td><td>
+								<p>c1.xlarge</p>
+							</td><td>
+								<p>4</p>
+							</td><td>
+								<p>15</p>
+							</td></tr><tr><td>
+								<p>High-Memory Extra Large</p>
+							</td><td>
+								<p>m2.xlarge</p>
+							</td><td>
+								<p>4</p>
+							</td><td>
+								<p>15</p>
+							</td></tr><tr><td>
+								<p>High-Memory Double Extra Large</p>
+							</td><td>
+								<p>m2.2xlarge</p>
+							</td><td>
+								<p>4</p>
+							</td><td>
+								<p>30</p>
+							</td></tr><tr><td>
+								<p>High-Memory Quadruple Extra Large</p>
+							</td><td>
+								<p>m2.4xlarge</p>
+							</td><td>
+								<p>8</p>
+							</td><td>
+								<p>30</p>
+							</td></tr><tr><td>
+								<p>High I/O Quadruple Extra Large</p>
+							</td><td>
+								<p>hi1.4xlarge</p>
+							</td><td>
+								<p>8</p>
+							</td><td>
+								<p>30</p>
+							</td></tr><tr><td>
+								<p>High Storage Eight Extra Large</p>
+							</td><td>
+								<p>hs1.8xlarge</p>
+							</td><td>
+								<p>8</p>
+							</td><td>
+								<p>30</p>
+							</td></tr><tr><td>
+								<p>Cluster Compute Quadruple Extra Large</p>
+							</td><td>
+								<p>cc1.4xlarge</p>
+							</td><td>
+								<p>N/A</p>
+							</td><td>
+								<p>N/A</p>
+							</td></tr><tr><td>
+								<p>Cluster Compute Eight Extra Large</p>
+							</td><td>
+								<p>cc2.8xlarge</p>
+							</td><td>
+								<p>8</p>
+							</td><td>
+								<p>30</p>
+							</td></tr><tr><td>
+								<p>Cluster GPU Quadruple Extra Large</p>
+							</td><td>
+								<p>cg1.4xlarge</p>
+							</td><td>
+								<p>8</p>
+							</td><td>
+								<p>30</p>
+							</td></tr></tbody></table></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="concepts-windows">Windows Instance Types</h2></div></div></div><a class="indexterm" name="d0e9009"></a><p>Amazon EC2 instances can run Microsoft Windows Server 2003, Windows Server 2008, Windows
+					Server 2008 R2, or Windows Server 2012. The Windows AMIs provide you with all
+					standard Windows Server functionality. </p><p>Using Amazon EC2 instances running Windows is similar to using instances running Linux/UNIX. The following are the major differences
+				between instances that use Linux/UNIX and Windows: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="topcom">Remote Desktop&#8212;</span>To access Windows instances, you use Remote Desktop instead of
+						SSH.</p></li><li class="listitem"><p><span class="topcom">Administrative Password&#8212;</span>To access Windows instances
+							the first time, you must obtain the administrative password (available
+							through the AWS Management Console, the command line tools, or the
+							Amazon EC2 API).</p></li><li class="listitem"><p><span class="topcom">Bundling&#8212;</span>Amazon instance store-backed Windows
+							instances requires different bundling procedures than Amazon instance
+							store-backed Linux/UNIX instances. For more information, see <a class="ulink" href="http://docs.amazonwebservices.com/AWSEC2/latest/WindowsGuide/Creating_InstanceStoreBacked_WinAMI.html" target="_blank">Creating an Instance Store-Backed Windows AMI</a> in the
+								<em class="citetitle">Amazon EC2 Microsoft Windows Guide </em>. </p></li></ul></div><p>Amazon EC2 currently provides the following
+					Windows
+					Server AMIs:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p class="simpara">Microsoft Windows Server 2003 (32-bit)</p></li><li class="listitem"><p class="simpara">Microsoft Windows Server 2003 (64-bit) </p></li><li class="listitem"><p class="simpara">Microsoft Windows Server 2008 (32-bit) </p></li><li class="listitem"><p class="simpara">Microsoft Windows Server 2008 (64-bit) </p></li><li class="listitem"><p class="simpara">Microsoft Windows Server 2008 R2 (64-bit)</p></li><li class="listitem"><p class="simpara">Microsoft Windows Server 2012 (64-bit)</p></li></ul></div><p>The Windows public AMIs that Amazon provides are unmodified versions of Windows with the
+					following two exceptions:  we added drivers to improve the networking and disk
+					I/O performance and we created the Amazon EC2 configuration service. The Amazon EC2
+					configuration service performs the following functions:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Randomly sets the Administrator password on initial launch, encrypts the password with the user&#8217;s SSH key, and reports it to
+						the console. This operation happens upon initial AMI launch. If you change the password, AMIs that are created from this
+						instance use the new password.</p></li><li class="listitem"><p>Configures the computer name to the internal DNS name. For more information about how to
+							determine the internal DNS name, <span>see
+									<a class="xref" href="using-instance-addressing.html" title="Amazon EC2 Instance IP Addressing">Amazon EC2 Instance IP Addressing</a>.</span>
+							
+						</p></li><li class="listitem"><p>Sends the last three system and application errors from the event log to the console. This helps developers to identify
+						problems that caused an instance to crash or network connectivity to be lost.</p></li></ul></div><p>For more information about the EC2 configuration service, see 
+				<a class="ulink" href="http://docs.amazonwebservices.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html" target="_blank">Using Ec2Config Service</a> in the <span class="emphasis"><em>Microsoft Windows
+						Guide</em></span>.
+			</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="MeasuringComputeResources">Compute Resources Measurement</h2></div></div></div><a class="indexterm" name="d0e9095"></a><a class="indexterm" name="d0e9098"></a><p>Changing to a utility computing model changes how developers are trained to think about CPU
+					resources. Instead of purchasing or leasing a particular processor to use for
+					several months or years, you are renting capacity by the hour. Because Amazon EC2 is
+					built on commodity hardware, over time there might be several different types of
+					physical processors underlying different virtual EC2 instances. Our goal is to
+					provide a consistent amount of CPU capacity regardless of the actual underlying
+					hardware. </p><p> Amazon EC2 uses a variety of measures to provide each instance with a consistent and predictable amount of CPU capacity. To make it
+				easy for developers to compare CPU capacity between different instance types, we defined an Amazon EC2 Compute Unit.
+				One
+				EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor. This is also the
+				equivalent to an early-2006 1.7 GHz Xeon processor referenced in our original documentation.</p><div class="aws-note"><p class="aws-note">Note</p><p> We use several internal benchmarks and tests to manage the consistency and predictability
+						of the performance of an Amazon EC2 Compute Unit. For more information, see the
+							<a class="ulink" href="http://www.amazon.com/gp/browse.html?node=370375011" target="_blank">Instance page</a>. </p></div><p> To find out which instance works best for your application, we recommend launching an instance and using your own benchmark
+				application. This helps you determine which instance type works best for your specific use case. </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="IOResources">I/O Resources</h2></div></div></div><a class="indexterm" name="d0e9120"></a><a class="indexterm" name="d0e9123"></a><a class="indexterm" name="d0e9128"></a><a class="indexterm" name="d0e9131"></a><a class="indexterm" name="d0e9134"></a><p> Amazon EC2 provides virtualized server instances. Whereas some resources like CPU, memory, and instance storage are dedicated to a
+				particular instance, other resources such as the network and the disk subsystem are shared among instances. If each instance on a
+				physical host tries to use as much of one of these shared resources as possible, each receives an equal share of that resource.
+				However, when a resource is under-utilized, you are often able to consume a higher share of that resource while it is available. </p><p> The different instance types provide higher or lower minimum performance from the shared
+					resources depending on their size. Each of the instance types has an I/O
+					performance indicator (low, moderate, high, etc.). Instance types with high I/O
+					performance have a larger allocation of shared resources. Allocating a larger
+					share of shared resources also reduces the variance of I/O performance. For most
+					applications, moderate I/O performance is more than enough. However, for
+					applications that require greater or more consistent I/O performance, consider
+					instances with higher I/O performance. </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="Instances_Tags">Instance Tags</h2></div></div></div><a class="indexterm" name="d0e9144"></a><p>To help categorize and manage your instances, you can assign <span class="emphasis"><em>tags</em></span> of
+					your choice to them. For more information, <span>see
+							<a class="xref" href="Using_Tags.html" title="Tagging Your EC2 Resources">Tagging Your EC2 Resources</a>.</span>
+					</p></div></div><img src="images/expanderarrow.png" style="display:none;height:0;width:0"><div class="navfooter"><table class="navfooter" width="100%" summary="Navigation footer" cellspacing="0" cellpadding="2" style="margin-top:12px;"><tr><td valign="top" style="padding-top:8px;"><a class="awstoc" target="_top" href="http://docs.aws.amazon.com/general/latest/gr/docconventions.html">Document Conventions</a></td><td width="350px" align="right" valign="top" style="padding-top:8px;"><a class="awstoc" accesskey="p" style="margin-right:12px;" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-previous', 'aws-docs-click', location.protocol + '//' + location.hostname + '/instance-basics.html');" href="instance-basics.html">&laquo; Previous</a><a class="awstoc" accesskey="n" onclick="location.hostname.substring(0,5)!=='docs.' || __utmTrackEvent('aws-docs-next', 'aws-docs-click', location.protocol + '//' + location.hostname + '/concepts_micro_instances.html');" href="concepts_micro_instances.html">Next &raquo;</a></td></tr><tr><td style="padding-top:8px;"><a class="awstoc" target="_top" href="http://aws.amazon.com/terms/">Terms of Use</a></td><td width="350px" align="right" valign="top" style="padding-top:8px;">Did this page help you?&nbsp;&nbsp;<a class="awstoc" target="_blank" href="feedbackyes.html?topic_id=instance-types">Yes</a>&nbsp;|&nbsp;<a class="awstoc" target="_blank" href="feedbackno.html?topic_id=instance-types">No</a>&nbsp;|&nbsp;&nbsp;<a class="awstoc" target="_blank" href="https://aws-portal.amazon.com/gp/aws/html-forms-controller/documentation/aws_doc_feedback_04?service_name=EC2&amp;guide_name=User%20Guide&amp;api_version=2012-12-01&amp;file_name=instance-types">Tell us about it...</a></td></tr></table></div></div></div><noscript><div class="yui-b" style="padding: 20px; padding-top: 0;"><div class="yui-ge"><div class="yui-u first"><div id="error_messages"><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" style="float: left;" alt="Warning"><div style="float:left; margin-left: 1em;"><strong>Javascript is disabled or is unavailable in your browser.</strong><br>
+										To use the AWS Documentation, Javascript must be enabled.  Please refer to your 
+										browser's Help pages for instructions.
+									</div><div style="clear: both;"></div></div></div></div></div></noscript><!-- SiteCatalyst code version: H.25.2.
+            Copyright 1996-2012 Adobe, Inc. All Rights Reserved
+            More info available at http://www.omniture.com --><script language="JavaScript" type="text/javascript" src="https://d36cz9buwru1tt.cloudfront.net/js/sitecatalyst/s_code.min.js"></script><script language="JavaScript" type="text/javascript"><!--
 
-<!--[if lt IE 7]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 lang-en" lang="en"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie10 lt-ie9 lt-ie8 lang-en" lang="en"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9 lang-en" lang="en"> <![endif]-->
-<!--[if IE 9]>         <html class="no-js lt-ie10 lang-en" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js lang-en" lang="en"> <!--<![endif]-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <link rel="icon" type="image/ico" href="//d36cz9buwru1tt.cloudfront.net/favicon.ico">
-  <link rel="shortcut icon" type="image/ico" href="//d36cz9buwru1tt.cloudfront.net/favicon.ico">
-  <link rel="apple-touch-icon" sizes="57x57" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-iphone-114-precomposed.png">       
-  <link rel="apple-touch-icon" sizes="72x72" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-ipad-144-precomposed.png">         
-  <link rel="apple-touch-icon" sizes="114x114" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-iphone-114-precomposed.png">     
-  <link rel="apple-touch-icon" sizes="144x144" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-ipad-144-precomposed.png">       
-  <meta name="description" content="Amazon Elastic Compute Cloud (Amazon EC2) provides the flexibility to choose from a number of different instance types to meet your computing needs. Each instance provides a predictable amount of dedicated compute capacity and is charged per instance-hour consumed." /><meta name="keywords" content="" />
-  <meta name="google-site-verification" content="XHghG81ulgiW-3EylGcF48sG28tBW5EH0bNUhgo_DrU" /> 
-
-  <title>Amazon EC2 Instance Types</title>
-
+            // Documentation Service Name
+            s.prop66='Amazon Elastic Compute Cloud';
+            s.eVar66='D=c66';
   
-
-  <link rel="stylesheet" href="/css/screen_2.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <link rel="stylesheet" href="/css/awsGlobalNav3-ltIE9.css" type="text/css" />
-  <![endif]-->
-  <!--[if lt IE 8]>
-    <link rel="stylesheet" href="/css/awsGlobalNav3-ltIE8.css" type="text/css" />
-  <![endif]-->
-  <!--[if lt IE 7]>
-    <link rel="stylesheet" href="/css/awsGlobalNav3-ltIE7.css" type="text/css" />
-    <link rel="stylesheet" href="/css/documentationIE6.css" type="text/css" />
-  <![endif]-->
-
-  
-
-  
-
-  <script src="/js/all_2.js" type="text/javascript"></script>
-
-  <script type="text/javascript">
-  __amznUtmPage = "/ec2/instance-types/";
-</script>
-<script src="/js/amznUrchin.js" type="text/javascript"></script> 
-</head>
-
-<body id="top" class="yui-skin-sam noJS">
-  
-  <!-- layout _210_left -->
-  <div id="doc4" class="yui-t2">
-    <div id="hd">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- header -->
-
-<div id="main-nav" class="nav-lang-en">
-  <a href="//aws.amazon.com/" id="nav-aws-logo" class="nav-sprite" title="Amazon Web Services"><span>Amazon Web Services</span></a>
-
-  <div id="nav-bar" class="nav-sprite">
-    <a id="nav-dd-products-solutions" class="nav-link" href="//aws.amazon.com/products-solutions/">
-      <strong>AWS Products</strong> &amp; <strong>Solutions</strong>
-    </a>
-
-    <form id="nav-search-form" method="get" action="//aws.amazon.com/search">
-      <div id="nav-searchfield-outer" class="nav-sprite">
-        <div id="nav-searchfield-inner" class="nav-sprite">
-          <div id="nav-searchfield-width">
-            <input id="nav-searchfield" name="searchQuery"></input>
-          </div>
-        </div>
-      </div>
-
-      <span id="nav-search-in" class="nav-sprite">
-        <span id="nav-search-in-content">Search In</span>
-        <span class="nav-down-arrow nav-sprite"></span>
-        <select name="searchPath" id="nav-search-dropdown"></select>
-      </span>
-
-      <div id="nav-search-button" class="nav-sprite">
-        <input type="image" alt="Search" id="nav-search-button-inner" title="Search" src="//d36cz9buwru1tt.cloudfront.net/nav/transparent_pixel.gif">
-      </div>
-    </form>
-
-    <a id="nav-dd-developers" class="nav-link" href="//aws.amazon.com/developers/">
-      <strong>Developers</strong>
-    </a>
-
-    <a id="nav-dd-support" class="nav-link" href="//aws.amazon.com/support/">
-      <strong>Support</strong>
-    </a>
-  </div>
-
-  <div id="global-top-links">
-    <a href="https://portal.aws.amazon.com/gp/aws/developer/registration/index.html" id="gtl-sign-up">Sign Up</a>
-    <a href="https://console.aws.amazon.com/s3/home" id="gtl-dd-account-console">My Account / Console</a>
-  </div>
-</div>
-
-
-
-<noscript>
-  <!--#if expr="${LANG_NOT_FOUND}" -->
-    <div id="pageNotTranslated">
-      <!--#include virtual="/errors/untranslated/$LANG_NOT_FOUND/index.html" -->
-    </div>
-  <!--#endif -->
-</noscript>
-
-
-<script type="text/javascript">
-  if ( ! window.AWSGlobalNav ) {
-      AWSGlobalNav = {};
-  }
-
-  // This has to be set early (before the onload handlers execute)
-  AWSGlobalNav.acceptLanguage = '<!--#echo var="ACCEPT_LANGUAGE_HEADER" -->';
-  AWSGlobalNav.contentBaseURL = '//aws.amazon.com';
-</script>
-
-<!-- /header -->
-
-</div> 
-    <div id="bd">
-  <!-- layout product_detail -->
-  <div id="yui-main" style="line-height:1.5em;">
-    <div class="yui-b">
-      <h1 class="title">Amazon EC2 Instance Types</h1>
-
-	<p><a href="/ec2" title="Amazon EC2">Amazon Elastic Compute Cloud (Amazon EC2)</a> provides the flexibility to choose from a number of different instance types to meet your computing needs. Each instance provides a predictable amount of dedicated compute capacity and is charged per instance-hour consumed.</p>
-
-
-	<h1>Available Instance Types</h1>
-
-       <a name="standard-instances"></a>
-	<h2>Standard Instances<br></h2>
-
-        <h3>First Generation<br><br></h3>
-
-	<p style="padding-left:2em;">First generation (M1) Standard instances provide customers with a balanced set of resources and a low cost platform that is well suited for a wide variety of applications.</p>
-
-
-	<p style="padding-left:2em;"><strong>M1 Small Instance</strong> &#8211; default<code>++</code></p>
-
-
-	<p style="padding-left:4em;">1.7 GiB memory<br>
-1 EC2 Compute Unit (1 virtual core with 1 EC2 Compute Unit)<br>
-160 GB instance storage<br>
-32-bit or 64-bit platform<br>
-I/O Performance: Moderate<br>
-EBS-Optimized Available: No<br>
-API name: m1.small</p>
-
-	<p style="padding-left:2em;"><strong>M1 Medium Instance</strong></code></p>
-
-
-	<p style="padding-left:4em;">3.75 GiB memory<br>
-2 EC2 Compute Unit (1 virtual core with 2 EC2 Compute Unit)<br>
-410 GB instance storage<br>
-32-bit or 64-bit platform<br>
-I/O Performance: Moderate<br>
-EBS-Optimized Available: No<br>
-API name: m1.medium</p>
-
-
-	<p style="padding-left:2em;"><strong>M1 Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">7.5 GiB memory<br>
-4 EC2 Compute Units (2 virtual cores with 2 EC2 Compute Units each)<br>
-850 GB instance storage<br>
-64-bit platform<br>
-I/O Performance: High<br>
-EBS-Optimized Available: 500 Mbps<br>
-API name: m1.large</p>
-
-
-	<p style="padding-left:2em;"><strong>M1 Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">15 GiB memory<br> 
-8 EC2 Compute Units (4 virtual cores with 2 EC2 Compute Units each)<br>
-1,690 GB instance storage<br>
-64-bit platform<br>
-I/O Performance: High<br>
-EBS-Optimized Available: 1000 Mbps<br>
-API name: m1.xlarge</p>
-
- <h3>Second Generation<br><br></h3>
-
-<p style="padding-left:2em;">Second generation (M3) Standard instances provide customers with a balanced set of resources and a higher level of processing performance compared to First Generation Standard instances.  Instances in this family are ideal for applications that require higher absolute CPU and memory performance.  Examples of applications that will benefit from the performance of Second Generation Standard instances include encoding, high traffic content management systems, and memcached.</p>
-
-	<p style="padding-left:2em;"><strong>M3 Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">15 GiB memory<br> 
-13 EC2 Compute Units (4 virtual cores with 3.25 EC2 Compute Units each)<br>
-EBS storage only<br>
-64-bit platform<br>
-I/O Performance: Moderate<br>
-EBS-Optimized Available: No<br>
-API name: m3.xlarge</p>
-
-	<p style="padding-left:2em;"><strong>M3 Double Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">30 GiB memory<br> 
-26 EC2 Compute Units (8 virtual cores with 3.25 EC2 Compute Units each)<br>
-EBS storage only<br>
-64-bit platform<br>
-I/O Performance: High<br>
-EBS-Optimized Available: No<br>
-API name: m3.2xlarge</p>
-
-<br>
-
-<a name="micro-instances"></a>
-	<h2>Micro Instances<br></h2>
-
-
-	<p style="padding-left:2em;">Micro instances (t1.micro) provide a small amount of consistent CPU resources and allow you to increase CPU capacity in short bursts when additional cycles are available.  They are well suited for lower throughput applications and web sites that require additional compute cycles periodically.  You can learn more about how you can use Micro instances and appropriate applications in the <a href="http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/concepts_micro_instances.html">Amazon EC2 documentation</a></p>
-
-<br>
-
-	<p style="padding-left:2em;"><strong>Micro Instance</strong></p>
-
-
-	<p style="padding-left:4em;">613 MiB memory<br>
-Up to 2 EC2 Compute Units (for short periodic bursts)<br>
-EBS storage only<br>
-32-bit or 64-bit platform<br>
-I/O Performance: Low<br>
-EBS-Optimized Available: No<br>
-API name: t1.micro<br></p>
-
-<br>
-
-        <a name="highmemory-instances"></a>
-	<h2>High-Memory Instances<br></h2>
-
-	<p style="padding-left:2em;">Instances of this family offer large memory sizes for high throughput applications, including database and memory caching applications.</p>
-
-
-	<p style="padding-left:2em;"><strong>High-Memory Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">17.1 GiB of memory<br>
-6.5 EC2 Compute Units (2 virtual cores with 3.25 EC2 Compute Units each)<br>
-420 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: Moderate<br>
-EBS-Optimized Available: No<br>
-API name: m2.xlarge<br></p>
-
-
-	<p style="padding-left:2em;"><strong>High-Memory Double Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">34.2 GiB of memory<br>
-13 EC2 Compute Units (4 virtual cores with 3.25 EC2 Compute Units each)<br>
-850 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: High<br>
-EBS-Optimized Available: No<br>
-API name: m2.2xlarge<br></p>
-
-
-	<p style="padding-left:2em;"><strong>High-Memory Quadruple Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">68.4 GiB of memory<br>
-26 EC2 Compute Units (8 virtual cores with 3.25 EC2 Compute Units each)<br>
-1690 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: High<br>
-EBS-Optimized Available: 1000 Mbps<br>
-API name: m2.4xlarge<br></p>
-
-<br>
-
-<a name="highcpu-instances"></a>
-	<h2>High-CPU Instances<br></h2>
-
-
-	<p style="padding-left:2em;">Instances of this family have proportionally more CPU resources than memory (RAM) and are well suited for compute-intensive applications.</p>
-
-
-	<p style="padding-left:2em;"><strong>High-CPU Medium Instance</strong></p>
-
-
-	<p style="padding-left:4em;">1.7 GiB of memory<br>
-5 EC2 Compute Units (2 virtual cores with 2.5 EC2 Compute Units each)<br>
-350 GB of instance storage<br>
-32-bit or 64-bit platform<br>
-I/O Performance: Moderate<br>
-EBS-Optimized Available: No<br>
-API name: c1.medium<br></p>
-
-
-	<p style="padding-left:2em;"><strong>High-CPU Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">7 GiB of memory<br>
-20 EC2 Compute Units (8 virtual cores with 2.5 EC2 Compute Units each)<br>
-1690 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: High<br>
-EBS-Optimized Available: No<br>
-API name: c1.xlarge<br></p>
-
-<br>
-
-      <a name="clustercompute-instances"></a>
-	<h2>Cluster Compute Instances<br></h2>
-
-
-	<p style="padding-left:2em;">Instances of this family provide proportionally high CPU resources with increased network performance and are well suited for High Performance Compute (HPC) applications and other demanding network-bound applications. You can learn more about Cluster instance concepts by reading the <a href="http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html">Amazon EC2 documentation</a>. For more information about specific use cases and cluster management options for HPC, please visit the <a href="/ec2/hpc-applications/">HPC solutions page</a>.</p>
-
-
-
-	<p style="padding-left:2em;"><strong>Cluster Compute Eight Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">60.5 GiB of memory<br>
-88 EC2 Compute Units (2 x Intel Xeon E5-2670, eight-core "Sandy Bridge" architecture)<br>
-3370 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: Very High (10 Gigabit Ethernet)<br>
-EBS-Optimized Available: No*<br>
-API name: cc2.8xlarge<br></p>
-
-<p style="padding-left:2em;">***Cluster Compute, Cluster GPU, High I/O, and High Storage instances do not currently support EBS Optimization, but provide customers with high bandwidth networking and can also be used with EBS Provisioned IOPS volumes for improved consistency and performance.</p>
-
-<br>
-
-<a name="clustergpu-instances"></a>
-	<h2>Cluster GPU Instances<br></h2>
-
-
-	<p style="padding-left:2em;">Instances of this family provide general-purpose graphics processing units (GPUs) with proportionally high CPU and increased network performance for applications benefitting from highly parallelized processing, including HPC, rendering and media processing applications. While Cluster Compute Instances provide the ability to create clusters of instances connected by a low latency, high throughput network, Cluster GPU Instances provide an additional option for applications that can benefit from the efficiency gains of the parallel computing power of GPUs over what can be achieved with traditional processors. <a href="/ec2/hpc-applications/">Learn more</a> about use of this instance type for HPC applications.</p>
-
-
-	<p style="padding-left:2em;"><strong>Cluster GPU Quadruple Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">22 GiB of memory<br>
-33.5 EC2 Compute Units (2 x Intel Xeon X5570, quad-core &#8220;Nehalem&#8221; architecture)<br>
-2 x NVIDIA Tesla “Fermi” M2050 GPUs<br>
-1690 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: Very High (10 Gigabit Ethernet)<br>
-EBS-Optimized Available: No*<br>
-API name: cg1.4xlarge<br></p>
-
-<p style="padding-left:2em;">***Cluster Compute, Cluster GPU, High I/O, and High Storage instances do not currently support EBS Optimization, but provide customers with high bandwidth networking and can also be used with EBS Provisioned IOPS volumes for improved consistency and performance.</p>
-
-<br>
-
-<a name="highio-instances"></a>
-	<h2>High I/O Instances<br></h2>
-
-
-	<p style="padding-left:2em;">Instances of this family provide very high instance storage I/O performance and are ideally suited for many high performance database workloads.  Example applications include NoSQL databases like Cassandra and MongoDB. High I/O instances are backed by Solid State Drives (SSD), and also provide high levels of CPU, memory and network performance.</p>
-
-	<p style="padding-left:2em;"><strong>High I/O Quadruple Extra Large Instance</strong></p>
-
-
-	<p style="padding-left:4em;">60.5 GiB of memory<br>
-35 EC2 Compute Units (16 virtual cores*)<br>
-2 SSD-based volumes each with 1024 GB of instance storage<br>
-64-bit platform<br>
-I/O Performance: Very High (10 Gigabit Ethernet)<br>
-Storage I/O Performance: Very High**<br>
-EBS-Optimized Available: No***<br>
-API name: hi1.4xlarge<br></p>
-
-<p style="padding-left:2em;">*8 cores + 8 hyperthreads for 16 virtual cores
-<br>
-<br>
-**Using Linux paravirtual (PV) AMIs, High I/O Quadruple Extra Large instances can deliver more than 120,000 4 KB random read IOPS and between 10,000 and 85,000 4 KB random write IOPS (depending on active logical block addressing span) to applications. For hardware virtual machines (HVM) and Windows AMIs, performance is approximately 90,000 4 KB random read IOPS and between 9,000 and 75,000 4 KB random write IOPS.  The maximum sequential throughput on all AMI types (Linux PV, Linux HVM, and Windows) per second is approximately 2 GB read and 1.1 GB write.
-<br>
-<br>
-For customers using Microsoft Windows Server, High Storage Instances are only supported with the Microsoft Windows Server 2008R2 AMI for Cluster Instances and Windows Server 2012 AMIs.</p>
-
-<p style="padding-left:2em;">***Cluster Compute, Cluster GPU, High I/O, and High Storage instances do not currently support EBS Optimization, but provide customers with high bandwidth networking and can also be used with EBS Provisioned IOPS volumes for improved consistency and performance.</p>
-
-<br>
-
-<a name="highstorage-instances"></a>
-	<h2>High Storage Instances<br></h2>
-
-
-	<p style="padding-left:2em;">Instances of this family provide proportionally higher storage density per instance, and are ideally suited for applications that benefit from high sequential I/O performance across very large data sets. Example applications include data warehouses, Hadoop, seismic analysis, cluster file systems, etc.  High Storage instances also provide high levels of CPU, memory and network performance.  
-
-
-	<p style="padding-left:4em;">117 GiB of memory<br>
-35 EC2 Compute Units (16 virtual cores*)<br>
-24 hard disk drives each with 2 TB of instance storage<br>
-64-bit platform<br>
-I/O Performance: Very High (10 Gigabit Ethernet)<br>
-Storage I/O Performance: Very High**<br>
-EBS-Optimized Available: No***<br>
-API name: hs1.8xlarge<br></p>
-
-<p style="padding-left:2em;">*8 cores + 8 hyperthreads for 16 virtual cores
-<br>
-<br>
-**High Storage Eight Extra Large instances can deliver 2.4 GB per second of 2 MiB sequential read performance and 2.6 GB per second of sequential write performance.
-<br>
-<br>
-For customers using Microsoft Windows Server, High Storage Instances are only supported with the Microsoft Windows Server 2008R2 AMI for Cluster Instances and Windows Server 2012 AMIs.</p>
-
-<p style="padding-left:2em;">***Cluster Compute, Cluster GPU, High I/O, and High Storage instances do not currently support EBS Optimization, but provide customers with high bandwidth networking and can also be used with EBS Provisioned IOPS volumes for improved consistency and performance.</p>
-
-    <h1>EBS-Optimized Instances</h1>
-    
-    <p>For a low, additional, hourly fee, customers can launch selected Amazon EC2 instances types as “EBS-Optimized” instances.  EBS-Optimized instances enable Amazon EC2 instances to fully utilize the IOPS provisioned on an EBS volume.  EBS-optimized instances deliver dedicated throughput between Amazon EC2 and Amazon EBS, with options between 500 Mbps and 1000 Mbps depending on the instance type used.  When attached to EBS-Optimized instances, Provisioned IOPS volumes are designed to deliver within 10% of their provisioned performance 99.9% of the time. See <a href="/ec2/instance-types">Amazon EC2 Instance Types</a> to find out more about instance types that can be launched as EBS-optimized instances.</p>
-
-
-
-	<h1>Selecting Instance Types</h1>
-
-
-	<p>Amazon EC2 instances are grouped into eight families: Standard (first and second generation), Micro, High-Memory, High-CPU, Cluster Compute, Cluster GPU, and High I/O.</p>
-
-
-	<p>Standard Instances have memory to CPU ratios suitable for most general purpose applications; second generation Standard instances provide higher absolute CPU performance for CPU intensive applications; High-Memory instances offer larger memory sizes for memory-intensive applications, including database and memory caching applications; and High-CPU instances have proportionally more CPU resources than memory (RAM) and are well suited for scale out compute-intensive applications.</p>
-
-
-	<p>Micro instances provide a small amount of consistent CPU resources and allow you to burst CPU capacity when additional cycles are available. They are well suited for lower throughput applications and web sites that consume significant compute cycles periodically.  At steady state, Micro instances receive a fraction of the compute resources that Small instances do. Therefore, if your application has compute-intensive or steady state needs we recommend using a Small instance (or larger, depending on your needs).  However, Micro instances can provide periodic bursts of additional CPU capability.  Therefore, if you have a relatively low throughput application or web site with an occasional need to consume significant compute cycles, we recommend using Micro instances.</p>
-
-
-	<p>Cluster Compute instances provide a very large amount of CPU coupled with increased network performance making them well suited for High Performance Compute (HPC) applications and other demanding network-bound applications.</p>
-
-
-	<p>Cluster GPU instances provide general-purpose graphics processing units (GPUs) with proportionally high CPU and increased network performance making them well suited for applications benefitting from highly parallelized processing, including HPC, rendering and media processing applications.</p>
-
-    <p>High I/O instances take advantage of Solid State Disk (SSD) technology to provide a very large amount of random I/O performance.  High I/O instances are ideal for applications that benefit a large number of low latency IOPS such as NoSQL databases and relational databases.</p>
-
-    <p>Customers running databases should consider launching instances as EBS-Optimized instances. The combination of EBS-Optimized instances and Amazon EBS Provisioned IOPS volumes ensures that instances are capable of consistent EBS I/O performance.</p>
-
-	<p>When choosing instance types, you should consider the characteristics of your application with regards to resource utilization and select the optimal instance family and size. One of the advantages of EC2 is that you pay by the instance hour, which makes it convenient and inexpensive to test the performance of your application on different instance families and types. One good way to determine the most appropriate instance family and instance type is to launch test instances and benchmark your application.</p>
-
-
-	<h1>Measuring Compute Resources</h1>
-
-
-	<p>Transitioning to a utility computing model fundamentally changes how developers have been trained to think about CPU resources.  Instead of purchasing or leasing a particular processor to use for several months or years, you are renting capacity by the hour.  Because Amazon EC2 is built on commodity hardware, over time there may be several different types of physical hardware underlying EC2 instances.  Our goal is to provide a consistent amount of CPU capacity no matter what the actual underlying hardware.</p>
-
-
-	<p>Amazon EC2 uses a variety of measures to provide each instance with a consistent and predictable amount of CPU capacity.  In order to make it easy for developers to compare CPU capacity between different instance types, we have defined an Amazon EC2 Compute Unit.  The amount of CPU that is allocated to a particular instance is expressed in terms of these EC2 Compute Units. We use several benchmarks and tests to manage the consistency and predictability of the performance of an EC2 Compute Unit. One EC2 Compute Unit provides the equivalent CPU capacity of a 1.0-1.2 GHz 2007 Opteron or 2007 Xeon processor. This is also the equivalent to an early-2006 1.7 GHz Xeon processor referenced in our original documentation. Over time, we may add or substitute measures that go into the definition of an EC2 Compute Unit, if we find metrics that will give you a clearer picture of compute capacity.</p>
-
-
-	<p>To find out which instance will work best for your application, the best thing to do is to launch an instance and benchmark your own application.  One of the advantages of EC2 is that you pay by the hour which makes it convenient and inexpensive to test the performance of your application on different instance types.</p>
-
-
-	<h1>I/O Performance</h1>
-
-
-	<p>Amazon EC2 provides virtualized server instances. While some resources like CPU, memory and instance storage are dedicated to a particular instance, other resources like the network and the disk subsystem are shared among instances.  If each instance on a physical host tries to use as much of one of these shared resources as possible, each will receive an equal share of that resource. However, when a resource is under-utilized you will often be able to consume a higher share of that resource while it is available.</p>
-
-
-	<p>The different instance types will provide higher or lower minimum performance from the shared resources depending on their size.  Each of the instance types has an I/O performance indicator (<em>low</em>, <em>moderate</em>, or <em>high</em>). Instance types with high I/O performance have a larger allocation of shared resources. Allocating larger share of shared resources also reduces the variance of I/O performance. For many applications, <em>low</em> or <em>moderate</em> I/O performance is more than enough.  However, for those applications requiring greater or more consistent I/O performance, you may want to consider instances with <em>high</em> I/O performance.</p>
-
-
-	<p>Cluster Compute and Cluster GPU instances have <em>very high</em> I/O performance using 10 Gigabit Ethernet for high throughput and reduced network latencies within clusters.</p>
-
-
-    <p>High I/O Instances are designed to provide customers with a very high amount of low latency storage I/O by taking advantage of direct attached, SSD-backed storage volumes.  High I/O instances can deliver in excess of 100,000 random read IOPS and as many as 80,000 random write IOPS for high performance NoSQL and relational database applications.  In addition to storage performance, High I/O instances also have very high I/O performance via 10 Gigabit Ethernet for high throughput and reduced network latencies within clusters.</p>
-
-	<p>In addition, you can use Amazon EBS to get improved storage I/O performance for disk-bound applications. Amazon EBS standard volumes provide customers with reliable, low cost, persistent storage, and customers can scale I/O performance by striping across many EBS volumes.  Amazon EBS Provisioned IOPS volumes allow customers to provision the desired level of storage volume performance and should be used with Amazon EC2 EBS-Optimized instances to maximize I/O performance and consistency. EBS-Optimized instances provide customers with an optimized configuration and dedicated throughput for consistency of EBS I/O performance.</p>
-
-
-	<p><br>
-<hr/>
-<br></p>
-
-
-	<p>++The Small Instance type is equivalent to the original Amazon EC2 instance type that has been available since Amazon EC2 launched. This instance type is currently the default for all customers. To use other instance types, customers must specifically request them via the <em>RunInstances</em> API.</p>
-    </div>
-  </div>
-
-
-  <div class="yui-b">
-    <div id="sideNav">
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div id="subNavA">
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <div id="subPageSelector" class="products">
-    <div id="subPageComboButton"></div>
-    <div class="flyout">
-      <div class="liner">
-        
-  <div class="col1">
-  <h4>Compute</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/ec2/" class="">
-      Amazon Elastic Compute Cloud <span class="norm">(EC2)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/elasticmapreduce/" class="">
-      Amazon Elastic MapReduce
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/autoscaling/" class="">
-      Auto Scaling
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Content Delivery</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/cloudfront/" class="">
-      Amazon CloudFront
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Database</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/rds/" class="">
-      Amazon Relational Database Service <span class="norm">(RDS)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/dynamodb/" class="">
-      Amazon DynamoDB</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/simpledb/" class="">
-      Amazon SimpleDB
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/elasticache/" class="">
-      Amazon ElastiCache </span>
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Deployment & Management</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/elasticbeanstalk/" class="">
-      AWS Elastic Beanstalk
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/cloudformation/" class="">
-      AWS CloudFormation
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>E-Commerce</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/fws/" class="">
-      Amazon Fulfillment Web Service (FWS)
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Industry-specific Clouds</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/govcloud-us/" class="">
-      AWS GovCloud (US)
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Messaging</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/sqs/" class="">
-      Amazon Simple Queue Service <span class="norm">(SQS)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/sns/" class="">
-      Amazon Simple   Notification Service <span class="norm">(SNS)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/ses/" class="">
-      Amazon Simple Email Service <span class="norm">(SES)</span>
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Monitoring</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/cloudwatch/" class="">
-      Amazon CloudWatch
-    </a>
-      </li>
-    
-  
-      </ul>
-</div>
-
-<div class="col2">
-  <h4>Networking</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/route53/" class="">
-      Amazon Route 53
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/vpc/" class="">
-      Amazon Virtual Private Cloud <span class="norm">(VPC)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/elasticloadbalancing/" class="">
-      Elastic Load Balancing
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/directconnect/" class="">
-      AWS Direct Connect
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Payments &amp; Billing</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/fps/" class="">
-      Amazon Flexible Payments Service <span class="norm">(FPS)</span>
-    </a>
-      </li>
-      
-    
-      <li class="">
-        <a href="/devpay/" class="">
-      Amazon DevPay
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Storage</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/s3/" class="">
-      Amazon Simple Storage Service <span class="norm">(S3)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/ebs/" class="">
-      Amazon Elastic Block Store <span class="norm">(EBS)</span>
-    </a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/importexport/" class="">
-      AWS Import/Export
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Support</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/premiumsupport/" class="">
-      AWS Premium Support
-    </a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Web Traffic</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/awis/" class="">Alexa Web Information Service</a>
-      </li>
-    
-    
-      <li class="">
-        <a href="/alexatopsites/" class="">Alexa Top Sites</a>
-      </li>
-    
-  
-      </ul>
-
-  <h4>Workforce</h4>
-  <ul class="">
-        
-    
-      <li class="">
-        <a href="/mturk/" class="">
-      Amazon Mechanical Turk
-    </a>
-      </li>
-    
-  
-      </ul>
-</div>
-
-
-      </div>
-    </div>
-    <a href="/products/" class="noScript">Products &amp; Services</a>
-  </div>
-   
-
-
-
-  
-    <div class="decoratedBox ">
-      <div class="head">
-        <h4>Amazon EC2 Details</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <ul class="">
-        
-      
-      <li class="">
-        <a href="/ec2/" class="">EC2 Overview</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/faqs/" class="">EC2 FAQs</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/pricing/" class="">EC2 Pricing</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2-sla/" class="">Amazon EC2 SLA</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/instance-types/" class="selected">EC2 Instance Types</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/purchasing-options/" class="">EC2 Instance Purchasing Options</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/reserved-instances/" class="">Reserved Instances</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/spot-instances/" class="">Spot Instances</a>
-      </li>
-    
-      
-      <li class="last">
-        <a href="/windows/" class="">Windows Instances</a>
-      </li>
-    
-    
-      </ul>
-  
-        </div>
-      </div>
-    </div>
-    
-
-  
-    <div class="decoratedBox last">
-      <div class="head">
-        <h4>Amazon EC2 Features</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <ul class="">
-        
-      
-      <li class="">
-        <a href="/ebs/" class="">Elastic Block Store</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/cloudwatch/" class="">Amazon CloudWatch</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/autoscaling/" class="">Auto Scaling</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/elasticloadbalancing/" class="">Elastic Load Balancing</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/ec2/hpc-applications/" class="">High Performance Computing</a>
-      </li>
-    
-      
-      <li class="last">
-        <a href="/ec2/vmimport/" class="">VM Import/Export</a>
-      </li>
-    
-    
-      </ul>
-  
-        </div>
-      </div>
-    </div>
-    
-</div>
-
-
-<div id="subNavB">
-  
-    <div class="decoratedBox ">
-      <div class="head">
-        <h4>Related Resources</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <ul class="">
-        
-      
-      <li class="">
-        <a href="/console/" class="">AWS Management Console</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/documentation/ec2/" class="">Documentation</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=86" class="">Release Notes</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=85" class="">Sample Code & Libraries</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=88" class="">Developer Tools</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=100" class="">Articles & Tutorials</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=171" class="">Amazon Machine Images (AMIs)</a>
-      </li>
-    
-      
-      <li class="">
-        <a href="/publicdatasets/" class="">Public Data Sets on AWS</a>
-      </li>
-    
-      
-      <li class="last">
-        <a href="http://developer.amazonwebservices.com/connect/forum.jspa?forumID=30" class="">Community Forum</a>
-      </li>
-    
-  
-      </ul>
-  
-        </div>
-      </div>
-    </div>
-    
-
-<br><br><br>
-
-
-    <div class="decoratedBox last">
-      <div class="head">
-        <h4>Want to Save on Your Amazon EC2 Bill?</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <div class="liner">
-      <img src="//d36cz9buwru1tt.cloudfront.net/logo_harvard_sm2.gif"
-           width="150px"
-           class="logo"
-           title="Harvard" alt="Harvard"/>
-      <p>
-        See how customers like Harvard Medical School significantly reduced their Amazon EC2 bill by using Spot Instances.
-      </p>
-      <div class="learnMore">
-        <span class="carat">&gt;</span>
-        <a href="/ec2/spot-instances">Learn More</a>
-      </div>
-    </div>
-  
-        </div>
-      </div>
-    </div>
-    
-<br><br><br>
-  
-    <div class="decoratedBox ">
-      <div class="head">
-        <h4>EC2 Running Microsoft</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <div class="liner">
-      <img src="//d36cz9buwru1tt.cloudfront.net/globalNav/img/logo-microsoft.png"
-           width="137"
-           height="27"
-           class="logo"
-           alt="Microsoft"/>
-      <p>
-        Amazon EC2 running Microsoft Windows Server&reg; 2003/2008 is a fast and 
-        dependable environment for deploying applications using the Microsoft Web Platform. 
-      </p>
-      <div class="learnMore">
-        <span class="carat">&gt;</span>
-        <a href="/windows/">Learn More</a>
-      </div>
-    </div>
-  
-        </div>
-      </div>
-    </div>
-    
-
-  <br><br><br>
-
-    <div class="decoratedBox last">
-      <div class="head">
-        <h4>EC2 Running IBM</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <div class="liner">
-      <img src="//d36cz9buwru1tt.cloudfront.net/globalNav/img/logo-ibm.png"
-           width="140"
-           height="53"
-           class="logo"
-           alt="IBM"/>
-      <p>
-        You can run many of the proven IBM platform technologies with which you're already familiar.
-      </p>
-      <div class="learnMore">
-        <span class="carat">&gt;</span>
-        <a href="/ibm/">Learn More</a>
-      </div>
-    </div>
-  
-        </div>
-      </div>
-    </div>
-    
-
-  <br><br><br>
-
-    <div class="decoratedBox last">
-      <div class="head">
-        <h4>Amazon EC2 is Hiring!</h4>
-      </div>
-      <div class="body">
-        <div class="liner">
-          
-    <div class="liner">
-      <img src="//d36cz9buwru1tt.cloudfront.net/logo_aws.gif"
-           width="140"
-           height="53"
-           class="logo"
-           alt="AWS"/>
-Amazon EC2 is hiring to rapidly expand our service.
-      </p>
-      <div class="learnMore">
-        <span class="carat">&gt;</span>
-        <a href="/ec2-jobs/">Learn More</a>
-      </div>
-    </div>
-  
-        </div>
-      </div>
-    </div>
-    
-</div>
-
-<br>
-<br>
-
-
-
-    </div>
-  </div>
-  
-</div>
-    <div id="ft">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div style="border-top: 1px solid #ccc; margin-bottom: 12px; margin-top: 10px; padding-top: 2px;">
-  <ul class="h_bar">
-    <li class="first">
-      <a href="http://aws.typepad.com/" target="_blank">AWS Blog <img src="//d36cz9buwru1tt.cloudfront.net/icon_offsite.gif" width="15" height="13" border="0" alt="This link will launch a new browser window or tab."></a>
-    </li>
-    <li><a href="http://phx.corporate-ir.net/phoenix.zhtml?c=176060&p=irol-InfoReq">Press Inquiries</a></li>
-    <li><a href="/careers/">Careers at AWS</a></li>
-    <li><a href="/contact-us/">Contact Us</a></li>
-    <li><a href="/privacy/">Privacy Policy</a></li>
-    <li><a href="/terms/">Terms of Use</a></li>
-  </ul>
-  <div class="grey666">&#169;2012, Amazon Web Services, Inc. or its affiliates. All rights reserved.</div>
-  <img src="//d36cz9buwru1tt.cloudfront.net/awsmedia/logo_an_amazon_company.gif" width="160" height="21" vspace="8">
-</div>
-</div> 
-  </div>
-
-
-  
-
-  
-<!-- SiteCatalyst code version: H.25.1.
-Copyright 1996-2012 Adobe, Inc. All Rights Reserved
-More info available at http://www.omniture.com -->
-<script language="JavaScript" type="text/javascript" src="//d36cz9buwru1tt.cloudfront.net/js/sitecatalyst/s_code.min.js"></script> 
-
-<script language="JavaScript" type="text/javascript"><!--
-/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
-var s_code=s.t();if(s_code)document.write(s_code)//--></script>
-<script language="JavaScript" type="text/javascript"><!--
-if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
-//--></script><noscript><img src="//amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.1--NS/0"
-height="1" width="1" border="0" alt="" /></noscript><!--/DO NOT REMOVE/-->
-<!-- End SiteCatalyst code version: H.25.1. -->
-</body>
-
-</html>
-
-
-
-
+            // Documentation Guide Name                                                                 
+            s.prop65='User Guide';
+            s.eVar65='D=c65';
+
+            var s_code=s.t();if(s_code)document.write(s_code)//--></script><script language="JavaScript" type="text/javascript"><!--
+                if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+                //--></script><noscript><img src="http://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt=""></noscript><!--/DO NOT REMOVE/--><!-- End SiteCatalyst code version: H.25.2. --></body></html>
