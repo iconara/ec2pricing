@@ -37,6 +37,7 @@ module Ec2Pricing
           m2.4xlarge
           m3.xlarge
           m3.2xlarge
+          cc1.4xlarge
           cc2.8xlarge
           cg1.4xlarge
           hi1.4xlarge
@@ -46,7 +47,7 @@ module Ec2Pricing
 
       it 'finds the names' do
         m1_small = find_instance_type('m1.small')
-        expect(m1_small[:name]).to eql('M1 Small Instance')
+        expect(m1_small[:name]).to eql('M1 Small')
       end
 
       it 'finds the number of cores' do
@@ -65,10 +66,8 @@ module Ec2Pricing
         expect(cg1_4xlarge[:cores]).to eql(8)
       end
 
-      it 'corrects for core numbers on high IO and high storage instances' do
-        hi1_4xlarge = find_instance_type('hi1.4xlarge')
+      it 'corrects for core numbers on high storage instances' do
         hs1_8xlarge = find_instance_type('hs1.8xlarge')
-        expect(hi1_4xlarge[:cores]).to eql(16)
         expect(hs1_8xlarge[:cores]).to eql(16)
       end
 
@@ -89,26 +88,52 @@ module Ec2Pricing
         m2_2xlarge = find_instance_type('m2.2xlarge')
         t1_micro = find_instance_type('t1.micro')
         expect(m2_2xlarge[:ram]).to eql('34.2 GiB')
-        expect(t1_micro[:ram]).to eql('613 MiB')
+        expect(t1_micro[:ram]).to eql('615 MiB')
+      end
+
+      it 'ignores comments about RAM' do
+        cg1_4xlarge = find_instance_type('cg1.4xlarge')
+        expect(cg1_4xlarge[:ram]).to eql('22.5 GiB')
       end
 
       it 'finds the amount of disk' do
         m1_xlarge = find_instance_type('m1.xlarge')
         cc2_8xlarge = find_instance_type('cc2.8xlarge')
-        expect(m1_xlarge[:disk]).to eql(1690)
-        expect(cc2_8xlarge[:disk]).to eql(3370)
+        expect(m1_xlarge[:disk_size]).to eql('1680 GiB')
+        expect(cc2_8xlarge[:disk_size]).to eql('3360 GiB')
       end
 
-      it 'finds no disk for EBS-only instances' do
+      it 'does not interprete disk size units' do
+        hs1_8xlarge = find_instance_type('hs1.8xlarge')
+        expect(hs1_8xlarge[:disk_size]).to eql('48 TiB')
+      end
+
+      it 'finds the number of disks' do
+        m1_small = find_instance_type('m1.small')
+        hi1_4xlarge = find_instance_type('hi1.4xlarge')
+        hs1_8xlarge = find_instance_type('hs1.8xlarge')
+        expect(m1_small[:disk_count]).to eql(1)
+        expect(hi1_4xlarge[:disk_count]).to eql(2)
+        expect(hs1_8xlarge[:disk_count]).to eql(24)
+      end
+
+      it 'finds no disk size for EBS-only instances' do
         m3_xlarge = find_instance_type('m3.xlarge')
         t1_micro = find_instance_type('t1.micro')
-        expect(m3_xlarge[:disk]).to be_nil
-        expect(t1_micro[:disk]).to be_nil
+        expect(m3_xlarge[:disk_size]).to be_nil
+        expect(t1_micro[:disk_size]).to be_nil
+      end
+
+      it 'finds zero disks for EBS-only instances' do
+        m3_xlarge = find_instance_type('m3.xlarge')
+        t1_micro = find_instance_type('t1.micro')
+        expect(m3_xlarge[:disk_count]).to eql(0)
+        expect(t1_micro[:disk_count]).to eql(0)
       end
 
       it 'finds the amount of disk for SSD instances' do
         hi1_4xlarge = find_instance_type('hi1.4xlarge')
-        expect(hi1_4xlarge[:disk]).to eql(2048)
+        expect(hi1_4xlarge[:disk_size]).to eql('2 TiB')
       end
 
       it 'marks SSD instances' do
@@ -116,11 +141,6 @@ module Ec2Pricing
         hs1_8xlarge = find_instance_type('hs1.8xlarge')
         expect(hi1_4xlarge[:ssd]).to be_true
         expect(hs1_8xlarge[:ssd]).to be_false
-      end
-
-      it 'finds the amount of disk for high storage instances' do
-        hs1_8xlarge = find_instance_type('hs1.8xlarge')
-        expect(hs1_8xlarge[:disk]).to eql(2048 * 24)
       end
 
       it 'finds the processor architecture' do
@@ -141,15 +161,6 @@ module Ec2Pricing
         expect(cc2_8xlarge[:io_performance]).to eql('very high')
       end
 
-      it 'finds if EBS optimized is available' do
-        m1_large = find_instance_type('m1.large')
-        m2_4xlarge = find_instance_type('m2.4xlarge')
-        m3_2xlarge = find_instance_type('m3.2xlarge')
-        expect(m1_large[:ebs_optimized]).to eql('500 Mbps')
-        expect(m2_4xlarge[:ebs_optimized]).to eql('1000 Mbps')
-        expect(m3_2xlarge[:ebs_optimized]).to be_nil
-      end
-
       it 'finds if the instance is EBS-only' do
         m1_large = find_instance_type('m1.large')
         t1_micro = find_instance_type('t1.micro')
@@ -161,33 +172,31 @@ module Ec2Pricing
 
       it 'records notes for t1.micro instances' do
         t1_micro = find_instance_type('t1.micro')
-        expect(t1_micro[:notes]).to include('Up to 2 EC2 Compute Units (for short periodic bursts)')
+        expect(t1_micro[:notes]).to include('Up to 2 ECUs (for short periodic bursts)')
       end
 
       it 'records notes for cc2.8xlarge instances' do
         cc2_8xlarge = find_instance_type('cc2.8xlarge')
         expect(cc2_8xlarge[:notes]).to include('2 x Intel Xeon E5-2670, eight-core "Sandy Bridge" architecture')
-        expect(cc2_8xlarge[:notes]).to include('10 Gigabit Ethernet')
+        expect(cc2_8xlarge[:notes]).to include('10 Gbps Ethernet')
       end
 
       it 'records notes for cg1.4xlarge instances' do
         cg1_4xlarge = find_instance_type('cg1.4xlarge')
         expect(cg1_4xlarge[:notes]).to include('2 x Intel Xeon X5570, quad-core "Nehalem" architecture')
-        expect(cg1_4xlarge[:notes]).to include('2 x NVIDIA Tesla "Fermi" M2050 GPUs')
-        expect(cg1_4xlarge[:notes]).to include('10 Gigabit Ethernet')
+        expect(cg1_4xlarge[:notes]).to include('2 NVIDIA Tesla M2050 "Fermi" GPUs')
+        expect(cg1_4xlarge[:notes]).to include('10 Gbps Ethernet')
       end
 
       it 'records notes for hi1.4xlarge instances' do
         hi1_4xlarge = find_instance_type('hi1.4xlarge')
-        expect(hi1_4xlarge[:notes]).to include('8 cores + 8 hyperthreads for 16 virtual cores')
-        expect(hi1_4xlarge[:notes]).to include('2 SSD-based volumes each with 1024 GB')
-        expect(hi1_4xlarge[:notes]).to include('10 Gigabit Ethernet')
+        expect(hi1_4xlarge[:notes]).to include('10 Gbps Ethernet')
       end
 
       it 'records notes for hs1.8xlarge instances' do
         hs1_8xlarge = find_instance_type('hs1.8xlarge')
-        expect(hs1_8xlarge[:notes]).to include('8 cores + 8 hyperthreads for 16 virtual cores')
-        expect(hs1_8xlarge[:notes]).to include('10 Gigabit Ethernet')
+        expect(hs1_8xlarge[:notes]).to include('8 cores + 8 hyperthreads')
+        expect(hs1_8xlarge[:notes]).to include('10 Gbps Ethernet')
       end
 
       it 'does not return empty notes properties' do

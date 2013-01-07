@@ -54,16 +54,24 @@
   var sortInstanceTypesBy = function (instanceTypes, field, sortAscending) {
     var sortedInstanceTypes = _(instanceTypes).sortBy(function (instance) {
       var value = instance[field]
-      if (field == "ram" || field == "disk") {
+      if (field == "ram" || field == "disk_size") {
         if (!value) {
-          return 0
+          return Number.MAX_VALUE
         }
-        var m = value.match(/([\d.]+) ([GM]B)/)
+        var m = value.match(/([\d.]+) ([MGT]iB)/)
         var size = parseFloat(m[1])
-        if (m[2] == "MB") {
-          size = size/1024
+        if (m[2] == "TiB") {
+          size = size * 1024 * 1024
+        } else if (m[2] == "GiB") {
+          size = size * 1024
         }
         return size
+      } else if (field == "disk_count") {
+        if (value == 0) {
+          return Number.MAX_VALUE
+        } else {
+          return value
+        }
       } else if (field == "architectures") {
         return value.join("/")
       } else if (field == "io_performance") {
