@@ -66,7 +66,7 @@
         return size
       } else if (field == "architectures") {
         return value.join("/")
-      } else if (field == "io") {
+      } else if (field == "io_performance") {
         return IO_SORT_ORDER.indexOf(value)
       } else {
         return instance[field]

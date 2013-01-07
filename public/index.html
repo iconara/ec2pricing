@@ -106,7 +106,7 @@
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'architectures')" title="Processor architecture">Arch.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'ram')" title="RAM">RAM</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'disk')" title="Total disk size (most instances have multiple disks)">Disk</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'io')" title="IO Performance">IO&nbsp;Perf.</a></th>
+                <th><a href="#" ng-click="sortBy($event, 'io_performance')" title="IO Performance">IO&nbsp;Perf.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'price')" title="On Demand cost per {{singularPeriods[selectedPeriod]}}">Price</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'spotPrice')" title="Spot instance cost per {{singularPeriods[selectedPeriod]}} at current rate (updated every five minutes)">Spot&nbsp;price</a></th>
               </tr>
@@ -150,7 +150,7 @@
                     -
                   </span>
                 </td>
-                <td>{{instanceType.io | dashIfNull}}</td>
+                <td>{{instanceType.io_performance | dashIfNull}}</td>
                 <td class="numeric">{{calculatedPrice(instanceType) | naIfNull}}</td>
                 <td class="numeric">{{spotPrice(instanceType) | naIfNull}}</td>
               </tr>
