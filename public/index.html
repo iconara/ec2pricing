@@ -105,7 +105,8 @@
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'cores')" title="Logical cores">Cores</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'architectures')" title="Processor architecture">Arch.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'ram')" title="RAM">RAM</a></th>
-                <th class="numeric"><a href="#" ng-click="sortBy($event, 'disk')" title="Total disk size (most instances have multiple disks)">Disk</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'disk_size')" title="Total instance storage">Storage</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'disk_count')" title="Number of disks">Disks</a></th>
                 <th><a href="#" ng-click="sortBy($event, 'io_performance')" title="IO Performance">IO&nbsp;Perf.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'price')" title="On Demand cost per {{singularPeriods[selectedPeriod]}}">Price</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'spotPrice')" title="Spot instance cost per {{singularPeriods[selectedPeriod]}} at current rate (updated every five minutes)">Spot&nbsp;price</a></th>
@@ -142,9 +143,16 @@
                 <td class="numeric">{{instanceType.ram | dashIfNull}}</td>
                 <td class="numeric">
                   <span ng-show="instanceType.name">
-                    <i class="icon-bolt" title="SSD" ng-show="instanceType.ssd"></i>
-                    <i class="icon-warning-sign" title="EBS Only" ng-show="instanceType.ebs_only"></i>
-                    {{instanceType.disk | naIfNull}}
+                    <a title="EBS Only" ng-show="instanceType.ebs_only" class="tooltip-icon"><i class="icon-warning-sign"></i></a>
+                    {{instanceType.disk_size | naIfNull}}
+                  </span>
+                  <span ng-hide="instanceType.name">
+                    -
+                  </span>
+                </td>
+                <td class="numeric">
+                  <span ng-show="instanceType.name">
+                    {{instanceType.disk_count | naIfNull}}
                   </span>
                   <span ng-hide="instanceType.name">
                     -
