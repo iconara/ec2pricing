@@ -8,8 +8,6 @@ require 'nokogiri'
 require 'ec2_pricing'
 
 
-task :upload => ['upload:data', 'upload:site']
-
 namespace :cache do
   task :data do
     api_host = ENV['API_HOST'] || 'ec2pricing.heroku.com'
@@ -56,9 +54,9 @@ namespace :upload do
         local_md5 = Digest::MD5.hexdigest(local_data)
         remote_path = local_path.sub(/^public\//, '')
         if local_md5 == etags[remote_path]
-          puts "Skipping #{local_path}"
+          $stderr.puts("Skipping #{local_path}")
         else
-          puts "Uploading #{local_path} to #{remote_path}"
+          $stderr.puts("Uploading #{local_path} to #{remote_path}")
           object_options = {
             :data => local_data,
             :acl => :public_read,
@@ -76,3 +74,5 @@ namespace :upload do
     @bucket.objects['data/data.json'].write(@data, options)
   end
 end
+
+task :upload => ['upload:data', 'upload:site']
