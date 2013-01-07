@@ -10,14 +10,21 @@ require 'ec2_pricing'
 
 task :upload => ['upload:data', 'upload:site']
 
-namespace :update do
+namespace :cache do
   task :data do
     api_host = ENV['API_HOST'] || 'ec2pricing.heroku.com'
     api_url =  "http://#{api_host}/api/v1"
+    $stderr.puts("Downloading #{api_url}")
+    @data = open(api_url).read
+  end
+end
+
+namespace :update do
+  task :data => 'cache:data' do
     local_path = 'public/data/data.json'
-    $stderr.puts("Downloading #{api_url} to #{local_path}")
+    $stderr.puts("Writing #{local_path}")
     FileUtils.mkdir_p(File.dirname(local_path))
-    File.write(local_path, open(api_url).read)
+    File.write(local_path, @data)
   end
 end
 
@@ -63,9 +70,9 @@ namespace :upload do
     end
   end
 
-  task :data => ['update:data', :connect] do
-    $stderr.puts('Uploading public/data/data.json to data/data.json')
+  task :data => ['cache:data', :connect] do
+    $stderr.puts("Writing s3://#{@bucket.name}/data/data.json")
     options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
-    @bucket.objects['data/data.json'].write(Pathname.new('public/data/data.json'), options)
+    @bucket.objects['data/data.json'].write(@data, options)
   end
 end
