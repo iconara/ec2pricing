@@ -10,6 +10,17 @@ require 'ec2_pricing'
 
 task :upload => ['upload:data', 'upload:site']
 
+namespace :update do
+  task :data do
+    api_host = ENV['API_HOST'] || 'ec2pricing.heroku.com'
+    api_url =  "http://#{api_host}/api/v1"
+    local_path = 'public/data/data.json'
+    $stderr.puts("Downloading #{api_url} to #{local_path}")
+    FileUtils.mkdir_p(File.dirname(local_path))
+    File.write(local_path, open(api_url).read)
+  end
+end
+
 namespace :upload do
   MIME_TYPES = {
     '.js'   => 'application/javascript',
@@ -52,11 +63,9 @@ namespace :upload do
     end
   end
 
-  task :data => :connect do
-    api_host = ENV['API_HOST'] || 'ec2pricing.heroku.com'
-    api_url =  "http://#{api_host}/api/v1"
-    $stderr.puts("Uploading data/data.json from #{api_url}")
+  task :data => ['update:data', :connect] do
+    $stderr.puts('Uploading public/data/data.json to data/data.json')
     options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
-    @bucket.objects['data/data.json'].write(open(api_url), options)
+    @bucket.objects['data/data.json'].write(Pathname.new('public/data/data.json'), options)
   end
 end
