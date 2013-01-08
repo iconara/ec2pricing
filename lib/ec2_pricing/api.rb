@@ -20,8 +20,8 @@ module Ec2Pricing
         Api.logger
       end
 
-      def pricing_url
-        ENV['AWS_PRICING_URL']
+      def on_demand_pricing_url
+        ENV['AWS_ON_DEMAND_PRICING_URL']
       end
 
       def instance_types_url
@@ -33,7 +33,7 @@ module Ec2Pricing
       end
 
       def load_data!
-        pricing_request = Typhoeus::Request.new(pricing_url, methdod: :get)
+        pricing_request = Typhoeus::Request.new(on_demand_pricing_url, methdod: :get)
         instance_types_request = Typhoeus::Request.new(instance_types_url, methdod: :get)
 
         hydra = Typhoeus::Hydra.new
