@@ -24,6 +24,10 @@ module Ec2Pricing
         ENV['AWS_ON_DEMAND_PRICING_URL']
       end
 
+      def spot_pricing_url
+        ENV['AWS_SPOT_PRICING_URL']
+      end
+
       def instance_types_url
         ENV['AWS_INSTANCE_TYPES_URL']
       end
@@ -33,38 +37,59 @@ module Ec2Pricing
       end
 
       def load_data!
-        pricing_request = Typhoeus::Request.new(on_demand_pricing_url, methdod: :get)
+        on_demand_pricing_request = Typhoeus::Request.new(on_demand_pricing_url, methdod: :get)
+        spot_pricing_request = Typhoeus::Request.new(spot_pricing_url, methdod: :get)
         instance_types_request = Typhoeus::Request.new(instance_types_url, methdod: :get)
 
         hydra = Typhoeus::Hydra.new
-        hydra.queue(pricing_request)
+        hydra.queue(on_demand_pricing_request)
+        hydra.queue(spot_pricing_request)
         hydra.queue(instance_types_request)
         hydra.run
 
-        on_demand_pricing_data = PricingParser.new.parse(MultiJson.load(pricing_request.response.body))
+        pricing_parser = PricingParser.new
+
+        on_demand_pricing_data = pricing_parser.parse(MultiJson.load(on_demand_pricing_request.response.body))
+        spot_pricing_data = pricing_parser.parse(MultiJson.load(fix_jsonp(spot_pricing_request.response.body)))
+
         instance_types_data = InstanceTypesParser.new.parse(Nokogiri::HTML(instance_types_request.response.body))
         instance_types_data = Hash[instance_types_data.map { |type| [type[:api_name], type] }]
 
-        [on_demand_pricing_data, instance_types_data]
+        [on_demand_pricing_data, spot_pricing_data, instance_types_data]
+      end
+
+      def fix_jsonp(str)
+        str.sub(/\A\s*callback\((.+)\)\s*\Z/m, '\1').gsub(/\},\s*\]/, '}]')
       end
 
       def instance_types
         cache['instance_types'] ||= begin
-          on_demand_pricing_data, instance_types_data = load_data!
-          instance_types = []
+          on_demand_pricing_data, spot_pricing_data, instance_types_data = load_data!
+          instance_types_by_region = {}
           on_demand_pricing_data.each do |region_pricing|
             region = {:region => region_pricing[:region], :instance_types => []}
-            instance_types << region
+            instance_types_by_region[region[:region]] = region
             region_pricing[:instance_types].each do |instance_type_on_demand_pricing|
               instance_type_data = instance_types_data[instance_type_on_demand_pricing[:api_name]]
               if instance_type_data
-                region[:instance_types] << instance_type_data.merge(:pricing => instance_type_on_demand_pricing)
+                region[:instance_types] << instance_type_data.merge(:on_demand_pricing => instance_type_on_demand_pricing[:pricing])
               else
-                logger.warn("No data for #{instance_type[:api_name]} (in region #{region[:region]})")
+                logger.warn("No instance type data for #{instance_type_on_demand_pricing[:api_name]} (in region #{region[:region]})")
               end
             end
           end
-          instance_types
+          spot_pricing_data.each do |region_pricing|
+            region = instance_types_by_region[region_pricing[:region]]
+            region_pricing[:instance_types].each do |instance_type_spot_pricing|
+              instance_type_data = region[:instance_types].find { |instance_type| instance_type[:api_name] == instance_type_spot_pricing[:api_name] }
+              if instance_type_data
+                instance_type_data[:spot_pricing] = instance_type_spot_pricing[:pricing]
+              else
+                logger.info("No instance type data for #{instance_type_spot_pricing[:api_name]} (in region #{region[:region]})")
+              end
+            end
+          end
+          instance_types_by_region.values
         end
       end
 

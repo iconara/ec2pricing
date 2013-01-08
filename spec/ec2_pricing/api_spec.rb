@@ -16,12 +16,14 @@ module Ec2Pricing
     end
 
     before do
-      ENV['AWS_ON_DEMAND_PRICING_URL'] = 'http://example.com/aws-pricing'
+      ENV['AWS_ON_DEMAND_PRICING_URL'] = 'http://example.com/aws-on-demand-pricing'
+      ENV['AWS_SPOT_PRICING_URL'] = 'http://example.com/aws-spot-pricing'
       ENV['AWS_INSTANCE_TYPES_URL'] = 'http://example.com/aws-instance-types'
     end
 
     before do
       stub_http_request(:any, ENV['AWS_ON_DEMAND_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)))
+      stub_http_request(:any, ENV['AWS_SPOT_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/spot.js', __FILE__)))
       stub_http_request(:any, ENV['AWS_INSTANCE_TYPES_URL']).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
     end
 
@@ -77,15 +79,25 @@ module Ec2Pricing
 
       describe '/:region' do
         before do
-          get '/api/v1/us-west-1'
+          get '/api/v1/eu-west-1'
         end
 
         it_behaves_like 'a GET URI'
 
-        it 'returns pricing for the specified region' do
-          expect(response_body['region']).to eql('us-west-1')
-          expect(response_body['instance_types']).to have(10).items
-          expect(response_body['instance_types'].first).to have_key('pricing')
+        it 'returns instance type information for the specified region' do
+          expect(response_body['region']).to eql('eu-west-1')
+          expect(response_body['instance_types']).to have(13).items
+        end
+
+        it 'returns on demand pricing for the specified region' do
+          expect(response_body['instance_types'].first['on_demand_pricing']).to have_key('linux')
+        end
+
+        it 'returns spot pricing for the specified region (where available)' do
+          m1_small = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'm1.small' }
+          hi1_4xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'hi1.4xlarge' }
+          expect(m1_small['spot_pricing']).to have_key('linux')
+          expect(hi1_4xlarge['spot_pricing']).to be_nil
         end
 
         it 'responds with Not Found for regions that do not exist' do
@@ -101,12 +113,12 @@ module Ec2Pricing
 
         it_behaves_like 'a GET URI'
 
-        it 'returns pricing for the specified instance type in the specified region' do
-          expect(response_body['api_name']).to eql('m1.xlarge')
-          expect(response_body).to have_key('pricing')
+        it 'returns on demand pricing for the specified instance type in the specified region' do
+          expect(response_body).to have_key('on_demand_pricing')
         end
 
         it 'returns instance type data for the specified instance type in the specified region' do
+          expect(response_body['api_name']).to eql('m1.xlarge')
           expect(response_body['ram']).to eql('15 GiB')
           expect(response_body['ecus']).to eql(8)
           expect(response_body['io_performance']).to eql('high')
