@@ -37,9 +37,9 @@ module Ec2Pricing
       end
 
       def load_data!
-        on_demand_pricing_request = Typhoeus::Request.new(on_demand_pricing_url, methdod: :get)
-        spot_pricing_request = Typhoeus::Request.new(spot_pricing_url, methdod: :get)
-        instance_types_request = Typhoeus::Request.new(instance_types_url, methdod: :get)
+        on_demand_pricing_request = Typhoeus::Request.new(on_demand_pricing_url, method: :get)
+        spot_pricing_request = Typhoeus::Request.new(spot_pricing_url, method: :get)
+        instance_types_request = Typhoeus::Request.new(instance_types_url, method: :get)
 
         hydra = Typhoeus::Hydra.new
         hydra.queue(on_demand_pricing_request)

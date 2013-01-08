@@ -22,9 +22,9 @@ module Ec2Pricing
     end
 
     before do
-      stub_http_request(:any, ENV['AWS_ON_DEMAND_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)))
-      stub_http_request(:any, ENV['AWS_SPOT_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/spot.js', __FILE__)))
-      stub_http_request(:any, ENV['AWS_INSTANCE_TYPES_URL']).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
+      stub_http_request(:get, ENV['AWS_ON_DEMAND_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)))
+      stub_http_request(:get, ENV['AWS_SPOT_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/spot.js', __FILE__)))
+      stub_http_request(:get, ENV['AWS_INSTANCE_TYPES_URL']).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
     end
 
     shared_examples_for 'a GET URI' do
