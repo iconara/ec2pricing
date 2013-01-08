@@ -16,8 +16,13 @@ module Ec2Pricing
     end
 
     before do
-      ENV['AWS_PRICING_URL'] = File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)
-      ENV['AWS_INSTANCE_TYPES_URL'] = File.expand_path('../../resources/instance-types.html', __FILE__)
+      ENV['AWS_PRICING_URL'] = 'http://example.com/aws-pricing'
+      ENV['AWS_INSTANCE_TYPES_URL'] = 'http://example.com/aws-instance-types'
+    end
+
+    before do
+      stub_http_request(:any, ENV['AWS_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)))
+      stub_http_request(:any, ENV['AWS_INSTANCE_TYPES_URL']).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
     end
 
     shared_examples_for 'a GET URI' do
