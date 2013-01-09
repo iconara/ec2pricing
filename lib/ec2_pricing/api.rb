@@ -5,6 +5,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'typhoeus'
 require 'ec2_pricing/heap_cache'
+require 'ec2_pricing/aws_data_loader'
 require 'ec2_pricing/pricing_parser'
 require 'ec2_pricing/instance_types_parser'
 
@@ -37,29 +38,18 @@ module Ec2Pricing
       end
 
       def load_data!
-        on_demand_pricing_request = Typhoeus::Request.new(on_demand_pricing_url, method: :get)
-        spot_pricing_request = Typhoeus::Request.new(spot_pricing_url, method: :get)
-        instance_types_request = Typhoeus::Request.new(instance_types_url, method: :get)
-
-        hydra = Typhoeus::Hydra.new
-        hydra.queue(on_demand_pricing_request)
-        hydra.queue(spot_pricing_request)
-        hydra.queue(instance_types_request)
-        hydra.run
-
+        instance_types_parser = InstanceTypesParser.new
         pricing_parser = PricingParser.new
+        data_loader = AwsDataLoader.new(instance_types_url, on_demand_pricing_url, spot_pricing_url)
+        data_loader.load!
 
-        on_demand_pricing_data = pricing_parser.parse(MultiJson.load(on_demand_pricing_request.response.body))
-        spot_pricing_data = pricing_parser.parse(MultiJson.load(fix_jsonp(spot_pricing_request.response.body)))
-
-        instance_types_data = InstanceTypesParser.new.parse(Nokogiri::HTML(instance_types_request.response.body))
+        instance_types_data = instance_types_parser.parse(data_loader.instance_types_data)
         instance_types_data = Hash[instance_types_data.map { |type| [type[:api_name], type] }]
 
-        [on_demand_pricing_data, spot_pricing_data, instance_types_data]
-      end
+        on_demand_pricing_data = pricing_parser.parse(data_loader.on_demand_pricing_data)
+        spot_pricing_data = pricing_parser.parse(data_loader.spot_pricing_data)
 
-      def fix_jsonp(str)
-        str.sub(/\A\s*callback\((.+)\)\s*\Z/m, '\1').gsub(/\},\s*\]/, '}]')
+        [on_demand_pricing_data, spot_pricing_data, instance_types_data]
       end
 
       def instance_types
