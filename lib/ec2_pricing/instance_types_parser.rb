@@ -5,11 +5,12 @@ module Ec2Pricing
     def parse(doc)
       instance_types = []
       header = doc.css('#AvailableInstanceTypes').first
+      raise 'Could not parse instance types HTML' unless header
       section = header.ancestors.find { |n| n['class'] && n['class'].include?('section') }
       table_rows = section.xpath('div[@class = "informaltable"]/table/tbody/tr')
       table_rows.map do |row|
         columns = row.xpath('td').map { |t| t.text.strip }
-        parse_instance_properties(*columns)
+        parse_instance_properties(*columns[0, 8])
       end
     end
 
