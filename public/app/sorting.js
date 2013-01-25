@@ -7,10 +7,10 @@
 
   module.value("instanceTypeSorter", function (instanceTypes, sortField, sortAscending, selectedOs) {
     var availableTypes = _(instanceTypes).select(function (instanceType) {
-      return !!instanceType.pricing[selectedOs]
+      return !!instanceType.on_demand_pricing[selectedOs]
     })
     var unavailableTypes = _(instanceTypes).select(function (instanceType) {
-      return !instanceType.pricing[selectedOs]
+      return !instanceType.on_demand_pricing[selectedOs]
     })
 
     if (sortField == "api_name") {
@@ -53,7 +53,7 @@
 
   var sortInstanceTypesByPrice = function (instanceTypes, selectedOs, sortAscending) {
     var sortedInstanceTypes = _(instanceTypes).sortBy(function (instance) {
-      return instance.pricing[selectedOs]
+      return instance.on_demand_pricing[selectedOs]
     })
     if (!sortAscending) {
       sortedInstanceTypes.reverse()
