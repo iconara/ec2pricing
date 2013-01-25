@@ -11,12 +11,14 @@
     "clusterGPUI":     "cg1",
     "hiIoODI":         "hi1",
     "hiStoreODI":      "hs1",
+    "clusterHiMemODI": "cr1",
 
     "stdSpot":         "m1",
     "secgenstdSpot":   "m3",
     "uSpot":           "t1",
     "hiMemSpot":       "m2",
-    "hiCPUSpot":       "c1"
+    "hiCPUSpot":       "c1",
+    "clusterHiMemSpot": "cr1"
   }
 
   var SIZE_MAP = {
