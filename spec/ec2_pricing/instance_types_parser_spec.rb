@@ -40,6 +40,7 @@ module Ec2Pricing
           cc1.4xlarge
           cc2.8xlarge
           cg1.4xlarge
+          cr1.8xlarge
           hi1.4xlarge
           hs1.8xlarge
         ].sort)
@@ -177,14 +178,20 @@ module Ec2Pricing
 
       it 'records notes for cc2.8xlarge instances' do
         cc2_8xlarge = find_instance_type('cc2.8xlarge')
-        expect(cc2_8xlarge[:notes]).to include('2 x Intel Xeon E5-2670, eight-core "Sandy Bridge" architecture')
+        expect(cc2_8xlarge[:notes]).to include('2 x Intel Xeon E5-2670, eight-core with hyperthread')
+        expect(cc2_8xlarge[:notes]).to include('10 Gbps Ethernet')
+      end
+
+      it 'records notes for cc1.4xlarge instances' do
+        cc2_8xlarge = find_instance_type('cc1.4xlarge')
+        expect(cc2_8xlarge[:notes]).to include('2 x Intel Xeon X5570, quad-core with hyperthread')
         expect(cc2_8xlarge[:notes]).to include('10 Gbps Ethernet')
       end
 
       it 'records notes for cg1.4xlarge instances' do
         cg1_4xlarge = find_instance_type('cg1.4xlarge')
-        expect(cg1_4xlarge[:notes]).to include('2 x Intel Xeon X5570, quad-core "Nehalem" architecture')
-        expect(cg1_4xlarge[:notes]).to include('2 NVIDIA Tesla M2050 "Fermi" GPUs')
+        expect(cg1_4xlarge[:notes]).to include('2 x Intel Xeon X5570, quad-core with hyperthread')
+        expect(cg1_4xlarge[:notes]).to include('2 NVIDIA Tesla M2050 GPUs')
         expect(cg1_4xlarge[:notes]).to include('10 Gbps Ethernet')
       end
 

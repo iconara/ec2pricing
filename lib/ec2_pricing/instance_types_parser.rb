@@ -8,10 +8,14 @@ module Ec2Pricing
       raise 'Could not parse instance types HTML' unless header
       section = header.ancestors.find { |n| n['class'] && n['class'].include?('section') }
       table_rows = section.xpath('div[@class = "informaltable"]/table/tbody/tr')
-      table_rows.map do |row|
+      instance_types = table_rows.map do |row|
         columns = row.xpath('td').map { |t| t.text.strip }
-        parse_instance_properties(*columns[0, 8])
+        if columns.size >= 9
+          parse_instance_properties(*columns[0, 9])
+        end
       end
+      instance_types.compact!
+      instance_types
     end
 
     private
@@ -30,7 +34,15 @@ module Ec2Pricing
       instance_type
     end
 
-    def parse_instance_properties(name, api_name, ecus_str, cores_str, ram_str, disk_str, architectures_str, io_str)
+    def parse_instance_properties(*args)
+      if args[7] == 't1.micro'
+        args.unshift(args.first)
+        args[1] = '615 MiB'
+        args.pop
+      end
+
+      name, ram_str, ecus_str, cores_str, disk_str, architectures_str, io_str, spot_availability_str, api_name = args
+
       properties = {}
       properties[:name] = name
       properties[:api_name] = api_name
@@ -78,7 +90,7 @@ module Ec2Pricing
 
     def parse_disk_count(disk_str)
       case disk_str
-      when /\(\d+ x (\d+) TiB hard disk drives/
+      when /\((\d+) x \d+ TiB hard disk drives/
         $1.to_i
       when /\((\d+) x \d+/
         $1.to_i
@@ -124,8 +136,8 @@ module Ec2Pricing
         []
       when /\((.+?)\), plus (.+)\Z/m
         [normalize_whitespace($1), normalize_whitespace($2)]
-      when /\((.+?)\)/
-        [normalize_whitespace($1).sub('with ', '')]
+      when /\((.+?)\)/m
+        [normalize_whitespace($1)]
       else
         []
       end
