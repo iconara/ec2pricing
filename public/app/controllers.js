@@ -75,6 +75,8 @@
         $scope.$watch(function () { return $location.search() }, restoreState)
         $scope.autoRestoreSetup = true
       }
+
+      sortInstanceTypes()
     }
 
     var selectRegion = function (region) {
@@ -98,7 +100,6 @@
     }
     
     STATE_FIELDS.forEach(function (property) {
-      $scope.$watch(property, sortInstanceTypes)
       $scope.$watch(property, updateState)
     })
 
