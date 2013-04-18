@@ -7,9 +7,8 @@
     <title>EC2 Instance Types &amp; Pricing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-2.0.4-custom.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive-2.0.4.min.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome-2.0.css">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <style type="text/css">
     body {
       margin-top: 1em;
@@ -99,16 +98,16 @@
           <table class="instance-properties table table-striped">
             <thead>
               <tr>
-                <th class="hidden-phone"><a href="#" ng-click="sortBy($event, 'api_name')">Name</a></th>
-                <th class="hidden-phone"></th>
+                <th class="hidden-tablet hidden-phone"><a href="#" ng-click="sortBy($event, 'api_name')">Name</a></th>
+                <th class="hidden-tablet hidden-phone"></th>
                 <th><a href="#" ng-click="sortBy($event, 'api_name')">API Name</a></th>
                 <th class="numeric hidden-phone"><a href="#" ng-click="sortBy($event, 'ecus')" title="EC2 Compute Units">ECUs</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'cores')" title="Logical cores">Cores</a></th>
-                <th class="numeric hidden-phone"><a href="#" ng-click="sortBy($event, 'architectures')" title="Processor architecture">Arch.</a></th>
+                <th class="numeric hidden-tablet hidden-phone"><a href="#" ng-click="sortBy($event, 'architectures')" title="Processor architecture">Arch.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'ram')" title="RAM">RAM</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'disk_size')" title="Total instance storage">Storage</a></th>
                 <th class="numeric hidden-phone"><a href="#" ng-click="sortBy($event, 'disk_count')" title="Number of disks">Disks</a></th>
-                <th><a href="#" ng-click="sortBy($event, 'io_performance')" title="IO Performance">IO&nbsp;Perf.</a></th>
+                <th class="hidden-tablet hidden-phone"><a href="#" ng-click="sortBy($event, 'io_performance')" title="IO Performance">IO&nbsp;Perf.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'price')" title="On Demand cost per {{singularPeriods[selectedPeriod]}}">Price</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'spotPrice')" title="Spot instance cost per {{singularPeriods[selectedPeriod]}} at current rate (updated every five minutes)">Spot&nbsp;price</a></th>
               </tr>
@@ -117,8 +116,8 @@
               <tr ng-repeat="instanceType in selectedInstanceTypes"
                    ng-class="{'not-available': instanceType.pricing[$scope.selectedOs]}"
                    ng-click="inspectInstanceType(instanceType)">
-                <td class="hidden-phone">{{instanceType.name | dashIfNull}}</td>
-                <td class="hidden-phone">
+                <td class="hidden-tablet hidden-phone">{{instanceType.name | dashIfNull}}</td>
+                <td class="hidden-tablet hidden-phone">
                   <a ng-show="instanceType.notes" class="tooltip-icon" href="#" onclick="return false">
                     <i class="icon-info-sign" title="{{instanceType.notes.join(', ')}}"></i>
                   </a>
@@ -133,7 +132,7 @@
                 </td>
                 <td class="numeric hidden-phone">{{instanceType.ecus | dashIfNull}}</td>
                 <td class="numeric">{{instanceType.cores | dashIfNull}}</td>
-                <td class="numeric hidden-phone">
+                <td class="numeric hidden-tablet hidden-phone">
                   <span ng-show="instanceType.architectures">
                     {{instanceType.architectures.join("/")}}-bit
                   </span>
@@ -159,7 +158,7 @@
                     -
                   </span>
                 </td>
-                <td>{{instanceType.io_performance | dashIfNull}}</td>
+                <td class="hidden-tablet hidden-phone">{{instanceType.io_performance | dashIfNull}}</td>
                 <td class="numeric">{{calculatedPrice(instanceType) | naIfNull}}</td>
                 <td class="numeric">{{spotPrice(instanceType) | naIfNull}}</td>
               </tr>
