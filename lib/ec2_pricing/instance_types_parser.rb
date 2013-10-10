@@ -4,14 +4,15 @@ module Ec2Pricing
   class InstanceTypesParser
     def parse(doc)
       instance_types = []
-      header = doc.css('#AvailableInstanceTypes').first
-      raise 'Could not parse instance types HTML' unless header
-      section = header.ancestors.find { |n| n['class'] && n['class'].include?('section') }
-      table_rows = section.xpath('div[@class = "informaltable"]/table/tbody/tr')
+      table = find_pricing_table(doc)
+      raise 'Could not parse instance types HTML' unless table
+      table_rows = table.xpath('tr')
       instance_types = table_rows.map do |row|
-        columns = row.xpath('td').map { |t| t.text.strip }
+        columns = row.xpath('td').map do |t|
+          t.inner_html.sub(/<span.+?>.+?<\/span>/, '').strip
+        end
         if columns.size >= 9
-          parse_instance_properties(*columns[0, 9])
+          parse_instance_properties(*columns[1, 8])
         end
       end
       instance_types.compact!
@@ -19,6 +20,15 @@ module Ec2Pricing
     end
 
     private
+
+    def find_pricing_table(doc)
+      anchor = doc.xpath('//a[@name = "instance-details"]').first
+      node = anchor
+      while node = node.next
+        return node if node.element? && node.name == 'table'
+      end
+      nil
+    end
 
     def instance_name?(text)
       text.include?('Instance') && (text.end_with?('Instance') || text.include?('Small Instance'))
@@ -35,16 +45,9 @@ module Ec2Pricing
     end
 
     def parse_instance_properties(*args)
-      if args[7] == 't1.micro'
-        args.unshift(args.first)
-        args[1] = '615 MiB'
-        args.pop
-      end
-
-      name, ram_str, ecus_str, cores_str, disk_str, architectures_str, io_str, spot_availability_str, api_name = args
-
+      api_name, architectures_str, cores_str, ecus_str, ram_str, disk_str, _, io_str = args
       properties = {}
-      properties[:name] = name
+      properties[:name] = api_name.split('.').map(&:capitalize).join(' ')
       properties[:api_name] = api_name
       properties[:ecus] = ecus_str.include?('.') ? ecus_str.to_f : ecus_str.to_i
       properties[:cores] = parse_cores(cores_str)
@@ -55,7 +58,7 @@ module Ec2Pricing
       properties[:io_performance] = parse_io_performance(io_str)
       properties[:ssd] = true if ssd?(disk_str)
       properties[:ebs_only] = true if ebs_only?(disk_str)
-      properties[:notes] = parse_notes(name, api_name, ecus_str, cores_str, ram_str, disk_str, architectures_str, io_str)
+      properties[:notes] = parse_notes(nil, api_name, ecus_str, cores_str, ram_str, disk_str, architectures_str, io_str)
       properties.delete(:notes) if properties[:notes].empty?
       properties
     end
@@ -71,28 +74,31 @@ module Ec2Pricing
     end
 
     def parse_ram(ram_str)
-      ram_str.scan(/^([\d.]+ \w+)/).flatten.first
+      number = ram_str.scan(/^([\d.]+)/).flatten.first
+      "#{number} GiB"
     end
 
     def parse_disk_size(disk_str)
-      size = disk_str.scan(/^(\d+ \w+)/).flatten.first
-      case size
+      case disk_str
       when nil, /None/
         nil
-      else
-        fix_disk_unit(size)
+      when /(\d+) x ([\d,]+)/
+        disk_count = $1.to_i
+        size_per_disk = $2.gsub(',', '').to_i
+        total_size = disk_count * size_per_disk
+        if total_size > 1024 * 10
+          unit = 'TiB'
+          total_size /= 1024
+        else
+          unit = 'GiB'
+        end
+        "#{total_size} #{unit}"
       end
-    end
-
-    def fix_disk_unit(str)
-      str.sub('GB', 'GiB')
     end
 
     def parse_disk_count(disk_str)
       case disk_str
-      when /\((\d+) x \d+ TiB hard disk drives/
-        $1.to_i
-      when /\((\d+) x \d+/
+      when /(\d+) x/
         $1.to_i
       else
         0
@@ -100,17 +106,11 @@ module Ec2Pricing
     end
 
     def parse_io_performance(io_str)
-      case io_str
-      when /^(.+?) \(/
-        $1.downcase
-      else
-        io_str.downcase
-      end
+      io_str.downcase
     end
 
     def parse_architectures(architectures_str)
-      case architectures_str
-      when /32-bit and 64-bit/
+      if architectures_str.include?('32') && architectures_str.include?('64')
         [32, 64]
       else
         [64]
@@ -157,7 +157,7 @@ module Ec2Pricing
     end
 
     def ebs_only?(disk_str)
-      disk_str.include?('EBS storage only') || disk_str.include?('None')
+      disk_str.include?('EBS only')
     end
 
     def normalize_whitespace(str)
