@@ -47,7 +47,7 @@ module Ec2Pricing
     def parse_instance_properties(*args)
       api_name, architectures_str, cores_str, ecus_str, ram_str, disk_str, _, io_str = args
       properties = {}
-      properties[:name] = api_name.split('.').map(&:capitalize).join(' ')
+      properties[:name] = name_from_api_name(api_name)
       properties[:api_name] = api_name
       properties[:ecus] = ecus_str.include?('.') ? ecus_str.to_f : ecus_str.to_i
       properties[:cores] = parse_cores(cores_str)
@@ -63,6 +63,46 @@ module Ec2Pricing
       properties
     end
 
+    XL = {
+      '2' => 'Double',
+      '4' => 'Quadruple',
+      '8' => 'Eight'
+    }
+
+    def name_from_api_name(api_name)
+      family, name = api_name.split('.')
+      family = begin
+        case family
+        when 't1'
+          ''
+        when 'cc2'
+          'Cluster Compute'
+        when 'cg1'
+          'Cluster GPU'
+        when 'c1'
+          'High CPU'
+        when 'm2', 'cr1'
+          'High Memory'
+        when 'hi1'
+          'High IO'
+        when 'hs1'
+          'High Storage'
+        else
+          family.upcase
+        end
+      end
+      name = begin
+        case name
+        when /(\d+)xlarge/
+          "#{XL[$1]} Extra Large"
+        when /^xlarge/
+          'Extra Large'
+        else
+          name.capitalize
+        end
+      end
+      "#{family} #{name}".strip
+    end
 
     def parse_cores(cores_str)
       case cores_str

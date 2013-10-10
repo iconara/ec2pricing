@@ -46,8 +46,20 @@ module Ec2Pricing
       end
 
       it 'finds the names' do
+        t1_micro = find_instance_type('t1.micro')
         m1_small = find_instance_type('m1.small')
+        m2_2xlarge = find_instance_type('m2.2xlarge')
+        cc2_8xlarge = find_instance_type('cc2.8xlarge')
+        cg1_4xlarge = find_instance_type('cg1.4xlarge')
+        hi1_4xlarge = find_instance_type('hi1.4xlarge')
+        hs1_8xlarge = find_instance_type('hs1.8xlarge')
+        expect(t1_micro[:name]).to eql('Micro')
         expect(m1_small[:name]).to eql('M1 Small')
+        expect(m2_2xlarge[:name]).to eql('High Memory Double Extra Large')
+        expect(cc2_8xlarge[:name]).to eql('Cluster Compute Eight Extra Large')
+        expect(cg1_4xlarge[:name]).to eql('Cluster GPU Quadruple Extra Large')
+        expect(hi1_4xlarge[:name]).to eql('High IO Quadruple Extra Large')
+        expect(hs1_8xlarge[:name]).to eql('High Storage Eight Extra Large')
       end
 
       it 'finds the number of cores' do
