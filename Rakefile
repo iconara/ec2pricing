@@ -1,12 +1,20 @@
 $: << File.expand_path('../lib', __FILE__)
 
+require 'rspec/core/rake_task'
 require 'open-uri'
 require 'fileutils'
 require 'aws'
 require 'multi_json'
 require 'nokogiri'
 require 'ec2_pricing'
+require 'ec2_pricing/defaults'
 
+
+RSpec::Core::RakeTask.new(:spec) do |r|
+  r.rspec_opts = '--tty'
+end
+
+task :spec => 'update:resources'
 
 namespace :cache do
   task :data do
@@ -23,6 +31,20 @@ namespace :update do
     $stderr.puts("Writing #{local_path}")
     FileUtils.mkdir_p(File.dirname(local_path))
     File.write(local_path, @data)
+  end
+
+  task :resources do
+    {
+      ENV['AWS_ON_DEMAND_PRICING_URL'] => 'spec/resources/pricing-on-demand-instances.json',
+      ENV['AWS_SPOT_PRICING_URL'] => 'spec/resources/spot.js',
+      ENV['AWS_INSTANCE_TYPES_URL'] => 'spec/resources/instance-types.html',
+    }.each do |source, destination|
+      open(source) do |r|
+        File.open(destination, 'w') do |w|
+          w.write(r.read)
+        end
+      end
+    end
   end
 end
 
