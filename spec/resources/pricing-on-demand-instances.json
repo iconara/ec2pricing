@@ -1,4 +1,6 @@
-{
+
+
+  {
     "vers": 0.01,
     "config": {
         "rate": "perhr",
@@ -22,13 +24,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.065"
+                                            "USD": "0.060"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.115"
+                                            "USD": "0.091"
                                         }
                                     }
                                 ]
@@ -39,13 +41,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.130"
+                                            "USD": "0.120"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.230"
+                                            "USD": "0.182"
                                         }
                                     }
                                 ]
@@ -56,13 +58,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.260"
+                                            "USD": "0.240"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.460"
+                                            "USD": "0.364"
                                         }
                                     }
                                 ]
@@ -73,13 +75,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.520"
+                                            "USD": "0.480"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.920"
+                                            "USD": "0.728"
                                         }
                                     }
                                 ]
@@ -95,13 +97,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.580"
+                                            "USD": "0.500"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.980"
+                                            "USD": "0.780"
                                         }
                                     }
                                 ]
@@ -112,13 +114,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.160"
+                                            "USD": "1.000"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.960"
+                                            "USD": "1.560"
                                         }
                                     }
                                 ]
@@ -156,13 +158,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.450"
+                                            "USD": "0.410"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.570"
+                                            "USD": "0.510"
                                         }
                                     }
                                 ]
@@ -173,13 +175,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.900"
+                                            "USD": "0.820"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.140"
+                                            "USD": "1.020"
                                         }
                                     }
                                 ]
@@ -190,13 +192,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.800"
+                                            "USD": "1.640"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "2.280"
+                                            "USD": "2.040"
                                         }
                                     }
                                 ]
@@ -212,13 +214,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.165"
+                                            "USD": "0.145"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.285"
+                                            "USD": "0.225"
                                         }
                                     }
                                 ]
@@ -229,13 +231,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.660"
+                                            "USD": "0.580"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.140"
+                                            "USD": "0.900"
                                         }
                                     }
                                 ]
@@ -275,6 +277,28 @@
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "2.970"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+          {
+                        "type": "clusterHiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "3.500"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "3.831"
                                         }
                                     }
                                 ]
@@ -361,13 +385,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.065"
+                                            "USD": "0.060"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.115"
+                                            "USD": "0.091"
                                         }
                                     }
                                 ]
@@ -378,13 +402,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.130"
+                                            "USD": "0.120"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.230"
+                                            "USD": "0.182"
                                         }
                                     }
                                 ]
@@ -395,13 +419,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.260"
+                                            "USD": "0.240"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.460"
+                                            "USD": "0.364"
                                         }
                                     }
                                 ]
@@ -412,13 +436,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.520"
+                                            "USD": "0.480"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.920"
+                                            "USD": "0.728"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.500"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.780"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.000"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.560"
                                         }
                                     }
                                 ]
@@ -456,13 +519,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.450"
+                                            "USD": "0.410"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.570"
+                                            "USD": "0.510"
                                         }
                                     }
                                 ]
@@ -473,13 +536,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.900"
+                                            "USD": "0.820"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.140"
+                                            "USD": "1.020"
                                         }
                                     }
                                 ]
@@ -490,13 +553,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.800"
+                                            "USD": "1.640"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "2.280"
+                                            "USD": "2.040"
                                         }
                                     }
                                 ]
@@ -512,13 +575,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.165"
+                                            "USD": "0.145"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.285"
+                                            "USD": "0.225"
                                         }
                                     }
                                 ]
@@ -529,13 +592,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.660"
+                                            "USD": "0.580"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.140"
+                                            "USD": "0.900"
                                         }
                                     }
                                 ]
@@ -545,6 +608,23 @@
                     {
                         "type": "clusterComputeI",
                         "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A"
+                                        }
+                                    }
+                                ]
+                            },
                             {
                                 "size": "xxxxxxxxl",
                                 "valueColumns": [
@@ -558,6 +638,94 @@
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "2.970"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterHiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "3.500"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "3.831"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterGPUI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiIoODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "3.100"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "3.580"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiStoreODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "4.600"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "4.931"
                                         }
                                     }
                                 ]
@@ -578,13 +746,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.090"
+                                            "USD": "0.065"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.125"
+                                            "USD": "0.096"
                                         }
                                     }
                                 ]
@@ -595,13 +763,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.180"
+                                            "USD": "0.130"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.250"
+                                            "USD": "0.192"
                                         }
                                     }
                                 ]
@@ -612,13 +780,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.360"
+                                            "USD": "0.260"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.500"
+                                            "USD": "0.384"
                                         }
                                     }
                                 ]
@@ -629,13 +797,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.720"
+                                            "USD": "0.520"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.000"
+                                            "USD": "0.768"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.550"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.830"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.100"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.660"
                                         }
                                     }
                                 ]
@@ -673,13 +880,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.506"
+                                            "USD": "0.460"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.626"
+                                            "USD": "0.560"
                                         }
                                     }
                                 ]
@@ -690,13 +897,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.012"
+                                            "USD": "0.920"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.252"
+                                            "USD": "1.120"
                                         }
                                     }
                                 ]
@@ -707,13 +914,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "2.024"
+                                            "USD": "1.840"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "2.504"
+                                            "USD": "2.240"
                                         }
                                     }
                                 ]
@@ -729,13 +936,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.186"
+                                            "USD": "0.165"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.306"
+                                            "USD": "0.245"
                                         }
                                     }
                                 ]
@@ -746,13 +953,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.744"
+                                            "USD": "0.660"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.224"
+                                            "USD": "0.980"
                                         }
                                     }
                                 ]
@@ -773,13 +980,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.085"
+                                            "USD": "0.065"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.115"
+                                            "USD": "0.091"
                                         }
                                     }
                                 ]
@@ -790,13 +997,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.170"
+                                            "USD": "0.130"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.230"
+                                            "USD": "0.182"
                                         }
                                     }
                                 ]
@@ -807,13 +1014,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.340"
+                                            "USD": "0.260"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.460"
+                                            "USD": "0.364"
                                         }
                                     }
                                 ]
@@ -824,13 +1031,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.680"
+                                            "USD": "0.520"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.920"
+                                            "USD": "0.728"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.550"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.780"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.100"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.560"
                                         }
                                     }
                                 ]
@@ -868,13 +1114,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.506"
+                                            "USD": "0.460"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.570"
+                                            "USD": "0.510"
                                         }
                                     }
                                 ]
@@ -885,13 +1131,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.012"
+                                            "USD": "0.920"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.140"
+                                            "USD": "1.020"
                                         }
                                     }
                                 ]
@@ -902,13 +1148,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "2.024"
+                                            "USD": "1.840"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "2.280"
+                                            "USD": "2.040"
                                         }
                                     }
                                 ]
@@ -924,13 +1170,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.186"
+                                            "USD": "0.165"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.285"
+                                            "USD": "0.225"
                                         }
                                     }
                                 ]
@@ -941,13 +1187,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.744"
+                                            "USD": "0.660"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.140"
+                                            "USD": "0.900"
                                         }
                                     }
                                 ]
@@ -976,6 +1222,28 @@
                             }
                         ]
                     },
+					{
+			                        "type": "clusterHiMemODI",
+			                        "sizes": [
+			                            {
+			                                "size": "xxxxxxxxl",
+			                                "valueColumns": [
+			                                    {
+			                                        "name": "linux",
+			                                        "prices": {
+			                                            "USD": "3.750"
+			                                        }
+			                                    },
+			                                    {
+			                                        "name": "mswin",
+			                                        "prices": {
+			                                            "USD": "3.831"
+			                                        }
+			                                    }
+			                                ]
+			                            }
+			                        ]
+			                    },
                     {
                         "type": "clusterGPUI",
                         "sizes": [
@@ -1019,6 +1287,28 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "type": "hiStoreODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "4.900"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "4.931"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -1034,7 +1324,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.085"
+                                            "USD": "0.080"
                                         }
                                     },
                                     {
@@ -1051,7 +1341,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.170"
+                                            "USD": "0.160"
                                         }
                                     },
                                     {
@@ -1068,7 +1358,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.340"
+                                            "USD": "0.320"
                                         }
                                     },
                                     {
@@ -1085,13 +1375,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.680"
+                                            "USD": "0.640"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "0.920"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.980"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.400"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.960"
                                         }
                                     }
                                 ]
@@ -1129,7 +1458,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.506"
+                                            "USD": "0.495"
                                         }
                                     },
                                     {
@@ -1146,7 +1475,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.012"
+                                            "USD": "0.990"
                                         }
                                     },
                                     {
@@ -1163,7 +1492,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "2.024"
+                                            "USD": "1.980"
                                         }
                                     },
                                     {
@@ -1185,7 +1514,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.186"
+                                            "USD": "0.183"
                                         }
                                     },
                                     {
@@ -1202,7 +1531,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.744"
+                                            "USD": "0.730"
                                         }
                                     },
                                     {
@@ -1229,7 +1558,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.092"
+                                            "USD": "0.088"
                                         }
                                     },
                                     {
@@ -1246,7 +1575,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.184"
+                                            "USD": "0.175"
                                         }
                                     },
                                     {
@@ -1263,7 +1592,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.368"
+                                            "USD": "0.350"
                                         }
                                     },
                                     {
@@ -1280,13 +1609,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.736"
+                                            "USD": "0.700"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "0.920"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.760"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.980"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.520"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.960"
                                         }
                                     }
                                 ]
@@ -1324,7 +1692,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.518"
+                                            "USD": "0.505"
                                         }
                                     },
                                     {
@@ -1341,7 +1709,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.036"
+                                            "USD": "1.010"
                                         }
                                     },
                                     {
@@ -1358,7 +1726,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "2.072"
+                                            "USD": "2.020"
                                         }
                                     },
                                     {
@@ -1380,7 +1748,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.190"
+                                            "USD": "0.185"
                                         }
                                     },
                                     {
@@ -1397,13 +1765,101 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.760"
+                                            "USD": "0.740"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "1.140"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterComputeI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "2.960"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "3.530"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterHiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "4.310"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "4.641"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiIoODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "3.820"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "4.300"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiStoreODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "5.670"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "6.000"
                                         }
                                     }
                                 ]
@@ -1424,7 +1880,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.085"
+                                            "USD": "0.080"
                                         }
                                     },
                                     {
@@ -1441,7 +1897,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.170"
+                                            "USD": "0.160"
                                         }
                                     },
                                     {
@@ -1458,7 +1914,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.340"
+                                            "USD": "0.320"
                                         }
                                     },
                                     {
@@ -1475,13 +1931,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.680"
+                                            "USD": "0.640"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "0.920"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.980"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.400"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.960"
                                         }
                                     }
                                 ]
@@ -1519,7 +2014,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.506"
+                                            "USD": "0.495"
                                         }
                                     },
                                     {
@@ -1536,7 +2031,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.012"
+                                            "USD": "0.990"
                                         }
                                     },
                                     {
@@ -1553,7 +2048,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "2.024"
+                                            "USD": "1.980"
                                         }
                                     },
                                     {
@@ -1575,7 +2070,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.186"
+                                            "USD": "0.183"
                                         }
                                     },
                                     {
@@ -1592,7 +2087,7 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.744"
+                                            "USD": "0.730"
                                         }
                                     },
                                     {
@@ -1619,13 +2114,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.115"
+                                            "USD": "0.080"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.150"
+                                            "USD": "0.111"
                                         }
                                     }
                                 ]
@@ -1636,13 +2131,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.230"
+                                            "USD": "0.160"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.300"
+                                            "USD": "0.222"
                                         }
                                     }
                                 ]
@@ -1653,13 +2148,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.460"
+                                            "USD": "0.320"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.600"
+                                            "USD": "0.444"
                                         }
                                     }
                                 ]
@@ -1670,13 +2165,52 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.920"
+                                            "USD": "0.640"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.200"
+                                            "USD": "0.888"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+{
+                        "type": "secgenstdODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.680"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.960"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "1.360"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.920"
                                         }
                                     }
                                 ]
@@ -1714,13 +2248,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.680"
+                                            "USD": "0.540"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.800"
+                                            "USD": "0.640"
                                         }
                                     }
                                 ]
@@ -1731,13 +2265,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "1.360"
+                                            "USD": "1.080"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.600"
+                                            "USD": "1.280"
                                         }
                                     }
                                 ]
@@ -1748,13 +2282,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "2.720"
+                                            "USD": "2.160"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "3.200"
+                                            "USD": "2.560"
                                         }
                                     }
                                 ]
@@ -1770,13 +2304,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.230"
+                                            "USD": "0.200"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.350"
+                                            "USD": "0.280"
                                         }
                                     }
                                 ]
@@ -1787,13 +2321,13 @@
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.920"
+                                            "USD": "0.800"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.400"
+                                            "USD": "1.120"
                                         }
                                     }
                                 ]
@@ -1805,3 +2339,6 @@
         ]
     }
 }
+
+
+

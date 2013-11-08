@@ -25,7 +25,7 @@ module Ec2Pricing
 
       it 'finds the instance types for each region' do
         region = pricing.find { |region| region[:region] == 'eu-west-1' }
-        expect(region[:instance_types]).to have(13).items
+        expect(region[:instance_types]).to have(17).items
       end
 
       it 'maps the pricing data names to the real API names' do
@@ -45,7 +45,7 @@ module Ec2Pricing
       it 'finds the pricing for Linux and Windows' do
         region = pricing.find { |region| region[:region] == 'sa-east-1' }
         instance_type = region[:instance_types].find { |instance_type| instance_type[:api_name] == 'm2.xlarge' }
-        expect(instance_type[:pricing]).to eql(:linux => 0.680, :mswin => 0.800)
+        expect(instance_type[:pricing]).to eql(:linux => 0.54, :mswin => 0.64)
       end
     end
   end

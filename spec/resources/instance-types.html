@@ -254,20 +254,26 @@
 </p>
 <h2>
     GPU Instances</h2>
-<p>
-   This family includes the CG1 instances and allows you to take advantage of the parallel performance of NVidia Tesla GPUs using the CUDA and OpenCL programming models for GPGPU computing. GPU instances also provide high CPU capabilities (Intel Xeon X5570) and support cluster networking.
+<p>This family includes G2 and CG1 instance types, which provide you with Intel Xeon processors and high-performance NVIDIA GPUs intended for graphics and general purpose GPU compute applications.  Currently, there are two types of GPU instances.  G2 instances provide access to NVIDIA GRID GPUs (“Kepler” GK104) each with 1,536 CUDA cores and 4GB of video memory.  This GPU also features an on-board hardware video encoder designed to support up to eight real-time HD video streams (720p@30fps) or up to four real-time FHD video streams (1080p at 30 fps).  The initial driver release provides support for OpenGL 4.3, DirectX 9, 10, and 11, CUDA 5.5, OpenCL 1.1, and GRID SDK.  The GRID SDK provides low-level access to the capture and encoding capabilities of GRID GPUs.  Combined with the hardware resources of G2 instances, the GRID SDK enables low-latency frame capture and encoding for either the full operating system or select render targets, enabling high-quality interactive streaming experiences.    </p>
+<p>CG1 instances provide access to NVIDIA Tesla M2050 GPUs (“Fermi” GF100) each with 448 CUDA cores and 3GB of video memory.  The latest driver release provides support for CUDA 5.5, OpenCL 1.1, and DirectCompute.  The NVIDIA GPU Computing SDK provides hundreds of code samples and white papers to help you get started writing software with CUDA or DirectCompute, allowing you to take advantage of the parallel performance of NVIDIA GPUs. </p>
+<p>You can be up and running with Amazon EC2 GPU instances in minutes by leveraging our GPU Amazon Machine Images found in the <a href="https://aws.amazon.com/marketplace/search/results/?searchTerms=GPU">AWS Marketplace</a>.  For immediate access to 3D graphics streaming capabilities, the AWS Marketplace also provides offerings that integrate the NVIDIA GRID SDK and G2 instances.
+
     <ul>
-        <li><span class="h3">CG1 popular use cases:</span> Computational chemistry, rendering,
+      <li><span class="h3">G2 popular use cases:</span> Game streaming, 3D application streaming, and other server-side graphics workloads.</li>  
+      <li><span class="h3">CG1 popular use cases:</span> Computational chemistry, rendering,
             financial modeling, and engineering design.</li>
     </ul>
 </p>
 <p>
-    &nbsp; &nbsp; We recommend that you select the instance type that is most appropriate for your workload profile and scale, and then change your instance type if your application's requirements change. In all cases, we strongly recommend application  profiling and load testing. The availability of multiple instance types, combined with features like EBS-optimization and cluster networking allow applications to be optimized for increased performance, improved application resilience, and lower costs. In particular, you should evaluate the most important performance metrics for your application. For applications that benefit from a low
-    cost per CPU, we recommend choosing compute-optimized instances (C1 or CC2 instances).  For applications that require the lowest cost per GiB of memory, we recommend choosing memory-optimized instances (M2 or CR1 instances). Additionally, we recommend that if you are running a database, you should choose instances that support EBS-optimization or instances that support cluster networking. For applications with high inter-node network requirements, you should choose instances that support cluster networking. Micro instances provide short-lived CPU resources opportunistically and are not recommended for applications that require sustained CPU performance.
-    <br />
+</P>
+<p>
+<br />
     <br />
     For a complete list of instance families, sizes, and specifications of Amazon EC2
     instance types please see <a href="#instance-details">Amazon EC2 Instance Details</a>
+<p>
+     We recommend that you select the instance type that is most appropriate for your workload profile and scale, and then change your instance type if your application's requirements change. In all cases, we strongly recommend application  profiling and load testing. The availability of multiple instance types, combined with features like EBS-optimization and cluster networking allow applications to be optimized for increased performance, improved application resilience, and lower costs. In particular, you should evaluate the most important performance metrics for your application. For applications that benefit from a low
+    cost per CPU, we recommend choosing compute-optimized instances (C1 or CC2 instances).  For applications that require the lowest cost per GiB of memory, we recommend choosing memory-optimized instances (M2 or CR1 instances). Additionally, we recommend that if you are running a database, you should choose instances that support EBS-optimization or instances that support cluster networking. For applications with high inter-node network requirements, you should choose instances that support cluster networking. Micro instances provide short-lived CPU resources opportunistically and are not recommended for applications that require sustained CPU performance.
 </p>
 <a name="instance-features"></a>
 <h1>
@@ -300,7 +306,7 @@
 
    <h2>Cluster Networking</h2>
 <p>
-    CC2, CR1, CG1, HI1, and HS1 instances support cluster networking. Instances launched into a
+    CC2, CR1, CG1, G2, HI1, and HS1 instances support cluster networking. Instances launched into a
     common cluster placement group are placed into a logical cluster that provides high-bandwidth,
     low-latency networking between all instances in the cluster. Cluster networking
     is ideal for high performance analytics systems and many science and engineering
@@ -1160,7 +1166,7 @@
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            cg1.4xlarge
+            g2.2xlarge
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
@@ -1170,33 +1176,81 @@
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            16 
+            8 
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top" >
-            33.5
+            26
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            22.5
+            15
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            2 x 840
+            1 x 60 SSD
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            -
+            Yes
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: solid #DDDDDD 1.0pt; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            High
+        </td>
+      <tr>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            GPU Instances
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            cg1.4xlarge
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            64-bit
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            16
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top" >
+            33.5
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            22.5
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            2 x 840
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            -
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: solid #DDDDDD 1.0pt; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
             10 Gigabit<span style=" vertical-align: top; position: relative; top: -0.5em;font-size: 0.7em;">4</span>
         </td>
+    </tr>
+
     </tr>
 </table>
 <br />
@@ -1204,9 +1258,10 @@
     <!-- modify superscript tag -->
     <span><span style=" vertical-align: top; position: relative; top: -0.5em;font-size: 0.7em;">1</span>
     	- M1, C1, M2, and HI1 instances are based on Intel Xeon processors.<br />
-   		- For M3, CC2 and CR1 Instances, each vCPU is a hardware hyperthread from Intel Xeon E5-2670 processors<br />
+   		- For M3, G2, CC2 and CR1 Instances, each vCPU is a hardware hyperthread from Intel Xeon E5-2670 processors<br />
   		- For HS1 instances, each vCPU is a hardware hyperthread from Intel Xeon E5-2650 processors<br />
-    	- CG1 Instances are backed by 2 x Intel Xeon X5570, quad-core with hyperthread plus 2 NVIDIA Tesla M2050 GPUs
+    	- CG1 Instances are backed by 2 x Intel Xeon X5570, quad-core with hyperthread plus 2 NVIDIA Tesla M2050 GPUs<br/>
+	- G2 Instances are backed by 1 x NVIDIA GRID GPU (Kepler GK104)
 </span><br />
     <span><span style=" vertical-align: top; position: relative; top: -0.5em;font-size: 0.7em;">2</span> 
     	HI1 Instances can deliver more than 120,000 4 KB random read IOPS and between 10,000 and 85,000 4 KB random write IOPS (depending on active logical block addressing span) to applications. The maximum sequential throughput on is approximately 2 GB/s read and 1.1 GB/s write.</span><br />
@@ -1950,6 +2005,7 @@
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
             -</td>
     </tr>
+
     <tr style="background-color: White;">
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
@@ -1959,7 +2015,7 @@
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            cg1.4xlarge
+            g2.2xlarge
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
@@ -1969,17 +2025,17 @@
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            16 
+            8 
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top" >
-            33.5
+            26
         </td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-    <span>Intel Xeon X5570</span></td>
+    <span>Intel Xeon E5-2670</span></td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
@@ -1987,12 +2043,56 @@
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
             border-right: none; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
-            -</td>
+            Yes</td>
         <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: solid #DDDDDD 1.0pt;
+            border-right: solid #DDDDDD 1.0pt; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            Yes</td>
+    </tr>
+<tr>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            GPU Instances
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            cg1.4xlarge
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            64-bit
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            16
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top" >
+            33.5
+        </td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            Intel Xeon x5570</td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            Yes</td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
+            border-right: none; 
+            padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
+            -</td>
+        <td style="border-top: solid #DDDDDD 1.0pt; border-left: solid #DDDDDD 1.0pt; border-bottom: none;
             border-right: solid #DDDDDD 1.0pt; 
             padding: 3.0pt 3.75pt 3.0pt 3.75pt" valign="top">
             -</td>
     </tr>
+
 </table>
 <br />
 <span style="color: rgb(0, 0, 0); font-family: verdana, arial, helvetica, clean, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); vertical-align: top; position: relative; top: -0.5em; font-size: 0.7em;">

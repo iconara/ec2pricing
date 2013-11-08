@@ -42,6 +42,7 @@ module Ec2Pricing
           cr1.8xlarge
           hi1.4xlarge
           hs1.8xlarge
+          g2.2xlarge
         ].sort)
       end
 

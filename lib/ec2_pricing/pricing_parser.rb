@@ -23,10 +23,14 @@ module Ec2Pricing
 
     def parse_instance_types(instance_family_data)
       instance_family_data['sizes'].map do |instance_type_data|
-        size = SIZE_MAP[instance_type_data['size']]
-        family = FAMILY_MAP[instance_family_data['type']]
-        family = 'cc1' if family == 'cc2' && size == '4xlarge'
-        api_name = "#{family}.#{size}"
+        if instance_type_data['size'].index('.')
+          api_name = instance_type_data['size']
+        else
+          size = SIZE_MAP[instance_type_data['size']]
+          family = FAMILY_MAP[instance_family_data['type']]
+          family = 'cc1' if family == 'cc2' && size == '4xlarge'
+          api_name = "#{family}.#{size}"
+        end
         {
           :api_name => api_name,
           :pricing => parse_pricing(instance_type_data['valueColumns'])
