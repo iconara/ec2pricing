@@ -1,6 +1,5 @@
 $: << File.expand_path('../lib', __FILE__)
 
-require 'rspec/core/rake_task'
 require 'open-uri'
 require 'fileutils'
 require 'aws'
@@ -10,11 +9,16 @@ require 'ec2_pricing'
 require 'ec2_pricing/defaults'
 
 
-RSpec::Core::RakeTask.new(:spec) do |r|
-  r.rspec_opts = '--tty'
-end
+begin
+  require 'rspec/core/rake_task'
 
-task :spec => 'update:resources'
+  RSpec::Core::RakeTask.new(:spec) do |r|
+    r.rspec_opts = '--tty'
+  end
+
+  task :spec => 'update:resources'
+rescue LoadError
+end
 
 namespace :cache do
   task :data do
