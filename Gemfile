@@ -9,6 +9,7 @@ gem 'puma'
 gem 'grape'
 gem 'rack-contrib'
 gem 'typhoeus'
+gem 'rack'
 
 group :development do
   gem 'pry'

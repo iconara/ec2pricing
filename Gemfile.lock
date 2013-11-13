@@ -86,6 +86,7 @@ DEPENDENCIES
   oj
   pry
   puma
+  rack
   rack-contrib
   rack-test
   rspec
