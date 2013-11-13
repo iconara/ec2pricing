@@ -6,17 +6,19 @@ require 'spec_helper'
 module Ec2Pricing
   describe AwsDataLoader do
     let :data_loader do
-      described_class.new(instance_types_url, on_demand_pricing_url, spot_pricing_url)
+      described_class.new(instance_types_url, on_demand_pricing_url, emr_pricing_url, spot_pricing_url)
     end
 
     let(:instance_types_url) { 'http://example.com/instance-types' }
     let(:on_demand_pricing_url) { 'http://example.com/on-demand-pricing' }
+    let(:emr_pricing_url) { 'http://example.com/emr-pricing' }
     let(:spot_pricing_url) { 'http://example.com/spot-pricing' }
 
     describe '#load!' do
       before do
         stub_http_request(:get, instance_types_url).to_return(body: '<html><body><p>Hello World</p></body></html>')
         stub_http_request(:get, on_demand_pricing_url).to_return(body: '{"hello":"world"}')
+        stub_http_request(:get, emr_pricing_url).to_return(body: '{"xyz":"abc"}')
         stub_http_request(:get, spot_pricing_url).to_return(body: 'callback({"foo":"bar"})')
       end
 
@@ -31,6 +33,10 @@ module Ec2Pricing
 
         it 'loads the on demand pricing data' do
           data_loader.on_demand_pricing_data.should == {'hello' => 'world'}
+        end
+
+        it 'loads the EMR pricing data' do
+          data_loader.emr_pricing_data.should == {'xyz' => 'abc'}
         end
 
         it 'loads the spot pricing data' do
@@ -56,6 +62,7 @@ module Ec2Pricing
         it 'raises errors' do
           expect { data_loader.instance_types_data }.to raise_error(/No data loaded/)
           expect { data_loader.on_demand_pricing_data }.to raise_error(/No data loaded/)
+          expect { data_loader.emr_pricing_data }.to raise_error(/No data loaded/)
           expect { data_loader.spot_pricing_data }.to raise_error(/No data loaded/)
         end
       end
@@ -66,6 +73,7 @@ module Ec2Pricing
           data_loader.load!
           WebMock.should have_requested(:get, instance_types_url).once
           WebMock.should have_requested(:get, on_demand_pricing_url).once
+          WebMock.should have_requested(:get, emr_pricing_url).once
           WebMock.should have_requested(:get, spot_pricing_url).once
         end
       end

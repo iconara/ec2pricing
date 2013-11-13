@@ -25,6 +25,10 @@ module Ec2Pricing
         ENV['AWS_ON_DEMAND_PRICING_URL']
       end
 
+      def emr_pricing_url
+        ENV['AWS_EMR_PRICING_URL']
+      end
+
       def spot_pricing_url
         ENV['AWS_SPOT_PRICING_URL']
       end
@@ -40,21 +44,22 @@ module Ec2Pricing
       def load_data!
         instance_types_parser = InstanceTypesParser.new
         pricing_parser = PricingParser.new
-        data_loader = AwsDataLoader.new(instance_types_url, on_demand_pricing_url, spot_pricing_url)
+        data_loader = AwsDataLoader.new(instance_types_url, on_demand_pricing_url, emr_pricing_url, spot_pricing_url)
         data_loader.load!
 
         instance_types_data = instance_types_parser.parse(data_loader.instance_types_data)
         instance_types_data = Hash[instance_types_data.map { |type| [type[:api_name], type] }]
 
         on_demand_pricing_data = pricing_parser.parse(data_loader.on_demand_pricing_data)
+        emr_pricing_data = pricing_parser.parse(data_loader.emr_pricing_data)
         spot_pricing_data = pricing_parser.parse(data_loader.spot_pricing_data)
 
-        [on_demand_pricing_data, spot_pricing_data, instance_types_data]
+        [on_demand_pricing_data, emr_pricing_data, spot_pricing_data, instance_types_data]
       end
 
       def instance_types
         cache['instance_types'] ||= begin
-          on_demand_pricing_data, spot_pricing_data, instance_types_data = load_data!
+          on_demand_pricing_data, emr_pricing_data, spot_pricing_data, instance_types_data = load_data!
           instance_types_by_region = {}
           on_demand_pricing_data.each do |region_pricing|
             region = {:region => region_pricing[:region], :instance_types => []}
@@ -65,6 +70,17 @@ module Ec2Pricing
                 region[:instance_types] << instance_type_data.merge(:on_demand_pricing => instance_type_on_demand_pricing[:pricing])
               else
                 logger.warn("No instance type data for #{instance_type_on_demand_pricing[:api_name]} (in region #{region[:region]})")
+              end
+            end
+          end
+          emr_pricing_data.each do |region_pricing|
+            region = instance_types_by_region[region_pricing[:region]]
+            region_pricing[:instance_types].each do |instance_type_emr_pricing|
+              instance_type_data = region[:instance_types].find { |instance_type| instance_type[:api_name] == instance_type_emr_pricing[:api_name] }
+              if instance_type_data
+                instance_type_data[:emr_pricing] = instance_type_emr_pricing[:pricing]
+              else
+                logger.info("No instance type data for #{instance_type_emr_pricing[:api_name]} (in region #{region[:region]})")
               end
             end
           end

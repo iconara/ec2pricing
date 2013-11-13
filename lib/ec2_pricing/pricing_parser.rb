@@ -39,7 +39,9 @@ module Ec2Pricing
     end
 
     def parse_pricing(pricing_data)
-      Hash[pricing_data.group_by { |d| d['name'].to_sym }.map { |k, vs| [k, vs.first['prices']['USD'].to_f] }]
+      pricing = Hash[pricing_data.group_by { |d| d['name'].to_sym }.map { |k, vs| [k, vs.first['prices']['USD'].to_f] }]
+      pricing.delete(:ec2)
+      pricing
     end
 
     REGION_MAP = {
@@ -62,6 +64,7 @@ module Ec2Pricing
       'clusterComputeI' => 'cc2', # except the discontinued 4xlarge which is 'cc1'
       'clusterGPUI'     => 'cg1',
       'hiIoODI'         => 'hi1',
+      'hiIOODI'         => 'hi1',
       'hiStoreODI'      => 'hs1',
       'clusterHiMemODI' => 'cr1',
 

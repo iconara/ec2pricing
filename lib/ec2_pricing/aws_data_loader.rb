@@ -3,17 +3,19 @@
 module Ec2Pricing
   class AwsDataLoader
     def initialize(*args)
-      @instance_types_url, @on_demand_pricing_url, @spot_pricing_url = args
+      @instance_types_url, @on_demand_pricing_url, @emr_pricing_url, @spot_pricing_url = args
     end
 
     def load!
       return if @instance_types_request
       @instance_types_request = Typhoeus::Request.new(@instance_types_url, method: :get)
       @on_demand_pricing_request = Typhoeus::Request.new(@on_demand_pricing_url, method: :get)
+      @emr_pricing_request = Typhoeus::Request.new(@emr_pricing_url, method: :get)
       @spot_pricing_request = Typhoeus::Request.new(@spot_pricing_url, method: :get)
       hydra = Typhoeus::Hydra.new
       hydra.queue(@instance_types_request)
       hydra.queue(@on_demand_pricing_request)
+      hydra.queue(@emr_pricing_request)
       hydra.queue(@spot_pricing_request)
       hydra.run
     end
@@ -26,6 +28,11 @@ module Ec2Pricing
     def on_demand_pricing_data
       raise 'No data loaded!' unless @on_demand_pricing_request
       @on_demand_pricing_data ||= MultiJson.load(@on_demand_pricing_request.response.body)
+    end
+
+    def emr_pricing_data
+      raise 'No data loaded!' unless @emr_pricing_request
+      @emr_pricing_data ||= MultiJson.load(@emr_pricing_request.response.body)
     end
 
     def spot_pricing_data

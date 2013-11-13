@@ -17,12 +17,14 @@ module Ec2Pricing
 
     before do
       ENV['AWS_ON_DEMAND_PRICING_URL'] = 'http://example.com/aws-on-demand-pricing'
+      ENV['AWS_EMR_PRICING_URL'] = 'http://example.com/emr-pricing'
       ENV['AWS_SPOT_PRICING_URL'] = 'http://example.com/aws-spot-pricing'
       ENV['AWS_INSTANCE_TYPES_URL'] = 'http://example.com/aws-instance-types'
     end
 
     before do
       stub_http_request(:get, ENV['AWS_ON_DEMAND_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/pricing-on-demand-instances.json', __FILE__)))
+      stub_http_request(:get, ENV['AWS_EMR_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/pricing-emr.json', __FILE__)))
       stub_http_request(:get, ENV['AWS_SPOT_PRICING_URL']).to_return(body: File.read(File.expand_path('../../resources/spot.js', __FILE__)))
       stub_http_request(:get, ENV['AWS_INSTANCE_TYPES_URL']).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
     end
@@ -98,6 +100,13 @@ module Ec2Pricing
           hi1_4xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'hi1.4xlarge' }
           expect(m1_small['spot_pricing']).to have_key('linux')
           expect(hi1_4xlarge['spot_pricing']).to be_nil
+        end
+
+        it 'returns EMR pricing for the specified region (where available)' do
+          m1_small = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'm1.small' }
+          hs1_8xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'hs1.8xlarge' }
+          expect(m1_small['emr_pricing']).to have_key('emr')
+          expect(hs1_8xlarge['emr_pricing']).to be_nil
         end
 
         it 'responds with Not Found for regions that do not exist' do

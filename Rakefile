@@ -40,6 +40,7 @@ namespace :update do
   task :resources do
     {
       ENV['AWS_ON_DEMAND_PRICING_URL'] => 'spec/resources/pricing-on-demand-instances.json',
+      ENV['AWS_EMR_PRICING_URL'] => 'spec/resources/pricing-emr.json',
       ENV['AWS_SPOT_PRICING_URL'] => 'spec/resources/spot.js',
       ENV['AWS_INSTANCE_TYPES_URL'] => 'spec/resources/instance-types.html',
     }.each do |source, destination|

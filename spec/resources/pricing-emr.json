@@ -1,0 +1,1574 @@
+
+
+  {
+    "vers": 0.01,
+    "config": {
+        "rate": "perhr",
+        "currencies": ["USD"],
+        "regions": [
+            {
+                "region": "us-east",
+                "footnotes": {
+                },
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.24"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.48"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.41"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.82"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.64"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.145"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.58"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterComputeI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.30"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.27"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "2.40"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.50"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterGPUI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "2.10"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+					{
+                        "type": "hiIOODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "3.10"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.47"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+					{
+                        "type": "hiStoreODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "4.60"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.69"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "us-west-2",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.24"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.48"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.41"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.82"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.64"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.145"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.58"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterComputeI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "2.40"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.50"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "us-west",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.065"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.13"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.26"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.52"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.46"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.92"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.84"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.165"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.66"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+        
+            {
+                "region": "eu-ireland",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.065"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.13"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.26"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.52"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.46"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.92"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.84"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.165"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.66"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "clusterComputeI",
+                        "sizes": [
+                            {
+                                "size": "xxxxxxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "2.70"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.50"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+					{
+                        "type": "hiIOODI",
+                        "sizes": [
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "3.41"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.51"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-sin",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.08"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.16"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.32"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.64"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.495"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.99"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.98"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.183"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.73"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-tokyo",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.088"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.175"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.35"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.70"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.505"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.01"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "2.02"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.185"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.74"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                   ]
+            },
+			{
+                "region": "apac-syd",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.08"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.16"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.32"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.64"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.495"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.99"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.98"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.183"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.73"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "sa-east-1",
+                "instanceTypes": [
+                    {
+                        "type": "stdODI",
+                        "sizes": [
+                            {
+                                "size": "sm",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.08"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.015"
+                                        }
+                                    }
+                                ]
+                            },
+							{
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.16"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "lg",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.32"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.06"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.64"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemODI",
+                        "sizes": [
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.54"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.09"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "1.08"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.21"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xxxxl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "2.16"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.42"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiCPUODI",
+                        "sizes": [
+                            {
+                                "size": "med",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.20"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.03"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "xl",
+                                "valueColumns": [
+                                    {
+                                        "name": "ec2",
+                                        "prices": {
+                                            "USD": "0.80"
+                                        }
+                                    },
+                                    {
+                                        "name": "emr",
+                                        "prices": {
+                                            "USD": "0.12"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+
