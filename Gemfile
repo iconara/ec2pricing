@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org/'
 
 ruby '1.9.3'
 
@@ -9,7 +9,7 @@ gem 'puma'
 gem 'grape'
 gem 'rack-contrib'
 gem 'typhoeus'
-gem 'rack'
+gem 'rake'
 
 group :development do
   gem 'pry'
