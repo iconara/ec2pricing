@@ -138,8 +138,8 @@
       tracker.trackEvent("Sort By Column", f)
     }
 
-    $scope.calculatedPrice = function (instanceType) {
-      var basePrice = instanceType.on_demand_pricing[$scope.selectedOs]
+    $scope.calculatedPrice = function (pricing) {
+      var basePrice = pricing[$scope.selectedOs]
       var multiplier = PERIOD_MULTIPLIERS[$scope.selectedPeriod]
       var price = basePrice * multiplier
       // var decimals = Math.max(0, 3 - Math.floor(Math.log(multiplier)/Math.log(10)))
@@ -157,12 +157,21 @@
       }
     }
 
+    $scope.onDemandPrice = function (instanceType) {
+      return $scope.calculatedPrice(instanceType.on_demand_pricing)
+    }
+
     $scope.spotPrice = function (instanceType) {
       if (spotInstancePricingByRegion) {
         var instanceTypePricing = spotInstancePricingByRegion[$scope.selectedRegion][instanceType.api_name]
-        return instanceTypePricing && $scope.calculatedPrice({on_demand_pricing: instanceTypePricing})
+        return instanceTypePricing && $scope.calculatedPrice(instanceTypePricing)
       }
       return null
+    }
+
+    $scope.emrPrice = function (instanceType) {
+      var price = instanceType.emr_pricing && instanceType.emr_pricing.emr
+      return $scope.calculatedPrice({linux: price, mswin: price})
     }
 
     $scope.inspectInstanceType = function (instanceType) {

@@ -17,8 +17,8 @@
       availableTypes = sortInstanceTypesByType(availableTypes, sortAscending)
     } else if (sortField == "price") {
       availableTypes = sortInstanceTypesByPrice(availableTypes, selectedOs, sortAscending)
-    } else if (sortField == "spotPrice") {
-      // TODO: move instances without spotPrice to the unavailable list
+    } else if (sortField == "spotPrice" || sortField == "emrPrice") {
+      // TODO: move instances without spotPrice/emrPrice to the unavailable list and sort the right value
       availableTypes = sortInstanceTypesByPrice(availableTypes, selectedOs, sortAscending)
     } else if (sortField == "disk_size") {
       var newAvailableTypes = []

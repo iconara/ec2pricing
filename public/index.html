@@ -111,6 +111,7 @@
                 <th class="hidden-tablet hidden-phone"><a href="#" ng-click="sortBy($event, 'io_performance')" title="IO Performance">IO&nbsp;Perf.</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'price')" title="On Demand cost per {{singularPeriods[selectedPeriod]}}">Price</a></th>
                 <th class="numeric"><a href="#" ng-click="sortBy($event, 'spotPrice')" title="Spot instance cost per {{singularPeriods[selectedPeriod]}} at current rate (updated every five minutes)">Spot&nbsp;price</a></th>
+                <th class="numeric"><a href="#" ng-click="sortBy($event, 'emrPrice')" title="EMR additional cost per {{singularPeriods[selectedPeriod]}}">EMR&nbsp;price</a></th>
               </tr>
             </thead>
             <tbody>
@@ -160,8 +161,9 @@
                   </span>
                 </td>
                 <td class="hidden-tablet hidden-phone">{{instanceType.io_performance | dashIfNull}}</td>
-                <td class="numeric">{{calculatedPrice(instanceType) | naIfNull}}</td>
+                <td class="numeric">{{onDemandPrice(instanceType) | naIfNull}}</td>
                 <td class="numeric">{{spotPrice(instanceType) | naIfNull}}</td>
+                <td class="numeric">{{emrPrice(instanceType) | naIfNull}}</td>
               </tr>
             </tbody>
           </table>
