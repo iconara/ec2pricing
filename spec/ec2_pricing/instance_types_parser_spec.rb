@@ -32,6 +32,11 @@ module Ec2Pricing
           t1.micro
           c1.medium
           c1.xlarge
+          c3.large
+          c3.xlarge
+          c3.2xlarge
+          c3.4xlarge
+          c3.8xlarge
           m2.xlarge
           m2.2xlarge
           m2.4xlarge
