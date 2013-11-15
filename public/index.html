@@ -146,6 +146,7 @@
                 <td class="numeric">
                   <span ng-show="instanceType.name">
                     <a title="EBS Only" ng-show="instanceType.ebs_only" class="tooltip-icon"><i class="icon-warning-sign"></i></a>
+                    <a title="SSD" ng-show="instanceType.ssd" class="tooltip-icon"><i class="icon-bolt"></i></a>
                     {{instanceType.disk_size | naIfNull}}
                   </span>
                   <span ng-hide="instanceType.name">
