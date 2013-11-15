@@ -38,16 +38,17 @@ namespace :update do
   end
 
   task :resources do
-    {
-      ENV['AWS_ON_DEMAND_PRICING_URL'] => 'spec/resources/pricing-on-demand-instances.json',
-      ENV['AWS_EMR_PRICING_URL'] => 'spec/resources/pricing-emr.json',
-      ENV['AWS_SPOT_PRICING_URL'] => 'spec/resources/spot.js',
-      ENV['AWS_INSTANCE_TYPES_URL'] => 'spec/resources/instance-types.html',
-    }.each do |source, destination|
-      open(source) do |r|
-        File.open(destination, 'w') do |w|
+    Ec2Pricing::AWS_PRICING_URLS.each_value do |url|
+      open(url) do |r|
+        file_name = File.basename(url)
+        File.open("spec/resources/#{file_name}", 'w') do |w|
           w.write(r.read)
         end
+      end
+    end
+    open(Ec2Pricing::AWS_INSTANCE_TYPES_URL) do |r|
+      File.open('spec/resources/instance-types.html', 'w') do |w|
+        w.write(r.read)
       end
     end
   end

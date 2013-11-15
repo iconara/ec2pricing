@@ -63,7 +63,7 @@ module Ec2Pricing
             it 'finds the EMR pricing' do
               region = pricing.find { |region| region[:region] == 'sa-east-1' }
               instance_type = region[:instance_types].find { |instance_type| instance_type[:api_name] == 'm2.xlarge' }
-              expect(instance_type[:pricing][:emr]).to be_a(Numeric)
+              expect(instance_type[:pricing][:linux]).to be_a(Numeric)
             end
           end
         end

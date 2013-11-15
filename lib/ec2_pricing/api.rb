@@ -4,6 +4,7 @@ require 'grape'
 require 'open-uri'
 require 'nokogiri'
 require 'typhoeus'
+require 'ec2_pricing/defaults'
 require 'ec2_pricing/heap_cache'
 require 'ec2_pricing/aws_data_loader'
 require 'ec2_pricing/pricing_parser'
@@ -21,22 +22,6 @@ module Ec2Pricing
         Api.logger
       end
 
-      def on_demand_pricing_url
-        ENV['AWS_ON_DEMAND_PRICING_URL']
-      end
-
-      def emr_pricing_url
-        ENV['AWS_EMR_PRICING_URL']
-      end
-
-      def spot_pricing_url
-        ENV['AWS_SPOT_PRICING_URL']
-      end
-
-      def instance_types_url
-        ENV['AWS_INSTANCE_TYPES_URL']
-      end
-
       def cache
         @cache ||= HeapCache.new(ttl: 30 * 60)
       end
@@ -44,58 +29,59 @@ module Ec2Pricing
       def load_data!
         instance_types_parser = InstanceTypesParser.new
         pricing_parser = PricingParser.new
-        data_loader = AwsDataLoader.new(instance_types_url, on_demand_pricing_url, emr_pricing_url, spot_pricing_url)
+        data_loader = AwsDataLoader.new(Ec2Pricing::AWS_INSTANCE_TYPES_URL, Ec2Pricing::AWS_PRICING_URLS)
         data_loader.load!
-
         instance_types_data = instance_types_parser.parse(data_loader.instance_types_data)
         instance_types_data = Hash[instance_types_data.map { |type| [type[:api_name], type] }]
+        pricing_data = data_loader.pricing_data.each_with_object({}) do |(type, pricing_data), result|
+          result[type] = pricing_parser.parse(pricing_data)
+        end
+        [instance_types_data, pricing_data]
+      end
 
-        on_demand_pricing_data = pricing_parser.parse(data_loader.on_demand_pricing_data)
-        emr_pricing_data = pricing_parser.parse(data_loader.emr_pricing_data)
-        spot_pricing_data = pricing_parser.parse(data_loader.spot_pricing_data)
+      def create_region(region_name)
+        {:region => region_name, :instance_types => {}}
+      end
 
-        [on_demand_pricing_data, emr_pricing_data, spot_pricing_data, instance_types_data]
+      def create_instance(api_name, instance_types_data)
+        i = {:api_name => api_name}
+        if (data = instance_types_data[api_name])
+          i.merge!(data)
+        end
+        i
+      end
+
+      def merge_pricing(pricing_type, data, instance_type)
+        case pricing_type
+        when :spot
+          data[:spot_pricing] = instance_type[:pricing]
+        when :emr
+          data[:emr_pricing] = instance_type[:pricing]
+        else
+          data[:on_demand_pricing] ||= {}
+          data[:on_demand_pricing].merge!(instance_type[:pricing])
+        end
       end
 
       def instance_types
         cache['instance_types'] ||= begin
-          on_demand_pricing_data, emr_pricing_data, spot_pricing_data, instance_types_data = load_data!
-          instance_types_by_region = {}
-          on_demand_pricing_data.each do |region_pricing|
-            region = {:region => region_pricing[:region], :instance_types => []}
-            instance_types_by_region[region[:region]] = region
-            region_pricing[:instance_types].each do |instance_type_on_demand_pricing|
-              instance_type_data = instance_types_data[instance_type_on_demand_pricing[:api_name]]
-              if instance_type_data
-                region[:instance_types] << instance_type_data.merge(:on_demand_pricing => instance_type_on_demand_pricing[:pricing])
-              else
-                logger.warn("No instance type data for #{instance_type_on_demand_pricing[:api_name]} (in region #{region[:region]})")
+          instance_types_data, pricing_data = load_data!
+          instances_by_region = pricing_data.each_with_object({}) do |(pricing_type, regions), instances_by_region|
+            regions.each do |region_data|
+              region_name = region_data[:region]
+              region = instances_by_region[region_name] ||= create_region(region_name)
+              instance_types = region[:instance_types]
+              region_data[:instance_types].each do |pricing_data|
+                api_name = pricing_data[:api_name]
+                instance_type_data = instance_types[api_name] ||= create_instance(api_name, instance_types_data)
+                merge_pricing(pricing_type, instance_type_data, pricing_data)
               end
             end
           end
-          emr_pricing_data.each do |region_pricing|
-            region = instance_types_by_region[region_pricing[:region]]
-            region_pricing[:instance_types].each do |instance_type_emr_pricing|
-              instance_type_data = region[:instance_types].find { |instance_type| instance_type[:api_name] == instance_type_emr_pricing[:api_name] }
-              if instance_type_data
-                instance_type_data[:emr_pricing] = instance_type_emr_pricing[:pricing]
-              else
-                logger.info("No instance type data for #{instance_type_emr_pricing[:api_name]} (in region #{region[:region]})")
-              end
-            end
+          instances_by_region.each_value do |region|
+            region[:instance_types] = region[:instance_types].values
           end
-          spot_pricing_data.each do |region_pricing|
-            region = instance_types_by_region[region_pricing[:region]]
-            region_pricing[:instance_types].each do |instance_type_spot_pricing|
-              instance_type_data = region[:instance_types].find { |instance_type| instance_type[:api_name] == instance_type_spot_pricing[:api_name] }
-              if instance_type_data
-                instance_type_data[:spot_pricing] = instance_type_spot_pricing[:pricing]
-              else
-                logger.info("No instance type data for #{instance_type_spot_pricing[:api_name]} (in region #{region[:region]})")
-              end
-            end
-          end
-          instance_types_by_region.values
+          instances_by_region.values
         end
       end
 

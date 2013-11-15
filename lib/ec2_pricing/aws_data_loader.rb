@@ -2,21 +2,20 @@
 
 module Ec2Pricing
   class AwsDataLoader
-    def initialize(*args)
-      @instance_types_url, @on_demand_pricing_url, @emr_pricing_url, @spot_pricing_url = args
+    def initialize(instance_types_url, pricing_urls)
+      @instance_types_url = instance_types_url
+      @pricing_urls = pricing_urls
     end
 
     def load!
       return if @instance_types_request
       @instance_types_request = Typhoeus::Request.new(@instance_types_url, method: :get)
-      @on_demand_pricing_request = Typhoeus::Request.new(@on_demand_pricing_url, method: :get)
-      @emr_pricing_request = Typhoeus::Request.new(@emr_pricing_url, method: :get)
-      @spot_pricing_request = Typhoeus::Request.new(@spot_pricing_url, method: :get)
+      @pricing_requests = @pricing_urls.each_with_object({}) do |(type, url), requests|
+        requests[type] = Typhoeus::Request.new(url, method: :get)
+      end
       hydra = Typhoeus::Hydra.new
       hydra.queue(@instance_types_request)
-      hydra.queue(@on_demand_pricing_request)
-      hydra.queue(@emr_pricing_request)
-      hydra.queue(@spot_pricing_request)
+      @pricing_requests.each_value { |r| hydra.queue(r) }
       hydra.run
     end
 
@@ -25,19 +24,11 @@ module Ec2Pricing
       @instance_types_data ||= Nokogiri::HTML(@instance_types_request.response.body)
     end
 
-    def on_demand_pricing_data
-      raise 'No data loaded!' unless @on_demand_pricing_request
-      @on_demand_pricing_data ||= MultiJson.load(@on_demand_pricing_request.response.body)
-    end
-
-    def emr_pricing_data
-      raise 'No data loaded!' unless @emr_pricing_request
-      @emr_pricing_data ||= MultiJson.load(@emr_pricing_request.response.body)
-    end
-
-    def spot_pricing_data
-      raise 'No data loaded!' unless @spot_pricing_request
-      @spot_pricing_data ||= MultiJson.load(fix_jsonp(@spot_pricing_request.response.body))
+    def pricing_data
+      raise 'No data loaded!' unless @pricing_requests
+      @pricing_data ||= @pricing_requests.each_with_object({}) do |(type, request), data|
+        data[type] = MultiJson.load(fix_jsonp(request.response.body))
+      end
     end
 
     private

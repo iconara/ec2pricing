@@ -1,0 +1,1999 @@
+
+
+  {
+    "vers": 0.01,
+    "config": {
+        "rate": "perhr",
+        "valueColumns": [
+            "sles"
+        ],
+        "currencies": [
+            "USD"
+        ],
+        "regions": [
+            {
+                "region": "us-east",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.550"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.000"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.090"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.200"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.340"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.580"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.250"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.400"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.300"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.500"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.245"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.680"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.500"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.750"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "cg1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.200"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.510"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.920"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.740"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.600"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.200"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "4.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.030"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "us-west-2",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.550"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.000"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.090"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.200"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.340"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.580"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.250"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.400"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.300"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.500"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.245"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.680"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.500"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.750"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.510"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.920"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.740"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.600"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.200"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "4.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.030"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "us-west",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.595"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.090"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.095"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.360"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.620"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.265"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.760"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.802"
+                                        }
+                                    }
+                                ]
+                            }
+						]
+					},
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.560"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.020"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.940"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.035"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "eu-ireland",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.560"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.090"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.095"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.360"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.620"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.271"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.442"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.783"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.466"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.832"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.265"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.760"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.800"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+    				{
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.802"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "cg1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.460"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.560"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.020"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.940"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                       "name": "sles",
+                                        "prices": {
+                                            "USD": "3.850"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.510"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "5.000"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.035"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-sin",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.730"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.360"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.110"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.230"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.420"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.740"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.289"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.478"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.856"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.612"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.124"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.283"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.830"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.595"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.090"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.080"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "5.670"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.035"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-tokyo",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.784"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.468"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.122"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.234"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.465"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.815"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.292"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.483"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.866"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.632"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.164"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.290"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.855"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.075"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.620"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.125"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.135"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "4.425"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.935"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "5.785"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.037"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-syd",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.730"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.360"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.110"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.230"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.420"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.740"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.289"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.478"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.856"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.612"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "3.124"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.283"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.830"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.595"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.090"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.080"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "5.670"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.035"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "sa-east-1",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.712"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.324"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.110"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.240"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.420"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.740"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.300"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.900"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.640"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "1.180"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "2.260"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "sles",
+                                        "prices": {
+                                            "USD": "0.037"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+

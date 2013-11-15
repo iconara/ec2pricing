@@ -1,0 +1,1999 @@
+
+
+  {
+    "vers": 0.01,
+    "config": {
+        "rate": "perhr",
+        "valueColumns": [
+            "rhel"
+        ],
+        "currencies": [
+            "USD"
+        ],
+        "regions": [
+            {
+                "region": "us-east",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.510"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.030"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.120"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.170"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.300"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.540"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.360"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.730"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.330"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.530"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.205"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.680"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.520"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.780"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "cg1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.200"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.470"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.880"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.740"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.620"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.220"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "4.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.080"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "us-west-2",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.510"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.030"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.120"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.170"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.300"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.540"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.360"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.730"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.330"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.530"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.205"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.680"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.520"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.780"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.470"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.880"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.740"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.620"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.220"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "4.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.080"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "us-west",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.555"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.120"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.125"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.180"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.320"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.580"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.225"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.760"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.832"
+                                        }
+                                    }
+                                ]
+                            }
+						]
+					},
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.520"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.980"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.940"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.085"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "eu-ireland",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.555"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.120"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.125"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.180"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.320"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.580"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.231"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.402"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.813"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.496"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.862"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.225"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.760"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.820"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+    				{
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "g2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.832"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "gpuPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "cg1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.480"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.520"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.980"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.940"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                       "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.870"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.530"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "5.020"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.085"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-sin",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.690"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.390"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.140"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.380"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.249"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.438"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.886"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.642"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.154"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.243"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.830"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.555"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.050"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.080"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "5.690"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.085"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-tokyo",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.744"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.498"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.155"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.220"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.419"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.769"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.252"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.443"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.896"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.662"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.194"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.254"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.855"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.100"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.574"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.079"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.135"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "4.450"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.960"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "5.810"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.087"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "apac-syd",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.690"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.390"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.140"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.380"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.249"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.438"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.886"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.642"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "3.154"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.243"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.830"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.555"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.050"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.080"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "storageCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "hs1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "5.690"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.085"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "region": "sa-east-1",
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.672"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.354"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.140"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.210"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.380"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.700"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.260"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.900"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.600"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "1.140"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "2.260"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "rhel",
+                                        "prices": {
+                                            "USD": "0.087"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+
+

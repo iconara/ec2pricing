@@ -40,7 +40,10 @@ module Ec2Pricing
 
     def parse_pricing(pricing_data)
       pricing = Hash[pricing_data.group_by { |d| d['name'].to_sym }.map { |k, vs| [k, vs.first['prices']['USD'].to_f] }]
-      pricing.delete(:ec2)
+      if pricing.include?(:emr)
+        pricing.delete(:ec2)
+        pricing[:linux] = pricing.delete(:emr)
+      end
       pricing
     end
 
