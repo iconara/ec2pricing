@@ -22,7 +22,7 @@ module Ec2Pricing
 
     describe '#parse' do
       [:linux, :mswin, :rhel, :sles, :emr, :spot].each do |source|
-        source_name = {:linux => 'on demand (Linux)', :mswin => 'on demand (Windows)', :rhel => 'on demand (Red Hat)', :sles => 'on demand (SLES)', :emr => 'EMR', :spot => 'spot'}[source]
+        source_name = {:linux => 'on demand (Linux)', :mswin => 'on demand (Windows)', :rhel => 'on demand (Red Hat)', :sles => 'on demand (SUSE)', :emr => 'EMR', :spot => 'spot'}[source]
         instance_type_count = {:linux => 23, :mswin => 23, :rhel => 23, :sles => 23, :emr => 11, :spot => 22}[source]
 
         context "with #{source_name} pricing data" do
