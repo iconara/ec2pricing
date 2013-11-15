@@ -170,8 +170,7 @@
     }
 
     $scope.emrPrice = function (instanceType) {
-      var price = instanceType.emr_pricing && instanceType.emr_pricing.emr
-      return $scope.calculatedPrice({linux: price, mswin: price})
+      return $scope.calculatedPrice(instanceType.emr_pricing || {})
     }
 
     $scope.inspectInstanceType = function (instanceType) {
@@ -193,10 +192,18 @@
       $timeout(arguments.callee, 5000)
     }
 
+    var removeInstancesWithoutPrice = function (instanceTypesByRegion) {
+      instanceTypesByRegion.forEach(function (region) {
+        region.instance_types = region.instance_types.filter(function (instanceType) {
+          return "on_demand_pricing" in instanceType
+        })
+      })
+      return instanceTypesByRegion
+    }
+
     instanceTypesLoader.instanceTypesByRegion()
       .then(function (loadedInstanceTypesByRegion) {
-        instanceTypesByRegion = loadedInstanceTypesByRegion
-
+        instanceTypesByRegion = removeInstancesWithoutPrice(loadedInstanceTypesByRegion)
         $scope.lastUpdated = new Date() // TODO
         $scope.regions = _.map(instanceTypesByRegion, function (region) { return region.region }).sort()
       })
