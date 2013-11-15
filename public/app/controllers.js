@@ -28,7 +28,7 @@
 
     $scope.sortField = null
     $scope.sortAscending = false
-    $scope.operatingSystems = {"linux": "Linux", "mswin": "Windows"}
+    $scope.operatingSystems = {"linux": "Linux", "mswin": "Windows", "rhel": "Red Hat", "sles": "SUSE"}
     $scope.selectedOs = null
     $scope.periods = ["hourly", "daily", "weekly", "monthly", "yearly"]
     $scope.selectedPeriod = null
