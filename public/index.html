@@ -118,7 +118,7 @@
               <tr ng-repeat="instanceType in selectedInstanceTypes"
                    ng-class="{'not-available': instanceType.pricing[$scope.selectedOs]}"
                    ng-click="inspectInstanceType(instanceType)">
-                <td class="hidden-tablet hidden-phone">{{instanceType.name | dashIfNull}}</td>
+                <td class="hidden-tablet hidden-phone">{{instanceType.name | naIfNull}}</td>
                 <td class="hidden-tablet hidden-phone">
                   <a ng-show="instanceType.notes" class="tooltip-icon" href="#" onclick="return false">
                     <i class="icon-info-sign" title="{{instanceType.notes.join(', ')}}"></i>
@@ -132,17 +132,17 @@
                     {{instanceType.api_name}}
                   </span>
                 </td>
-                <td class="numeric hidden-phone">{{instanceType.ecus | dashIfNull}}</td>
-                <td class="numeric">{{instanceType.cores | dashIfNull}}</td>
+                <td class="numeric hidden-phone">{{instanceType.ecus | naIfNull}}</td>
+                <td class="numeric">{{instanceType.cores | naIfNull}}</td>
                 <td class="numeric hidden-tablet hidden-phone">
                   <span ng-show="instanceType.architectures">
                     {{instanceType.architectures.join("/")}}-bit
                   </span>
                   <span ng-hide="instanceType.architectures">
-                    -
+                    n/a
                   </span>
                 </td>
-                <td class="numeric">{{instanceType.ram | dashIfNull}}</td>
+                <td class="numeric">{{instanceType.ram | naIfNull}}</td>
                 <td class="numeric">
                   <span ng-show="instanceType.name">
                     <a title="EBS Only" ng-show="instanceType.ebs_only" class="tooltip-icon"><i class="icon-warning-sign"></i></a>
@@ -150,7 +150,7 @@
                     {{instanceType.disk_size | naIfNull}}
                   </span>
                   <span ng-hide="instanceType.name">
-                    -
+                    n/a
                   </span>
                 </td>
                 <td class="numeric hidden-phone">
@@ -158,10 +158,10 @@
                     {{instanceType.disk_count}}
                   </span>
                   <span ng-hide="instanceType.name">
-                    -
+                    n/a
                   </span>
                 </td>
-                <td class="hidden-tablet hidden-phone">{{instanceType.io_performance | dashIfNull}}</td>
+                <td class="hidden-tablet hidden-phone">{{instanceType.io_performance | naIfNull}}</td>
                 <td class="numeric">{{onDemandPrice(instanceType) | naIfNull}}</td>
                 <td class="numeric">{{spotPrice(instanceType) | naIfNull}}</td>
                 <td class="numeric">{{emrPrice(instanceType) | naIfNull}}</td>
