@@ -50,6 +50,8 @@
       border-top: 1px solid #EEE;
       padding-top: 1em;
     }
+
+    tr.highlight>td { background-color: #d9edf7 !important }
     </style>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
@@ -117,7 +119,8 @@
             <tbody>
               <tr ng-repeat="instanceType in selectedInstanceTypes"
                    ng-class="{'not-available': instanceType.pricing[$scope.selectedOs]}"
-                   ng-click="inspectInstanceType(instanceType)">
+                   ng-click="highlightInstanceType($event)"
+                   ng-dblclick="inspectInstanceType(instanceType)">
                 <td class="hidden-tablet hidden-phone">{{instanceType.name | naIfNull}}</td>
                 <td class="hidden-tablet hidden-phone">
                   <a ng-show="instanceType.notes" class="tooltip-icon" href="#" onclick="return false">
