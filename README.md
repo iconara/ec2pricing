@@ -8,7 +8,7 @@ Many thanks to [Garret Heaton / @powdahound][4] whose [ec2instances.info][5] ins
 
 ## Copyright
 
-2012, [Theo Hultberg / @iconara][6]
+2012-2014, [Theo Hultberg / @iconara][6]
 
   [1]: http://aws.amazon.com/ec2/pricing/
   [2]: http://aws.amazon.com/ec2/instance-types/
