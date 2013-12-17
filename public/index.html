@@ -50,6 +50,8 @@
       border-top: 1px solid #EEE;
       padding-top: 1em;
     }
+
+    tr.highlight>td { background-color: #d9edf7 !important }
     </style>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.string/2.0.0/underscore.string.min.js"></script>
@@ -96,7 +98,7 @@
               <a href="#" ng-click="selectRegion($event, region)" title="{{regionName(region)}}">{{region}}</a>
             </li>
           </ul>
-          <table class="instance-properties table table-striped">
+          <table class="instance-properties table table-striped table-hover">
             <thead>
               <tr>
                 <th class="hidden-tablet hidden-phone"><a href="#" ng-click="sortBy($event, 'api_name')">Name</a></th>
@@ -116,8 +118,9 @@
             </thead>
             <tbody>
               <tr ng-repeat="instanceType in selectedInstanceTypes"
-                   ng-class="{'not-available': instanceType.pricing[$scope.selectedOs]}"
-                   ng-click="inspectInstanceType(instanceType)">
+                   ng-class="{'not-available': instanceType.pricing[$scope.selectedOs], 'highlight' : instanceType.highlight}"
+                   ng-click="highlightInstanceType(instanceType)"
+                   ng-dblclick="inspectInstanceType(instanceType)">
                 <td class="hidden-tablet hidden-phone">{{instanceType.name | naIfNull}}</td>
                 <td class="hidden-tablet hidden-phone">
                   <a ng-show="instanceType.notes" class="tooltip-icon" href="#" onclick="return false">
