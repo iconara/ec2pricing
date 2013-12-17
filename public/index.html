@@ -118,8 +118,8 @@
             </thead>
             <tbody>
               <tr ng-repeat="instanceType in selectedInstanceTypes"
-                   ng-class="{'not-available': instanceType.pricing[$scope.selectedOs]}"
-                   ng-click="highlightInstanceType($event)"
+                   ng-class="{'not-available': instanceType.pricing[$scope.selectedOs], 'highlight' : instanceType.highlight}"
+                   ng-click="highlightInstanceType(instanceType)"
                    ng-dblclick="inspectInstanceType(instanceType)">
                 <td class="hidden-tablet hidden-phone">{{instanceType.name | naIfNull}}</td>
                 <td class="hidden-tablet hidden-phone">

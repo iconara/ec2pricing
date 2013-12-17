@@ -173,8 +173,8 @@
       return $scope.calculatedPrice(instanceType.emr_pricing || {})
     }
 
-    $scope.highlightInstanceType = function (event) {
-      angular.element(event.target).parent().toggleClass('highlight')
+    $scope.highlightInstanceType = function (instanceType) {
+      instanceType.highlight = !instanceType.highlight
     }
 
     $scope.inspectInstanceType = function (instanceType) {
