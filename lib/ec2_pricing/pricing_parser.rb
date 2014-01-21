@@ -17,24 +17,25 @@ module Ec2Pricing
       api_name = REGION_MAP[region_data['region']]
       {
         :region => api_name,
-        :instance_types => region_data['instanceTypes'].flat_map { |instance_family_data| parse_instance_types(instance_family_data) }
+        :instance_types => region_data['instanceTypes'].flat_map { |instance_family_data| parse_instance_types(instance_family_data) }.compact
       }
     end
 
     def parse_instance_types(instance_family_data)
-      instance_family_data['sizes'].map do |instance_type_data|
-        if instance_type_data['size'].index('.')
-          api_name = instance_type_data['size']
-        else
-          size = SIZE_MAP[instance_type_data['size']]
-          family = FAMILY_MAP[instance_family_data['type']]
-          family = 'cc1' if family == 'cc2' && size == '4xlarge'
-          api_name = "#{family}.#{size}"
+      if (sizes = instance_family_data['sizes'])
+        sizes.map do |instance_type_data|
+          if instance_type_data['size'].index('.')
+            api_name = instance_type_data['size']
+          else
+            size = SIZE_MAP[instance_type_data['size']]
+            family = FAMILY_MAP[instance_family_data['type']]
+            api_name = "#{family}.#{size}"
+          end
+          {
+            :api_name => api_name,
+            :pricing => parse_pricing(instance_type_data['valueColumns'])
+          }
         end
-        {
-          :api_name => api_name,
-          :pricing => parse_pricing(instance_type_data['valueColumns'])
-        }
       end
     end
 

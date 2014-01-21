@@ -39,9 +39,11 @@ namespace :update do
 
   task :resources do
     Ec2Pricing::AWS_PRICING_URLS.each_value do |url|
+      file_name = File.basename(url)
+      path = "spec/resources/#{file_name}"
+      $stderr.puts("Saving #{url} as #{path}")
       open(url) do |r|
-        file_name = File.basename(url)
-        File.open("spec/resources/#{file_name}", 'w') do |w|
+        File.open(path, 'w') do |w|
           w.write(r.read)
         end
       end

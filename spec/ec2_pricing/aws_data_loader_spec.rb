@@ -26,10 +26,10 @@ module Ec2Pricing
     describe '#load!' do
       before do
         stub_http_request(:get, instance_types_url).to_return(body: '<html><body><p>Hello World</p></body></html>')
-        stub_http_request(:get, pricing_urls[:linux]).to_return(body: '{"hello":"linux"}')
-        stub_http_request(:get, pricing_urls[:mswin]).to_return(body: '{"hello":"mswin"}')
-        stub_http_request(:get, pricing_urls[:fake]).to_return(body: '{"hello":"fake"}')
-        stub_http_request(:get, pricing_urls[:emr]).to_return(body: '{"xyz":"abc"}')
+        stub_http_request(:get, pricing_urls[:linux]).to_return(body: 'callback({"hello":"linux"})')
+        stub_http_request(:get, pricing_urls[:mswin]).to_return(body: 'callback({"hello":"mswin"})')
+        stub_http_request(:get, pricing_urls[:fake]).to_return(body: 'callback({"hello":"fake"})')
+        stub_http_request(:get, pricing_urls[:emr]).to_return(body: 'callback({"xyz":"abc"})')
         stub_http_request(:get, pricing_urls[:spot]).to_return(body: 'callback({"foo":"bar"})')
       end
 

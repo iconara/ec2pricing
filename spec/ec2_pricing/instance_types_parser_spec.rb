@@ -40,8 +40,14 @@ module Ec2Pricing
           m2.xlarge
           m2.2xlarge
           m2.4xlarge
+          m3.medium
+          m3.large
           m3.xlarge
           m3.2xlarge
+          i2.xlarge
+          i2.2xlarge
+          i2.4xlarge
+          i2.8xlarge
           cc2.8xlarge
           cg1.4xlarge
           cr1.8xlarge
@@ -54,6 +60,7 @@ module Ec2Pricing
       it 'finds the names' do
         t1_micro = find_instance_type('t1.micro')
         m1_small = find_instance_type('m1.small')
+        m3_large = find_instance_type('m3.large')
         m2_2xlarge = find_instance_type('m2.2xlarge')
         cc2_8xlarge = find_instance_type('cc2.8xlarge')
         cg1_4xlarge = find_instance_type('cg1.4xlarge')
@@ -61,6 +68,7 @@ module Ec2Pricing
         hs1_8xlarge = find_instance_type('hs1.8xlarge')
         expect(t1_micro[:name]).to eql('Micro')
         expect(m1_small[:name]).to eql('M1 Small')
+        expect(m3_large[:name]).to eql('M3 Large')
         expect(m2_2xlarge[:name]).to eql('High Memory Double Extra Large')
         expect(cc2_8xlarge[:name]).to eql('Cluster Compute Eight Extra Large')
         expect(cg1_4xlarge[:name]).to eql('Cluster GPU Quadruple Extra Large')
@@ -136,16 +144,12 @@ module Ec2Pricing
       end
 
       it 'finds no disk size for EBS-only instances' do
-        m3_xlarge = find_instance_type('m3.xlarge')
         t1_micro = find_instance_type('t1.micro')
-        expect(m3_xlarge[:disk_size]).to be_nil
         expect(t1_micro[:disk_size]).to be_nil
       end
 
       it 'finds zero disks for EBS-only instances' do
-        m3_xlarge = find_instance_type('m3.xlarge')
         t1_micro = find_instance_type('t1.micro')
-        expect(m3_xlarge[:disk_count]).to eql(0)
         expect(t1_micro[:disk_count]).to eql(0)
       end
 
@@ -182,10 +186,8 @@ module Ec2Pricing
       it 'finds if the instance is EBS-only' do
         m1_large = find_instance_type('m1.large')
         t1_micro = find_instance_type('t1.micro')
-        m3_2xlarge = find_instance_type('m3.2xlarge')
         expect(m1_large[:ebs_only]).to be_false
         expect(t1_micro[:ebs_only]).to be_true
-        expect(m3_2xlarge[:ebs_only]).to be_true
       end
 
       it 'does not return empty notes properties' do

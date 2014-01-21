@@ -6,10 +6,11 @@ module Ec2Pricing
       instance_types = []
       table = find_pricing_table(doc)
       raise 'Could not parse instance types HTML' unless table
-      table_rows = table.xpath('tr')
+      table_rows = table.xpath('tbody/tr')
+      table_rows.shift
       instance_types = table_rows.map do |row|
         columns = row.xpath('td').map do |t|
-          t.inner_html.sub(/<span.+?>.+?<\/span>/, '').strip
+          t.text.strip.gsub(/^[[:space:]]*(.+?)[[:space:]]*$/, '\1')
         end
         if columns.size >= 9
           parse_instance_properties(*columns[1, 8])
@@ -22,12 +23,7 @@ module Ec2Pricing
     private
 
     def find_pricing_table(doc)
-      anchor = doc.xpath('//a[@name = "instance-details"]').first
-      node = anchor
-      while node = node.next
-        return node if node.element? && node.name == 'table'
-      end
-      nil
+      doc.xpath('//table').first
     end
 
     def instance_name?(text)
@@ -146,7 +142,7 @@ module Ec2Pricing
     end
 
     def parse_io_performance(io_str)
-      io_str.downcase
+      io_str.downcase.gsub(/\*\d*$/, '')
     end
 
     def parse_architectures(architectures_str)

@@ -11,19 +11,19 @@ module Ec2Pricing
 
     let :pricing_data do
       {
-        :linux => MultiJson.load(File.read(File.expand_path('../../resources/linux-od.json', __FILE__))),
-        :mswin => MultiJson.load(File.read(File.expand_path('../../resources/mswin-od.json', __FILE__))),
-        :rhel => MultiJson.load(File.read(File.expand_path('../../resources/rhel-od.json', __FILE__))),
-        :sles => MultiJson.load(File.read(File.expand_path('../../resources/sles-od.json', __FILE__))),
-        :emr => MultiJson.load(File.read(File.expand_path('../../resources/pricing-emr.json', __FILE__))),
-        :spot => MultiJson.load(File.read(File.expand_path('../../resources/spot.js', __FILE__)).sub(/\A\s*callback\((.+)\)\s*\Z/m, '\1').gsub(/\},\s*\]/, '}]')),
+        :linux => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/linux-od.js', __FILE__)))),
+        :mswin => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/mswin-od.js', __FILE__)))),
+        :rhel => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/rhel-od.js', __FILE__)))),
+        :sles => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/sles-od.js', __FILE__)))),
+        :emr => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/pricing-emr.js', __FILE__)))),
+        :spot => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/spot.js', __FILE__)))),
       }
     end
 
     describe '#parse' do
       [:linux, :mswin, :rhel, :sles, :emr, :spot].each do |source|
         source_name = {:linux => 'on demand (Linux)', :mswin => 'on demand (Windows)', :rhel => 'on demand (Red Hat)', :sles => 'on demand (SUSE)', :emr => 'EMR', :spot => 'spot'}[source]
-        instance_type_count = {:linux => 23, :mswin => 23, :rhel => 23, :sles => 23, :emr => 11, :spot => 22}[source]
+        instance_type_count = {:linux => 29, :mswin => 29, :rhel => 29, :sles => 29, :emr => 11, :spot => 24}[source]
 
         context "with #{source_name} pricing data" do
           let :pricing do
@@ -55,14 +55,6 @@ module Ec2Pricing
           end
 
           if source == :spot
-            it 'handles the cc1/cc2 special case' do
-              region = pricing.find { |region| region[:region] == 'us-east-1' }
-              cc1_4xlarge = region[:instance_types].find { |instance_type| instance_type[:api_name] == 'cc1.4xlarge' }
-              cc2_8xlarge = region[:instance_types].find { |instance_type| instance_type[:api_name] == 'cc2.8xlarge' }
-              expect(cc1_4xlarge).not_to be_nil
-              expect(cc2_8xlarge).not_to be_nil
-            end
-
             it 'finds the pricing for Linux and Windows' do
               region = pricing.find { |region| region[:region] == 'sa-east-1' }
               instance_type = region[:instance_types].find { |instance_type| instance_type[:api_name] == 'm2.xlarge' }

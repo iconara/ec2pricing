@@ -7,6 +7,10 @@ module Ec2Pricing
       @pricing_urls = pricing_urls
     end
 
+    def self.fix_jsonp(str)
+      str.sub(/\A\s*callback\((.+)\)\s*\Z/m, '\1').gsub(/\},\s*\]/, '}]')
+    end
+
     def load!
       return if @instance_types_request
       @instance_types_request = Typhoeus::Request.new(@instance_types_url, method: :get)
@@ -27,14 +31,8 @@ module Ec2Pricing
     def pricing_data
       raise 'No data loaded!' unless @pricing_requests
       @pricing_data ||= @pricing_requests.each_with_object({}) do |(type, request), data|
-        data[type] = MultiJson.load(fix_jsonp(request.response.body))
+        data[type] = MultiJson.load(self.class.fix_jsonp(request.response.body))
       end
-    end
-
-    private
-
-    def fix_jsonp(str)
-      str.sub(/\A\s*callback\((.+)\)\s*\Z/m, '\1').gsub(/\},\s*\]/, '}]')
     end
   end
 end

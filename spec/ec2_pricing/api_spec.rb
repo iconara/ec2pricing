@@ -16,11 +16,11 @@ module Ec2Pricing
     end
 
     before do
-      stub_http_request(:get, AWS_PRICING_URLS[:linux]).to_return(body: File.read(File.expand_path('../../resources/linux-od.json', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:mswin]).to_return(body: File.read(File.expand_path('../../resources/mswin-od.json', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:rhel]).to_return(body: File.read(File.expand_path('../../resources/rhel-od.json', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:sles]).to_return(body: File.read(File.expand_path('../../resources/sles-od.json', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:emr]).to_return(body: File.read(File.expand_path('../../resources/pricing-emr.json', __FILE__)))
+      stub_http_request(:get, AWS_PRICING_URLS[:linux]).to_return(body: File.read(File.expand_path('../../resources/linux-od.js', __FILE__)))
+      stub_http_request(:get, AWS_PRICING_URLS[:mswin]).to_return(body: File.read(File.expand_path('../../resources/mswin-od.js', __FILE__)))
+      stub_http_request(:get, AWS_PRICING_URLS[:rhel]).to_return(body: File.read(File.expand_path('../../resources/rhel-od.js', __FILE__)))
+      stub_http_request(:get, AWS_PRICING_URLS[:sles]).to_return(body: File.read(File.expand_path('../../resources/sles-od.js', __FILE__)))
+      stub_http_request(:get, AWS_PRICING_URLS[:emr]).to_return(body: File.read(File.expand_path('../../resources/pricing-emr.js', __FILE__)))
       stub_http_request(:get, AWS_PRICING_URLS[:spot]).to_return(body: File.read(File.expand_path('../../resources/spot.js', __FILE__)))
       stub_http_request(:get, AWS_INSTANCE_TYPES_URL).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
     end
@@ -84,7 +84,7 @@ module Ec2Pricing
 
         it 'returns instance type information for the specified region' do
           expect(response_body['region']).to eql('eu-west-1')
-          expect(response_body['instance_types']).to have(24).items
+          expect(response_body['instance_types']).to have(39).items
         end
 
         it 'returns on demand pricing for the specified region' do
@@ -94,9 +94,9 @@ module Ec2Pricing
 
         it 'returns spot pricing for the specified region (where available)' do
           m1_small = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'm1.small' }
-          hi1_4xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'hi1.4xlarge' }
+          hs1_8xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'hs1.8xlarge' }
           expect(m1_small['spot_pricing']).to have_key('linux')
-          expect(hi1_4xlarge['spot_pricing']).to be_nil
+          expect(hs1_8xlarge['spot_pricing']).to be_nil
         end
 
         it 'returns EMR pricing for the specified region (where available)' do
