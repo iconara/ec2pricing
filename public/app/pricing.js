@@ -25,14 +25,31 @@
   })
 
   module.factory("pricingLoader", function ($http, $window, $q, $rootScope, spotPricingUrl, pricingParser) {
+    function iframedJsonp(url, callbackName, callback) {
+      var frame = $window.document.createElement('IFRAME')
+      frame.src = 'about:blank'
+      frame.height = '0px'
+      frame.width = '0px'
+      frame.style['background-color'] = 'transparent'
+      frame.style['border'] =  '0px none transparent'
+      frame.style['padding'] =  '0px'
+      frame.style['overflow'] =  'hidden'
+      $window.document.body.appendChild(frame)
+      var script = frame.contentDocument.createElement('script')
+      script.src = url
+      frame.contentWindow[callbackName] = function (result) {
+        frame.parentNode.removeChild(frame)
+        callback(result)
+      }
+      frame.contentDocument.body.appendChild(script)
+    }
+
     return {
       spot: function () {
         var deferred = $q.defer()
-        $window.callback = function (response) {
-          $window.callback = undefined
-          $rootScope.$apply(function () { deferred.resolve(response) })
-        }
-        $http.jsonp(spotPricingUrl)
+        iframedJsonp(spotPricingUrl, "callback", function (result) {
+          $rootScope.$apply(function () { deferred.resolve(result) })
+        })
         return deferred.promise.then(function (data) {
           data = pricingParser(data)
           data.lastUpdated = new Date()
