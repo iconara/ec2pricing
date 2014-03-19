@@ -10,20 +10,36 @@ module Ec2Pricing
     end
 
     let :pricing_data do
-      {
-        :linux => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/linux-od.js', __FILE__)))),
-        :mswin => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/mswin-od.js', __FILE__)))),
-        :rhel => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/rhel-od.js', __FILE__)))),
-        :sles => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/sles-od.js', __FILE__)))),
-        :emr => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/pricing-emr.js', __FILE__)))),
-        :spot => MultiJson.load(AwsDataLoader.fix_jsonp(File.read(File.expand_path('../../resources/spot.js', __FILE__)))),
-      }
+      PRICING_TYPES.each_with_object({}) do |type, acc|
+        file_name = File.join(File.expand_path('../../resources', __FILE__), File.basename(AWS_PRICING_URLS[type]))
+        acc[type] = MultiJson.load(AwsDataLoader.fix_jsonp(File.read(file_name)))
+      end
     end
 
+    PRICING_TYPES = (AWS_ON_DEMAND_PRICE_KEYS + AWS_EXTRA_PRICE_KEYS).freeze
+
+    SOURCE_NAMES = {
+      :linux_od => 'on demand (Linux)',
+      :mswin_od => 'on demand (Windows)',
+      :rhel_od => 'on demand (Red Hat)',
+      :sles_od => 'on demand (SUSE)',
+      :emr => 'EMR',
+      :spot => 'spot'
+    }.freeze
+
+    EXPECTED_INSTANCE_TYPE_COUNTS = {
+      :linux_od => 29,
+      :mswin_od => 29,
+      :rhel_od => 29,
+      :sles_od => 29,
+      :emr => 11,
+      :spot => 24,
+    }.freeze
+
     describe '#parse' do
-      [:linux, :mswin, :rhel, :sles, :emr, :spot].each do |source|
-        source_name = {:linux => 'on demand (Linux)', :mswin => 'on demand (Windows)', :rhel => 'on demand (Red Hat)', :sles => 'on demand (SUSE)', :emr => 'EMR', :spot => 'spot'}[source]
-        instance_type_count = {:linux => 29, :mswin => 29, :rhel => 29, :sles => 29, :emr => 11, :spot => 24}[source]
+      PRICING_TYPES.each do |source|
+        source_name = SOURCE_NAMES[source]
+        instance_type_count = EXPECTED_INSTANCE_TYPE_COUNTS[source]
 
         context "with #{source_name} pricing data" do
           let :pricing do
@@ -67,7 +83,8 @@ module Ec2Pricing
             it 'finds the pricing for the OS' do
               region = pricing.find { |region| region[:region] == 'sa-east-1' }
               instance_type = region[:instance_types].find { |instance_type| instance_type[:api_name] == 'm2.xlarge' }
-              expect(instance_type[:pricing][source]).to be_a(Numeric)
+              source_key = source.to_s.sub('_od', '').to_sym
+              expect(instance_type[:pricing][source_key]).to be_a(Numeric)
             end
           end
         end
