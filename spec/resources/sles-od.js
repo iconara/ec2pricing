@@ -1382,6 +1382,9 @@ callback(
          {
             "region":"eu-ireland",
             "instanceTypes":[
+               {
+                  "type":"generalCurrentGen",
+                  "sizes":[
                             {
                                 "size": "m3.medium",
                                 "vCPU": "1",
@@ -1412,39 +1415,6 @@ callback(
                                     }
                                 ]
                             },
-               {
-                  "type":"generalCurrentGen",
-                  "sizes":[
-                            {
-                                "size": "m3.medium",
-                                "vCPU": "1",
-                                "ECU": "3",
-                                "memoryGiB": "3.75",
-                                "storageGB": "1 x 4 SSD",
-                                "valueColumns": [
-                                    {
-                                        "name": "sles",
-                                        "prices": {
-                                            "USD": "0.213"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.large",
-                                "vCPU": "2",
-                                "ECU": "6.5",
-                                "memoryGiB": "7.5",
-                                "storageGB": "1 x 32 SSD",
-                                "valueColumns": [
-                                    {
-                                        "name": "sles",
-                                        "prices": {
-                                            "USD": "0.325"
-                                        }
-                                    }
-                                ]
-                            },
                      {
                         "size":"m3.xlarge",
                         "vCPU":"4",
@@ -1455,7 +1425,7 @@ callback(
                            {
                               "name":"sles",
                               "prices":{
-                                 "USD":"0.560"
+                                 "USD":"0.595"
                               }
                            }
                         ]
@@ -2556,6 +2526,26 @@ callback(
                               "name":"sles",
                               "prices":{
                                  "USD":"3.075"
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               },
+               {
+                  "type":"gpuCurrentGen",
+                  "sizes":[
+                     {
+                        "size":"g2.2xlarge",
+                        "vCPU":"8",
+                        "ECU":"26",
+                        "memoryGiB":"15",
+                        "storageGB":"60 SSD",
+                        "valueColumns":[
+                           {
+                              "name":"sles",
+                              "prices":{
+                                 "USD":"1.058"
                               }
                            }
                         ]

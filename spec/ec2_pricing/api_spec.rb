@@ -84,7 +84,7 @@ module Ec2Pricing
 
         it 'returns instance type information for the specified region' do
           expect(response_body['region']).to eql('eu-west-1')
-          expect(response_body['instance_types']).to have(39).items
+          expect(response_body['instance_types']).to have(29).items
         end
 
         it 'returns on demand pricing for the specified region' do

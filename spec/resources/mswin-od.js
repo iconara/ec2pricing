@@ -2533,6 +2533,26 @@ callback(
                   ]
                },
                {
+                  "type":"gpuCurrentGen",
+                  "sizes":[
+                     {
+                        "size":"g2.2xlarge",
+                        "vCPU":"8",
+                        "ECU":"26",
+                        "memoryGiB":"15",
+                        "storageGB":"60 SSD",
+                        "valueColumns":[
+                           {
+                              "name":"mswin",
+                              "prices":{
+                                 "USD":"1.060"
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               },
+               {
                   "type":"hiMemCurrentGen",
                   "sizes":[
                      {

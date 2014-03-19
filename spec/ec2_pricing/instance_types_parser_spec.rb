@@ -178,7 +178,7 @@ module Ec2Pricing
         c1_xlarge = find_instance_type('c1.xlarge')
         cc2_8xlarge = find_instance_type('cc2.8xlarge')
         expect(m2_xlarge[:io_performance]).to eql('moderate')
-        expect(m3_xlarge[:io_performance]).to eql('moderate')
+        expect(m3_xlarge[:io_performance]).to eql('high')
         expect(c1_xlarge[:io_performance]).to eql('high')
         expect(cc2_8xlarge[:io_performance]).to eql('10 gigabit')
       end
