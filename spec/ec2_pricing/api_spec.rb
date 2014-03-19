@@ -16,12 +16,9 @@ module Ec2Pricing
     end
 
     before do
-      stub_http_request(:get, AWS_PRICING_URLS[:linux]).to_return(body: File.read(File.expand_path('../../resources/linux-od.js', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:mswin]).to_return(body: File.read(File.expand_path('../../resources/mswin-od.js', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:rhel]).to_return(body: File.read(File.expand_path('../../resources/rhel-od.js', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:sles]).to_return(body: File.read(File.expand_path('../../resources/sles-od.js', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:emr]).to_return(body: File.read(File.expand_path('../../resources/pricing-emr.js', __FILE__)))
-      stub_http_request(:get, AWS_PRICING_URLS[:spot]).to_return(body: File.read(File.expand_path('../../resources/spot.js', __FILE__)))
+      AWS_PRICING_URLS.each do |key, url|
+        stub_http_request(:get, url).to_return(body: File.read(File.expand_path('../../resources/' + File.basename(url), __FILE__)))
+      end
       stub_http_request(:get, AWS_INSTANCE_TYPES_URL).to_return(body: File.read(File.expand_path('../../resources/instance-types.html', __FILE__)))
     end
 

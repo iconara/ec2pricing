@@ -34,7 +34,9 @@ module Ec2Pricing
         instance_types_data = instance_types_parser.parse(data_loader.instance_types_data)
         instance_types_data = Hash[instance_types_data.map { |type| [type[:api_name], type] }]
         pricing_data = data_loader.pricing_data.each_with_object({}) do |(type, pricing_data), result|
-          result[type] = pricing_parser.parse(pricing_data)
+          if Ec2Pricing::AWS_ON_DEMAND_PRICE_KEYS.include?(type) || Ec2Pricing::AWS_EXTRA_PRICE_KEYS.include?(type)
+            result[type] = pricing_parser.parse(pricing_data)
+          end
         end
         [instance_types_data, pricing_data]
       end
