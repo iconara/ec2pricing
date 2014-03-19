@@ -1,10 +1,10 @@
 $: << File.expand_path('../lib', __FILE__)
 
-require 'open-uri'
 require 'fileutils'
 require 'aws'
 require 'multi_json'
 require 'nokogiri'
+require 'typhoeus'
 require 'ec2_pricing'
 require 'ec2_pricing/defaults'
 
@@ -25,17 +25,30 @@ namespace :cache do
     api_host = ENV['API_HOST'] || 'ec2pricing.heroku.com'
     api_url =  "http://#{api_host}/api/v1"
     $stderr.puts("Downloading #{api_url}")
-    @data = open(api_url).read
+    @data = Typhoeus.get(api_url, followlocation: true).body
   end
 
   task :resources do
-    @pricing_data = {}
+    requests = []
     Ec2Pricing::AWS_PRICING_URLS.each_value do |url|
-      $stderr.puts("Downloading #{url}")
-      @pricing_data[url] = open(url).read
+      $stderr.puts("Queueing #{url} for download")
+      requests << Typhoeus::Request.new(url, method: :get)
     end
-    $stderr.puts("Downloading #{Ec2Pricing::AWS_INSTANCE_TYPES_URL}")
-    @instance_types_data = open(Ec2Pricing::AWS_INSTANCE_TYPES_URL).read
+    $stderr.puts("Queueing #{Ec2Pricing::AWS_INSTANCE_TYPES_URL} for download")
+    requests << Typhoeus::Request.new(Ec2Pricing::AWS_INSTANCE_TYPES_URL, method: :get)
+    hydra = Typhoeus::Hydra.new
+    requests.each { |r| hydra.queue(r) }
+    hydra.run
+    @pricing_data = {}
+    @instance_types_data = nil
+    requests.each do |request|
+      if request.url == Ec2Pricing::AWS_INSTANCE_TYPES_URL
+        @instance_types_data = request.response.body
+      else
+        @pricing_data[request.url] = request.response.body
+      end
+    end
+    $stderr.puts('All resources downloaded')
   end
 end
 
