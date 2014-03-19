@@ -27,6 +27,16 @@ namespace :cache do
     $stderr.puts("Downloading #{api_url}")
     @data = open(api_url).read
   end
+
+  task :resources do
+    @pricing_data = {}
+    Ec2Pricing::AWS_PRICING_URLS.each_value do |url|
+      $stderr.puts("Downloading #{url}")
+      @pricing_data[url] = open(url).read
+    end
+    $stderr.puts("Downloading #{Ec2Pricing::AWS_INSTANCE_TYPES_URL}")
+    @instance_types_data = open(Ec2Pricing::AWS_INSTANCE_TYPES_URL).read
+  end
 end
 
 namespace :update do
@@ -37,21 +47,17 @@ namespace :update do
     File.write(local_path, @data)
   end
 
-  task :resources do
-    Ec2Pricing::AWS_PRICING_URLS.each_value do |url|
+  task :resources => 'cache:resources' do
+    @pricing_data.each do |url, data|
       file_name = File.basename(url)
       path = "spec/resources/#{file_name}"
       $stderr.puts("Saving #{url} as #{path}")
-      open(url) do |r|
-        File.open(path, 'w') do |w|
-          w.write(r.read)
-        end
+      File.open(path, 'w') do |w|
+        w.write(data)
       end
     end
-    open(Ec2Pricing::AWS_INSTANCE_TYPES_URL) do |r|
-      File.open('spec/resources/instance-types.html', 'w') do |w|
-        w.write(r.read)
-      end
+    File.open('spec/resources/instance-types.html', 'w') do |w|
+      w.write(@instance_types_data)
     end
   end
 end
@@ -99,9 +105,26 @@ namespace :upload do
   end
 
   task :data => ['cache:data', :connect] do
+    date_stamp = Time.now.utc.strftime('%Y%m%d')
     $stderr.puts("Writing s3://#{@bucket.name}/data/data.json")
     options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
     @bucket.objects['data/data.json'].write(@data, options)
+    $stderr.puts("Writing s3://#{@bucket.name}/data/#{date_stamp}/ec2pricing.json")
+    @bucket.objects["data/#{date_stamp}/ec2pricing.json"].write(@data, options)
+  end
+
+  task :resources => ['cache:resources', :connect] do
+    options = {:acl => :public_read, :content_type => MIME_TYPES['.json']}
+    date_stamp = Time.now.utc.strftime('%Y%m%d')
+    @pricing_data.each do |url, data|
+      file_name = url.end_with?('spot.js') ? 'spot.js' : url.scan(%r{/([^/]+/[^/]+)$}).flatten.first
+      key = "data/#{date_stamp}/#{file_name}"
+      $stderr.puts("Writing s3://#{@bucket.name}/#{key}")
+      @bucket.objects[key].write(data, options)
+    end
+    key = "data/#{date_stamp}/instance-types.html"
+    $stderr.puts("Writing s3://#{@bucket.name}/#{key}")
+    @bucket.objects[key].write(@instance_types_data, options)
   end
 end
 
