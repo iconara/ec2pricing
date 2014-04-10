@@ -48,6 +48,11 @@ module Ec2Pricing
           i2.2xlarge
           i2.4xlarge
           i2.8xlarge
+          r3.2xlarge
+          r3.4xlarge
+          r3.8xlarge
+          r3.large
+          r3.xlarge
           cc2.8xlarge
           cg1.4xlarge
           cr1.8xlarge

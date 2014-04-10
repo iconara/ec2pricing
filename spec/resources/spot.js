@@ -13,7 +13,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0221"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -30,7 +30,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.043"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -47,13 +47,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0756"
+                                            "USD": "0.5"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1442"
+                                            "USD": "0.1839"
                                         }
                                     }
                                 ]
@@ -64,13 +64,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.127"
+                                            "USD": "0.3776"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2751"
+                                            "USD": "0.2927"
                                         }
                                     }
                                 ]
@@ -103,7 +103,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0131"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -120,7 +120,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0262"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -137,7 +137,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.055"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
@@ -159,7 +159,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0321"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -176,13 +176,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0643"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2071"
+                                            "USD": "0.1981"
                                         }
                                     }
                                 ]
@@ -193,13 +193,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1305"
+                                            "USD": "0.0642"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4141"
+                                            "USD": "0.3961"
                                         }
                                     }
                                 ]
@@ -210,13 +210,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2575"
+                                            "USD": "0.1358"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.8285"
+                                            "USD": "0.7939"
                                         }
                                     }
                                 ]
@@ -227,13 +227,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.5131"
+                                            "USD": "0.2561"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.6561"
+                                            "USD": "1.5841"
                                         }
                                     }
                                 ]
@@ -249,7 +249,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0181"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -266,7 +266,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0701"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
@@ -283,7 +283,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2701"
+                                            "USD": "0.2562"
                                         }
                                     },
                                     {
@@ -305,13 +305,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.25"
+                                              "USD": "0.0768"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.141"
+                                              "USD": "0.1063"
                                           }
                                       }
                                   ]
@@ -344,12 +344,102 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                         "type": "hiMemCurrentGen",
                         "sizes": [
                             {
+                                "size": "r3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0161"  
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1741"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0321" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2821"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0641"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4441"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1281"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.6721"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.2561"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.9561"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
                                 "size": "m2.xlarge",
                                 "valueColumns": [
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0352"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -366,13 +456,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0703"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1402"
+                                            "USD": "0.1401"
                                         }
                                     }
                                 ]
@@ -383,7 +473,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1406"
+                                            "USD": "0.1"
                                         }
                                     },
                                     {
@@ -400,7 +490,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3942"
+                                            "USD": "0.4963"
                                         }
                                     },
                                     {
@@ -422,7 +512,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2413"
+                                            "USD": "0.1283"
                                         }
                                     },
                                     {
@@ -507,7 +597,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.094"
+                                            "USD": "0.0932"
                                         }
                                     },
                                     {
@@ -524,7 +614,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.89"
+                                            "USD": "0.1859"
                                         }
                                     },
                                     {
@@ -563,7 +653,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0215"
+                                            "USD": "0.0211"
                                         }
                                     },
                                     {
@@ -580,7 +670,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0422"
+                                            "USD": "0.0421"
                                         }
                                     },
                                     {
@@ -636,7 +726,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0642"
+                                            "USD": "0.0644"
                                         }
                                     },
                                     {
@@ -670,7 +760,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2572"
+                                            "USD": "0.2571"
                                         }
                                     },
                                     {
@@ -709,7 +799,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0283"
+                                            "USD": "0.0281"
                                         }
                                     },
                                     {
@@ -743,7 +833,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2544"
+                                            "USD": "0.2535"
                                         }
                                     },
                                     {
@@ -765,13 +855,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.6501"
+                                              "USD": "0.111"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.2366"
+                                              "USD": "0.1134"
                                           }
                                       }
                                   ]
@@ -804,6 +894,96 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                         "type": "hiMemCurrentGen",
                         "sizes": [
                             {
+                                "size": "r3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0161"  
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1741"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0321" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2821"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0641"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4441"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1281"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.6721"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.2566"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.9564"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
                                 "size": "m2.xlarge",
                                 "valueColumns": [
                                     {
@@ -826,7 +1006,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1121"
+                                            "USD": "0.1127"
                                         }
                                     },
                                     {
@@ -860,7 +1040,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3924"
+                                            "USD": "0.6588"
                                         }
                                     },
                                     {
@@ -950,13 +1130,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0661"
+                                            "USD": "0.0662"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1431"
+                                            "USD": "0.1432"
                                         }
                                     }
                                 ]
@@ -984,7 +1164,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1977"
+                                            "USD": "0.1851"
                                         }
                                     },
                                     {
@@ -1096,13 +1276,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0514"
+                                            "USD": "0.0511"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1243"
+                                            "USD": "0.1241"
                                         }
                                     }
                                 ]
@@ -1113,13 +1293,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1025"
+                                            "USD": "0.1028"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2494"
+                                            "USD": "0.2501"
                                         }
                                     }
                                 ]
@@ -1147,13 +1327,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4063"
+                                            "USD": "0.5514"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.9942"
+                                            "USD": "1.1034"
                                         }
                                     }
                                 ]
@@ -1225,13 +1405,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.702"
+                                              "USD": "0.111"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.29"
+                                              "USD": "0.1137"
                                           }
                                       }
                                   ]
@@ -1264,18 +1444,108 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                         "type": "hiMemCurrentGen",
                         "sizes": [
                             {
-                                "size": "m2.xlarge",
+                                "size": "r3.large",
                                 "valueColumns": [
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0595"
+                                            "USD": "0.0161"  
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0991"
+                                            "USD": "0.1741"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0321" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2821"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0641"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4441"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1283"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.6723"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.2572"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.9571"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0608"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0992"
                                         }
                                     }
                                 ]
@@ -1286,13 +1556,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1181"
+                                            "USD": "0.1182"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1981"
+                                            "USD": "0.1983"
                                         }
                                     }
                                 ]
@@ -1303,7 +1573,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2362"
+                                            "USD": "0.2361"
                                         }
                                     },
                                     {
@@ -1393,7 +1663,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0331"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -1410,7 +1680,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0651"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -1427,13 +1697,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1414"
+                                            "USD": "0.0407"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2686"
+                                            "USD": "0.2689"
                                         }
                                     }
                                 ]
@@ -1444,7 +1714,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.282"
+                                            "USD": "0.0826"
                                         }
                                     },
                                     {
@@ -1466,7 +1736,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -1483,7 +1753,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0321"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -1500,7 +1770,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0641"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -1517,7 +1787,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1281"
+                                            "USD": "0.0401"
                                         }
                                     },
                                     {
@@ -1539,13 +1809,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0511"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1241"
+                                            "USD": "0.1031"
                                         }
                                     }
                                 ]
@@ -1556,13 +1826,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1011"
+                                            "USD": "0.0401"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2481"
+                                            "USD": "0.2061"
                                         }
                                     }
                                 ]
@@ -1573,13 +1843,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2031"
+                                            "USD": "0.0801"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4971"
+                                            "USD": "0.4121"
                                         }
                                     }
                                 ]
@@ -1590,13 +1860,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4061"
+                                            "USD": "0.1601"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.9941"
+                                            "USD": "0.8241"
                                         }
                                     }
                                 ]
@@ -1607,13 +1877,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.8111"
+                                            "USD": "0.3201"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.9871"
+                                            "USD": "1.6481"
                                         }
                                     }
                                 ]
@@ -1629,7 +1899,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0441"
+                                            "USD": "0.0205"
                                         }
                                     },
                                     {
@@ -1646,7 +1916,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1761"
+                                            "USD": "0.0801"
                                         }
                                     },
                                     {
@@ -1663,7 +1933,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4881"
+                                            "USD": "0.3201"
                                         }
                                     },
                                     {
@@ -1685,13 +1955,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.2"
+                                              "USD": "0.13"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.141"
+                                              "USD": "0.1085"
                                           }
                                       }
                                   ]
@@ -1724,12 +1994,102 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                         "type": "hiMemCurrentGen",
                         "sizes": [
                             {
+                                "size": "r3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"  
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1781"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2901"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0801"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4601"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1602"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.7041"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.3225"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.025"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
                                 "size": "m2.xlarge",
                                 "valueColumns": [
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0941"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -1746,7 +2106,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1891"
+                                            "USD": "0.0401"
                                         }
                                     },
                                     {
@@ -1763,13 +2123,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3781"
+                                            "USD": "0.0801"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.6341"
+                                            "USD": "0.4801"
                                         }
                                     }
                                 ]
@@ -1802,13 +2162,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2412"
+                                            "USD": "0.1603"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4817"
+                                            "USD": "0.4816"
                                         }
                                     }
                                 ]
@@ -1824,13 +2184,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0061"
+                                            "USD": "0.0031"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0111"
+                                            "USD": "0.0031"
                                         }
                                     }
                                 ]
@@ -1840,6 +2200,1106 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                 ]
               },{
                 "region": "apac-sin",
+                "footnotes": { 
+                    "*" : "clusterOnlyInUSEast"
+                },
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0102"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0721"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1431"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0991"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1948"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1981"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.3886"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },          
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0101"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0101"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0401"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0203"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0801"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1601"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type":"computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1241"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0412"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2064"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0803"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4122"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1647"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.8253"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.3204"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.6482"
+                                        }
+                                    }
+                                ]
+                            }                              
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0601"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0801"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2401"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },             
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                  "size": "g2.2xlarge",
+                                  "valueColumns": [
+                                      {
+                                          "name": "linux",
+                                          "prices": {
+                                              "USD": "N/A*"
+                                          }
+                                      },
+                                      {
+                                          "name": "mswin",
+                                          "prices": {
+                                              "USD": "N/A*"
+                                          }
+                                      }
+                                  ]
+                             }
+                        ]
+                    },
+                    {
+                        "type": "gpuPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "cg1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }                          
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "r3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"  
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1781"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2901"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0802"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4601"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1604"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.7043"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.3345"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.0342"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0203"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0992"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.2775"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2036"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1328"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4071"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }                            
+                        ]
+                    },
+                    {
+                        "type": "storagePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },                        
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0032"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0061"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+              },{
+                "region": "apac-tokyo",
+                "footnotes": { 
+                    "*" : "clusterOnlyInUSEast"
+                },
+                "instanceTypes": [
+                    {
+                        "type": "generalCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "m3.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0101"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0731"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0204"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1461"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0455"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2928"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1364"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.587"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },          
+                    {
+                        "type": "generalPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "m1.small",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0101"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0351"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0101"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0701"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1411"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2821"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type":"computeCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "c3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1031"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2061"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0802"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4121"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1738"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.8319"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.3475"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.653"
+                                        }
+                                    }
+                                ]
+                            }                              
+                        ]
+                    },
+                    {
+                        "type": "computePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "c1.medium",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1061"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "c1.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0801"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4001"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cc2.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.3201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },             
+                    {
+                        "type": "gpuCurrentGen",
+                        "sizes": [
+                            {
+                                  "size": "g2.2xlarge",
+                                  "valueColumns": [
+                                      {
+                                          "name": "linux",
+                                          "prices": {
+                                              "USD": "0.943"
+                                          }
+                                      },
+                                      {
+                                          "name": "mswin",
+                                          "prices": {
+                                              "USD": "0.1456"
+                                          }
+                                      }
+                                  ]
+                             }
+                        ]
+                    },
+                    {
+                        "type": "gpuPreviousGen",
+                        "sizes": [
+                            {
+                                "size": "cg1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }                          
+                        ]
+                    },
+                    {
+                        "type": "hiMemCurrentGen",
+                        "sizes": [
+                            {
+                                "size": "r3.large",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0202"  
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1781"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0419" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2914"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1162"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4811"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.2143"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.7789"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.4286"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.1739"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0201"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.1721"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.3442"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "m2.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0801"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4802"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "cr1.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.3209"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }                            
+                        ]
+                    },
+                    {
+                        "type": "storagePreviousGen",
+                        "sizes": [
+                            {
+                                "size": "hi1.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1601"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.6181"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },                        
+                    {
+                        "type": "uI",
+                        "sizes": [
+                            {
+                                "size": "t1.micro",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0031"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0061"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+              },{
+                "region": "apac-syd",
                 "footnotes": { 
                     "*" : "clusterOnlyInUSEast"
                 },
@@ -1870,13 +3330,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0721"
+                                            "USD": "0.0722"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1431"
+                                            "USD": "0.1433"
                                         }
                                     }
                                 ]
@@ -1887,13 +3347,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1074"
+                                            "USD": "0.0944"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1948"
+                                            "USD": "0.1704"
                                         }
                                     }
                                 ]
@@ -1910,7 +3370,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.3886"
+                                            "USD": "0.3493"
                                         }
                                     }
                                 ]
@@ -1926,7 +3386,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0801"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -1943,7 +3403,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0202"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -1960,7 +3420,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0402"
+                                            "USD": "0.0401"
                                         }
                                     },
                                     {
@@ -1999,7 +3459,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0561"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -2016,13 +3476,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1123"
+                                            "USD": "0.0563"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2483"
+                                            "USD": "0.2482"
                                         }
                                     }
                                 ]
@@ -2033,13 +3493,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2243"
+                                            "USD": "0.1121"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4972"
+                                            "USD": "0.4971"
                                         }
                                     }
                                 ]
@@ -2050,13 +3510,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4471"
+                                            "USD": "0.2255"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.9941"
+                                            "USD": "0.995"
                                         }
                                     }
                                 ]
@@ -2067,7 +3527,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.8943"
+                                            "USD": "0.4472"
                                         }
                                     },
                                     {
@@ -2184,18 +3644,108 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                         "type": "hiMemCurrentGen",
                         "sizes": [
                             {
-                                "size": "m2.xlarge",
+                                "size": "r3.large",
                                 "valueColumns": [
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0593"
+                                            "USD": "0.0201"  
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0992"
+                                            "USD": "0.1781"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0401" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.2901"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0815"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.4604"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.1615"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.7052"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "3.36"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "1.9151"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0594"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0993"
                                         }
                                     }
                                 ]
@@ -2206,13 +3756,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1241"
+                                            "USD": "0.1202"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2"
+                                            "USD": "0.2009"
                                         }
                                     }
                                 ]
@@ -2223,13 +3773,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2505"
+                                            "USD": "0.2367"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4029"
+                                            "USD": "0.3967"
                                         }
                                     }
                                 ]
@@ -2284,933 +3834,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.08"
+                                            "USD": "0.0041"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
                                             "USD": "0.0071"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-              },{
-                "region": "apac-tokyo",
-                "footnotes": { 
-                    "*" : "clusterOnlyInUSEast"
-                },
-                "instanceTypes": [
-                    {
-                        "type": "generalCurrentGen",
-                        "sizes": [
-                            {
-                                "size": "m3.medium",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0371"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.0791"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.large",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0751"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1571"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1483"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.2952"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.2xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.2952"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.5892"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },          
-                    {
-                        "type": "generalPreviousGen",
-                        "sizes": [
-                            {
-                                "size": "m1.small",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0171"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.0351"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m1.medium",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0351"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.0701"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m1.large",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0671"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1411"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m1.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1341"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.2821"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "type":"computeCurrentGen",
-                        "sizes": [
-                            {
-                                "size": "c3.large",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0611"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1381"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1221"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.2751"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.2xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.2441"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.5511"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.4907"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "1.1023"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.8xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "1.2024"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "2.2023"
-                                        }
-                                    }
-                                ]
-                            }                              
-                        ]
-                    },
-                    {
-                        "type": "computePreviousGen",
-                        "sizes": [
-                            {
-                                "size": "c1.medium",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0481"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1061"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c1.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1921"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.4261"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "cc2.8xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.8921"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },             
-                    {
-                        "type": "gpuCurrentGen",
-                        "sizes": [
-                            {
-                                  "size": "g2.2xlarge",
-                                  "valueColumns": [
-                                      {
-                                          "name": "linux",
-                                          "prices": {
-                                              "USD": "0.943"
-                                          }
-                                      },
-                                      {
-                                          "name": "mswin",
-                                          "prices": {
-                                              "USD": "0.16"
-                                          }
-                                      }
-                                  ]
-                             }
-                        ]
-                    },
-                    {
-                        "type": "gpuPreviousGen",
-                        "sizes": [
-                            {
-                                "size": "cg1.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }                          
-                        ]
-                    },
-                    {
-                        "type": "hiMemCurrentGen",
-                        "sizes": [
-                            {
-                                "size": "m2.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1041"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1721"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m2.2xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.2081"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.3441"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m2.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.4161"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.6882"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "cr1.8xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.9824"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }                            
-                        ]
-                    },
-                    {
-                        "type": "storagePreviousGen",
-                        "sizes": [
-                            {
-                                "size": "hi1.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.4021"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.6181"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },                        
-                    {
-                        "type": "uI",
-                        "sizes": [
-                            {
-                                "size": "t1.micro",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0071"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.0151"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-              },{
-                "region": "apac-syd",
-                "footnotes": { 
-                    "*" : "clusterOnlyInUSEast"
-                },
-                "instanceTypes": [
-                    {
-                        "type": "generalCurrentGen",
-                        "sizes": [
-                            {
-                                "size": "m3.medium",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0363"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.072"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.large",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0725"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1436"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0926"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1704"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m3.2xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.2138"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.3493"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },          
-                    {
-                        "type": "generalPreviousGen",
-                        "sizes": [
-                            {
-                                "size": "m1.small",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0107"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.02"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m1.medium",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.02"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.04"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m1.large",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0401"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.08"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m1.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.08"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.16"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "type":"computeCurrentGen",
-                        "sizes": [
-                            {
-                                "size": "c3.large",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0162"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1242"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0562"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.2482"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.2xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1126"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.4981"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.2246"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.9948"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c3.8xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.4471"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "1.9871"
-                                        }
-                                    }
-                                ]
-                            }                              
-                        ]
-                    },
-                    {
-                        "type": "computePreviousGen",
-                        "sizes": [
-                            {
-                                "size": "c1.medium",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0283"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.06"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "c1.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.11"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.24"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "cc2.8xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },             
-                    {
-                        "type": "gpuCurrentGen",
-                        "sizes": [
-                            {
-                                  "size": "g2.2xlarge",
-                                  "valueColumns": [
-                                      {
-                                          "name": "linux",
-                                          "prices": {
-                                              "USD": "N/A*"
-                                          }
-                                      },
-                                      {
-                                          "name": "mswin",
-                                          "prices": {
-                                              "USD": "N/A*"
-                                          }
-                                      }
-                                  ]
-                             }
-                        ]
-                    },
-                    {
-                        "type": "gpuPreviousGen",
-                        "sizes": [
-                            {
-                                "size": "cg1.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }                          
-                        ]
-                    },
-                    {
-                        "type": "hiMemCurrentGen",
-                        "sizes": [
-                            {
-                                "size": "m2.xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0597"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.0994"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m2.2xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.1199"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.1988"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "m2.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.2365"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.3964"
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                "size": "cr1.8xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }                            
-                        ]
-                    },
-                    {
-                        "type": "storagePreviousGen",
-                        "sizes": [
-                            {
-                                "size": "hi1.4xlarge",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "N/A*"
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    },                        
-                    {
-                        "type": "uI",
-                        "sizes": [
-                            {
-                                "size": "t1.micro",
-                                "valueColumns": [
-                                    {
-                                        "name": "linux",
-                                        "prices": {
-                                            "USD": "0.0042"
-                                        }
-                                    },
-                                    {
-                                        "name": "mswin",
-                                        "prices": {
-                                            "USD": "0.007"
                                         }
                                     }
                                 ]
@@ -3233,13 +3863,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.03"
+                                            "USD": "0.0301"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.073"
+                                            "USD": "0.0731"
                                         }
                                     }
                                 ]
@@ -3250,13 +3880,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0615"
+                                            "USD": "0.0611"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1474"
+                                            "USD": "0.1471"
                                         }
                                     }
                                 ]
@@ -3267,13 +3897,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1733"
+                                            "USD": "0.1245"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2551"
+                                            "USD": "0.2297"
                                         }
                                     }
                                 ]
@@ -3312,7 +3942,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.021"
+                                            "USD": "0.0211"
                                         }
                                     }
                                 ]
@@ -3323,13 +3953,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.023"
+                                            "USD": "0.0221"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.042"
+                                            "USD": "0.0421"
                                         }
                                     }
                                 ]
@@ -3346,7 +3976,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0827"
+                                            "USD": "0.0824"
                                         }
                                     }
                                 ]
@@ -3357,13 +3987,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.084"
+                                            "USD": "0.0841"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.164"
+                                            "USD": "0.1641"
                                         }
                                     }
                                 ]
@@ -3469,7 +4099,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0244"
+                                            "USD": "0.0241"
                                         }
                                     },
                                     {
@@ -3486,13 +4116,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.096"
+                                            "USD": "0.0961"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.226"
+                                            "USD": "0.2261"
                                         }
                                     }
                                 ]
@@ -3564,18 +4194,108 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                         "type": "hiMemCurrentGen",
                         "sizes": [
                             {
-                                "size": "m2.xlarge",
+                                "size": "r3.large",
                                 "valueColumns": [
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0625"
+                                            "USD": "N/A*"  
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0977"
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*" 
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.2xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.4xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "size": "r3.8xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "N/A*"
+                                        }
+                                    }
+                                ]
+                            }                           
+                        ]
+                    },                    
+                    {
+                        "type": "Memory Optimized - Previous Generation",
+                        "sizes": [
+                            {
+                                "size": "m2.xlarge",
+                                "valueColumns": [
+                                    {
+                                        "name": "linux",
+                                        "prices": {
+                                            "USD": "0.0629"
+                                        }
+                                    },
+                                    {
+                                        "name": "mswin",
+                                        "prices": {
+                                            "USD": "0.0978"
                                         }
                                     }
                                 ]
@@ -3586,13 +4306,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.124"
+                                            "USD": "0.1235"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.193"
+                                            "USD": "0.1933"
                                         }
                                     }
                                 ]
@@ -3603,13 +4323,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.246"
+                                            "USD": "0.2463"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.386"
+                                            "USD": "0.3861"
                                         }
                                     }
                                 ]
@@ -3664,13 +4384,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.004"
+                                            "USD": "0.0041"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.007"
+                                            "USD": "0.0071"
                                         }
                                     }
                                 ]

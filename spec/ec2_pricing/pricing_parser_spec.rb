@@ -33,7 +33,7 @@ module Ec2Pricing
       :rhel_od => 29,
       :sles_od => 29,
       :emr => 11,
-      :spot => 24,
+      :spot => 29,
     }.freeze
 
     describe '#parse' do
