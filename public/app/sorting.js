@@ -1,7 +1,37 @@
 (function () {
-  var IO_SORT_ORDER = ["low", "moderate", "high", "very high"]
-  var TYPE_CLASS_SORT_ORDER = ["m1", "m3", "t1", "c1", "c3", "m2", "g2", "cc1", "cc2", "cg1", "hi1", "hs1", "cr1"]
-  var TYPE_SIZE_SORT_ORDER = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
+  var IO_SORT_ORDER = [
+    "low",
+    "moderate",
+    "high",
+    "very high"
+  ]
+
+  var TYPE_CLASS_SORT_ORDER = [
+    "m1",
+    "m3",
+    "t1",
+    "c1",
+    "c3",
+    "m2",
+    "g2",
+    "cc1",
+    "cc2",
+    "cg1",
+    "hi1",
+    "hs1",
+    "cr1"
+  ]
+
+  var TYPE_SIZE_SORT_ORDER = [
+    "micro",
+    "small",
+    "medium",
+    "large",
+    "xlarge",
+    "2xlarge",
+    "4xlarge",
+    "8xlarge"
+  ]
 
   var module = angular.module("ec2pricing.sorting", [])
 
