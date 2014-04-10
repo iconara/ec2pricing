@@ -8,7 +8,11 @@ module Ec2Pricing
     end
 
     def self.fix_jsonp(str)
-      str.sub(/\A\s*callback\((.+)\)\s*\Z/m, '\1').gsub(/\},\s*\]/, '}]')
+      object_start_index = str.index('{')
+      object_end_index = str.rindex('}')
+      str = str[object_start_index, object_end_index - object_start_index + 1]
+      str.gsub!(/(?<=[\{,])([^\{,":]+)(?=:)/, '"\1"')
+      str
     end
 
     def load!

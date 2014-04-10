@@ -28,11 +28,11 @@ module Ec2Pricing
     }.freeze
 
     EXPECTED_INSTANCE_TYPE_COUNTS = {
-      :linux_od => 29,
-      :mswin_od => 29,
-      :rhel_od => 29,
-      :sles_od => 29,
-      :emr => 11,
+      :linux_od => 34,
+      :mswin_od => 34,
+      :rhel_od => 34,
+      :sles_od => 34,
+      :emr => 25,
       :spot => 29,
     }.freeze
 

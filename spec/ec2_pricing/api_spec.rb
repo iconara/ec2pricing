@@ -98,9 +98,9 @@ module Ec2Pricing
 
         it 'returns EMR pricing for the specified region (where available)' do
           m1_small = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'm1.small' }
-          hs1_8xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'hs1.8xlarge' }
+          r3_xlarge = response_body['instance_types'].find { |instance_type| instance_type['api_name'] == 'r3.xlarge' }
           expect(m1_small['emr_pricing']).to have_key('linux')
-          expect(hs1_8xlarge['emr_pricing']).to be_nil
+          expect(r3_xlarge['emr_pricing']).to be_nil
         end
 
         it 'responds with Not Found for regions that do not exist' do

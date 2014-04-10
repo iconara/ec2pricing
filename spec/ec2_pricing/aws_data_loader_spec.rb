@@ -55,7 +55,7 @@ module Ec2Pricing
 
       context 'with badly formatted spot pricing data' do
         before do
-          stub_http_request(:get, pricing_urls[:spot]).to_return(body: 'callback({"foo":"bar","bad":[{},]})')
+          stub_http_request(:get, pricing_urls[:spot]).to_return(body: 'callback({foo:"bar",list:[{with:"objs"}]})')
         end
 
         before do
@@ -63,7 +63,7 @@ module Ec2Pricing
         end
 
         it 'fixes the error and loads the spot pricing data' do
-          data_loader.pricing_data[:spot].should == {'foo' => 'bar', 'bad' => [{}]}
+          data_loader.pricing_data[:spot].should == {'foo' => 'bar', 'list' => [{'with' => 'objs'}]}
         end
       end
 
