@@ -7,19 +7,20 @@
   ]
 
   var TYPE_CLASS_SORT_ORDER = [
-    "m1",
     "m3",
-    "t1",
-    "c1",
+    "m1",
     "c3",
-    "m2",
-    "g2",
-    "cc1",
+    "c1",
     "cc2",
+    "g2",
     "cg1",
-    "hi1",
+    "r3",
+    "m2",
+    "cr1",
+    "i2",
     "hs1",
-    "cr1"
+    "hi1",
+    "t1"
   ]
 
   var TYPE_SIZE_SORT_ORDER = [
