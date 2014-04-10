@@ -1,9 +1,11 @@
 (function () {
   var IO_SORT_ORDER = [
+    "very low",
     "low",
     "moderate",
     "high",
-    "very high"
+    "very high",
+    "10 gigabit"
   ]
 
   var TYPE_CLASS_SORT_ORDER = [
