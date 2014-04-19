@@ -3,7 +3,7 @@ angular.injector(["ng", "ec2pricing.pricing"]).invoke(function ($http, pricingPa
 
   describe("pricingParser", function () {
     beforeEach(function (done) {
-      var spotInstancePricingFuture = $http.get("spec/data/spot-instance-prices.json")
+      var spotInstancePricingFuture = $http.get("tests/data/spot-instance-prices.json")
       spotInstancePricingFuture.success(function (data, status, headers, config) {
         pricing = pricingParser(data).regions
         done()
