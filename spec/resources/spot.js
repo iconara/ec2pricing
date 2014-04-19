@@ -53,7 +53,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1839"
+                                            "USD": "0.1447"
                                         }
                                     }
                                 ]
@@ -64,13 +64,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3776"
+                                            "USD": "0.2401"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2927"
+                                            "USD": "0.2883"
                                         }
                                     }
                                 ]
@@ -193,7 +193,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0643"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
@@ -210,13 +210,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1358"
+                                            "USD": "0.1283"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.7938"
+                                            "USD": "0.7921"
                                         }
                                     }
                                 ]
@@ -283,7 +283,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2562"
+                                            "USD": "0.2561"
                                         }
                                     },
                                     {
@@ -305,13 +305,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.08"
+                                              "USD": "0.0666"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.105"
+                                              "USD": "0.1043"
                                           }
                                       }
                                   ]
@@ -473,7 +473,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0651"
+                                            "USD": "0.0642"
                                         }
                                     },
                                     {
@@ -490,7 +490,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4963"
+                                            "USD": "0.3197"
                                         }
                                     },
                                     {
@@ -563,7 +563,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0221"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -580,7 +580,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0431"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -597,13 +597,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0932"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2207"
+                                            "USD": "0.2201"
                                         }
                                     }
                                 ]
@@ -614,13 +614,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1859"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4415"
+                                            "USD": "0.4391"
                                         }
                                     }
                                 ]
@@ -636,7 +636,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0101"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -653,7 +653,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0211"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -670,7 +670,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0421"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -687,7 +687,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0831"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
@@ -709,7 +709,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0321"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -726,13 +726,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0644"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2071"
+                                            "USD": "0.1981"
                                         }
                                     }
                                 ]
@@ -743,13 +743,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1281"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4141"
+                                            "USD": "0.3961"
                                         }
                                     }
                                 ]
@@ -760,13 +760,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2571"
+                                            "USD": "0.1283"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.8281"
+                                            "USD": "0.7921"
                                         }
                                     }
                                 ]
@@ -777,13 +777,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.5131"
+                                            "USD": "0.2562"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.6561"
+                                            "USD": "1.5841"
                                         }
                                     }
                                 ]
@@ -799,7 +799,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0281"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -816,7 +816,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1121"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
@@ -833,7 +833,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2534"
+                                            "USD": "0.2531"
                                         }
                                     },
                                     {
@@ -855,13 +855,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.111"
+                                              "USD": "0.12"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.1142"
+                                              "USD": "0.115"
                                           }
                                       }
                                   ]
@@ -967,13 +967,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2566"
+                                            "USD": "0.2562"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.9564"
+                                            "USD": "0.9562"
                                         }
                                     }
                                 ]
@@ -989,7 +989,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0561"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -1006,7 +1006,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1126"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
@@ -1023,7 +1023,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2241"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
@@ -1040,7 +1040,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.6588"
+                                            "USD": "0.3719"
                                         }
                                     },
                                     {
@@ -1062,7 +1062,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2411"
+                                            "USD": "0.1281"
                                         }
                                     },
                                     {
@@ -1084,13 +1084,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0041"
+                                            "USD": "0.0031"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0091"
+                                            "USD": "0.0061"
                                         }
                                     }
                                 ]
@@ -1113,13 +1113,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0332"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0721"
+                                            "USD": "0.0711"
                                         }
                                     }
                                 ]
@@ -1130,13 +1130,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0661"
+                                            "USD": "0.0162"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1431"
+                                            "USD": "0.1422"
                                         }
                                     }
                                 ]
@@ -1147,13 +1147,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0952"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1695"
+                                            "USD": "0.1681"
                                         }
                                     }
                                 ]
@@ -1164,13 +1164,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1851"
+                                            "USD": "0.0655"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.3466"
+                                            "USD": "0.3361"
                                         }
                                     }
                                 ]
@@ -1186,7 +1186,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0101"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -1203,7 +1203,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0201"
+                                            "USD": "0.0081"
                                         }
                                     },
                                     {
@@ -1220,7 +1220,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0401"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -1237,7 +1237,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0801"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
@@ -1259,7 +1259,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0261"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -1276,7 +1276,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0511"
+                                            "USD": "0.0321"
                                         }
                                     },
                                     {
@@ -1293,13 +1293,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.103"
+                                            "USD": "0.0645"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.25"
+                                            "USD": "0.2497"
                                         }
                                     }
                                 ]
@@ -1310,7 +1310,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2031"
+                                            "USD": "0.1281"
                                         }
                                     },
                                     {
@@ -1327,7 +1327,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.5514"
+                                            "USD": "0.4108"
                                         }
                                     },
                                     {
@@ -1349,7 +1349,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0281"
+                                            "USD": "0.0161"
                                         }
                                     },
                                     {
@@ -1366,7 +1366,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1101"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
@@ -1405,13 +1405,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.111"
+                                              "USD": "0.702"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.1137"
+                                              "USD": "0.1557"
                                           }
                                       }
                                   ]
@@ -1517,13 +1517,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2572"
+                                            "USD": "0.2564"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.9571"
+                                            "USD": "0.9564"
                                         }
                                     }
                                 ]
@@ -1539,13 +1539,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0604"
+                                            "USD": "0.0162"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0992"
+                                            "USD": "0.0991"
                                         }
                                     }
                                 ]
@@ -1556,13 +1556,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1182"
+                                            "USD": "0.0322"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1983"
+                                            "USD": "0.1982"
                                         }
                                     }
                                 ]
@@ -1573,7 +1573,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2361"
+                                            "USD": "0.0641"
                                         }
                                     },
                                     {
@@ -1634,13 +1634,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0041"
+                                            "USD": "0.0031"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0071"
+                                            "USD": "0.0061"
                                         }
                                     }
                                 ]
@@ -1697,13 +1697,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0411"
+                                            "USD": "0.0407"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2689"
+                                            "USD": "0.2692"
                                         }
                                     }
                                 ]
@@ -1899,7 +1899,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0204"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -1955,13 +1955,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.111"
+                                              "USD": "0.0865"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.1077"
+                                              "USD": "0.1063"
                                           }
                                       }
                                   ]
@@ -2056,7 +2056,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.7041"
+                                            "USD": "0.7042"
                                         }
                                     }
                                 ]
@@ -2067,13 +2067,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3225"
+                                            "USD": "0.3202"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.025"
+                                            "USD": "1.0202"
                                         }
                                     }
                                 ]
@@ -2162,13 +2162,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1603"
+                                            "USD": "0.1607"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4816"
+                                            "USD": "0.4823"
                                         }
                                     }
                                 ]
@@ -2213,7 +2213,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0102"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -2247,13 +2247,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0991"
+                                            "USD": "0.0401"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1948"
+                                            "USD": "0.1681"
                                         }
                                     }
                                 ]
@@ -2264,13 +2264,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1981"
+                                            "USD": "0.0801"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.3886"
+                                            "USD": "0.3351"
                                         }
                                     }
                                 ]
@@ -2286,7 +2286,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0101"
+                                            "USD": "0.0102"
                                         }
                                     },
                                     {
@@ -2320,7 +2320,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0202"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -2376,13 +2376,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0406"
+                                            "USD": "0.0404"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2064"
+                                            "USD": "0.2062"
                                         }
                                     }
                                 ]
@@ -2393,7 +2393,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0803"
+                                            "USD": "0.0804"
                                         }
                                     },
                                     {
@@ -2410,13 +2410,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1647"
+                                            "USD": "0.1619"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.8253"
+                                            "USD": "0.8247"
                                         }
                                     }
                                 ]
@@ -2427,13 +2427,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3204"
+                                            "USD": "0.3202"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.6482"
+                                            "USD": "1.6481"
                                         }
                                     }
                                 ]
@@ -2583,7 +2583,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0802"
+                                            "USD": "0.0801"
                                         }
                                     },
                                     {
@@ -2600,13 +2600,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1604"
+                                            "USD": "0.1605"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.7043"
+                                            "USD": "0.7044"
                                         }
                                     }
                                 ]
@@ -2617,13 +2617,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.3345"
+                                            "USD": "0.3255"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.0342"
+                                            "USD": "1.0283"
                                         }
                                     }
                                 ]
@@ -2639,13 +2639,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0203"
+                                            "USD": "0.0202"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0992"
+                                            "USD": "0.0991"
                                         }
                                     }
                                 ]
@@ -2656,13 +2656,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.99"
+                                            "USD": "0.0408"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2046"
+                                            "USD": "0.1983"
                                         }
                                     }
                                 ]
@@ -2673,13 +2673,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0991"
+                                            "USD": "0.0805"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4044"
+                                            "USD": "0.3965"
                                         }
                                     }
                                 ]
@@ -2734,7 +2734,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0032"
+                                            "USD": "0.025"
                                         }
                                     },
                                     {
@@ -2780,7 +2780,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0204"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -2797,7 +2797,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0455"
+                                            "USD": "0.0413"
                                         }
                                     },
                                     {
@@ -2814,7 +2814,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1364"
+                                            "USD": "0.2947"
                                         }
                                     },
                                     {
@@ -2909,7 +2909,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0201"
+                                            "USD": "0.0202"
                                         }
                                     },
                                     {
@@ -2943,7 +2943,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0814"
+                                            "USD": "0.0804"
                                         }
                                     },
                                     {
@@ -2960,13 +2960,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1738"
+                                            "USD": "0.161"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.8319"
+                                            "USD": "0.8247"
                                         }
                                     }
                                 ]
@@ -2977,13 +2977,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4298"
+                                            "USD": "3.0641"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.6575"
+                                            "USD": "4.72"
                                         }
                                     }
                                 ]
@@ -3055,13 +3055,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                       {
                                           "name": "linux",
                                           "prices": {
-                                              "USD": "0.943"
+                                              "USD": "0.174"
                                           }
                                       },
                                       {
                                           "name": "mswin",
                                           "prices": {
-                                              "USD": "0.1456"
+                                              "USD": "0.1147"
                                           }
                                       }
                                   ]
@@ -3099,7 +3099,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0202"  
+                                            "USD": "0.0201"  
                                         }
                                     },
                                     {
@@ -3116,13 +3116,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0419" 
+                                            "USD": "0.0403" 
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2914"
+                                            "USD": "0.2902"
                                         }
                                     }
                                 ]
@@ -3133,13 +3133,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1162"
+                                            "USD": "0.0884"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4811"
+                                            "USD": "0.463"
                                         }
                                     }
                                 ]
@@ -3156,7 +3156,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.7789"
+                                            "USD": "0.719"
                                         }
                                     }
                                 ]
@@ -3167,13 +3167,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.4286"
+                                            "USD": "0.3203"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.1739"
+                                            "USD": "1.0203"
                                         }
                                     }
                                 ]
@@ -3330,13 +3330,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0722"
+                                            "USD": "0.0721"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1434"
+                                            "USD": "0.1431"
                                         }
                                     }
                                 ]
@@ -3347,13 +3347,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0944"
+                                            "USD": "0.0881"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1704"
+                                            "USD": "0.1681"
                                         }
                                     }
                                 ]
@@ -3364,13 +3364,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2138"
+                                            "USD": "0.1751"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.3493"
+                                            "USD": "0.3351"
                                         }
                                     }
                                 ]
@@ -3482,7 +3482,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.2482"
+                                            "USD": "0.2483"
                                         }
                                     }
                                 ]
@@ -3510,13 +3510,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2258"
+                                            "USD": "0.2244"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.9951"
+                                            "USD": "0.9943"
                                         }
                                     }
                                 ]
@@ -3533,7 +3533,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.9872"
+                                            "USD": "1.9871"
                                         }
                                     }
                                 ]
@@ -3683,13 +3683,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0815"
+                                            "USD": "0.0813"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.4604"
+                                            "USD": "0.4603"
                                         }
                                     }
                                 ]
@@ -3700,13 +3700,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1616"
+                                            "USD": "0.1614"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.7053"
+                                            "USD": "0.7051"
                                         }
                                     }
                                 ]
@@ -3717,13 +3717,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "3.36"
+                                            "USD": "0.323"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "1.9151"
+                                            "USD": "1.0226"
                                         }
                                     }
                                 ]
@@ -3739,13 +3739,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0595"
+                                            "USD": "0.0596"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0993"
+                                            "USD": "0.0996"
                                         }
                                     }
                                 ]
@@ -3756,13 +3756,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1202"
+                                            "USD": "0.1268"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1999"
+                                            "USD": "0.1994"
                                         }
                                     }
                                 ]
@@ -3773,13 +3773,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2368"
+                                            "USD": "0.2397"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.3968"
+                                            "USD": "0.4026"
                                         }
                                     }
                                 ]
@@ -3863,7 +3863,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0301"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -3880,13 +3880,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0611"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1471"
+                                            "USD": "0.1461"
                                         }
                                     }
                                 ]
@@ -3897,7 +3897,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1245"
+                                            "USD": "0.0973"
                                         }
                                     },
                                     {
@@ -3914,7 +3914,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2121"
+                                            "USD": "0.0954"
                                         }
                                     },
                                     {
@@ -3936,7 +3936,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0111"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -3953,7 +3953,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0221"
+                                            "USD": "0.0101"
                                         }
                                     },
                                     {
@@ -3970,13 +3970,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0424"
+                                            "USD": "0.0205"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0823"
+                                            "USD": "0.0822"
                                         }
                                     }
                                 ]
@@ -3987,7 +3987,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0841"
+                                            "USD": "0.0401"
                                         }
                                     },
                                     {
@@ -4099,7 +4099,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0241"
+                                            "USD": "0.0201"
                                         }
                                     },
                                     {
@@ -4116,7 +4116,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0961"
+                                            "USD": "0.0801"
                                         }
                                     },
                                     {
@@ -4289,13 +4289,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0629"
+                                            "USD": "0.0209"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0978"
+                                            "USD": "0.0977"
                                         }
                                     }
                                 ]
@@ -4306,13 +4306,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.1235"
+                                            "USD": "0.0407"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.1933"
+                                            "USD": "0.1934"
                                         }
                                     }
                                 ]
@@ -4323,7 +4323,7 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.2462"
+                                            "USD": "0.0802"
                                         }
                                     },
                                     {
@@ -4384,13 +4384,13 @@ callback({"vers": 0.01,"config": {"rate": "perhr","valueColumns": ["linux", "msw
                                     {
                                         "name": "linux",
                                         "prices": {
-                                            "USD": "0.0041"
+                                            "USD": "0.0031"
                                         }
                                     },
                                     {
                                         "name": "mswin",
                                         "prices": {
-                                            "USD": "0.0071"
+                                            "USD": "0.0061"
                                         }
                                     }
                                 ]
