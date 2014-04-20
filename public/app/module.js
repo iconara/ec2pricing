@@ -184,7 +184,9 @@
                     }
                     osPricing[awsValueColumn.name] = +awsValueColumn.prices.USD
                   } else {
-                    if (awsValueColumn.name != "ec2") {
+                    if (awsValueColumn.name == "os") {
+                      pricingCategoryData[awsPricing.operatingSystem] = +awsValueColumn.prices.USD
+                    } else if (awsValueColumn.name != "ec2") {
                       pricingCategoryData[awsValueColumn.name] = +awsValueColumn.prices.USD
                     }
                   }
