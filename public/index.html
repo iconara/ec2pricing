@@ -23,26 +23,76 @@
   <body ng-controller="ApplicationController">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand"><span class="cloud glyphicon glyphicon-cloud"></span> EC2 Instance Types &amp; Pricing</a>
+        <div class="navbar-header visible-lg visible-md">
+          <a class="navbar-brand">
+            <span class="cloud glyphicon glyphicon-cloud"></span>
+            EC2 Instance Types &amp; Pricing
+          </a>
+        </div>
+        <div class="navbar-header hidden-lg hidden-md">
+          <a class="navbar-brand">
+            <span class="cloud glyphicon glyphicon-cloud"></span>
+            EC2 Pricing
+          </a>
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">{{settings.region}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li ng-repeat="region in regions"><a ng-click="settings.region = region">{{region}}</a></li>
+              <li role="presentation" class="dropdown-header">Region</li>
+              <li ng-repeat="region in regions">
+                <a ng-click="settings.region = region">
+                  <span ng-show="settings.region == region" class="selection-indicator glyphicon glyphicon-ok"></span>
+                  {{region}}
+                </a>
+              </li>
             </ul>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">{{settings.operatingSystem}} <b class="caret"></b></a>
+            <a class="dropdown-toggle" data-toggle="dropdown">{{operatingSystemNames[settings.operatingSystem]}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li ng-repeat="operatingSystem in operatingSystems"><a ng-click="settings.operatingSystem = operatingSystem">{{operatingSystem}}</a></li>
+              <li role="presentation" class="dropdown-header">Operating System</li>
+              <li ng-repeat="operatingSystem in operatingSystems">
+                <a ng-click="settings.operatingSystem = operatingSystem">
+                  <span ng-show="settings.operatingSystem == operatingSystem" class="selection-indicator glyphicon glyphicon-ok"></span>
+                  {{operatingSystemNames[operatingSystem]}}
+                </a>
+              </li>
             </ul>
           </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">{{settings.period}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li ng-repeat="period in periods"><a ng-click="settings.period = period">{{period}}</a></li>
+              <li role="presentation" class="dropdown-header">Pricing period</li>
+              <li ng-repeat="period in periods">
+                <a ng-click="settings.period = period">
+                  <span ng-show="settings.period == period" class="selection-indicator glyphicon glyphicon-ok"></span>
+                  {{period}}
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown visible-lg visible-md visible-sm">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              {{reservationTerms[settings.reservationTerm]}} {{reservationTypes[settings.reservationType]}}
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation" class="dropdown-header">Reservation term</li>
+              <li ng-repeat="(reservationTerm, reservationTermName) in reservationTerms">
+                <a ng-click="settings.reservationTerm = reservationTerm">
+                  <span ng-show="settings.reservationTerm == reservationTerm" class="selection-indicator glyphicon glyphicon-ok"></span>
+                  {{reservationTermName}}
+                </a>
+              </li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation" class="dropdown-header">Reservation type</li>
+              <li ng-repeat="(reservationType, reservationTypeName) in reservationTypes">
+                <a ng-click="settings.reservationType = reservationType">
+                  <span ng-show="settings.reservationType == reservationType" class="selection-indicator glyphicon glyphicon-ok"></span>
+                  {{reservationTypeName}}
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -93,22 +143,6 @@
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="well">
-            <form class="form-inline">
-              <div class="form-group">
-                <div class="visible-lg visible-md visible-sm">
-                  <label for="reservationSetting">Reservation</label>
-                  <select name="reservationSetting" class="input-sm form-control" ng-model="settings.reservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
-                  <select name="reservationSetting2" class="input-sm form-control" ng-model="settings.reservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </div>

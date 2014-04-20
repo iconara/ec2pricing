@@ -156,11 +156,15 @@
       "ebsOptimizedPrice": priceSort("other", "ebsOptimized")
     }
     return function (input) {
-      var sorted = input.slice().sort(sortFunctions[displaySettings.sortField] || sortFunctions["apiName"])
-      if (!displaySettings.sortAscending) {
-        sorted.reverse()
+      if (input) {
+        var sorted = input.slice().sort(sortFunctions[displaySettings.sortField] || sortFunctions["apiName"])
+        if (!displaySettings.sortAscending) {
+          sorted.reverse()
+        }
+        return sorted
+      } else {
+        return input
       }
-      return sorted
     }
   })
 }())

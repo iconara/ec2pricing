@@ -16,9 +16,31 @@
   })
 
   ec2pricing.controller("ApplicationController", function ($scope, pricingData, displaySettings) {
-    $scope.reservationTypes = ["lightReservation", "mediumReservation", "heavyReservation"]
-    $scope.reservationTerms = ["yrTerm1", "yrTerm3"]
-    $scope.periods = ["hourly", "daily", "weekly", "monthly", "yearly"]
+    $scope.reservationTypes = {
+      "lightReservation": "light",
+      "mediumReservation": "medium",
+      "heavyReservation": "heavy"
+    }
+    $scope.reservationTerms = {
+      "yrTerm1": "1 year",
+      "yrTerm3": "3 years"
+    }
+    $scope.periods = [
+      "hourly",
+      "daily",
+      "weekly",
+      "monthly",
+      "yearly"
+    ]
+    $scope.operatingSystemNames = {
+      "linux": "Linux",
+      "mswin": "Windows",
+      "rhel": "RedHat",
+      "sles": "SUSE",
+      "mswinsql": "SQL Server Standard",
+      "mswinsqlweb": "SQL Server Web"
+    }
+
     $scope.settings = displaySettings
 
     pricingData.then(function (data) {
