@@ -75,17 +75,18 @@
     "http://a0.awsstatic.com/pricing/1/ec2/pricing-elb.min.js"
   ])
 
-  ec2pricing.factory("pricingData", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
-    var loadData = function (url) {
-      return cache(url, jsonpLoader, url, "callback").then(function (data) {
-        data.url = url
-        return data
+  ec2pricing.factory("pricingDataLoader", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
+    var load = function () {
+      var promises = pricingUrls.map(function (url) {
+        return cache(url, jsonpLoader, url, "callback").then(function (data) {
+          data.url = url
+          return data
+        })
       })
+      return $q.all(promises).then(awsDataParser)
     }
     return {
-      load: function () {
-        return $q.all(pricingUrls.map(loadData)).then(awsDataParser)
-      }
+      load: load
     }
   })
 }())

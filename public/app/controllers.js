@@ -15,7 +15,7 @@
     }
   })
 
-  ec2pricing.controller("ApplicationController", function ($scope, pricingData, displaySettings) {
+  ec2pricing.controller("ApplicationController", function ($scope, pricingDataLoader, displaySettings) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -43,7 +43,7 @@
 
     $scope.settings = displaySettings
 
-    pricingData.load().then(function (data) {
+    pricingDataLoader.load().then(function (data) {
       $scope.regions = data.regions
       $scope.operatingSystems = data.operatingSystems
       $scope.instanceTypes = data.instanceTypes
