@@ -8,29 +8,29 @@
       restrict: "A",
       link: function (scope, element, attrs) {
         var update = function () {
-          var sortIndicator = element.find("span")
           if (displaySettings.sortField == attrs.name) {
-            if (sortIndicator.length == 0) {
-              sortIndicator = angular.element("<span></span>")
-              sortIndicator.addClass("caret")
-              if (element.hasClass("text-column")) {
-                element.append(sortIndicator)
-              } else {
-                element.prepend(sortIndicator)
-              }
-            }
+            var sortIndicator = element.find("span")
             if (displaySettings.sortAscending) {
               sortIndicator.removeClass("caret-reversed")
             } else {
               sortIndicator.addClass("caret-reversed")
             }
-          } else if (sortIndicator.length > 0) {
-            sortIndicator.remove()
+            element.addClass("sort-column")
+          } else {
+            element.removeClass("sort-column")
           }
         }
 
         scope.$watch(function () { return displaySettings.sortField }, update)
         scope.$watch(function () { return displaySettings.sortAscending }, update)
+
+        var sortIndicator = angular.element("<span></span>")
+        sortIndicator.addClass("caret")
+        if (element.hasClass("text-column")) {
+          element.append(sortIndicator)
+        } else {
+          element.prepend(sortIndicator)
+        }
 
         element.addClass(attrs.name)
         element.bind("click", function () {
