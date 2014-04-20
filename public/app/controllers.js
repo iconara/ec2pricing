@@ -16,15 +16,6 @@
   })
 
   ec2pricing.controller("ApplicationController", function ($scope, pricingData, displaySettings) {
-    $scope.sortBy = function (what) {
-      if (what == displaySettings.sortField) {
-        displaySettings.sortAscending = !displaySettings.sortAscending
-      } else {
-        displaySettings.sortField = what
-        displaySettings.sortAscending = false
-      }
-    }
-
     $scope.reservationTypes = ["lightReservation", "mediumReservation", "heavyReservation"]
     $scope.reservationTerms = ["yrTerm1", "yrTerm3"]
     $scope.periods = ["hourly", "daily", "weekly", "monthly", "yearly"]
@@ -34,8 +25,6 @@
       $scope.regions = data.regions
       $scope.operatingSystems = data.operatingSystems
       $scope.instanceTypes = data.instanceTypes
-
-      $scope.sortBy("apiName")
     })
   })
 }())

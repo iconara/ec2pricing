@@ -1,7 +1,7 @@
 (function () {
   "use strict"
 
-  var ec2pricing = angular.module("ec2pricing", ["ec2pricing.filters"])
+  var ec2pricing = angular.module("ec2pricing", ["ec2pricing.filters", "ec2pricing.directives"])
 
   ec2pricing.value("pricingUrls", [
     // on demand
