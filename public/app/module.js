@@ -102,14 +102,14 @@
     return function (key, producer, _args) {
       var cacheKey = "ec2pricing:" + key
       var value = $window.localStorage[cacheKey]
-      if (value) {
+      if (value && value.time + 1800000 < (new Date().getTime())) {
         return $q.when(angular.fromJson(value))
       } else {
         var args = Array.prototype.slice.apply(arguments)
         args.shift()
         args.shift()
         return producer.apply(null, args).then(function (value) {
-          localStorage[cacheKey] = angular.toJson(value)
+          localStorage[cacheKey] = angular.toJson({time: new Date().getTime(), value: value})
           return value
         })
       }
