@@ -29,44 +29,60 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="form-group">
-            <form class="form-inline"> 
-              <select class="input-sm form-control" ng-model="settings.region" ng-options="region for region in regions"></select>
-              <select class="input-sm form-control" ng-model="settings.operatingSystem" ng-options="os for os in operatingSystems"></select>
-              <select class="input-sm form-control" ng-model="settings.period" ng-options="period for period in periods"></select>
-              <select class="input-sm form-control" ng-model="settings.reservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
-              <select class="input-sm form-control" ng-model="settings.reservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table prices">
-            <tr>
-              <th class="apiName" ng-click="sortBy('apiName')">API name</th>
-              <th class="cpus" ng-click="sortBy('cpus')">CPUs</th>
-              <th class="ram" ng-click="sortBy('ram')">RAM</th>
-              <th class="disk" ng-click="sortBy('disk')" title="Instance store disk">Disk</th>
-              <th class="price" ng-click="sortBy('reservedPrice')">Reserved</th>
-              <th class="price" ng-click="sortBy('onDemandPrice')">On demand</th>
-              <th class="price" ng-click="sortBy('spotPrice')">Spot</th>
-              <th class="price" ng-click="sortBy('emrPrice')">EMR</th>
-              <th class="price" ng-click="sortBy('ebsOptimizedPrice')">EBS&nbsp;Opt.</th>
-            </tr>
-            <tr ng-repeat="instanceType in instanceTypes | sortInstances">
-              <td class="apiName">{{instanceType.apiName}}</td>
-              <td class="cpus">{{instanceType.cpus}}</td>
-              <td class="ram">{{instanceType.ram}} GiB</td>
-              <td class="disk">{{instanceType.disk | disks}}</td>
-              <td class="price">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
-              <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
-              <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
-              <td class="price">{{instanceType.prices[settings.region]["other"]["emr"] | price}}</td>
-              <td class="price">{{instanceType.prices[settings.region]["other"]["ebsOptimized"] | price}}</td>
-            </tr>
+          <table class="prices table table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="apiName" ng-click="sortBy('apiName')">API name</th>
+                <th class="cpus visible-lg visible-md" ng-click="sortBy('cpus')">CPUs</th>
+                <th class="ram" ng-click="sortBy('ram')">RAM</th>
+                <th class="disk" ng-click="sortBy('disk')" title="Instance store disk size">Disk</th>
+                <th class="price visible-lg visible-md visible-sm" ng-click="sortBy('reservedPrice')" title="Normalized price for a reserved instance (with current reservation settings)">Reserved</th>
+                <th class="price" ng-click="sortBy('onDemandPrice')" title="On demand (regular) price">On demand</th>
+                <th class="price" ng-click="sortBy('spotPrice')" title="Price on the spot market">Spot</th>
+                <th class="price visible-lg visible-md" ng-click="sortBy('emrPrice')" title="Additional cost for instances in Elastic MapReduce clusters">EMR</th>
+                <th class="price visible-lg visible-md" ng-click="sortBy('ebsOptimizedPrice')" title="Additional cost for EBS optimized instances">EBS&nbsp;Opt.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="instanceType in instanceTypes | sortInstances">
+                <td class="apiName">{{instanceType.apiName}}</td>
+                <td class="cpus visible-lg visible-md">{{instanceType.cpus}}</td>
+                <td class="ram">{{instanceType.ram}} GiB</td>
+                <td class="disk">{{instanceType.disk | disks}}</td>
+                <td class="price visible-lg visible-md visible-sm">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
+                <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
+                <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
+                <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["emr"] | price}}</td>
+                <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["ebsOptimized"] | price}}</td>
+              </tr>
+            </tbody>
           </table>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="regionSetting">Region</label>
+                  <select name="regionSetting" class="input-sm form-control" ng-model="settings.region" ng-options="region for region in regions"></select>
+                </div>
+                <div class="form-group">
+                  <label for="operatingSystemSetting">OS</label>
+                  <select name="operatingSystemSetting" class="input-sm form-control" ng-model="settings.operatingSystem" ng-options="os for os in operatingSystems"></select>
+                </div>
+                <div class="form-group">
+                  <label for="periodSetting">Period</label>
+                  <select name="periodSetting" class="input-sm form-control" ng-model="settings.period" ng-options="period for period in periods"></select>
+                </div>
+                <div class="form-group visible-lg visible-md visible-sm">
+                  <label for="reservationSetting">Reservation</label>
+                  <select name="reservationSetting" class="input-sm form-control" ng-model="settings.reservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
+                  <select name="reservationSetting2" class="input-sm form-control" ng-model="settings.reservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
