@@ -48,6 +48,7 @@
   })
 
   filters.filter("sortInstances", function (displaySettings, normalizedReservePrice) {
+    var sizeOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
     var stringSort = function (field) {
       return function (a, b) {
         return a[field].localeCompare(b[field])
@@ -56,6 +57,16 @@
     var numberSort = function (field) {
       return function (a, b) {
         return a[field] - b[field]
+      }
+    }
+    var apiNameSort = function (a, b) {
+      var aComponents = a.apiName.match(/^(.+?)\.(.+?)$/)
+      var bComponents = b.apiName.match(/^(.+?)\.(.+?)$/)
+      var familyResult = aComponents[1].localeCompare(bComponents[1])
+      if (familyResult == 0) {
+        return sizeOrder.indexOf(aComponents[2]) - sizeOrder.indexOf(bComponents[2])
+      } else {
+        return familyResult
       }
     }
     var diskSort = function (a, b) {
@@ -106,7 +117,7 @@
       return path.reduce(function (obj, key) { return obj && obj[key] }, object)
     }
     var sortFunctions = {
-      "apiName": stringSort("apiName"),
+      "apiName": apiNameSort,
       "cpus": numberSort("cpus"),
       "ram": numberSort("ram"),
       "disk": diskSort,
