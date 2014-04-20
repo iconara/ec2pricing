@@ -73,19 +73,56 @@
       return disk
     }
 
+    var guessOsFromUrl = function (url) {
+      if (url.indexOf("redhat") != -1 || url.indexOf("rhel") != -1) {
+        return "rhel"
+      } else if (url.indexOf("suse") != -1 || url.indexOf("sles") != -1) {
+        return "sles"
+      } else if (url.toLowerCase().indexOf("mswinsqlweb") != -1) {
+        return "mswinsqlweb"
+      } else if (url.toLowerCase().indexOf("mswinsql") != -1) {
+        return "mswinsql"
+      } else if (url.indexOf("mswin") != -1) {
+        return "mswin"
+      } else if (url.indexOf("linux") != -1) {
+        return "linux"
+      } else {
+        return null
+      }
+    }
+
+    var guessCategoryFromUrl = function (url) {
+      if (url.indexOf("-od") != -1) {
+        return "onDemand"
+      } else if (url.indexOf("spot") != -1) {
+        return "spot"
+      } else if (url.indexOf("-ri-light") != -1 || url.indexOf("light_") != -1) {
+        return "lightReservation"
+      } else if (url.indexOf("-ri-medium") != -1 || url.indexOf("medium_") != -1) {
+        return "mediumReservation"
+      } else if (url.indexOf("-ri-heavy") != -1 || url.indexOf("heavy_") != -1) {
+        return "heavyReservation"
+      } else {
+        return "other"
+      }
+    }
+
     return function (awsPricingFeeds) {
       var instanceTypes = {}
       var regions = {}
       var operatingSystems = {}
 
       awsPricingFeeds.forEach(function (awsPricing) {
+        var operatingSystem = guessOsFromUrl(awsPricing.url)
+        var pricingCategory = guessCategoryFromUrl(awsPricing.url)
+
         awsPricing.config.regions.forEach(function (awsRegion) {
           var regionName = regionMap[awsRegion.region] || awsRegion.region
           regions[regionName] = regionName
 
           if (awsRegion.instanceTypes) {
-            if (awsPricing.operatingSystem) {
-              operatingSystems[awsPricing.operatingSystem.toLowerCase()] = awsPricing.operatingSystem.toLowerCase()
+            if (operatingSystem) {
+              operatingSystems[operatingSystem.toLowerCase()] = operatingSystem.toLowerCase()
             }
 
             awsRegion.instanceTypes.forEach(function (awsInstanceFamily) {
@@ -104,19 +141,19 @@
                   if (!regionPrices) {
                     regionPrices = instanceType.prices[regionName] = {}
                   }
-                  var pricingCategoryData = regionPrices[awsPricing.pricingCategory]
+                  var pricingCategoryData = regionPrices[pricingCategory]
                   if (!pricingCategoryData) {
-                    pricingCategoryData = regionPrices[awsPricing.pricingCategory] = {}
+                    pricingCategoryData = regionPrices[pricingCategory] = {}
                   }
-                  if (awsPricing.pricingCategory.match(/reservation/i) != null) {
-                    var osPricing = pricingCategoryData[awsPricing.operatingSystem]
+                  if (pricingCategory.match(/reservation/i) != null) {
+                    var osPricing = pricingCategoryData[operatingSystem]
                     if (!osPricing) {
-                      osPricing = pricingCategoryData[awsPricing.operatingSystem] = {}
+                      osPricing = pricingCategoryData[operatingSystem] = {}
                     }
                     osPricing[awsValueColumn.name] = +awsValueColumn.prices.USD
                   } else {
                     if (awsValueColumn.name == "os") {
-                      pricingCategoryData[awsPricing.operatingSystem] = +awsValueColumn.prices.USD
+                      pricingCategoryData[operatingSystem] = +awsValueColumn.prices.USD
                     } else if (awsValueColumn.name == "ebsOptimized") {
                       pricingCategoryData[awsValueColumn.name] = +awsValueColumn.prices.USD
                     } else if (awsValueColumn.name != "ec2") {

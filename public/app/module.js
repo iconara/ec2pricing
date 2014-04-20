@@ -76,42 +76,9 @@
   ])
 
   ec2pricing.factory("pricingData", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
-    var guessOsFromUrl = function (url) {
-      if (url.indexOf("redhat") != -1 || url.indexOf("rhel") != -1) {
-        return "rhel"
-      } else if (url.indexOf("suse") != -1 || url.indexOf("sles") != -1) {
-        return "sles"
-      } else if (url.toLowerCase().indexOf("mswinsqlweb") != -1) {
-        return "mswinsqlweb"
-      } else if (url.toLowerCase().indexOf("mswinsql") != -1) {
-        return "mswinsql"
-      } else if (url.indexOf("mswin") != -1) {
-        return "mswin"
-      } else if (url.indexOf("linux") != -1) {
-        return "linux"
-      } else {
-        return null
-      }
-    }
-    var guessCategoryFromUrl = function (url) {
-      if (url.indexOf("-od") != -1) {
-        return "onDemand"
-      } else if (url.indexOf("spot") != -1) {
-        return "spot"
-      } else if (url.indexOf("-ri-light") != -1 || url.indexOf("light_") != -1) {
-        return "lightReservation"
-      } else if (url.indexOf("-ri-medium") != -1 || url.indexOf("medium_") != -1) {
-        return "mediumReservation"
-      } else if (url.indexOf("-ri-heavy") != -1 || url.indexOf("heavy_") != -1) {
-        return "heavyReservation"
-      } else {
-        return "other"
-      }
-    }
     var loadData = function (url) {
       return cache(url, jsonpLoader, url, "callback").then(function (data) {
-        data.pricingCategory = guessCategoryFromUrl(url)
-        data.operatingSystem = guessOsFromUrl(url)
+        data.url = url
         return data
       })
     }
