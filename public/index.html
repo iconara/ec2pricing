@@ -57,8 +57,8 @@
             <tr ng-repeat="instanceType in instanceTypes">
               <td class="apiName">{{instanceType.apiName}}</td>
               <td class="cpus">{{instanceType.cpus}}</td>
-              <td class="ram">{{instanceType.ram}}</td>
-              <td class="disk">{{instanceType.disk}}</td>
+              <td class="ram">{{instanceType.ram}} GiB</td>
+              <td class="disk">{{instanceType.disk | disks}}</td>
               <td class="price">{{instanceType.prices[selectedRegion][selectedReservationType][selectedOperatingSystem] | price:selectedPeriod:selectedReservationTerm}}</td>
               <td class="price">{{instanceType.prices[selectedRegion]["onDemand"][selectedOperatingSystem] | price:selectedPeriod:null}}</td>
               <td class="price">{{instanceType.prices[selectedRegion]["spot"][selectedOperatingSystem] | price:selectedPeriod:null}}</td>

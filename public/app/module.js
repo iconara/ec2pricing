@@ -1,9 +1,9 @@
 (function () {
   "use strict"
 
-  var ec2pricing = angular.module("ec2pricing", [])
+  var filters = angular.module("ec2pricing.filters", [])
 
-  ec2pricing.filter("price", function () {
+  filters.filter("price", function () {
     var periodMultiplier = {
       "hourly": 1,
       "daily": 24,
@@ -24,6 +24,22 @@
       return "$" + (hourlyPrice * periodMultiplier[period]).toFixed(3)
     }
   })
+
+  filters.filter("disks", function () {
+    return function (input) {
+      if (input == null) {
+        return "n/a"
+      } else {
+        var str = input.disks + "\u00A0×\u00A0" + input.size + "\u00A0GB"
+        if (input.ssd) {
+          str += "\u00A0SSD"
+        }
+        return str
+      }
+    }
+  })
+
+  var ec2pricing = angular.module("ec2pricing", ["ec2pricing.filters"])
 
   ec2pricing.value("pricingUrls", [
     // on demand
@@ -148,6 +164,25 @@
       "apac-syd":       "ap-southeast-2"
     }
 
+    var parseDisk = function (str) {
+      if (str == "ebsonly") {
+        return null
+      }
+      var disk = {}
+      if (str.match(/^\s*(\d+)\s*x\s*(\d+)\s*(\w+)?\s*$/)) {
+        disk.disks = +RegExp.$1
+        disk.size = +RegExp.$2
+        disk.ssd = RegExp.$3 == "SSD"
+      } else if (str.match(/^\s*(\d+)\s*(\w+)\s*$/)) {
+        disk.disks = 1
+        disk.size = +RegExp.$1
+        disk.ssd = RegExp.$2 == "SSD"
+      } else {
+        console.warn("Could not parse disk specs", str)
+      }
+      return disk
+    }
+
     return function (awsPricingFeeds) {
       var instanceTypes = {}
       var regions = {}
@@ -167,8 +202,8 @@
                   instanceType = instanceTypes[awsInstanceType.size] = {}
                   instanceType.apiName = awsInstanceType.size
                   instanceType.cpus = awsInstanceType.vCPU
-                  instanceType.ram = awsInstanceType.memoryGiB
-                  instanceType.disk = awsInstanceType.storageGB
+                  instanceType.ram = +awsInstanceType.memoryGiB
+                  instanceType.disk = parseDisk(awsInstanceType.storageGB)
                   instanceType.prices = {}
                 }
                 awsInstanceType.valueColumns.forEach(function (awsValueColumn) {
