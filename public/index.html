@@ -21,13 +21,35 @@
     <script src="/app/controllers.js" charset="utf-8"></script>
   </head>
   <body ng-controller="ApplicationController">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <h1><span class="cloud glyphicon glyphicon-cloud"></span> EC2 Instance Types &amp; Pricing</h1>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand"><span class="cloud glyphicon glyphicon-cloud"></span> EC2 Instance Types &amp; Pricing</a>
         </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">{{settings.region}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="region in regions"><a ng-click="settings.region = region">{{region}}</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">{{settings.operatingSystem}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="operatingSystem in operatingSystems"><a ng-click="settings.operatingSystem = operatingSystem">{{operatingSystem}}</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">{{settings.period}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="period in periods"><a ng-click="settings.period = period">{{period}}</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
+    </nav>
 
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <table class="prices table table-striped table-hover">
@@ -65,18 +87,6 @@
         <div class="col-md-12">
           <div class="well">
             <form class="form-inline">
-              <div class="form-group">
-                <label for="regionSetting">Region</label>
-                <select name="regionSetting" class="input-sm form-control" ng-model="settings.region" ng-options="region for region in regions"></select>
-              </div>
-              <div class="form-group">
-                <label for="operatingSystemSetting">OS</label>
-                <select name="operatingSystemSetting" class="input-sm form-control" ng-model="settings.operatingSystem" ng-options="os for os in operatingSystems"></select>
-              </div>
-              <div class="form-group">
-                <label for="periodSetting">Period</label>
-                <select name="periodSetting" class="input-sm form-control" ng-model="settings.period" ng-options="period for period in periods"></select>
-              </div>
               <div class="form-group">
                 <div class="visible-lg visible-md visible-sm">
                   <label for="reservationSetting">Reservation</label>
