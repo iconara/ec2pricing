@@ -11,7 +11,7 @@
       reservationTerm: "yrTerm1",
       period: "hourly",
       sortField: "apiName",
-      sortAscending: false
+      sortAscending: true
     }
   })
 
