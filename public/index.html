@@ -46,7 +46,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="instanceType in instanceTypes | sortInstances">
-                <td class="apiName">{{instanceType.apiName}}</td>
+                <td class="apiName"><span class="label label-primary">{{instanceType.apiName}}</span></td>
                 <td class="cpus visible-lg visible-md">{{instanceType.cpus}}</td>
                 <td class="ram">{{instanceType.ram}} GiB</td>
                 <td class="disk">{{instanceType.disk | disks}}</td>
