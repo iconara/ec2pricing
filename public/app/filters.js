@@ -3,7 +3,7 @@
 
   var filters = angular.module("ec2pricing.filters", [])
 
-  filters.filter("price", function () {
+  filters.filter("price", function (displaySettings) {
     var periodMultiplier = {
       "hourly": 1,
       "daily": 24,
@@ -11,17 +11,17 @@
       "monthly": 24 * 365.25/12,
       "yearly": 24 * 365.25
     }
-    return function (input, period, reservationTerm) {
+    return function (input) {
       if (input == null || input === "") {
         return "n/a"
       }
       var hourlyPrice = input
       if (typeof input == "object" && "yrTerm1" in input) {
-        var fixed = input[reservationTerm]
-        var hourly = input[reservationTerm + "Hourly"]
+        var fixed = input[displaySettings.reservationTerm]
+        var hourly = input[displaySettings.reservationTerm + "Hourly"]
         hourlyPrice = fixed/periodMultiplier["yearly"] + hourly
       }
-      return "$" + (hourlyPrice * periodMultiplier[period]).toFixed(3)
+      return "$" + (hourlyPrice * periodMultiplier[displaySettings.period]).toFixed(3)
     }
   })
 
@@ -39,7 +39,7 @@
     }
   })
 
-  filters.filter("sortInstances", function () {
+  filters.filter("sortInstances", function (displaySettings) {
     var stringSort = function (field) {
       return function (a, b) {
         return a[field].localeCompare(b[field])
@@ -87,9 +87,9 @@
       "emrPrice": priceSort,
       "ebsOptimizedPrice": priceSort
     }
-    return function (input, sortField, ascending) {
-      var sorted = input.slice().sort(sortFunctions[sortField] || sortFunctions["apiName"])
-      if (!ascending) {
+    return function (input) {
+      var sorted = input.slice().sort(sortFunctions[displaySettings.sortField] || sortFunctions["apiName"])
+      if (!displaySettings.sortAscending) {
         sorted.reverse()
       }
       return sorted

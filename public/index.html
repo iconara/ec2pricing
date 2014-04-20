@@ -31,11 +31,11 @@
         <div class="col-md-12">
           <div class="form-group">
             <form class="form-inline"> 
-              <select class="input-sm form-control" ng-model="selectedRegion" ng-options="region for region in regions"></select>
-              <select class="input-sm form-control" ng-model="selectedOperatingSystem" ng-options="os for os in operatingSystems"></select>
-              <select class="input-sm form-control" ng-model="selectedPeriod" ng-options="period for period in periods"></select>
-              <select class="input-sm form-control" ng-model="selectedReservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
-              <select class="input-sm form-control" ng-model="selectedReservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
+              <select class="input-sm form-control" ng-model="settings.region" ng-options="region for region in regions"></select>
+              <select class="input-sm form-control" ng-model="settings.operatingSystem" ng-options="os for os in operatingSystems"></select>
+              <select class="input-sm form-control" ng-model="settings.period" ng-options="period for period in periods"></select>
+              <select class="input-sm form-control" ng-model="settings.reservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
+              <select class="input-sm form-control" ng-model="settings.reservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
             </form>
           </div>
         </div>
@@ -55,16 +55,16 @@
               <th class="price" ng-click="sortBy('emrPrice')">EMR</th>
               <th class="price" ng-click="sortBy('ebsOptimizedPrice')">EBS&nbsp;Opt.</th>
             </tr>
-            <tr ng-repeat="instanceType in instanceTypes | sortInstances:sortField:sortAscending">
+            <tr ng-repeat="instanceType in instanceTypes | sortInstances">
               <td class="apiName">{{instanceType.apiName}}</td>
               <td class="cpus">{{instanceType.cpus}}</td>
               <td class="ram">{{instanceType.ram}} GiB</td>
               <td class="disk">{{instanceType.disk | disks}}</td>
-              <td class="price">{{instanceType.prices[selectedRegion][selectedReservationType][selectedOperatingSystem] | price:selectedPeriod:selectedReservationTerm}}</td>
-              <td class="price">{{instanceType.prices[selectedRegion]["onDemand"][selectedOperatingSystem] | price:selectedPeriod:null}}</td>
-              <td class="price">{{instanceType.prices[selectedRegion]["spot"][selectedOperatingSystem] | price:selectedPeriod:null}}</td>
-              <td class="price">{{instanceType.prices[selectedRegion]["other"]["emr"] | price:selectedPeriod:null}}</td>
-              <td class="price">{{instanceType.prices[selectedRegion]["other"]["ebsOptimized"] | price:selectedPeriod:null}}</td>
+              <td class="price">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
+              <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
+              <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
+              <td class="price">{{instanceType.prices[settings.region]["other"]["emr"] | price}}</td>
+              <td class="price">{{instanceType.prices[settings.region]["other"]["ebsOptimized"] | price}}</td>
             </tr>
           </table>
         </div>
