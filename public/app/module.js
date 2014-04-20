@@ -83,9 +83,9 @@
       frame.height = '0px'
       frame.width = '0px'
       frame.style['background-color'] = 'transparent'
-      frame.style['border'] =  '0px none transparent'
-      frame.style['padding'] =  '0px'
-      frame.style['overflow'] =  'hidden'
+      frame.style['border'] = '0px none transparent'
+      frame.style['padding'] = '0px'
+      frame.style['overflow'] = 'hidden'
       $window.document.body.appendChild(frame)
       var script = frame.contentDocument.createElement('script')
       script.src = url
