@@ -5,6 +5,15 @@
 
   ec2pricing.controller("ApplicationController", function ($scope, pricingData) {
     pricingData.then(function (data) {
+      $scope.sortBy = function (what) {
+        if (what == $scope.sortField) {
+          $scope.sortAscending = !$scope.sortAscending
+        } else {
+          $scope.sortField = what
+          $scope.sortAscending = false
+        }
+      }
+
       $scope.regions = data.regions
       $scope.operatingSystems = data.operatingSystems
       $scope.instanceTypes = data.instanceTypes
@@ -16,6 +25,8 @@
       $scope.selectedReservationType = "heavyReservation"
       $scope.selectedReservationTerm = "yrTerm1"
       $scope.selectedPeriod = $scope.periods[0]
+
+      $scope.sortBy("apiName")
     })
   })
 }())

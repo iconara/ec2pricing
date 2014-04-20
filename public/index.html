@@ -45,17 +45,17 @@
         <div class="col-md-12">
           <table class="table prices">
             <tr>
-              <th class="apiName">API name</th>
-              <th class="cpus">CPUs</th>
-              <th class="ram">RAM</th>
-              <th class="disk" title="Instance store disk">Disk</th>
-              <th class="price">Reserved</th>
-              <th class="price">On demand</th>
-              <th class="price">Spot</th>
-              <th class="price">EMR</th>
-              <th class="price">EBS&nbsp;Opt.</th>
+              <th class="apiName" ng-click="sortBy('apiName')">API name</th>
+              <th class="cpus" ng-click="sortBy('cpus')">CPUs</th>
+              <th class="ram" ng-click="sortBy('ram')">RAM</th>
+              <th class="disk" ng-click="sortBy('disk')" title="Instance store disk">Disk</th>
+              <th class="price" ng-click="sortBy('reservedPrice')">Reserved</th>
+              <th class="price" ng-click="sortBy('onDemandPrice')">On demand</th>
+              <th class="price" ng-click="sortBy('spotPrice')">Spot</th>
+              <th class="price" ng-click="sortBy('emrPrice')">EMR</th>
+              <th class="price" ng-click="sortBy('ebsOptimizedPrice')">EBS&nbsp;Opt.</th>
             </tr>
-            <tr ng-repeat="instanceType in instanceTypes">
+            <tr ng-repeat="instanceType in instanceTypes | sortInstances:sortField:sortAscending">
               <td class="apiName">{{instanceType.apiName}}</td>
               <td class="cpus">{{instanceType.cpus}}</td>
               <td class="ram">{{instanceType.ram}} GiB</td>
