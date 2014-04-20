@@ -59,32 +59,32 @@
           </table>
         </div>
 
-        <div class="row">
-          <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form-inline">
             <div class="form-group">
-              <form class="form-inline">
-                <div class="form-group">
-                  <label for="regionSetting">Region</label>
-                  <select name="regionSetting" class="input-sm form-control" ng-model="settings.region" ng-options="region for region in regions"></select>
-                </div>
-                <div class="form-group">
-                  <label for="operatingSystemSetting">OS</label>
-                  <select name="operatingSystemSetting" class="input-sm form-control" ng-model="settings.operatingSystem" ng-options="os for os in operatingSystems"></select>
-                </div>
-                <div class="form-group">
-                  <label for="periodSetting">Period</label>
-                  <select name="periodSetting" class="input-sm form-control" ng-model="settings.period" ng-options="period for period in periods"></select>
-                </div>
-                <div class="form-group visible-lg visible-md visible-sm">
-                  <label for="reservationSetting">Reservation</label>
-                  <select name="reservationSetting" class="input-sm form-control" ng-model="settings.reservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
-                  <select name="reservationSetting2" class="input-sm form-control" ng-model="settings.reservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
-                </div>
-              </form>
+              <label for="regionSetting">Region</label>
+              <select name="regionSetting" class="input-sm form-control" ng-model="settings.region" ng-options="region for region in regions"></select>
             </div>
-          </div>
+            <div class="form-group">
+              <label for="operatingSystemSetting">OS</label>
+              <select name="operatingSystemSetting" class="input-sm form-control" ng-model="settings.operatingSystem" ng-options="os for os in operatingSystems"></select>
+            </div>
+            <div class="form-group">
+              <label for="periodSetting">Period</label>
+              <select name="periodSetting" class="input-sm form-control" ng-model="settings.period" ng-options="period for period in periods"></select>
+            </div>
+            <div class="form-group">
+              <div class="visible-lg visible-md visible-sm">
+                <label for="reservationSetting">Reservation</label>
+                <select name="reservationSetting" class="input-sm form-control" ng-model="settings.reservationType" ng-options="reservationType for reservationType in reservationTypes"></select>
+                <select name="reservationSetting2" class="input-sm form-control" ng-model="settings.reservationTerm" ng-options="reservationTerm for reservationTerm in reservationTerms" ng-disabled="selectedReservationType == 'onDemand'"></select>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+      </div>
   </body>
 </html>
