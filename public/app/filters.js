@@ -88,11 +88,11 @@
       }
     }
     var apiNameSort = function (a, b) {
-      var aComponents = a.apiName.match(/^(.+?)\.(.+?)$/)
-      var bComponents = b.apiName.match(/^(.+?)\.(.+?)$/)
-      var familyResult = familyOrder.indexOf(aComponents[1]) - familyOrder.indexOf(bComponents[1])
+      var aComponents = a.apiName.split(".")
+      var bComponents = b.apiName.split(".")
+      var familyResult = familyOrder.indexOf(aComponents[0]) - familyOrder.indexOf(bComponents[0])
       if (familyResult == 0) {
-        return sizeOrder.indexOf(aComponents[2]) - sizeOrder.indexOf(bComponents[2])
+        return sizeOrder.indexOf(aComponents[1]) - sizeOrder.indexOf(bComponents[1])
       } else {
         return familyResult
       }
