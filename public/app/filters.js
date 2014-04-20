@@ -3,23 +3,30 @@
 
   var filters = angular.module("ec2pricing.filters", [])
 
-  filters.filter("price", function (displaySettings) {
-    var periodMultiplier = {
-      "hourly": 1,
-      "daily": 24,
-      "weekly": 24 * 7,
-      "monthly": 24 * 365.25/12,
-      "yearly": 24 * 365.25
+  filters.value("periodMultiplier", {
+    "hourly": 1,
+    "daily": 24,
+    "weekly": 24 * 7,
+    "monthly": 24 * 365.25/12,
+    "yearly": 24 * 365.25
+  })
+
+  filters.factory("normalizedReservePrice", function (displaySettings, periodMultiplier) {
+    return function (input) {
+      var fixed = input[displaySettings.reservationTerm]
+      var hourly = input[displaySettings.reservationTerm + "Hourly"]
+      return fixed/periodMultiplier["yearly"] + hourly
     }
+  })
+
+  filters.filter("price", function (displaySettings, periodMultiplier, normalizedReservePrice) {
     return function (input) {
       if (input == null || input === "") {
         return "n/a"
       }
       var hourlyPrice = input
       if (typeof input == "object" && "yrTerm1" in input) {
-        var fixed = input[displaySettings.reservationTerm]
-        var hourly = input[displaySettings.reservationTerm + "Hourly"]
-        hourlyPrice = fixed/periodMultiplier["yearly"] + hourly
+        hourlyPrice = normalizedReservePrice(input)
       }
       return "$" + (hourlyPrice * periodMultiplier[displaySettings.period]).toFixed(3)
     }
@@ -39,7 +46,7 @@
     }
   })
 
-  filters.filter("sortInstances", function (displaySettings) {
+  filters.filter("sortInstances", function (displaySettings, normalizedReservePrice) {
     var stringSort = function (field) {
       return function (a, b) {
         return a[field].localeCompare(b[field])
@@ -73,19 +80,40 @@
         }
       }
     }
-    var priceSort = function (a, b) {
-      return 0
+    var priceSort = function (reservationType, operatingSystem) {
+      return function (a, b) {
+        var aPrice = get(a, ["prices", displaySettings.region, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem])
+        var bPrice = get(b, ["prices", displaySettings.region, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem])
+        if (typeof aPrice == "object" && "yrTerm1" in aPrice) {
+          aPrice = normalizedReservePrice(aPrice)
+        }
+        if (typeof bPrice == "object" && "yrTerm1" in bPrice) {
+          bPrice = normalizedReservePrice(bPrice)
+        }
+        if (aPrice == null && bPrice == 0) {
+          return 0
+        } else if (aPrice == null) {
+          return -1
+        } else if (bPrice == null) {
+          return 1
+        } else {
+          return aPrice - bPrice
+        }
+      }
+    }
+    var get = function (object, path) {
+      return path.reduce(function (obj, key) { return obj && obj[key] }, object)
     }
     var sortFunctions = {
       "apiName": stringSort("apiName"),
       "cpus": numberSort("cpus"),
       "ram": numberSort("ram"),
       "disk": diskSort,
-      "reservedPrice": priceSort,
-      "onDemandPrice": priceSort,
-      "spotPrice": priceSort,
-      "emrPrice": priceSort,
-      "ebsOptimizedPrice": priceSort
+      "reservedPrice": priceSort(),
+      "onDemandPrice": priceSort("onDemand"),
+      "spotPrice": priceSort("spot"),
+      "emrPrice": priceSort("other", "emr"),
+      "ebsOptimizedPrice": priceSort("other", "ebsOptimized")
     }
     return function (input) {
       var sorted = input.slice().sort(sortFunctions[displaySettings.sortField] || sortFunctions["apiName"])
