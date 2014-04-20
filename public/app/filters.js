@@ -48,6 +48,7 @@
   })
 
   filters.filter("sortInstances", function (displaySettings, normalizedReservePrice) {
+    var familyOrder = ["m3", "c3", "g2", "r3", "i2", "hs1", "t1", "m1", "c1", "cc2", "cg1", "m2", "cr1", "hi1"]
     var sizeOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
     var stringSort = function (field) {
       return function (a, b) {
@@ -62,7 +63,7 @@
     var apiNameSort = function (a, b) {
       var aComponents = a.apiName.match(/^(.+?)\.(.+?)$/)
       var bComponents = b.apiName.match(/^(.+?)\.(.+?)$/)
-      var familyResult = aComponents[1].localeCompare(bComponents[1])
+      var familyResult = familyOrder.indexOf(aComponents[1]) - familyOrder.indexOf(bComponents[1])
       if (familyResult == 0) {
         return sizeOrder.indexOf(aComponents[2]) - sizeOrder.indexOf(bComponents[2])
       } else {
