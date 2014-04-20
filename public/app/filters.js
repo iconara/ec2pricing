@@ -33,13 +33,14 @@
   })
 
   filters.filter("disks", function () {
+    var nbsp = "\u00A0"
     return function (input) {
       if (input == null) {
         return "n/a"
       } else {
-        var str = input.disks + "\u00A0×\u00A0" + input.size + "\u00A0GB"
+        var str = input.disks + nbsp + "×" + nbsp + input.size + nbsp + "GB"
         if (input.ssd) {
-          str += "\u00A0SSD"
+          str += nbsp + "SSD"
         }
         return str
       }
