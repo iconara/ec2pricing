@@ -154,9 +154,12 @@
         awsPricing.config.regions.forEach(function (awsRegion) {
           var regionName = regionMap[awsRegion.region] || awsRegion.region
           regions[regionName] = regionName
-          operatingSystems[awsPricing.operatingSystem] = awsPricing.operatingSystem
 
           if (awsRegion.instanceTypes) {
+            if (awsPricing.operatingSystem) {
+              operatingSystems[awsPricing.operatingSystem.toLowerCase()] = awsPricing.operatingSystem.toLowerCase()
+            }
+
             awsRegion.instanceTypes.forEach(function (awsInstanceFamily) {
               awsInstanceFamily.sizes.forEach(function (awsInstanceType) {
                 var instanceType = instanceTypes[awsInstanceType.size]
@@ -186,8 +189,10 @@
                   } else {
                     if (awsValueColumn.name == "os") {
                       pricingCategoryData[awsPricing.operatingSystem] = +awsValueColumn.prices.USD
-                    } else if (awsValueColumn.name != "ec2") {
+                    } else if (awsValueColumn.name == "ebsOptimized") {
                       pricingCategoryData[awsValueColumn.name] = +awsValueColumn.prices.USD
+                    } else if (awsValueColumn.name != "ec2") {
+                      pricingCategoryData[awsValueColumn.name.toLowerCase()] = +awsValueColumn.prices.USD
                     }
                   }
                 })
