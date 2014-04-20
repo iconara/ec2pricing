@@ -47,6 +47,33 @@
     }
   })
 
+  filters.filter("totalDisk", function () {
+    return function (input) {
+      if (input == null) {
+        return "n/a"
+      } else {
+        return input.disks * input.size
+      }
+    }
+  })
+
+  filters.filter("shortApiName", function () {
+    var shortSizes = {
+      "micro": "µ",
+      "small": "s",
+      "medium": "m",
+      "large": "l",
+      "xlarge": "xl",
+      "2xlarge": "2xl",
+      "4xlarge": "4xl",
+      "8xlarge": "8xl"
+    }
+    return function (input) {
+      var components = input.split(".")
+      return components[0] + "." + shortSizes[components[1]]
+    }
+  })
+
   filters.filter("sortInstances", function (displaySettings, normalizedReservePrice) {
     var familyOrder = ["m3", "c3", "g2", "r3", "i2", "hs1", "t1", "m1", "c1", "cc2", "cg1", "m2", "cr1", "hi1"]
     var sizeOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]

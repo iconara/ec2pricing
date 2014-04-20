@@ -55,12 +55,15 @@
           <table class="prices table table-striped table-hover">
             <thead>
               <tr>
-                <th sortable-column name="apiName" title="The API name" class="text-column">API name</th>
+                <th sortable-column name="apiName" title="The API name" class="text-column">Name</th>
                 <th sortable-column name="cpus" class="visible-lg visible-md">CPUs</th>
                 <th sortable-column name="ram">RAM</th>
                 <th sortable-column name="disk" title="Instance store disk size">Disk</th>
                 <th sortable-column name="reservedPrice" class="price visible-lg visible-md visible-sm" title="Normalized price for a reserved instance (with current reservation settings)">Reserved</th>
-                <th sortable-column name="onDemandPrice" class="price" title="On demand (regular) price">On demand</th>
+                <th sortable-column name="onDemandPrice" class="price" title="On demand (regular) price">
+                  <span class="hidden-lg hidden-md">Price</span>
+                  <span class="visible-lg visible-md">On demand</span>
+                </th>
                 <th sortable-column name="spotPrice" class="price" title="Price on the spot market">Spot</th>
                 <th sortable-column name="emrPrice" class="price visible-lg visible-md" title="Additional cost for instances in Elastic MapReduce clusters">EMR</th>
                 <th sortable-column name="ebsOptimizedPrice" class="price visible-lg visible-md" title="Additional cost for EBS optimized instances">EBS&nbsp;Opt.</th>
@@ -68,10 +71,20 @@
             </thead>
             <tbody>
               <tr ng-repeat="instanceType in instanceTypes | sortInstances">
-                <td class="apiName"><span class="label label-primary">{{instanceType.apiName}}</span></td>
+                <td class="apiName">
+                  <span class="hidden-lg hidden-md"><span class="label label-primary">{{instanceType.apiName | shortApiName}}</span></span>
+                  <span class="visible-lg visible-md"><span class="label label-primary">{{instanceType.apiName}}</span></span>
+                </td>
                 <td class="cpus visible-lg visible-md">{{instanceType.cpus}}</td>
-                <td class="ram">{{instanceType.ram}} GiB</td>
-                <td class="disk">{{instanceType.disk | disks}}</td>
+                <td class="ram">
+                  <span class="hidden-lg hidden-md">{{instanceType.ram}} GiB</span>
+                  <span class="visible-lg visible-md">{{instanceType.ram}}</span>
+                </td>
+                <td class="disk">
+                  <span class="hidden-lg hidden-md">
+                    <span ng-show="instanceType.disk.ssd" class="glyphicon glyphicon-flash"></span> {{instanceType.disk | totalDisk}}</span>
+                  <span class="visible-lg visible-md">{{instanceType.disk | disks}}</span>
+                </td>
                 <td class="price visible-lg visible-md visible-sm">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
                 <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
                 <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
