@@ -43,7 +43,7 @@
 
     $scope.settings = displaySettings
 
-    pricingData.then(function (data) {
+    pricingData.load().then(function (data) {
       $scope.regions = data.regions
       $scope.operatingSystems = data.operatingSystems
       $scope.instanceTypes = data.instanceTypes

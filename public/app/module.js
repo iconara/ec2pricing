@@ -115,7 +115,10 @@
         return data
       })
     }
-    var requests = pricingUrls.map(loadData)
-    return $q.all(requests).then(awsDataParser)
+    return {
+      load: function () {
+        return $q.all(pricingUrls.map(loadData)).then(awsDataParser)
+      }
+    }
   })
 }())
