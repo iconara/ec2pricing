@@ -44,7 +44,7 @@
     }
   }])
 
-  utils.factory("awsDataParser", [function () {
+  utils.factory("awsDataParser", ["instanceTypeExtras", function (instanceTypeExtras) {
     var regionMap = {
       "us-east":        "us-east-1",
       "us-west":        "us-west-1",
@@ -174,6 +174,10 @@
       var operatingSystemsList = []
 
       angular.forEach(instanceTypes, function (instanceType) {
+        var extras = instanceTypeExtras[instanceType.apiName]
+        if (extras) {
+          angular.extend(instanceType, extras)
+        }
         instanceTypesList.push(instanceType)
       })
 

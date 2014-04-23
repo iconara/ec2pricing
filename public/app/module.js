@@ -75,6 +75,43 @@
     "http://a0.awsstatic.com/pricing/1/ec2/pricing-elb.min.js"
   ])
 
+  ec2pricing.value("instanceTypeExtras", {
+    "m3.medium":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
+    "m3.large":    {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
+    "m3.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
+    "m3.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
+    "c3.large":    {networkPerformance: " moderate",  processorFamily: "Intel Xeon E5-2680 v2", clockSpeed: 2.8},
+    "c3.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2680 v2", clockSpeed: 2.8},
+    "c3.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2680 v2", clockSpeed: 2.8},
+    "c3.4xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2680 v2", clockSpeed: 2.8},
+    "c3.8xlarge":  {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon E5-2680 v2", clockSpeed: 2.8},
+    "g2.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
+    "r3.large":    {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "r3.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "r3.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "r3.4xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "r3.8xlarge":  {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "i2.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "i2.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "i2.4xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
+    "i2.8xlarge":  {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon E5-2650",    clockSpeed: 2.5},
+    "hs1.8xlarge": {networkPerformance: "10 gibabit", processorFamily: "Intel Xeon Family",     clockSpeed: 2},
+    "t1.micro":    {networkPerformance: "very low",   processorFamily: "Variable"},
+    "m1.small":    {networkPerformance: "low",        processorFamily: "Intel Xeon Family"},
+    "m1.medium":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon Family"},
+    "m1.large":    {networkPerformance: "moderate",   processorFamily: "Intel Xeon Family"},
+    "m1.xlarge":   {networkPerformance: "high",       processorFamily: "Intel Xeon Family"},
+    "c1.medium":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon Family"},
+    "c1.xlarge":   {networkPerformance: "high",       processorFamily: "Intel Xeon Family"},
+    "cc2.8xlarge": {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon Family"},
+    "cg1.4xlarge": {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon Family"},
+    "m2.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon Family"},
+    "m2.2xlarge":  {networkPerformance: "moderate",   processorFamily: "Intel Xeon Family"},
+    "m2.4xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon Family"},
+    "cr1.8xlarge": {networkPerformance: "high",       processorFamily: "Intel Xeon Family"},
+    "hi1.4xlarge": {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon Family"}
+  })
+
   ec2pricing.factory("pricingDataLoader", ["$q", "pricingUrls", "jsonpLoader", "cache", "awsDataParser", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
     var load = function () {
       var promises = pricingUrls.map(function (url) {
