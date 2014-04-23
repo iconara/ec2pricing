@@ -3,7 +3,7 @@
 
   var directives = angular.module("ec2pricing.directives", [])
 
-  directives.directive("sortableColumn", function (displaySettings) {
+  directives.directive("sortableColumn", ["displaySettings", function (displaySettings) {
     return {
       restrict: "A",
       link: function (scope, element, attrs) {
@@ -44,5 +44,5 @@
         })
       }
     }
-  })
+  }])
 }())

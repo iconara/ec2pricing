@@ -3,7 +3,7 @@
 
   var utils = angular.module("ec2pricing.utils", [])
 
-  utils.factory("jsonpLoader", function ($window, $rootScope, $q) {
+  utils.factory("jsonpLoader", ["$window", "$rootScope", "$q", function ($window, $rootScope, $q) {
     return function (url, callbackName) {
       var deferred = $q.defer()
       var frame = $window.document.createElement('IFRAME')
@@ -24,9 +24,9 @@
       frame.contentDocument.body.appendChild(script)
       return deferred.promise
     }
-  })
+  }])
 
-  utils.factory("cache", function ($window, $q) {
+  utils.factory("cache", ["$window", "$q", function ($window, $q) {
     return function (key, producer, _args) {
       var cacheKey = "ec2pricing:" + key
       var value = $window.localStorage[cacheKey]
@@ -42,9 +42,9 @@
         })
       }
     }
-  })
+  }])
 
-  utils.factory("awsDataParser", function () {
+  utils.factory("awsDataParser", [function () {
     var regionMap = {
       "us-east":        "us-east-1",
       "us-west":        "us-west-1",
@@ -193,5 +193,5 @@
         instanceTypes: instanceTypesList
       }
     }
-  })
+  }])
 }())

@@ -3,7 +3,7 @@
 
   var ec2pricing = angular.module("ec2pricing")
 
-  ec2pricing.factory("displaySettings", function () {
+  ec2pricing.factory("displaySettings", [function () {
     return {
       region: "us-east-1",
       operatingSystem: "linux",
@@ -13,9 +13,9 @@
       sortField: "apiName",
       sortAscending: true
     }
-  })
+  }])
 
-  ec2pricing.controller("ApplicationController", function ($scope, pricingDataLoader, displaySettings) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", function ($scope, pricingDataLoader, displaySettings) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -48,5 +48,5 @@
       $scope.operatingSystems = data.operatingSystems
       $scope.instanceTypes = data.instanceTypes
     })
-  })
+  }])
 }())

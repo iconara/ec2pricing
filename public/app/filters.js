@@ -11,15 +11,15 @@
     "yearly": 24 * 365.25
   })
 
-  filters.factory("normalizedReservePrice", function (displaySettings, periodMultiplier) {
+  filters.factory("normalizedReservePrice", ["displaySettings", "periodMultiplier", function (displaySettings, periodMultiplier) {
     return function (input) {
       var fixed = input[displaySettings.reservationTerm]
       var hourly = input[displaySettings.reservationTerm + "Hourly"]
       return fixed/periodMultiplier["yearly"] + hourly
     }
-  })
+  }])
 
-  filters.filter("price", function (displaySettings, periodMultiplier, normalizedReservePrice) {
+  filters.filter("price", ["displaySettings", "periodMultiplier", "normalizedReservePrice", function (displaySettings, periodMultiplier, normalizedReservePrice) {
     return function (input) {
       if (input == null || input === "") {
         return "n/a"
@@ -30,9 +30,9 @@
       }
       return "$" + (hourlyPrice * periodMultiplier[displaySettings.period]).toFixed(3)
     }
-  })
+  }])
 
-  filters.filter("disks", function () {
+  filters.filter("disks", [function () {
     var nbsp = "\u00A0"
     return function (input) {
       if (input == null) {
@@ -45,9 +45,9 @@
         return str
       }
     }
-  })
+  }])
 
-  filters.filter("totalDisk", function () {
+  filters.filter("totalDisk", [function () {
     return function (input) {
       if (input == null) {
         return "n/a"
@@ -55,9 +55,9 @@
         return input.disks * input.size
       }
     }
-  })
+  }])
 
-  filters.filter("shortApiName", function () {
+  filters.filter("shortApiName", [function () {
     var shortSizes = {
       "micro": "µ",
       "small": "s",
@@ -72,9 +72,9 @@
       var components = input.split(".")
       return components[0] + "." + shortSizes[components[1]]
     }
-  })
+  }])
 
-  filters.filter("sortInstances", function (displaySettings, normalizedReservePrice) {
+  filters.filter("sortInstances", ["displaySettings", "normalizedReservePrice", function (displaySettings, normalizedReservePrice) {
     var familyOrder = ["m3", "c3", "g2", "r3", "i2", "hs1", "t1", "m1", "c1", "cc2", "cg1", "m2", "cr1", "hi1"]
     var sizeOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
     var stringSort = function (field) {
@@ -166,5 +166,5 @@
         return input
       }
     }
-  })
+  }])
 }())
