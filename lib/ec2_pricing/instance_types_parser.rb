@@ -38,24 +38,14 @@ module Ec2Pricing
       instance_type
     end
 
-    #["Instance Type", "vCPU", "Memory (GiB)", "Storage (GB)", "Enhanced Networking", "Networking Performance", "Physical Processor", "Clock Speed (GHz)", "Intel® AES-NI", "Intel® AVX†", "Intel® Turbo", "EBS optimized"]
-    #["c3.xlarge", "4", "7.5", "2 x 40 SSD", "Yes", "Moderate", "Intel Xeon E5-2680 v2", "2.8", "Yes", "Yes", "Yes", "Yes"]
     def parse_instance_properties(*args)
       api_name, ecus_str, ram_str, disk_str, architectures_str, cores_str,  _, io_str = args
       properties = {}
       properties[:name] = name_from_api_name(api_name)
       properties[:api_name] = api_name
       properties[:ecus] = ecus_str.include?('.') ? ecus_str.to_f : ecus_str.to_i
-      #properties[:cores] = parse_cores(cores_str)
       properties[:ram] = parse_ram(ram_str)
       properties[:disk_size] = parse_disk_size(disk_str)
-      #properties[:disk_count] = parse_disk_count(disk_str)
-      #properties[:architectures] = parse_architectures(architectures_str)
-      #properties[:io_performance] = parse_io_performance(io_str)
-      #properties[:ssd] = true if ssd?(disk_str)
-      #properties[:ebs_only] = true if ebs_only?(disk_str)
-      #properties[:notes] = parse_notes(nil, api_name, ecus_str, cores_str, ram_str, disk_str, architectures_str, io_str)
-      #properties.delete(:notes) if properties[:notes].empty?
       properties
     end
 
