@@ -1,6 +1,6 @@
 .PHONY: all clean test
 
-all: lib/lib.js lib/app.js styles/styles.css
+all: lib lib/lib.js lib/app.js styles/styles.css
 
 test: all
 	node_modules/mocha-phantomjs/bin/mocha-phantomjs test.html
@@ -15,16 +15,7 @@ setup:
 	npm install bower less uglify-js mocha chai mocha-phantomjs phantomjs
 	node_modules/bower/bin/bower install angular angular-mocks jquery bootstrap
 
-lib/angular.js: bower_components/angular/angular.js lib
-	cp $< $@
-
-lib/jquery.js: bower_components/jquery/dist/jquery.js lib
-	cp $< $@
-
-lib/bootstrap.js: bower_components/bootstrap/dist/js/bootstrap.js lib
-	cp $< $@
-
-lib/lib.js: lib/angular.js lib/jquery.js lib/bootstrap.js
+lib/lib.js: bower_components/angular/angular.js bower_components/jquery/dist/jquery.js bower_components/bootstrap/dist/js/bootstrap.js
 	node_modules/uglify-js/bin/uglifyjs $^ > lib/lib.js
 
 lib/app.js: app/filters.js app/utils.js app/directives.js app/module.js app/controllers.js
