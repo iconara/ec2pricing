@@ -2,7 +2,7 @@
 
 all: lib lib/lib.js lib/app.js styles/styles.css
 
-test: all
+test: all test/tests.js
 	node_modules/mocha-phantomjs/bin/mocha-phantomjs test.html
 
 clean:
@@ -20,6 +20,9 @@ lib/lib.js: bower_components/angular/angular.js bower_components/jquery/dist/jqu
 
 lib/app.js: app/filters.js app/utils.js app/directives.js app/module.js app/controllers.js
 	node_modules/uglify-js/bin/uglifyjs $^ > lib/app.js
+
+test/tests.js: $(filter-out test/tests.js, $(wildcard test/*.js))
+	node_modules/uglify-js/bin/uglifyjs $^ > test/tests.js
 
 styles/styles.css: styles/styles.less
 	node_modules/less/bin/lessc $< > $@
