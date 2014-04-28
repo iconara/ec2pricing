@@ -1,12 +1,16 @@
 .PHONY: all clean test
 
+APP_SOURCES = app/filters.js app/utils.js app/directives.js app/module.js app/controllers.js
+TEST_SOURCES = $(filter-out test/tests.js, $(wildcard test/*.js))
+
 all: lib lib/lib.js lib/app.js styles/styles.css
 
 test: all test/tests.js
 	node_modules/mocha-phantomjs/bin/mocha-phantomjs test.html
 
 clean:
-	rm -rf lib
+	rm -rf lib fonts
+	rm -f test/tests.js styles/styles.css
 
 lib:
 	mkdir -p lib
@@ -18,10 +22,10 @@ setup:
 lib/lib.js: bower_components/angular/angular.js bower_components/jquery/dist/jquery.js bower_components/bootstrap/dist/js/bootstrap.js
 	node_modules/uglify-js/bin/uglifyjs $^ > lib/lib.js
 
-lib/app.js: app/filters.js app/utils.js app/directives.js app/module.js app/controllers.js
+lib/app.js: $(APP_SOURCES)
 	node_modules/uglify-js/bin/uglifyjs $^ > lib/app.js
 
-test/tests.js: $(filter-out test/tests.js, $(wildcard test/*.js))
+test/tests.js: $(TEST_SOURCES)
 	node_modules/uglify-js/bin/uglifyjs $^ > test/tests.js
 
 styles/styles.css: styles/styles.less
