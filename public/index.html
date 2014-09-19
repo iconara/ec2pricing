@@ -113,7 +113,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="instanceType in instanceTypes | sortInstances">
+              <tr ng-class="{highlight: instanceType.highlighted}" ng-click="toggleInstanceTypeHighlight(instanceType)" ng-repeat="instanceType in instanceTypes | sortInstances">
                 <td class="apiName">
                   <span class="hidden-lg hidden-md"><span class="label label-primary">{{instanceType.apiName | shortApiName}}</span></span>
                   <span class="visible-lg visible-md"><span class="label label-primary">{{instanceType.apiName}}</span></span>

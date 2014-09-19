@@ -43,6 +43,10 @@
 
     $scope.settings = displaySettings
 
+    $scope.toggleInstanceTypeHighlight = function (instanceType) {
+      instanceType.highlighted = !instanceType.highlighted
+    }
+
     pricingDataLoader.load().then(function (data) {
       $scope.regions = data.regions
       $scope.operatingSystems = data.operatingSystems
