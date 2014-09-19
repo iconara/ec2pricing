@@ -76,6 +76,9 @@
   ])
 
   config.value("instanceTypeExtras", {
+    "t2.micro":    {networkPerformance: "low to moderate", processorFamily: "Intel Xeon family", clockSpeed: 2.5},
+    "t2.small":    {networkPerformance: "low to moderate", processorFamily: "Intel Xeon family", clockSpeed: 2.5},
+    "t2.medium":   {networkPerformance: "low to moderate", processorFamily: "Intel Xeon family", clockSpeed: 2.5},
     "m3.medium":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
     "m3.large":    {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
     "m3.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
