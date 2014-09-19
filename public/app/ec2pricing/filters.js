@@ -21,7 +21,7 @@
 
   filters.filter("price", ["displaySettings", "periodMultiplier", "normalizedReservePrice", function (displaySettings, periodMultiplier, normalizedReservePrice) {
     return function (input) {
-      if (input == null || input === "") {
+      if (input == null) {
         return "n/a"
       }
       var hourlyPrice = input
