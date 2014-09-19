@@ -1,7 +1,8 @@
-.PHONY: all clean test serve auto
+.PHONY: all clean test serve auto deploy
 
 APP_SOURCES = app/modules.js $(shell find app/ec2pricing -name '*.js')
 TEST_SOURCES = $(filter-out test/tests.js, $(wildcard test/*.js))
+S3_URI=s3://ec2pricing.iconara.info/beta
 
 all: lib lib/lib.js lib/app.js styles/styles.css fonts
 
@@ -17,6 +18,12 @@ serve:
 
 auto:
 	bin/watch app,app/ec2pricing,styles make
+
+deploy: lib/app.js lib/lib.js styles/styles.css fonts
+	aws s3 cp --acl public-read index.html ${S3_URI}/index.html
+	aws s3 cp --acl public-read --recursive lib ${S3_URI}/lib
+	aws s3 cp --acl public-read --recursive --exclude '*.less' styles ${S3_URI}/styles
+	aws s3 cp --acl public-read --recursive fonts ${S3_URI}/fonts
 
 lib:
 	mkdir -p lib
