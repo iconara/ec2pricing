@@ -1,7 +1,7 @@
 (function () {
   "use strict"
 
-  var filters = angular.module("ec2pricing.filters", [])
+  var filters = angular.module("ec2pricing.filters")
 
   filters.value("periodMultiplier", {
     "hourly": 1,

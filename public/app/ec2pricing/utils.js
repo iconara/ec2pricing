@@ -1,7 +1,7 @@
 (function () {
   "use strict"
 
-  var utils = angular.module("ec2pricing.utils", [])
+  var utils = angular.module("ec2pricing.utils")
 
   utils.factory("jsonpLoader", ["$window", "$rootScope", "$q", function ($window, $rootScope, $q) {
     return function (url, callbackName) {
@@ -196,6 +196,21 @@
         operatingSystems: operatingSystemsList,
         instanceTypes: instanceTypesList
       }
+    }
+  }])
+
+  utils.factory("pricingDataLoader", ["$q", "pricingUrls", "jsonpLoader", "cache", "awsDataParser", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
+    var load = function () {
+      var promises = pricingUrls.map(function (url) {
+        return cache(url, jsonpLoader, url, "callback").then(function (data) {
+          data.url = url
+          return data
+        })
+      })
+      return $q.all(promises).then(awsDataParser)
+    }
+    return {
+      load: load
     }
   }])
 }())

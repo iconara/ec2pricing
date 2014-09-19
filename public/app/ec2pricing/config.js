@@ -1,9 +1,9 @@
 (function () {
   "use strict"
 
-  var ec2pricing = angular.module("ec2pricing", ["ec2pricing.filters", "ec2pricing.directives", "ec2pricing.utils"])
+  var config = angular.module("ec2pricing.config")
 
-  ec2pricing.value("pricingUrls", [
+  config.value("pricingUrls", [
     // on demand
     "http://a0.awsstatic.com/pricing/1/ec2/linux-od.min.js",
     "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/linux-od.min.js",
@@ -75,7 +75,7 @@
     "http://a0.awsstatic.com/pricing/1/ec2/pricing-elb.min.js"
   ])
 
-  ec2pricing.value("instanceTypeExtras", {
+  config.value("instanceTypeExtras", {
     "m3.medium":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
     "m3.large":    {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
     "m3.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
@@ -111,19 +111,4 @@
     "cr1.8xlarge": {networkPerformance: "high",       processorFamily: "Intel Xeon Family"},
     "hi1.4xlarge": {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon Family"}
   })
-
-  ec2pricing.factory("pricingDataLoader", ["$q", "pricingUrls", "jsonpLoader", "cache", "awsDataParser", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
-    var load = function () {
-      var promises = pricingUrls.map(function (url) {
-        return cache(url, jsonpLoader, url, "callback").then(function (data) {
-          data.url = url
-          return data
-        })
-      })
-      return $q.all(promises).then(awsDataParser)
-    }
-    return {
-      load: load
-    }
-  }])
 }())

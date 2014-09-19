@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+var fs = require("fs")
+var spawn = require('child_process').spawn
+
+var running = false
+
+var watchDirectory = function (path, callback) {
+  fs.watch(path, callback)
+}
+
+var executeCommand = function (argv, callback) {
+  if (!running) {
+    running = true
+    var child = spawn(argv[0], argv.slice(1), {env: process.env, stdio: "inherit"})
+    child.on("close", function (code) {
+      running = false
+      callback(code, argv)
+    })
+  }
+}
+
+var printStatus = function (path, statusCode, argv) {
+  var message = "\n`"
+  message += argv.join(" ")
+  message += "`"
+  message += statusCode == 0 ? " ran sucessfully" : " failed"
+  message += " after " + path + " changed"
+  process.stderr.write(message + "\n")
+}
+
+if (process.argv.length >= 4) {
+  var paths = process.argv[2].split(",")
+  var command = process.argv.slice(3)
+  paths.forEach(function (path) {
+    process.stderr.write("Watching " + path + " for changes\n")
+    watchDirectory(path, function () {
+      executeCommand(command, function (statusCode, argv) {
+        printStatus(path, statusCode, argv)
+      })
+    })
+  })
+}

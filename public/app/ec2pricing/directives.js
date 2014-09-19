@@ -1,7 +1,7 @@
 (function () {
   "use strict"
 
-  var directives = angular.module("ec2pricing.directives", [])
+  var directives = angular.module("ec2pricing.directives")
 
   directives.directive("sortableColumn", ["displaySettings", function (displaySettings) {
     return {
