@@ -28,6 +28,9 @@
       if (typeof input == "object" && "yrTerm1" in input) {
         hourlyPrice = normalizedReservePrice(input)
       }
+      if (isNaN(hourlyPrice) || hourlyPrice == null) {
+        return "n/a"
+      }
       return "$" + (hourlyPrice * periodMultiplier[displaySettings.period]).toFixed(3)
     }
   }])
@@ -140,11 +143,11 @@
         if (typeof bPrice == "object" && "yrTerm1" in bPrice) {
           bPrice = normalizedReservePrice(bPrice)
         }
-        if (aPrice == null && bPrice == 0) {
+        if ((aPrice == null || isNaN(aPrice)) && bPrice == 0) {
           return 0
-        } else if (aPrice == null) {
+        } else if (aPrice == null || isNaN(aPrice)) {
           return -1
-        } else if (bPrice == null) {
+        } else if (bPrice == null || isNaN(bPrice)) {
           return 1
         } else {
           return aPrice - bPrice
