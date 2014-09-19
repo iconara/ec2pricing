@@ -76,6 +76,14 @@
 
   filters.filter("sortInstances", ["displaySettings", "normalizedReservePrice", function (displaySettings, normalizedReservePrice) {
     var sizeOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
+    var networkPerformanceOrder = [
+      "very low",
+      "low",
+      "low to moderate",
+      "moderate",
+      "high",
+      "10 gigabit"
+    ]
     var stringSort = function (field) {
       return function (a, b) {
         return a[field].localeCompare(b[field])
@@ -119,6 +127,9 @@
         }
       }
     }
+    var networkPerformanceSort = function (a, b) {
+      return networkPerformanceOrder.indexOf(a.networkPerformance) - networkPerformanceOrder.indexOf(b.networkPerformance)
+    }
     var priceSort = function (reservationType, operatingSystem) {
       return function (a, b) {
         var aPrice = get(a, ["prices", displaySettings.region, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem])
@@ -148,6 +159,7 @@
       "cpus": numberSort("cpus"),
       "ram": numberSort("ram"),
       "disk": diskSort,
+      "networkPerformance": networkPerformanceSort,
       "reservedPrice": priceSort(),
       "onDemandPrice": priceSort("onDemand"),
       "spotPrice": priceSort("spot"),
