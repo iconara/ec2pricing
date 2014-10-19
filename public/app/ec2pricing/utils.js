@@ -6,16 +6,16 @@
   utils.factory("jsonpLoader", ["$window", "$rootScope", "$q", function ($window, $rootScope, $q) {
     return function (url, callbackName) {
       var deferred = $q.defer()
-      var frame = $window.document.createElement('IFRAME')
-      frame.src = 'about:blank'
-      frame.height = '0px'
-      frame.width = '0px'
-      frame.style['background-color'] = 'transparent'
-      frame.style['border'] = '0px none transparent'
-      frame.style['padding'] = '0px'
-      frame.style['overflow'] = 'hidden'
+      var frame = $window.document.createElement("IFRAME")
+      frame.src = "about:blank"
+      frame.height = "0px"
+      frame.width = "0px"
+      frame.style["background-color"] = "transparent"
+      frame.style["border"] = "0px none transparent"
+      frame.style["padding"] = "0px"
+      frame.style["overflow"] = "hidden"
       $window.document.body.appendChild(frame)
-      var script = frame.contentDocument.createElement('script')
+      var script = frame.contentDocument.createElement("script")
       script.src = url
       frame.contentWindow[callbackName] = function (result) {
         frame.parentNode.removeChild(frame)
