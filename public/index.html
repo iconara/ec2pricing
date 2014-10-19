@@ -91,7 +91,17 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid" ng-show="loading">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="loading-indicator">
+            {{percentLoaded}}% loaded
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid" ng-hide="loading">
       <div class="row">
         <div class="col-md-12">
           <table class="prices table table-striped table-hover">

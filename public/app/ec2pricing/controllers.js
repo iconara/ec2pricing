@@ -47,10 +47,16 @@
       instanceType.highlighted = !instanceType.highlighted
     }
 
+    $scope.loading = true
+    $scope.percentLoaded = 0
+
     pricingDataLoader.load().then(function (data) {
+      $scope.loading = false
       $scope.regions = data.regions
       $scope.operatingSystems = data.operatingSystems
       $scope.instanceTypes = data.instanceTypes
+    }, undefined, function (percentLoaded) {
+      $scope.percentLoaded = Math.round(percentLoaded * 100)
     })
   }])
 }())

@@ -209,7 +209,18 @@
           return data
         })
       })
-      return $q.all(promises).then(awsDataParser)
+      var allLoaded = $q.defer()
+      var dataFeeds = []
+      promises.forEach(function (promise) {
+        promise.then(function (data) {
+          dataFeeds.push(data)
+          allLoaded.notify(dataFeeds.length/promises.length)
+          if (dataFeeds.length == promises.length) {
+            allLoaded.resolve(awsDataParser(dataFeeds))
+          }
+        })
+      })
+      return allLoaded.promise
     }
     return {
       load: load
