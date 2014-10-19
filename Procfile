@@ -1,1 +1,0 @@
-web: bundle exec puma --port $PORT config.ru --environment production
