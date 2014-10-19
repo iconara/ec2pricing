@@ -1,18 +1,37 @@
 # EC2 Instance Types & Pricing
 
-Have you ever found yourself flipping between the  [EC2 Pricing page][1] and the [EC2 Instance Type][2] pages when deciding on which EC2 instance type to choose? The first page displays the prices, the second the instance properties like CPU and RAM. Wouldn't it be better if the information was available in one, easily parsed table?
+Have you ever found yourself scrolling up and down the [EC2 Pricing Page][1], and moving back and forth between [the new instances][1] and [the old][2] when deciding on which EC2 instance type to choose? Wouldn't you just want all of it in one sortable table?
 
-You can find that table on [ec2pricing.iconara.info][3], and the code that generates the data for it in this repository.
+You can find that table on [ec2pricing.iconara.info][3], and the code that parses the pricing feeds is in this repository.
 
-Many thanks to [Garret Heaton / @powdahound][4] whose [ec2instances.info][5] inspired me -- think of this as an improvement, with prices for all regions and a script to keep it current.
+## Running it locally and making changes
+
+Open two terminals, in the first run this:
+
+```
+$ cd public
+$ make setup
+$ make
+$ make serve
+```
+
+… which will install all dependencies, compile and concatenate all of the sources, and finally start a web server on [port 8000](http://localhost:8000/).
+
+In the other terminal you run this:
+
+```
+$ make auto
+```
+
+… which will watch the sources for changes and compile and concatenate them.
+
+The pricing data is loaded from AWS directly so you need an internet connection to test even when running locally.
 
 ## Copyright
 
-2012-2014, [Theo Hultberg / @iconara][6]
+2012-2014, [Theo Hultberg / @iconara][4]
 
   [1]: http://aws.amazon.com/ec2/pricing/
-  [2]: http://aws.amazon.com/ec2/instance-types/
+  [2]: http://aws.amazon.com/ec2/previous-generation/
   [3]: http://ec2pricing.iconara.info/
-  [4]: https://twitter.com/powdahound
-  [5]: http://www.ec2instances.info/
-  [6]: http://twitter.com/iconara
+  [4]: http://twitter.com/iconara
