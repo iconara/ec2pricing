@@ -33,7 +33,7 @@
             <ul class="dropdown-menu">
               <li role="presentation" class="dropdown-header">Region</li>
               <li ng-repeat="region in regions">
-                <a ng-click="settings.region = region">
+                <a ng-click="settings.update('region', region)">
                   <span ng-show="settings.region == region" class="selection-indicator glyphicon glyphicon-ok"></span>
                   {{region}}
                 </a>
@@ -45,7 +45,7 @@
             <ul class="dropdown-menu">
               <li role="presentation" class="dropdown-header">Operating System</li>
               <li ng-repeat="operatingSystem in operatingSystems">
-                <a ng-click="settings.operatingSystem = operatingSystem">
+                <a ng-click="settings.update('operatingSystem', operatingSystem)">
                   <span ng-show="settings.operatingSystem == operatingSystem" class="selection-indicator glyphicon glyphicon-ok"></span>
                   {{operatingSystemNames[operatingSystem]}}
                 </a>
@@ -57,7 +57,7 @@
             <ul class="dropdown-menu">
               <li role="presentation" class="dropdown-header">Pricing period</li>
               <li ng-repeat="period in periods">
-                <a ng-click="settings.period = period">
+                <a ng-click="settings.update('period', period)">
                   <span ng-show="settings.period == period" class="selection-indicator glyphicon glyphicon-ok"></span>
                   {{period}}
                 </a>
@@ -72,7 +72,7 @@
             <ul class="dropdown-menu">
               <li role="presentation" class="dropdown-header">Reservation term</li>
               <li ng-repeat="(reservationTerm, reservationTermName) in reservationTerms">
-                <a ng-click="settings.reservationTerm = reservationTerm">
+                <a ng-click="settings.update('reservationTerm', reservationTerm)">
                   <span ng-show="settings.reservationTerm == reservationTerm" class="selection-indicator glyphicon glyphicon-ok"></span>
                   {{reservationTermName}}
                 </a>
@@ -80,7 +80,7 @@
               <li role="presentation" class="divider"></li>
               <li role="presentation" class="dropdown-header">Reservation type</li>
               <li ng-repeat="(reservationType, reservationTypeName) in reservationTypes">
-                <a ng-click="settings.reservationType = reservationType">
+                <a ng-click="settings.update('reservationType', reservationType)">
                   <span ng-show="settings.reservationType == reservationType" class="selection-indicator glyphicon glyphicon-ok"></span>
                   {{reservationTypeName}}
                 </a>
