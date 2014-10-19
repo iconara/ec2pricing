@@ -26,10 +26,10 @@
     }
   }])
 
-  utils.factory("cache", ["$window", "$q", function ($window, $q) {
+  utils.factory("cache", ["$q", "localStorage", function ($q, localStorage) {
     return function (key, producer, _args) {
       var cacheKey = "ec2pricing:" + key
-      var valueData = $window.localStorage[cacheKey]
+      var valueData = localStorage[cacheKey]
       var value = angular.fromJson(valueData)
       var age = (new Date().getTime()) - (value && value.time || 0)
       if (age < 1800000) {
