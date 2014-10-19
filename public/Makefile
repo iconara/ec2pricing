@@ -2,7 +2,7 @@
 
 APP_SOURCES = app/modules.js $(shell find app/ec2pricing -name '*.js')
 TEST_SOURCES = $(filter-out test/tests.js, $(wildcard test/*.js))
-S3_URI=s3://ec2pricing.iconara.info/beta
+S3_URI=s3://ec2pricing.net
 
 all: lib lib/lib.js lib/app.js styles/styles.css fonts
 
