@@ -36,7 +36,7 @@
     return self
   }])
 
-  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", function ($scope, pricingDataLoader, displaySettings) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -69,6 +69,18 @@
 
     $scope.toggleInstanceTypeHighlight = function (instanceType) {
       instanceType.highlighted = !instanceType.highlighted
+    }
+
+    $scope.reservedSavingsPercentage = function (instanceType) {
+      var onDemandPrice = instanceType.prices[displaySettings.region]["onDemand"][displaySettings.operatingSystem]
+      var reservedPrices = instanceType.prices[displaySettings.region]
+      if (onDemandPrice && reservedPrices && reservedPrices[displaySettings.reservationType] && reservedPrices[displaySettings.reservationType][displaySettings.operatingSystem]) {
+        var reservedPrice = normalizedReservePrice(reservedPrices[displaySettings.reservationType][displaySettings.operatingSystem])
+        if (!isNaN(reservedPrice)) {
+          return Math.round(100 * (1.0 - (reservedPrice/onDemandPrice))) + "%"
+        }
+      }
+      return "n/a"
     }
 
     $scope.loading = true

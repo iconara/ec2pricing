@@ -162,7 +162,10 @@
                   awsInstanceType.valueColumns.forEach(function (awsValueColumn) {
                     var pricingCategoryData = ensurePricingProperties(instanceType, regionName, pricingCategory, operatingSystem)
                     if (pricingCategory.match(/reservation/i) != null) {
-                      pricingCategoryData[operatingSystem][awsValueColumn.name] = +awsValueColumn.prices.USD
+                      var value = +awsValueColumn.prices.USD
+                      if (value && !isNaN(value)) {
+                        pricingCategoryData[operatingSystem][awsValueColumn.name] = value
+                      }
                     } else {
                       if (awsValueColumn.name == "os") {
                         pricingCategoryData[operatingSystem] = +awsValueColumn.prices.USD

@@ -113,6 +113,7 @@
                 <th sortable-column name="disk" title="Instance store disk size">Disk</th>
                 <th sortable-column name="networkPerformance" class="visible-lg visible-md" title="Network Performance">Network&nbsp;perf.</th>
                 <th sortable-column name="reservedPrice" class="price visible-lg visible-md visible-sm" title="Normalized price for a reserved instance (with current reservation settings)">Reserved</th>
+                <th sortable-column name="reservedSavings" class="price visible-lg visible-md" title="Reservation savings over on demand (with current reservation settings)">Savings</th>
                 <th sortable-column name="onDemandPrice" class="price" title="On demand (regular) price">
                   <span class="hidden-lg hidden-md">Price</span>
                   <span class="visible-lg visible-md">On demand</span>
@@ -142,6 +143,7 @@
                   {{instanceType.networkPerformance}}
                 </td>
                 <td class="price visible-lg visible-md visible-sm">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
+                <td class="price visible-lg visible-md">{{reservedSavingsPercentage(instanceType)}}</td>
                 <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
                 <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
                 <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["emr"] | price}}</td>
