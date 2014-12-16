@@ -13,9 +13,14 @@
 
   filters.factory("normalizedReservePrice", ["displaySettings", "periodMultiplier", function (displaySettings, periodMultiplier) {
     return function (input) {
-      var fixed = input[displaySettings.reservationTerm]
-      var hourly = input[displaySettings.reservationTerm + "Hourly"]
-      return fixed/periodMultiplier["yearly"] + hourly
+      var effectiveHourly = input[displaySettings.reservationTerm + "-effectiveHourly"]
+      if (effectiveHourly) {
+        return effectiveHourly
+      } else {
+        var fixed = input[displaySettings.reservationTerm]
+        var hourly = input[displaySettings.reservationTerm + "Hourly"]
+        return fixed/periodMultiplier["yearly"] + hourly
+      }
     }
   }])
 
@@ -25,7 +30,7 @@
         return "n/a"
       }
       var hourlyPrice = input
-      if (typeof input == "object" && "yrTerm1" in input) {
+      if (typeof input == "object" && ("yrTerm1" in input || "yrTerm1-effectiveHourly" in input)) {
         hourlyPrice = normalizedReservePrice(input)
       }
       if (isNaN(hourlyPrice) || hourlyPrice == null) {

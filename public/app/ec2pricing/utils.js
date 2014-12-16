@@ -76,7 +76,7 @@
     }
 
     var guessOsFromUrl = function (url) {
-      if (url.indexOf("redhat") != -1 || url.indexOf("rhel") != -1) {
+      if (url.indexOf("redhat") != -1 || url.indexOf("red-hat") != -1 || url.indexOf("rhel") != -1) {
         return "rhel"
       } else if (url.indexOf("suse") != -1 || url.indexOf("sles") != -1) {
         return "sles"
@@ -84,7 +84,7 @@
         return "mswinsqlweb"
       } else if (url.toLowerCase().indexOf("mswinsql") != -1) {
         return "mswinsql"
-      } else if (url.indexOf("mswin") != -1) {
+      } else if (url.indexOf("mswin") != -1 || url.indexOf("windows") != -1) {
         return "mswin"
       } else if (url.indexOf("linux") != -1) {
         return "linux"
@@ -104,6 +104,8 @@
         return "mediumReservation"
       } else if (url.indexOf("-ri-heavy") != -1 || url.indexOf("heavy_") != -1) {
         return "heavyReservation"
+      } else if (url.indexOf("ri-v2") != -1) {
+        return "reservationV2"
       } else {
         return "other"
       }
@@ -113,6 +115,26 @@
       var instanceTypes = {}
       var regions = {}
       var operatingSystems = {}
+
+      var createInstanceType = function (apiName) {
+        return {apiName: apiName, prices: {}}
+      }
+
+      var ensurePricingProperties = function (instanceType, regionName, pricingCategory, operatingSystem) {
+        var regionPrices = instanceType.prices[regionName]
+        if (!regionPrices) {
+          regionPrices = instanceType.prices[regionName] = {}
+        }
+        var pricingCategoryData = regionPrices[pricingCategory]
+        if (!pricingCategoryData) {
+          pricingCategoryData = regionPrices[pricingCategory] = {}
+        }
+        var osPricing = pricingCategoryData[operatingSystem]
+        if (!osPricing) {
+          osPricing = pricingCategoryData[operatingSystem] = {}
+        }
+        return pricingCategoryData
+      }
 
       awsPricingFeeds.forEach(function (awsPricing) {
         var operatingSystem = guessOsFromUrl(awsPricing.url)
@@ -128,42 +150,45 @@
             }
 
             awsRegion.instanceTypes.forEach(function (awsInstanceFamily) {
-              awsInstanceFamily.sizes.forEach(function (awsInstanceType) {
-                var instanceType = instanceTypes[awsInstanceType.size]
-                if (!instanceType) {
-                  instanceType = instanceTypes[awsInstanceType.size] = {}
-                  instanceType.apiName = awsInstanceType.size
-                  instanceType.cpus = awsInstanceType.vCPU
-                  instanceType.ram = +awsInstanceType.memoryGiB
-                  instanceType.disk = parseDisk(awsInstanceType.storageGB)
-                  instanceType.prices = {}
-                }
-                awsInstanceType.valueColumns.forEach(function (awsValueColumn) {
-                  var regionPrices = instanceType.prices[regionName]
-                  if (!regionPrices) {
-                    regionPrices = instanceType.prices[regionName] = {}
+              if ("sizes" in awsInstanceFamily) {
+                awsInstanceFamily.sizes.forEach(function (awsInstanceType) {
+                  var instanceType = instanceTypes[awsInstanceType.size]
+                  if (!instanceType) {
+                    instanceType = instanceTypes[awsInstanceType.size] = createInstanceType(awsInstanceType.size)
                   }
-                  var pricingCategoryData = regionPrices[pricingCategory]
-                  if (!pricingCategoryData) {
-                    pricingCategoryData = regionPrices[pricingCategory] = {}
-                  }
-                  if (pricingCategory.match(/reservation/i) != null) {
-                    var osPricing = pricingCategoryData[operatingSystem]
-                    if (!osPricing) {
-                      osPricing = pricingCategoryData[operatingSystem] = {}
+                  instanceType.cpus = instanceType.cpus || awsInstanceType.vCPU
+                  instanceType.ram = instanceType.ram || +awsInstanceType.memoryGiB
+                  instanceType.disk = instanceType.disk || awsInstanceType.storageGB && parseDisk(awsInstanceType.storageGB)
+                  awsInstanceType.valueColumns.forEach(function (awsValueColumn) {
+                    var pricingCategoryData = ensurePricingProperties(instanceType, regionName, pricingCategory, operatingSystem)
+                    if (pricingCategory.match(/reservation/i) != null) {
+                      pricingCategoryData[operatingSystem][awsValueColumn.name] = +awsValueColumn.prices.USD
+                    } else {
+                      if (awsValueColumn.name == "os") {
+                        pricingCategoryData[operatingSystem] = +awsValueColumn.prices.USD
+                      } else if (awsValueColumn.name == "ebsOptimized") {
+                        pricingCategoryData[awsValueColumn.name] = +awsValueColumn.prices.USD
+                      } else if (awsValueColumn.name != "ec2") {
+                        pricingCategoryData[awsValueColumn.name.toLowerCase()] = +awsValueColumn.prices.USD
+                      }
                     }
-                    osPricing[awsValueColumn.name] = +awsValueColumn.prices.USD
-                  } else {
-                    if (awsValueColumn.name == "os") {
-                      pricingCategoryData[operatingSystem] = +awsValueColumn.prices.USD
-                    } else if (awsValueColumn.name == "ebsOptimized") {
-                      pricingCategoryData[awsValueColumn.name] = +awsValueColumn.prices.USD
-                    } else if (awsValueColumn.name != "ec2") {
-                      pricingCategoryData[awsValueColumn.name.toLowerCase()] = +awsValueColumn.prices.USD
-                    }
-                  }
+                  })
                 })
-              })
+              } else if ("type" in awsInstanceFamily) {
+                var instanceType = instanceTypes[awsInstanceFamily.type]
+                if (!instanceType) {
+                  instanceType = instanceTypes[awsInstanceFamily.type] = createInstanceType(awsInstanceFamily.type)
+                }
+                awsInstanceFamily.terms.forEach(function (term) {
+                  term.purchaseOptions.forEach(function (purchaseOption) {
+                    var pricingCategoryData = ensurePricingProperties(instanceType, regionName, purchaseOption.purchaseOption, operatingSystem)
+                    purchaseOption.valueColumns.forEach(function (valueColumn) {
+                      var key = term.term + "-" + valueColumn.name
+                      pricingCategoryData[operatingSystem][key] = +valueColumn.prices.USD
+                    })
+                  })
+                })
+              }
             })
           } else {
             // TODO: parse other pricing data

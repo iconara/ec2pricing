@@ -60,6 +60,14 @@
     "http://a0.awsstatic.com/pricing/1/ec2/mswinSQLWeb-ri-heavy.min.js",
     "http://a0.awsstatic.com/pricing/1/ec2/previous-generation/heavy_mswinsqlweb.min.js",
 
+    // new reservation types
+    "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/linux-unix-shared.min.js",
+    "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/red-hat-enterprise-linux-shared.min.js",
+    "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/suse-linux-shared.min.js",
+    "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-shared.min.js",
+    "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-with-sql-server-standard-shared.min.js",
+    "http://a0.awsstatic.com/pricing/1/ec2/ri-v2/windows-with-sql-server-web-shared.min.js",
+
     // spot
     "http://spot-price.s3.amazonaws.com/spot.js",
 

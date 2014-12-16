@@ -7,7 +7,7 @@
     var state = {
       region: "us-east-1",
       operatingSystem: "linux",
-      reservationType: "heavyReservation",
+      reservationType: "partialUpfront",
       reservationTerm: "yrTerm1",
       period: "hourly",
       sortField: "apiName",
@@ -40,7 +40,10 @@
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
-      "heavyReservation": "heavy"
+      "heavyReservation": "heavy",
+      "noUpfront": "no upfront",
+      "partialUpfront": "partial upfront",
+      "allUpfront": "all upfront"
     }
     $scope.reservationTerms = {
       "yrTerm1": "1 year",
