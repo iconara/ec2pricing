@@ -83,6 +83,7 @@
     "http://a0.awsstatic.com/pricing/1/ec2/pricing-elb.min.js"
   ])
 
+  // from "Instance Types Matrix" on http://aws.amazon.com/ec2/instance-types/
   config.value("instanceTypeExtras", {
     "t2.micro":    {networkPerformance: "low to moderate", processorFamily: "Intel Xeon family", clockSpeed: 2.5},
     "t2.small":    {networkPerformance: "low to moderate", processorFamily: "Intel Xeon family", clockSpeed: 2.5},
