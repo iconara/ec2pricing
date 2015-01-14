@@ -135,9 +135,17 @@
                   <span class="visible-lg visible-md">{{instanceType.ram}}</span>
                 </td>
                 <td class="disk">
-                  <span class="hidden-lg hidden-md">
-                    <span ng-show="instanceType.disk.ssd" class="glyphicon glyphicon-flash"></span> {{instanceType.disk | totalDisk}}</span>
-                  <span class="visible-lg visible-md">{{instanceType.disk | disks}}</span>
+                  <span ng-if="instanceType.disk.ebsOnly">
+                    <span class="visible-lg visible-md">(EBS-only)</span>
+                    <span class="hidden-lg hidden-md">(EBS)</span>
+                  </span>
+                  <span class="hidden-lg hidden-md" ng-if="!instanceType.disk.ebsOnly">
+                    <span ng-show="instanceType.disk.ssd" class="glyphicon glyphicon-flash"></span>
+                    {{instanceType.disk | totalDisk}}
+                  </span>
+                  <span class="visible-lg visible-md" ng-if="!instanceType.disk.ebsOnly">
+                    {{instanceType.disk | disks}}
+                  </span>
                 </td>
                 <td class="networkPerformance visible-lg visible-md">
                   {{instanceType.networkPerformance}}

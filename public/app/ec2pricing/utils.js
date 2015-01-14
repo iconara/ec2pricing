@@ -57,11 +57,13 @@
     }
 
     var parseDisk = function (str) {
-      if (str == "ebsonly") {
-        return null
-      }
       var disk = {}
-      if (str.match(/^\s*(\d+)\s*x\s*(\d+)\s*(\w+)?\s*$/)) {
+      if (str == "ebsonly") {
+        disk.ebsOnly = true
+        disk.disks = 0
+        disk.size = 0
+        disk.ssd = false
+      } else if (str.match(/^\s*(\d+)\s*x\s*(\d+)\s*(\w+)?\s*$/)) {
         disk.disks = +RegExp.$1
         disk.size = +RegExp.$2
         disk.ssd = RegExp.$3 == "SSD"
