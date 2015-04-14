@@ -107,6 +107,7 @@
           <table class="prices table table-striped table-hover">
             <thead>
               <tr>
+                <th sortable-column name="quantity" title="Desired quantity">#</th>
                 <th sortable-column name="apiName" title="The API name" class="text-column">Name</th>
                 <th sortable-column name="cpus" class="visible-lg visible-md">CPUs</th>
                 <th sortable-column name="ram">RAM</th>
@@ -124,7 +125,30 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="quantity">
+                </td>
+                <td class="apiName">
+                  Total
+                </td>
+                <td class="cpus visible-lg visible-md"></td>
+                <td class="ram">
+                </td>
+                <td class="disk">
+                </td>
+                <td class="networkPerformance visible-lg visible-md">
+                </td>
+                <td class="price visible-lg visible-md visible-sm">{{total.reservedPrice | price}}</td>
+                <td class="price visible-lg visible-md">{{(1 - total.reservedPrice / total.onDemandPrice) | percent}}</td>
+                <td class="price">{{total.onDemandPrice | price}}</td>
+                <td class="price">{{total.spotPrice | price}}</td>
+                <td class="price visible-lg visible-md">{{total.emrPrice | price}}</td>
+                <td class="price visible-lg visible-md">{{total.ebsOptimizedPrice | price}}</td>
+              </tr>
               <tr ng-class="{highlight: instanceType.highlighted}" ng-click="toggleInstanceTypeHighlight(instanceType)" ng-repeat="instanceType in instanceTypes | sortInstances">
+                <td class="quantity">
+                  <span><input name="whatever" type="number" ng-model="instanceType.quantity"></input></span>
+                </td>
                 <td class="apiName">
                   <span class="hidden-lg hidden-md"><span class="label label-primary">{{instanceType.apiName | shortApiName}}</span></span>
                   <span class="visible-lg visible-md"><span class="label label-primary">{{instanceType.apiName}}</span></span>

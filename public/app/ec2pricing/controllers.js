@@ -33,6 +33,9 @@
     self.save = save
     self.load = load
     self.update = update
+    self.toJson = function () {
+      return angular.toJson(state)
+    }
     return self
   }])
 
@@ -101,7 +104,26 @@
     }
 
     $scope.loading = true
+    $scope.instanceTypes = []
     $scope.percentLoaded = 0
+
+    $scope.$watch(
+      function () {
+        return $scope.instanceTypes.reduce(function (result, instanceType) { return result + '+' + instanceType.quantity + '*' + instanceType.apiName }, displaySettings.toJson())
+      }, function () {
+        var sum = function(price) {
+          return $scope.instanceTypes.reduce(function (sum, instanceType) { return instanceType.quantity ? (sum + instanceType.quantity * price(instanceType)) : sum }, 0)
+        }
+        var totalOnDemandPrice = sum($scope.onDemandPrice)
+        var totalReservedPrice = sum($scope.reservedPrice)
+        $scope.total = {
+          onDemandPrice: totalOnDemandPrice,
+          reservedPrice: totalReservedPrice,
+          spotPrice: sum($scope.spotPrice),
+          emrPrice: sum($scope.emrPrice),
+          ebsOptimizedPrice: sum($scope.ebsOptimizedPrice),
+        }
+      })
 
     displaySettings.load().then(function () {
       pricingDataLoader.load().then(function (data) {
