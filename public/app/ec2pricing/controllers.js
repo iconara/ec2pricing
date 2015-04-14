@@ -5,6 +5,7 @@
 
   ec2pricing.factory("displaySettings", ["$q", "localStorage", function ($q, localStorage) {
     var state = {
+      calculator: false,
       region: "us-east-1",
       operatingSystem: "linux",
       reservationType: "partialUpfront",
