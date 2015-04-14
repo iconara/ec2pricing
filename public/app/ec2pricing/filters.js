@@ -180,7 +180,19 @@
     }
     return function (input) {
       if (input) {
-        var sorted = input.slice().sort(sortFunctions[displaySettings.sortField] || sortFunctions["apiName"])
+        var sortFunction = sortFunctions[displaySettings.sortField] || sortFunctions["apiName"]
+        if (displaySettings.calculator) {
+          var wrapped = sortFunction
+          var before = displaySettings.sortAscending ? -1 : 1
+          sortFunction = function (a, b) {
+            if (a.quantity) {
+              return b.quantity ? wrapped(a, b) : before
+            } else {
+              return b.quantity ? -before : wrapped(a, b)
+            }
+          }
+        }
+        var sorted = input.slice().sort(sortFunction)
         if (!displaySettings.sortAscending) {
           sorted.reverse()
         }
