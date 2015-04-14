@@ -36,7 +36,7 @@
     return self
   }])
 
-  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -71,16 +71,33 @@
       instanceType.highlighted = !instanceType.highlighted
     }
 
-    $scope.reservedSavingsPercentage = function (instanceType) {
-      var onDemandPrice = instanceType.prices[displaySettings.region]["onDemand"][displaySettings.operatingSystem]
-      var reservedPrices = instanceType.prices[displaySettings.region]
-      if (onDemandPrice && reservedPrices && reservedPrices[displaySettings.reservationType] && reservedPrices[displaySettings.reservationType][displaySettings.operatingSystem]) {
-        var reservedPrice = normalizedReservePrice(reservedPrices[displaySettings.reservationType][displaySettings.operatingSystem])
-        if (!isNaN(reservedPrice)) {
-          return Math.round(100 * (1.0 - (reservedPrice/onDemandPrice))) + "%"
-        }
+    function priceFor(instanceType, k1, k2) {
+      var prices = instanceType.prices[displaySettings.region]
+      var hourlyPrice = prices && prices[k1] && prices[k1][k2]
+      if (typeof hourlyPrice == "object" && ("yrTerm1" in hourlyPrice || "yrTerm1-effectiveHourly" in hourlyPrice)) {
+        hourlyPrice = normalizedReservePrice(hourlyPrice)
       }
-      return "n/a"
+      return hourlyPrice && (hourlyPrice * periodMultiplier[displaySettings.period])
+    }
+
+    $scope.onDemandPrice = function (instanceType) {
+      return priceFor(instanceType, 'onDemand', displaySettings.operatingSystem)
+    }
+
+    $scope.spotPrice = function (instanceType) {
+      return priceFor(instanceType, 'spot', displaySettings.operatingSystem)
+    }
+
+    $scope.emrPrice = function (instanceType) {
+      return priceFor(instanceType, 'other', 'emr')
+    }
+
+    $scope.ebsOptimizedPrice = function (instanceType) {
+      return priceFor(instanceType, 'other', 'ebsOptimized')
+    }
+
+    $scope.reservedPrice = function (instanceType) {
+      return priceFor(instanceType, displaySettings.reservationType, displaySettings.operatingSystem)
     }
 
     $scope.loading = true

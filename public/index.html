@@ -150,12 +150,12 @@
                 <td class="networkPerformance visible-lg visible-md">
                   {{instanceType.networkPerformance}}
                 </td>
-                <td class="price visible-lg visible-md visible-sm">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
-                <td class="price visible-lg visible-md">{{reservedSavingsPercentage(instanceType)}}</td>
-                <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
-                <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
-                <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["emr"] | price}}</td>
-                <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["ebsOptimized"] | price}}</td>
+                <td class="price visible-lg visible-md visible-sm">{{reservedPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{(1 - reservedPrice(instanceType) / onDemandPrice(instanceType)) | percent}}</td>
+                <td class="price">{{onDemandPrice(instanceType) | price}}</td>
+                <td class="price">{{spotPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{emrPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{ebsOptimizedPrice(instanceType) | price}}</td>
               </tr>
             </tbody>
           </table>
