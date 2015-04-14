@@ -3,6 +3,14 @@
 
   var utils = angular.module("ec2pricing.utils")
 
+  utils.factory('focus', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+    return function(name) {
+      $timeout(function (){
+        $rootScope.$broadcast('focusOn', name)
+      })
+    }
+  }])
+
   utils.factory("jsonpLoader", ["$window", "$rootScope", "$q", function ($window, $rootScope, $q) {
     return function (url, callbackName) {
       var deferred = $q.defer()

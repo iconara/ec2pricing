@@ -40,7 +40,7 @@
     return self
   }])
 
-  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", "focus", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier, focus) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -107,6 +107,7 @@
     $scope.loading = true
     $scope.instanceTypes = []
     $scope.percentLoaded = 0
+    $scope.focus = focus
 
     $scope.$watch(
       function () {

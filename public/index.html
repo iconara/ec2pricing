@@ -153,7 +153,7 @@
               </tr>
               <tr ng-class="{highlight: instanceType.highlighted}" ng-click="toggleInstanceTypeHighlight(instanceType)" ng-repeat="instanceType in instanceTypes | sortInstances">
                 <td class="quantity" ng-if="settings.calculator">
-                  <span><input name="whatever" type="number" ng-model="instanceType.quantity"></input></span>
+                  <span><input type="number" ng-model="instanceType.quantity" focus-on="{{instanceType.apiName}}" ng-change="focus(instanceType.apiName)"></input></span>
                 </td>
                 <td class="apiName">
                   <span class="hidden-lg hidden-md"><span class="label label-primary">{{instanceType.apiName | shortApiName}}</span></span>
