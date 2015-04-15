@@ -152,8 +152,8 @@
                 <td class="price visible-lg visible-md">{{total.ebsOptimizedPrice | price}}</td>
               </tr>
               <tr ng-class="{highlight: instanceType.highlighted}" ng-click="toggleInstanceTypeHighlight(instanceType)" ng-repeat="instanceType in instanceTypes | sortInstances">
-                <td class="quantity" ng-if="settings.calculator">
-                  <span><input type="number" ng-model="instanceType.quantity" focus-on="{{instanceType.apiName}}" ng-change="focus(instanceType.apiName)"></input></span>
+                <td class="quantity col-md-1" ng-if="settings.calculator">
+                  <span><input class="form-control" type="number" ng-model="instanceType.quantity" focus-on="{{instanceType.apiName}}" ng-change="focus(instanceType.apiName)"></input></span>
                 </td>
                 <td class="apiName">
                   <span class="hidden-lg hidden-md"><span class="label label-primary">{{instanceType.apiName | shortApiName}}</span></span>

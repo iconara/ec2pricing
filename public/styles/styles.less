@@ -56,13 +56,13 @@ nav.top-menu {
 
   }
 
-  .quantity, .cpus, .ram, .disk, .networkPerformance, .price {
+  .quantity input, .cpus, .ram, .disk, .networkPerformance, .price {
     text-align: right
   }
 
   .quantity {
-    input {
-      width: 2.5em;
+    input::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+      opacity: 1;
     }
   }
 }
