@@ -242,7 +242,7 @@
   utils.factory("pricingDataLoader", ["$q", "pricingUrls", "jsonpLoader", "cache", "awsDataParser", function ($q, pricingUrls, jsonpLoader, cache, awsDataParser) {
     var load = function () {
       var promises = pricingUrls.map(function (url) {
-        return cache(url, jsonpLoader, url, "callback").then(function (data) {
+        return jsonpLoader(url, "callback").then(function (data) {
           data.url = url
           return data
         })
@@ -260,8 +260,11 @@
       })
       return allLoaded.promise
     }
+    var cachedLoad = function () {
+      return cache("pricingData", load)
+    }
     return {
-      load: load
+      load: cachedLoad
     }
   }])
 }())
