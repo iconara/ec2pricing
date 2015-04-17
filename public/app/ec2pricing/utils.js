@@ -35,12 +35,14 @@
   }])
 
   utils.factory("cache", ["$q", "localStorage", function ($q, localStorage) {
-    return function (key, producer, _args) {
-      var cacheKey = "ec2pricing:" + key
+    var PREFIX = "ec2pricing:"
+    var TTL = 1800000
+    var cache = function (key, producer, _args) {
+      var cacheKey = PREFIX + key
       var valueData = localStorage[cacheKey]
       var value = angular.fromJson(valueData)
       var age = (new Date().getTime()) - (value && value.time || 0)
-      if (age < 1800000) {
+      if (age < TTL) {
         return $q.when(value.value)
       } else {
         var args = Array.prototype.slice.apply(arguments)
@@ -52,6 +54,24 @@
         })
       }
     }
+    cache.clear = function (filter) {
+      angular.forEach(localStorage, function (encodedValue, key) {
+        if (key.indexOf(PREFIX) == 0) {
+          var unprefixedKey = key.substring(PREFIX.length)
+          var unencodedValue = angular.fromJson(encodedValue)
+          if (filter == null || filter(unprefixedKey, unencodedValue.value, unencodedValue.time)) {
+            delete localStorage[key]
+          }
+        }
+      })
+    }
+    cache.prune = function () {
+      cache.clear(function (key, value, writeTime) {
+        var age = (new Date().getTime()) - writeTime
+        return age >= TTL
+      })
+    }
+    return cache
   }])
 
   utils.factory("awsDataParser", ["instanceTypeExtras", function (instanceTypeExtras) {

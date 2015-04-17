@@ -40,7 +40,7 @@
     return self
   }])
 
-  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", "focus", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier, focus) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", "focus", "cache", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier, focus, cache) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -126,6 +126,8 @@
           ebsOptimizedPrice: sum($scope.ebsOptimizedPrice),
         }
       })
+
+    cache.prune()
 
     displaySettings.load().then(function () {
       pricingDataLoader.load().then(function (data) {
