@@ -180,12 +180,12 @@
                 <td class="networkPerformance visible-lg visible-md">
                   {{instanceType.networkPerformance}}
                 </td>
-                <td class="price visible-lg visible-md visible-sm">{{reservedPrice(instanceType) | price}}</td>
-                <td class="price visible-lg visible-md">{{(1 - reservedPrice(instanceType) / onDemandPrice(instanceType)) | percent}}</td>
-                <td class="price">{{onDemandPrice(instanceType) | price}}</td>
-                <td class="price">{{spotPrice(instanceType) | price}}</td>
-                <td class="price visible-lg visible-md">{{emrPrice(instanceType) | price}}</td>
-                <td class="price visible-lg visible-md">{{ebsOptimizedPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md visible-sm">{{pricingCalculator.reservedPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{(1 - pricingCalculator.reservedPrice(instanceType) / pricingCalculator.onDemandPrice(instanceType)) | percent}}</td>
+                <td class="price">{{pricingCalculator.onDemandPrice(instanceType) | price}}</td>
+                <td class="price">{{pricingCalculator.spotPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{pricingCalculator.emrPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{pricingCalculator.ebsOptimizedPrice(instanceType) | price}}</td>
               </tr>
             </tbody>
           </table>

@@ -24,6 +24,40 @@
     }
   }])
 
+  filters.factory("pricingCalculator", ["displaySettings", "normalizedReservePrice", "periodMultiplier", function (displaySettings, normalizedReservePrice, periodMultiplier) {
+    var priceFor = function (instanceType, k1, k2) {
+      var prices = instanceType.prices[displaySettings.region]
+      var hourlyPrice = prices && prices[k1] && prices[k1][k2]
+      if (typeof hourlyPrice == "object" && ("yrTerm1" in hourlyPrice || "yrTerm1-effectiveHourly" in hourlyPrice)) {
+        hourlyPrice = normalizedReservePrice(hourlyPrice)
+      }
+      return hourlyPrice && (hourlyPrice * periodMultiplier[displaySettings.period])
+    }
+    var onDemandPrice = function (instanceType) {
+      return priceFor(instanceType, 'onDemand', displaySettings.operatingSystem)
+    }
+    var spotPrice = function (instanceType) {
+      return priceFor(instanceType, 'spot', displaySettings.operatingSystem)
+    }
+    var emrPrice = function (instanceType) {
+      return priceFor(instanceType, 'other', 'emr')
+    }
+    var ebsOptimizedPrice = function (instanceType) {
+      return priceFor(instanceType, 'other', 'ebsOptimized')
+    }
+    var reservedPrice = function (instanceType) {
+      return priceFor(instanceType, displaySettings.reservationType, displaySettings.operatingSystem)
+    }
+    return {
+      priceFor: priceFor,
+      onDemandPrice: onDemandPrice,
+      spotPrice: spotPrice,
+      emrPrice: emrPrice,
+      ebsOptimizedPrice: ebsOptimizedPrice,
+      reservedPrice: reservedPrice
+    }
+  }])
+
   filters.filter("price", function () {
     return function (input) {
       if (isNaN(input) || input == null) {

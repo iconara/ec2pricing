@@ -40,7 +40,7 @@
     return self
   }])
 
-  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", "focus", "cache", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier, focus, cache) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "pricingCalculator", "displaySettings", "periodMultiplier", "focus", "cache", function ($scope, pricingDataLoader, pricingCalculator, displaySettings, periodMultiplier, focus, cache) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -75,34 +75,7 @@
       instanceType.highlighted = !instanceType.highlighted
     }
 
-    function priceFor(instanceType, k1, k2) {
-      var prices = instanceType.prices[displaySettings.region]
-      var hourlyPrice = prices && prices[k1] && prices[k1][k2]
-      if (typeof hourlyPrice == "object" && ("yrTerm1" in hourlyPrice || "yrTerm1-effectiveHourly" in hourlyPrice)) {
-        hourlyPrice = normalizedReservePrice(hourlyPrice)
-      }
-      return hourlyPrice && (hourlyPrice * periodMultiplier[displaySettings.period])
-    }
-
-    $scope.onDemandPrice = function (instanceType) {
-      return priceFor(instanceType, 'onDemand', displaySettings.operatingSystem)
-    }
-
-    $scope.spotPrice = function (instanceType) {
-      return priceFor(instanceType, 'spot', displaySettings.operatingSystem)
-    }
-
-    $scope.emrPrice = function (instanceType) {
-      return priceFor(instanceType, 'other', 'emr')
-    }
-
-    $scope.ebsOptimizedPrice = function (instanceType) {
-      return priceFor(instanceType, 'other', 'ebsOptimized')
-    }
-
-    $scope.reservedPrice = function (instanceType) {
-      return priceFor(instanceType, displaySettings.reservationType, displaySettings.operatingSystem)
-    }
+    $scope.pricingCalculator = pricingCalculator
 
     $scope.loading = true
     $scope.instanceTypes = []
@@ -116,14 +89,14 @@
         var sum = function(price) {
           return $scope.instanceTypes.reduce(function (sum, instanceType) { return instanceType.quantity ? (sum + instanceType.quantity * price(instanceType)) : sum }, 0)
         }
-        var totalOnDemandPrice = sum($scope.onDemandPrice)
-        var totalReservedPrice = sum($scope.reservedPrice)
+        var totalOnDemandPrice = sum(pricingCalculator.onDemandPrice)
+        var totalReservedPrice = sum(pricingCalculator.reservedPrice)
         $scope.total = {
           onDemandPrice: totalOnDemandPrice,
           reservedPrice: totalReservedPrice,
-          spotPrice: sum($scope.spotPrice),
-          emrPrice: sum($scope.emrPrice),
-          ebsOptimizedPrice: sum($scope.ebsOptimizedPrice),
+          spotPrice: sum(pricingCalculator.spotPrice),
+          emrPrice: sum(pricingCalculator.emrPrice),
+          ebsOptimizedPrice: sum(pricingCalculator.ebsOptimizedPrice),
         }
       })
 
