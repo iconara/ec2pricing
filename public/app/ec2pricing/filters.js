@@ -120,7 +120,7 @@
     }
   }])
 
-  filters.filter("sortInstances", ["displaySettings", "normalizedReservePrice", function (displaySettings, normalizedReservePrice) {
+  filters.filter("sortInstances", ["displaySettings", "normalizedReservePrice", "pricingCalculator", function (displaySettings, normalizedReservePrice, pricingCalculator) {
     var sizeOrder = ["micro", "small", "medium", "large", "xlarge", "2xlarge", "4xlarge", "8xlarge"]
     var networkPerformanceOrder = [
       "very low",
@@ -178,14 +178,23 @@
     }
     var priceSort = function (reservationType, operatingSystem) {
       return function (a, b) {
-        var aPrice = get(a, ["prices", displaySettings.region, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem])
-        var bPrice = get(b, ["prices", displaySettings.region, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem])
-        if (typeof aPrice == "object" && "yrTerm1" in aPrice) {
-          aPrice = normalizedReservePrice(aPrice)
+        var aPrice = pricingCalculator.priceFor(a, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem)
+        var bPrice = pricingCalculator.priceFor(b, reservationType || displaySettings.reservationType, operatingSystem || displaySettings.operatingSystem)
+        if ((aPrice == null || isNaN(aPrice)) && bPrice == 0) {
+          return 0
+        } else if (aPrice == null || isNaN(aPrice)) {
+          return -1
+        } else if (bPrice == null || isNaN(bPrice)) {
+          return 1
+        } else {
+          return aPrice - bPrice
         }
-        if (typeof bPrice == "object" && "yrTerm1" in bPrice) {
-          bPrice = normalizedReservePrice(bPrice)
-        }
+      }
+    }
+    var savingsSort = function (reservationType, operatingSystem) {
+      return function (a, b) {
+        var aPrice = 1 - pricingCalculator.reservedPrice(a) / pricingCalculator.onDemandPrice(a)
+        var bPrice = 1 - pricingCalculator.reservedPrice(b) / pricingCalculator.onDemandPrice(b)
         if ((aPrice == null || isNaN(aPrice)) && bPrice == 0) {
           return 0
         } else if (aPrice == null || isNaN(aPrice)) {
@@ -207,6 +216,7 @@
       "disk": diskSort,
       "networkPerformance": networkPerformanceSort,
       "reservedPrice": priceSort(),
+      "reservedSavings": savingsSort(),
       "onDemandPrice": priceSort("onDemand"),
       "spotPrice": priceSort("spot"),
       "emrPrice": priceSort("other", "emr"),
