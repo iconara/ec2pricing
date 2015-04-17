@@ -56,8 +56,19 @@ nav.top-menu {
 
   }
 
-  .cpus, .ram, .disk, .networkPerformance, .price {
+  .quantity, .quantity input, .cpus, .ram, .disk, .networkPerformance, .price {
     text-align: right
+  }
+
+  .quantity {
+    input {
+      padding: 0;
+      margin: 0;
+      height: auto;
+    }
+    input::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+      opacity: 1;
+    }
   }
 }
 

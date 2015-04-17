@@ -27,7 +27,13 @@
             EC2 Pricing
           </a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav nav-pills navbar-nav navbar-right">
+          <li role="presentation" class="{{settings.calculator ? 'active' : ''}}">
+            <a href="#" ng-click="settings.update('calculator', !settings.calculator)">
+              <span class="glyphicon {{settings.calculator ? 'glyphicon-check' : 'glyphicon-unchecked'}}" aria-hidden="true"></span>
+              Calculator
+            </a>
+          </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">{{settings.region}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -107,6 +113,7 @@
           <table class="prices table table-striped table-hover">
             <thead>
               <tr>
+                <th sortable-column name="quantity" title="Desired quantity" ng-if="settings.calculator">#</th>
                 <th sortable-column name="apiName" title="The API name" class="text-column">Name</th>
                 <th sortable-column name="cpus" class="visible-lg visible-md">CPUs</th>
                 <th sortable-column name="ram">RAM</th>
@@ -124,7 +131,30 @@
               </tr>
             </thead>
             <tbody>
+              <tr ng-if="settings.calculator">
+                <td class="quantity">
+                </td>
+                <td class="apiName">
+                  Total
+                </td>
+                <td class="cpus visible-lg visible-md"></td>
+                <td class="ram">
+                </td>
+                <td class="disk">
+                </td>
+                <td class="networkPerformance visible-lg visible-md">
+                </td>
+                <td class="price visible-lg visible-md visible-sm">{{total.reservedPrice | price}}</td>
+                <td class="price visible-lg visible-md">{{(1 - total.reservedPrice / total.onDemandPrice) | percent}}</td>
+                <td class="price">{{total.onDemandPrice | price}}</td>
+                <td class="price">{{total.spotPrice | price}}</td>
+                <td class="price visible-lg visible-md">{{total.emrPrice | price}}</td>
+                <td class="price visible-lg visible-md">{{total.ebsOptimizedPrice | price}}</td>
+              </tr>
               <tr ng-class="{highlight: instanceType.highlighted}" ng-click="toggleInstanceTypeHighlight(instanceType)" ng-repeat="instanceType in instanceTypes | sortInstances">
+                <td class="quantity col-sm-1" ng-if="settings.calculator">
+                  <input type="number" class="form-control" ng-model="instanceType.quantity" focus-on="{{instanceType.apiName}}" ng-change="focus(instanceType.apiName)"></input>
+                </td>
                 <td class="apiName">
                   <span class="hidden-lg hidden-md"><span class="label label-primary">{{instanceType.apiName | shortApiName}}</span></span>
                   <span class="visible-lg visible-md"><span class="label label-primary">{{instanceType.apiName}}</span></span>
@@ -150,12 +180,12 @@
                 <td class="networkPerformance visible-lg visible-md">
                   {{instanceType.networkPerformance}}
                 </td>
-                <td class="price visible-lg visible-md visible-sm">{{instanceType.prices[settings.region][settings.reservationType][settings.operatingSystem] | price}}</td>
-                <td class="price visible-lg visible-md">{{reservedSavingsPercentage(instanceType)}}</td>
-                <td class="price">{{instanceType.prices[settings.region]["onDemand"][settings.operatingSystem] | price}}</td>
-                <td class="price">{{instanceType.prices[settings.region]["spot"][settings.operatingSystem] | price}}</td>
-                <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["emr"] | price}}</td>
-                <td class="price visible-lg visible-md">{{instanceType.prices[settings.region]["other"]["ebsOptimized"] | price}}</td>
+                <td class="price visible-lg visible-md visible-sm">{{reservedPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{(1 - reservedPrice(instanceType) / onDemandPrice(instanceType)) | percent}}</td>
+                <td class="price">{{onDemandPrice(instanceType) | price}}</td>
+                <td class="price">{{spotPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{emrPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md">{{ebsOptimizedPrice(instanceType) | price}}</td>
               </tr>
             </tbody>
           </table>

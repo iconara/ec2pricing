@@ -24,21 +24,25 @@
     }
   }])
 
-  filters.filter("price", ["displaySettings", "periodMultiplier", "normalizedReservePrice", function (displaySettings, periodMultiplier, normalizedReservePrice) {
+  filters.filter("price", function () {
     return function (input) {
-      if (input == null) {
+      if (isNaN(input) || input == null) {
         return "n/a"
+      } else {
+        return "$" + input.toFixed(3)
       }
-      var hourlyPrice = input
-      if (typeof input == "object" && ("yrTerm1" in input || "yrTerm1-effectiveHourly" in input)) {
-        hourlyPrice = normalizedReservePrice(input)
-      }
-      if (isNaN(hourlyPrice) || hourlyPrice == null) {
-        return "n/a"
-      }
-      return "$" + (hourlyPrice * periodMultiplier[displaySettings.period]).toFixed(3)
     }
-  }])
+  })
+
+  filters.filter("percent", function () {
+    return function (input) {
+      if (isNaN(input) || input == null) {
+        return "n/a"
+      } else {
+        return Math.round(100 * input) + "%";
+      }
+    }
+  })
 
   filters.filter("disks", [function () {
     var nbsp = "\u00A0"
@@ -176,7 +180,19 @@
     }
     return function (input) {
       if (input) {
-        var sorted = input.slice().sort(sortFunctions[displaySettings.sortField] || sortFunctions["apiName"])
+        var sortFunction = sortFunctions[displaySettings.sortField] || sortFunctions["apiName"]
+        if (displaySettings.calculator) {
+          var wrapped = sortFunction
+          var before = displaySettings.sortAscending ? -1 : 1
+          sortFunction = function (a, b) {
+            if (a.quantity) {
+              return b.quantity ? wrapped(a, b) : before
+            } else {
+              return b.quantity ? -before : wrapped(a, b)
+            }
+          }
+        }
+        var sorted = input.slice().sort(sortFunction)
         if (!displaySettings.sortAscending) {
           sorted.reverse()
         }

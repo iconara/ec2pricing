@@ -5,6 +5,7 @@
 
   ec2pricing.factory("displaySettings", ["$q", "localStorage", function ($q, localStorage) {
     var state = {
+      calculator: false,
       region: "us-east-1",
       operatingSystem: "linux",
       reservationType: "partialUpfront",
@@ -33,10 +34,13 @@
     self.save = save
     self.load = load
     self.update = update
+    self.toJson = function () {
+      return angular.toJson(state)
+    }
     return self
   }])
 
-  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice) {
+  ec2pricing.controller("ApplicationController", ["$scope", "pricingDataLoader", "displaySettings", "normalizedReservePrice", "periodMultiplier", "focus", function ($scope, pricingDataLoader, displaySettings, normalizedReservePrice, periodMultiplier, focus) {
     $scope.reservationTypes = {
       "lightReservation": "light",
       "mediumReservation": "medium",
@@ -71,20 +75,57 @@
       instanceType.highlighted = !instanceType.highlighted
     }
 
-    $scope.reservedSavingsPercentage = function (instanceType) {
-      var onDemandPrice = instanceType.prices[displaySettings.region]["onDemand"][displaySettings.operatingSystem]
-      var reservedPrices = instanceType.prices[displaySettings.region]
-      if (onDemandPrice && reservedPrices && reservedPrices[displaySettings.reservationType] && reservedPrices[displaySettings.reservationType][displaySettings.operatingSystem]) {
-        var reservedPrice = normalizedReservePrice(reservedPrices[displaySettings.reservationType][displaySettings.operatingSystem])
-        if (!isNaN(reservedPrice)) {
-          return Math.round(100 * (1.0 - (reservedPrice/onDemandPrice))) + "%"
-        }
+    function priceFor(instanceType, k1, k2) {
+      var prices = instanceType.prices[displaySettings.region]
+      var hourlyPrice = prices && prices[k1] && prices[k1][k2]
+      if (typeof hourlyPrice == "object" && ("yrTerm1" in hourlyPrice || "yrTerm1-effectiveHourly" in hourlyPrice)) {
+        hourlyPrice = normalizedReservePrice(hourlyPrice)
       }
-      return "n/a"
+      return hourlyPrice && (hourlyPrice * periodMultiplier[displaySettings.period])
+    }
+
+    $scope.onDemandPrice = function (instanceType) {
+      return priceFor(instanceType, 'onDemand', displaySettings.operatingSystem)
+    }
+
+    $scope.spotPrice = function (instanceType) {
+      return priceFor(instanceType, 'spot', displaySettings.operatingSystem)
+    }
+
+    $scope.emrPrice = function (instanceType) {
+      return priceFor(instanceType, 'other', 'emr')
+    }
+
+    $scope.ebsOptimizedPrice = function (instanceType) {
+      return priceFor(instanceType, 'other', 'ebsOptimized')
+    }
+
+    $scope.reservedPrice = function (instanceType) {
+      return priceFor(instanceType, displaySettings.reservationType, displaySettings.operatingSystem)
     }
 
     $scope.loading = true
+    $scope.instanceTypes = []
     $scope.percentLoaded = 0
+    $scope.focus = focus
+
+    $scope.$watch(
+      function () {
+        return $scope.instanceTypes.reduce(function (result, instanceType) { return result + '+' + instanceType.quantity + '*' + instanceType.apiName }, displaySettings.toJson())
+      }, function () {
+        var sum = function(price) {
+          return $scope.instanceTypes.reduce(function (sum, instanceType) { return instanceType.quantity ? (sum + instanceType.quantity * price(instanceType)) : sum }, 0)
+        }
+        var totalOnDemandPrice = sum($scope.onDemandPrice)
+        var totalReservedPrice = sum($scope.reservedPrice)
+        $scope.total = {
+          onDemandPrice: totalOnDemandPrice,
+          reservedPrice: totalReservedPrice,
+          spotPrice: sum($scope.spotPrice),
+          emrPrice: sum($scope.emrPrice),
+          ebsOptimizedPrice: sum($scope.ebsOptimizedPrice),
+        }
+      })
 
     displaySettings.load().then(function () {
       pricingDataLoader.load().then(function (data) {
