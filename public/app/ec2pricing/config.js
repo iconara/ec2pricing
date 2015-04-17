@@ -107,6 +107,7 @@
     "d2.4xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2676 v3", clockSpeed: 2.4},
     "d2.8xlarge":  {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon E5-2676 v3", clockSpeed: 2.4},
     "g2.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
+    "g2.8xlarge":  {networkPerformance: "10 gigabit", processorFamily: "Intel Xeon E5-2670",    clockSpeed: 2.6},
     "r3.large":    {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
     "r3.xlarge":   {networkPerformance: "moderate",   processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
     "r3.2xlarge":  {networkPerformance: "high",       processorFamily: "Intel Xeon E5-2670 v2", clockSpeed: 2.5},
