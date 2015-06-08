@@ -34,6 +34,12 @@
               Calculator
             </a>
           </li>
+          <li>
+            <a href="#" ng-click="settings.update('emrPercent', !settings.emrPercent)">
+              <span class="glyphicon {{settings.emrPercent ? 'glyphicon-check' : 'glyphicon-unchecked'}}" aria-hidden="true"></span>
+              EMR as %
+            </a>
+          </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">{{settings.region}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -126,8 +132,7 @@
                   <span class="visible-lg visible-md">On demand</span>
                 </th>
                 <th sortable-column name="spotPrice" class="price" title="Price on the spot market">Spot</th>
-                <th sortable-column name="emrPricePercent" class="price visible-lg" title="EMR price as a percentage of the On demand (regular) price">EMR%</th>
-                <th sortable-column name="emrPrice" class="price visible-lg visible-md" title="Additional cost for instances in Elastic MapReduce clusters">EMR</th>
+                <th sortable-column name="emrPrice" class="price visible-lg visible-md" title="Additional cost for instances in Elastic MapReduce clusters">EMR<span ng-show="settings.emrPercent">%</span></th>
                 <th sortable-column name="ebsOptimizedPrice" class="price visible-lg visible-md" title="Additional cost for EBS optimized instances">EBS&nbsp;Opt.</th>
               </tr>
             </thead>
@@ -149,8 +154,10 @@
                 <td class="price visible-lg visible-md">{{(1 - total.reservedPrice / total.onDemandPrice) | percent}}</td>
                 <td class="price">{{total.onDemandPrice | price}}</td>
                 <td class="price">{{total.spotPrice | price}}</td>
-                <td class="price visible-lg">{{total.emrPricePercent | percent}}</td>
-                <td class="price visible-lg visible-md">{{total.emrPrice | price}}</td>
+                <td class="price visible-lg visible-md">
+                  <span ng-if="settings.emrPercent">{{total.emrPricePercent | percent}}</span>
+                  <span ng-if="!settings.emrPercent">{{total.emrPrice | price}}</span>
+                </td>
                 <td class="price visible-lg visible-md">{{total.ebsOptimizedPrice | price}}</td>
               </tr>
               <tr ng-class="{highlight: instanceType.highlighted}" ng-click="toggleInstanceTypeHighlight(instanceType)" ng-repeat="instanceType in instanceTypes | sortInstances">
@@ -186,8 +193,10 @@
                 <td class="price visible-lg visible-md">{{(1 - pricingCalculator.reservedPrice(instanceType) / pricingCalculator.onDemandPrice(instanceType)) | percent}}</td>
                 <td class="price">{{pricingCalculator.onDemandPrice(instanceType) | price}}</td>
                 <td class="price">{{pricingCalculator.spotPrice(instanceType) | price}}</td>
-                <td class="price visible-lg">{{pricingCalculator.emrPricePercent(instanceType) | percent}}</td>
-                <td class="price visible-lg visible-md">{{pricingCalculator.emrPrice(instanceType) | price}}</td>
+                <td class="price visible-lg visible-md" ng-hide="settings.emrPercent">
+                  <span ng-if="settings.emrPercent">{{pricingCalculator.emrPricePercent(instanceType) | percent}}</span>
+                  <span ng-if="!settings.emrPercent">{{pricingCalculator.emrPrice(instanceType) | price}}</span>
+                </td>
                 <td class="price visible-lg visible-md">{{pricingCalculator.ebsOptimizedPrice(instanceType) | price}}</td>
               </tr>
             </tbody>

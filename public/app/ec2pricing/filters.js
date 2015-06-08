@@ -225,6 +225,13 @@
         return aPricePercent - bPricePercent
       }
     }
+    var emrPriceSort = function () {
+      if (displaySettings.emrPercent) {
+        return emrPricePercentSort
+      } else {
+        priceSort("other", "emr")
+      }
+    }
     var get = function (object, path) {
       return path.reduce(function (obj, key) { return obj && obj[key] }, object)
     }
@@ -238,8 +245,7 @@
       "reservedSavings": savingsSort(),
       "onDemandPrice": priceSort("onDemand"),
       "spotPrice": priceSort("spot"),
-      "emrPricePercent": emrPricePercentSort,
-      "emrPrice": priceSort("other", "emr"),
+      "emrPrice": emrPriceSort(),
       "ebsOptimizedPrice": priceSort("other", "ebsOptimized")
     }
     return function (input) {
