@@ -96,7 +96,8 @@
           reservedPrice: totalReservedPrice,
           spotPrice: sum(pricingCalculator.spotPrice),
           emrPrice: sum(pricingCalculator.emrPrice),
-          ebsOptimizedPrice: sum(pricingCalculator.ebsOptimizedPrice),
+          emrPricePercent: sum(pricingCalculator.emrPrice)/totalOnDemandPrice,
+          ebsOptimizedPrice: sum(pricingCalculator.ebsOptimizedPrice)
         }
       })
 

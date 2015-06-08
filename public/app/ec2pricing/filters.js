@@ -42,6 +42,11 @@
     var emrPrice = function (instanceType) {
       return priceFor(instanceType, 'other', 'emr')
     }
+    var emrPricePercent = function (instanceType) {
+      var emr = emrPrice(instanceType)
+      var od = onDemandPrice(instanceType)
+      return emr/od
+    }
     var ebsOptimizedPrice = function (instanceType) {
       return priceFor(instanceType, 'other', 'ebsOptimized')
     }
@@ -53,6 +58,7 @@
       onDemandPrice: onDemandPrice,
       spotPrice: spotPrice,
       emrPrice: emrPrice,
+      emrPricePercent: emrPricePercent,
       ebsOptimizedPrice: ebsOptimizedPrice,
       reservedPrice: reservedPrice
     }
@@ -206,6 +212,19 @@
         }
       }
     }
+    var emrPricePercentSort = function (a, b) {
+      var aPricePercent = pricingCalculator.emrPricePercent(a)
+      var bPricePercent = pricingCalculator.emrPricePercent(b)
+      if (isNaN(aPricePercent) && isNaN(bPricePercent)) {
+        return 0
+      } else if (isNaN(aPricePercent)) {
+        return -1
+      } else if (isNaN(bPricePercent)) {
+        return 1
+      } else {
+        return aPricePercent - bPricePercent
+      }
+    }
     var get = function (object, path) {
       return path.reduce(function (obj, key) { return obj && obj[key] }, object)
     }
@@ -219,6 +238,7 @@
       "reservedSavings": savingsSort(),
       "onDemandPrice": priceSort("onDemand"),
       "spotPrice": priceSort("spot"),
+      "emrPricePercent": emrPricePercentSort,
       "emrPrice": priceSort("other", "emr"),
       "ebsOptimizedPrice": priceSort("other", "ebsOptimized")
     }

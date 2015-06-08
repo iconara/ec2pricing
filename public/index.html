@@ -126,6 +126,7 @@
                   <span class="visible-lg visible-md">On demand</span>
                 </th>
                 <th sortable-column name="spotPrice" class="price" title="Price on the spot market">Spot</th>
+                <th sortable-column name="emrPricePercent" class="price visible-lg" title="EMR price as a percentage of the On demand (regular) price">EMR%</th>
                 <th sortable-column name="emrPrice" class="price visible-lg visible-md" title="Additional cost for instances in Elastic MapReduce clusters">EMR</th>
                 <th sortable-column name="ebsOptimizedPrice" class="price visible-lg visible-md" title="Additional cost for EBS optimized instances">EBS&nbsp;Opt.</th>
               </tr>
@@ -148,6 +149,7 @@
                 <td class="price visible-lg visible-md">{{(1 - total.reservedPrice / total.onDemandPrice) | percent}}</td>
                 <td class="price">{{total.onDemandPrice | price}}</td>
                 <td class="price">{{total.spotPrice | price}}</td>
+                <td class="price visible-lg">{{total.emrPricePercent | percent}}</td>
                 <td class="price visible-lg visible-md">{{total.emrPrice | price}}</td>
                 <td class="price visible-lg visible-md">{{total.ebsOptimizedPrice | price}}</td>
               </tr>
@@ -184,6 +186,7 @@
                 <td class="price visible-lg visible-md">{{(1 - pricingCalculator.reservedPrice(instanceType) / pricingCalculator.onDemandPrice(instanceType)) | percent}}</td>
                 <td class="price">{{pricingCalculator.onDemandPrice(instanceType) | price}}</td>
                 <td class="price">{{pricingCalculator.spotPrice(instanceType) | price}}</td>
+                <td class="price visible-lg">{{pricingCalculator.emrPricePercent(instanceType) | percent}}</td>
                 <td class="price visible-lg visible-md">{{pricingCalculator.emrPrice(instanceType) | price}}</td>
                 <td class="price visible-lg visible-md">{{pricingCalculator.ebsOptimizedPrice(instanceType) | price}}</td>
               </tr>
