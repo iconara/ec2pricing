@@ -197,39 +197,35 @@
         }
       }
     }
-    var savingsSort = function (reservationType, operatingSystem) {
+    var pricingCalculatorSort = function (numeratorMethod, denominatorMethod) {
       return function (a, b) {
-        var aPrice = 1 - pricingCalculator.reservedPrice(a) / pricingCalculator.onDemandPrice(a)
-        var bPrice = 1 - pricingCalculator.reservedPrice(b) / pricingCalculator.onDemandPrice(b)
-        if ((aPrice == null || isNaN(aPrice)) && bPrice == 0) {
+        var aValue = pricingCalculator[numeratorMethod](a)
+        var bValue = pricingCalculator[numeratorMethod](b)
+        if (denominatorMethod) {
+          aValue = aValue / pricingCalculator[denominatorMethod](a)
+          bValue = bValue / pricingCalculator[denominatorMethod](b)
+        }
+        var aUndefined = aValue == null || aValue == undefined || isNaN(aValue)
+        var bUndefined = bValue == null || bValue == undefined || isNaN(bValue)
+        if (aUndefined && bUndefined) {
           return 0
-        } else if (aPrice == null || isNaN(aPrice)) {
+        } else if (aUndefined && !bUndefined) {
           return -1
-        } else if (bPrice == null || isNaN(bPrice)) {
+        } else if (!aUndefined && bUndefined) {
           return 1
         } else {
-          return aPrice - bPrice
+          return aValue - bValue
         }
       }
     }
-    var emrPricePercentSort = function (a, b) {
-      var aPricePercent = pricingCalculator.emrPricePercent(a)
-      var bPricePercent = pricingCalculator.emrPricePercent(b)
-      if (isNaN(aPricePercent) && isNaN(bPricePercent)) {
-        return 0
-      } else if (isNaN(aPricePercent)) {
-        return -1
-      } else if (isNaN(bPricePercent)) {
-        return 1
-      } else {
-        return aPricePercent - bPricePercent
-      }
+    var savingsSort = function (reservationType, operatingSystem) {
+      return pricingCalculatorSort("reservedPrice", "onDemandPrice")
     }
     var emrPriceSort = function () {
       if (displaySettings.emrPercent) {
-        return emrPricePercentSort
+        return pricingCalculatorSort("emrPrice", "onDemandPrice")
       } else {
-        priceSort("other", "emr")
+        return pricingCalculatorSort("emrPrice")
       }
     }
     var get = function (object, path) {
