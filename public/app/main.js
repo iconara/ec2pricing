@@ -120,51 +120,24 @@ const app = new Vue({
       })
 
       loader.loadDatabase().then((db) => {
-        this.db = db
+        this.db = new CostDb(db)
         this.loaded = true
-
-        db.each("SELECT key, value FROM meta WHERE key = 'publication_date'", null, (row) => {
-          this.publicationDate = row.value
-        })
-
-        db.each("SELECT purchase_option_id AS id, purchase_option AS purchaseOption FROM purchase_option", null, (row) => {
-          this.purchaseOptions.push(row)
-        })
+        this.publicationDate = this.db.publicationDate()
+        this.purchaseOptions = this.db.purchaseOptions()
+        this.leaseContractLengths = this.db.leaseContractLengths()
+        this.offeringClasses = this.db.offeringClasses()
+        this.locations = this.db.locations()
+        this.operatingSystems = this.db.operatingSystems()
+        this.tenancies = this.db.tenancies()
+        this.licenseModels = this.db.licenseModels()
+        this.preinstalledSoftwares = this.db.preinstalledSoftwares()
         this.selectedPurchaseOptionId = this.purchaseOptions.find((po) => po.purchaseOption == "").id
-
-        db.each("SELECT lease_contract_length_id AS id, lease_contract_length AS leaseContractLength FROM lease_contract_length", null, (row) => {
-          this.leaseContractLengths.push(row)
-        })
         this.selectedLeaseContractLengthId = this.leaseContractLengths.find((lcl) => lcl.leaseContractLength == "").id
-
-        db.each("SELECT offering_class_id AS id, offering_class AS offeringClass FROM offering_class", null, (row) => {
-          this.offeringClasses.push(row)
-        })
         this.selectedOfferingClassId = this.offeringClasses.find((oc) => oc.offeringClass == "").id
-
-        db.each("SELECT location_id AS id, location FROM location", null, (row) => {
-          this.locations.push(row)
-        })
         this.selectedLocationId = this.locations.find((l) => l.location == "US East (N. Virginia)").id
-
-        db.each("SELECT operating_system_id AS id, operating_system AS operatingSystem FROM operating_system", null, (row) => {
-          this.operatingSystems.push(row)
-        })
         this.selectedOperatingSystemId = this.operatingSystems.find((os) => os.operatingSystem == "Linux").id
-
-        db.each("SELECT tenancy_id AS id, tenancy FROM tenancy", null, (row) => {
-          this.tenancies.push(row)
-        })
         this.selectedTenancyId = this.tenancies.find((t) => t.tenancy == "Shared").id
-
-        db.each("SELECT license_model_id AS id, license_model AS licenseModel FROM license_model", null, (row) => {
-          this.licenseModels.push(row)
-        })
         this.selectedLicenseModelId = this.licenseModels.find((lm) => lm.licenseModel == "No License required").id
-
-        db.each("SELECT preinstalled_software_id AS id, preinstalled_software AS preinstalledSoftware FROM preinstalled_software", null, (row) => {
-          this.preinstalledSoftwares.push(row)
-        })
         this.selectedPreinstalledSoftwareId = this.preinstalledSoftwares.find((ps) => ps.preinstalledSoftware == "NA").id
       })
     },
@@ -199,45 +172,7 @@ const app = new Vue({
   computed: {
     instanceTypes() {
       if (this.db) {
-        let sql = `
-          SELECT
-            instance_type AS name,
-            vcpus,
-            memory,
-            storage,
-            network_performance AS networkPerformance,
-            hourly_rate AS hourlyRate
-          FROM instance_type it
-          LEFT JOIN cost c ON (
-            it.instance_type_id = c.instance_type_id
-            AND purchase_option_id = :purchaseOptionId
-            AND lease_contract_length_id = :leaseContractLengthId
-            AND offering_class_id = :offeringClassId
-            AND location_id = :locationId
-            AND operating_system_id = :operatingSystemId
-            AND tenancy_id = :tenancyId
-            AND license_model_id = :licenseModelId
-            AND preinstalled_software_id = :preinstalledSoftwareId
-          )
-        `
-        let statement = this.db.prepare(sql)
-        statement.bind({
-          ":purchaseOptionId": this.selectedPurchaseOptionId,
-          ":leaseContractLengthId": this.selectedLeaseContractLengthId,
-          ":offeringClassId": this.selectedOfferingClassId,
-          ":locationId": this.selectedLocationId,
-          ":operatingSystemId": this.selectedOperatingSystemId,
-          ":tenancyId": this.selectedTenancyId,
-          ":licenseModelId": this.selectedLicenseModelId,
-          ":preinstalledSoftwareId": this.selectedPreinstalledSoftwareId
-        })
-        let rows = []
-        while (statement.step()) {
-          rows.push(statement.getAsObject())
-        }
-        statement.free()
-        rows.sort((it1, it2) => this.instanceTypeSort(it1, it2))
-        return rows
+        return this.db.instanceTypes(this).sort((it1, it2) => this.instanceTypeSort(it1, it2))
       } else {
         return []
       }
