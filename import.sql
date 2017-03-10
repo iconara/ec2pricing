@@ -198,7 +198,10 @@ SELECT
   t.tenancy_id,
   lm.license_model_id,
   ps.preinstalled_software_id,
-  CASE "PricePerUnit" WHEN '0.0' THEN '0.0' ELSE RTRIM("PricePerUnit", '0') END
+  CASE
+  WHEN "PricePerUnit" LIKE '%0' THEN SUBSTR("PricePerUnit", 0, INSTR("PricePerUnit", '.') + 2) || RTRIM(SUBSTR("PricePerUnit", INSTR("PricePerUnit", '.') + 2), '0')
+  ELSE "PricePerUnit"
+  END
 FROM "AmazonEC2" raw
 LEFT JOIN purchase_option po ON po.purchase_option = "PurchaseOption"
 LEFT JOIN lease_contract_length lcl ON lcl.lease_contract_length = "LeaseContractLength"
