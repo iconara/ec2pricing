@@ -184,7 +184,6 @@ CREATE TABLE hourly_rate (
   tenancy_id INTEGER NOT NULL,
   license_model_id INTEGER NOT NULL,
   preinstalled_software_id INTEGER NOT NULL,
-  ebs_optimized INTEGER NOT NULL,
   hourly_rate TEXT NOT NULL,
   FOREIGN KEY (purchase_option_id) REFERENCES purchase_option (purchase_option_id),
   FOREIGN KEY (lease_contract_length_id) REFERENCES lease_contract_length (lease_contract_length_id),
@@ -219,7 +218,6 @@ SELECT
   t.tenancy_id,
   lm.license_model_id,
   ps.preinstalled_software_id,
-  CASE "EBS Optimized" WHEN 'Yes' THEN 1 ELSE 0 END,
   CASE "PricePerUnit" WHEN '0.0' THEN '0.0' ELSE RTRIM("PricePerUnit", '0') END
 FROM "AmazonEC2" raw
 LEFT JOIN purchase_option po ON po.purchase_option = "PurchaseOption"
@@ -232,7 +230,8 @@ LEFT JOIN tenancy t ON t.tenancy = raw."Tenancy"
 LEFT JOIN license_model lm ON lm.license_model = "License Model"
 LEFT JOIN preinstalled_software ps ON ps.preinstalled_software = "Pre Installed S/W"
 WHERE "Product Family" = 'Compute Instance'
-AND "Unit" IN ('Hrs', 'hrs');
+AND "Unit" IN ('Hrs', 'hrs')
+AND "EBS Optimized" <> 'Yes';
 
 CREATE TABLE upfront_cost (
   purchase_option_id INTEGER NOT NULL,
@@ -291,7 +290,8 @@ LEFT JOIN license_model lm ON lm.license_model = "License Model"
 LEFT JOIN preinstalled_software ps ON ps.preinstalled_software = "Pre Installed S/W"
 WHERE "Product Family" = 'Compute Instance'
 AND "PriceDescription" = 'Upfront Fee'
-AND "Unit" = 'Quantity';
+AND "Unit" = 'Quantity'
+AND "EBS Optimized" <> 'Yes';
 
 CREATE TABLE cost (
   purchase_option_id INTEGER NOT NULL,
@@ -303,7 +303,6 @@ CREATE TABLE cost (
   tenancy_id INTEGER NOT NULL,
   license_model_id INTEGER NOT NULL,
   preinstalled_software_id INTEGER NOT NULL,
-  ebs_optimized INTEGER NOT NULL,
   hourly_rate TEXT NOT NULL,
   upfront_cost TEXT NULL,
   FOREIGN KEY (purchase_option_id) REFERENCES purchase_option (purchase_option_id),
@@ -339,7 +338,6 @@ SELECT
   hr.tenancy_id,
   hr.license_model_id,
   hr.preinstalled_software_id,
-  hr.ebs_optimized,
   hr.hourly_rate,
   uc.upfront_cost
 FROM hourly_rate hr LEFT JOIN upfront_cost uc ON (
