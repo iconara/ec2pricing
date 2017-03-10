@@ -175,7 +175,6 @@ EXCEPT
 SELECT preinstalled_software FROM preinstalled_software;
 
 CREATE TABLE hourly_rate (
-  hourly_rate_code TEXT PRIMARY KEY,
   purchase_option_id INTEGER NOT NULL,
   lease_contract_length_id INTEGER NOT NULL,
   offering_class_id INTEGER NOT NULL,
@@ -196,7 +195,7 @@ CREATE TABLE hourly_rate (
   FOREIGN KEY (tenancy_id) REFERENCES tenancy (tenancy_id),
   FOREIGN KEY (license_model_id) REFERENCES license_model (license_model_id),
   FOREIGN KEY (preinstalled_software_id) REFERENCES preinstalled_software (preinstalled_software_id),
-  UNIQUE (
+  PRIMARY KEY (
     purchase_option_id,
     lease_contract_length_id,
     offering_class_id,
@@ -211,7 +210,6 @@ CREATE TABLE hourly_rate (
 
 INSERT INTO hourly_rate
 SELECT
-  "RateCode",
   po.purchase_option_id,
   lcl.lease_contract_length_id,
   oc.offering_class_id,
@@ -237,7 +235,6 @@ WHERE "Product Family" = 'Compute Instance'
 AND "Unit" IN ('Hrs', 'hrs');
 
 CREATE TABLE upfront_cost (
-  upfront_rate_code TEXT PRIMARY KEY,
   purchase_option_id INTEGER NOT NULL,
   lease_contract_length_id INTEGER NOT NULL,
   offering_class_id INTEGER NOT NULL,
@@ -257,7 +254,7 @@ CREATE TABLE upfront_cost (
   FOREIGN KEY (tenancy_id) REFERENCES tenancy (tenancy_id),
   FOREIGN KEY (license_model_id) REFERENCES license_model (license_model_id),
   FOREIGN KEY (preinstalled_software_id) REFERENCES preinstalled_software (preinstalled_software_id),
-  UNIQUE (
+  PRIMARY KEY (
     purchase_option_id,
     lease_contract_length_id,
     offering_class_id,
@@ -272,7 +269,6 @@ CREATE TABLE upfront_cost (
 
 INSERT INTO upfront_cost
 SELECT
-  "RateCode",
   po.purchase_option_id,
   lcl.lease_contract_length_id,
   oc.offering_class_id,
@@ -298,8 +294,6 @@ AND "PriceDescription" = 'Upfront Fee'
 AND "Unit" = 'Quantity';
 
 CREATE TABLE cost (
-  hourly_rate_code TEXT PRIMARY KEY,
-  upfront_rate_code TEXT NULL,
   purchase_option_id INTEGER NOT NULL,
   lease_contract_length_id INTEGER NOT NULL,
   offering_class_id INTEGER NOT NULL,
@@ -321,7 +315,7 @@ CREATE TABLE cost (
   FOREIGN KEY (tenancy_id) REFERENCES tenancy (tenancy_id),
   FOREIGN KEY (license_model_id) REFERENCES license_model (license_model_id),
   FOREIGN KEY (preinstalled_software_id) REFERENCES preinstalled_software (preinstalled_software_id),
-  UNIQUE (
+  PRIMARY KEY (
     purchase_option_id,
     lease_contract_length_id,
     offering_class_id,
@@ -336,8 +330,6 @@ CREATE TABLE cost (
 
 INSERT INTO cost
 SELECT
-  hr.hourly_rate_code,
-  uc.upfront_rate_code,
   hr.purchase_option_id,
   hr.lease_contract_length_id,
   hr.offering_class_id,
