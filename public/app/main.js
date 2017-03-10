@@ -78,6 +78,9 @@ const app = new Vue({
             </tr>
           </tbody>
         </table>
+        <div>
+          Data published by AWS at {{publicationDate}}
+        </div>
       </div>
     </div>
   `,
@@ -85,6 +88,7 @@ const app = new Vue({
   data: {
     loaded: false,
     progress: 0,
+    publicationDate: null,
     purchaseOptions: [],
     leaseContractLengths: [],
     offeringClasses: [],
@@ -118,6 +122,10 @@ const app = new Vue({
       loader.loadDatabase().then((db) => {
         this.db = db
         this.loaded = true
+
+        db.each("SELECT key, value FROM meta WHERE key = 'publication_date'", null, (row) => {
+          this.publicationDate = row.value
+        })
 
         db.each("SELECT purchase_option_id AS id, purchase_option AS purchaseOption FROM purchase_option", null, (row) => {
           this.purchaseOptions.push(row)

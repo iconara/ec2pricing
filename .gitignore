@@ -1,2 +1,3 @@
 /public/data/*.sqlite
 /public/lib/*.js
+/tmp

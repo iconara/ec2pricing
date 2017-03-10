@@ -1,6 +1,11 @@
 .mode csv AmazonEC2
 .import /dev/stdin AmazonEC2
 
+CREATE TABLE meta (
+  key TEXT PRIMARY KEY,
+  value TEXT
+);
+
 CREATE TABLE term_type (
   term_type_id INTEGER PRIMARY KEY,
   term_type TEXT NOT NULL
