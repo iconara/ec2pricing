@@ -200,15 +200,17 @@ const app = new Vue({
             network_performance AS networkPerformance,
             hourly_rate AS hourlyRate
           FROM instance_type it
-          LEFT JOIN cost c ON (it.instance_type_id = c.instance_type_id)
-          WHERE purchase_option_id = :purchaseOptionId
-          AND lease_contract_length_id = :leaseContractLengthId
-          AND offering_class_id = :offeringClassId
-          AND location_id = :locationId
-          AND operating_system_id = :operatingSystemId
-          AND tenancy_id = :tenancyId
-          AND license_model_id = :licenseModelId
-          AND preinstalled_software_id = :preinstalledSoftwareId
+          LEFT JOIN cost c ON (
+            it.instance_type_id = c.instance_type_id
+            AND purchase_option_id = :purchaseOptionId
+            AND lease_contract_length_id = :leaseContractLengthId
+            AND offering_class_id = :offeringClassId
+            AND location_id = :locationId
+            AND operating_system_id = :operatingSystemId
+            AND tenancy_id = :tenancyId
+            AND license_model_id = :licenseModelId
+            AND preinstalled_software_id = :preinstalledSoftwareId
+          )
         `
         let statement = this.db.prepare(sql)
         statement.bind({
