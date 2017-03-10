@@ -6,8 +6,6 @@ CREATE TABLE term_type (
   term_type TEXT NOT NULL
 );
 
-INSERT INTO term_type (term_type_id, term_type) VALUES (0, '');
-
 INSERT INTO term_type (term_type)
 SELECT DISTINCT "TermType"
 FROM "AmazonEC2"
@@ -18,8 +16,6 @@ CREATE TABLE purchase_option (
   purchase_option_id INTEGER PRIMARY KEY,
   purchase_option TEXT NOT NULL
 );
-
-INSERT INTO purchase_option (purchase_option_id, purchase_option) VALUES (0, '');
 
 INSERT INTO purchase_option (purchase_option)
 SELECT DISTINCT "PurchaseOption"
@@ -32,8 +28,6 @@ CREATE TABLE lease_contract_length (
   lease_contract_length TEXT NOT NULL
 );
 
-INSERT INTO lease_contract_length (lease_contract_length_id, lease_contract_length) VALUES (0, '');
-
 INSERT INTO lease_contract_length (lease_contract_length)
 SELECT DISTINCT "LeaseContractLength"
 FROM "AmazonEC2"
@@ -44,8 +38,6 @@ CREATE TABLE offering_class (
   offering_class_id INTEGER PRIMARY KEY,
   offering_class TEXT NOT NULL
 );
-
-INSERT INTO offering_class (offering_class_id, offering_class) VALUES (0, '');
 
 INSERT INTO offering_class (offering_class)
 SELECT DISTINCT "OfferingClass"
@@ -58,8 +50,6 @@ CREATE TABLE location (
   location TEXT NOT NULL,
   region TEXT
 );
-
-INSERT INTO location (location_id, location, region) VALUES (0, '', NULL);
 
 INSERT INTO location (location)
 SELECT DISTINCT "Location"
@@ -80,8 +70,6 @@ CREATE TABLE instance_type (
   processor_architecture TEXT NOT NULL,
   gpus INTEGER NOT NULL
 );
-
-INSERT INTO instance_type VALUES (0, '', '', 0, '', NULL, '', '', '', '', 0);
 
 INSERT INTO instance_type (
   instance_type,
@@ -127,8 +115,6 @@ CREATE TABLE operating_system (
   operating_system TEXT NOT NULL
 );
 
-INSERT INTO operating_system VALUES (0, '');
-
 INSERT INTO operating_system (operating_system)
 SELECT DISTINCT "Operating System"
 FROM "AmazonEC2"
@@ -139,8 +125,6 @@ CREATE TABLE tenancy (
   tenancy_id INTEGER PRIMARY KEY,
   tenancy TEXT NOT NULL
 );
-
-INSERT INTO tenancy VALUES(0, '');
 
 INSERT INTO tenancy (tenancy)
 SELECT DISTINCT "Tenancy"
@@ -153,8 +137,6 @@ CREATE TABLE license_model (
   license_model TEXT NOT NULL
 );
 
-INSERT INTO license_model VALUES (0, '');
-
 INSERT INTO license_model (license_model)
 SELECT DISTINCT "License Model"
 FROM "AmazonEC2"
@@ -165,8 +147,6 @@ CREATE TABLE preinstalled_software (
   preinstalled_software_id INTEGER PRIMARY KEY,
   preinstalled_software TEXT NOT NULL
 );
-
-INSERT INTO preinstalled_software VALUES (0, '');
 
 INSERT INTO preinstalled_software (preinstalled_software)
 SELECT DISTINCT "Pre Installed S/W"
