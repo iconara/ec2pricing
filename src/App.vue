@@ -28,7 +28,7 @@ import FilterSelector from './components/FilterSelector'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
-const DIMENSION_META = [
+const FILTER_META = [
   ['purchaseOption', 'purchaseOptionId', 'purchaseOptions'],
   ['leaseContractLength', 'leaseContractLengthId', 'leaseContractLengths'],
   ['offeringClass', 'offeringClassId', 'offeringClasses'],
@@ -39,7 +39,7 @@ const DIMENSION_META = [
   ['preinstalledSoftware', 'preinstalledSoftwareId', 'preinstalledSoftwares']
 ]
 
-const DIMENSION_DEFAULTS = {
+const FILTER_DEFAULTS = {
   'purchaseOption': '',
   'leaseContractLength': '',
   'offeringClass': '',
@@ -89,11 +89,11 @@ export default {
       loaded: false,
       progress: 0,
       publicationDate: null,
-      filterMeta: DIMENSION_META,
+      filterMeta: FILTER_META,
       filters: {},
       selections: {}
     }
-    for (let [_, idName, collectionName] of DIMENSION_META) {
+    for (let [_, idName, collectionName] of FILTER_META) {
       d.filters[collectionName] = []
       d.selections[idName] = null
     }
@@ -116,9 +116,9 @@ export default {
         this.db = new CostDatabase(db)
         this.loaded = true
         this.publicationDate = this.db.publicationDate()
-        for (let [name, idName, collectionName] of DIMENSION_META) {
+        for (let [name, idName, collectionName] of FILTER_META) {
           let elements = this.db[collectionName]()
-          let defaultElement = elements.find((element) => element[name] === DIMENSION_DEFAULTS[name])
+          let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
           this.filters[collectionName] = elements
           this.selections[idName] = defaultElement && defaultElement.id || 0
         }
