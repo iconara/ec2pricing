@@ -88,6 +88,28 @@ import CostDatabase from './utils/CostDatabase'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
+const DIMENSION_META = [
+  ['purchaseOption', 'purchaseOptionId', 'purchaseOptions'],
+  ['leaseContractLength', 'leaseContractLengthId', 'leaseContractLengths'],
+  ['offeringClass', 'offeringClassId', 'offeringClasses'],
+  ['location', 'locationId', 'locations'],
+  ['operatingSystem', 'operatingSystemId', 'operatingSystems'],
+  ['tenancy', 'tenancyId', 'tenancies'],
+  ['licenseModel', 'licenseModelId', 'licenseModels'],
+  ['preinstalledSoftware', 'preinstalledSoftwareId', 'preinstalledSoftwares']
+]
+
+const DIMENSION_DEFAULTS = {
+  'purchaseOption': '',
+  'leaseContractLength': '',
+  'offeringClass': '',
+  'location': 'US East (N. Virginia)',
+  'operatingSystem': 'Linux',
+  'tenancy': 'Shared',
+  'licenseModel': 'No License required',
+  'preinstalledSoftware': 'NA'
+}
+
 function instanceTypeSort (it1, it2) {
   let [family1, size1] = it1.name.split('.')
   let [family2, size2] = it2.name.split('.')
@@ -159,23 +181,11 @@ export default {
         this.db = new CostDatabase(db)
         this.loaded = true
         this.publicationDate = this.db.publicationDate()
-        this.purchaseOptions = this.db.purchaseOptions()
-        this.leaseContractLengths = this.db.leaseContractLengths()
-        this.offeringClasses = this.db.offeringClasses()
-        this.locations = this.db.locations()
-        this.operatingSystems = this.db.operatingSystems()
-        this.tenancies = this.db.tenancies()
-        this.licenseModels = this.db.licenseModels()
-        this.preinstalledSoftwares = this.db.preinstalledSoftwares()
-        this.selections = {
-          purchaseOptionId: this.purchaseOptions.find((po) => po.purchaseOption === '').id,
-          leaseContractLengthId: this.leaseContractLengths.find((lcl) => lcl.leaseContractLength === '').id,
-          offeringClassId: this.offeringClasses.find((oc) => oc.offeringClass === '').id,
-          locationId: this.locations.find((l) => l.location === 'US East (N. Virginia)').id,
-          operatingSystemId: this.operatingSystems.find((os) => os.operatingSystem === 'Linux').id,
-          tenancyId: this.tenancies.find((t) => t.tenancy === 'Shared').id,
-          licenseModelId: this.licenseModels.find((lm) => lm.licenseModel === 'No License required').id,
-          preinstalledSoftwareId: this.preinstalledSoftwares.find((ps) => ps.preinstalledSoftware === 'NA').id
+        for (let [name, idName, collectionName] of DIMENSION_META) {
+          let elements = this.db[collectionName]()
+          let defaultElement = elements.find((element) => element[name] === DIMENSION_DEFAULTS[name])
+          this[collectionName] = elements
+          this.selections[idName] = defaultElement && defaultElement.id || 0
         }
       })
     }
