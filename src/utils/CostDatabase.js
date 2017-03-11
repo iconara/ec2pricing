@@ -31,8 +31,11 @@ export default class CostDatabase {
     this.db = db
   }
 
-  _rows (sql) {
+  _rows (sql, parameters) {
     let statement = this.db.prepare(sql)
+    if (parameters) {
+      statement.bind(parameters)
+    }
     let rows = []
     while (statement.step()) {
       rows.push(statement.getAsObject())
@@ -88,18 +91,11 @@ export default class CostDatabase {
   }
 
   instanceTypes (selectedIds) {
-    let statement = this.db.prepare(INSTANCE_TYPES_SQL)
     let parameters = {}
     for (let pair of DIMENSION_NAMES) {
       let camelCaseName = pair[1]
       parameters[`:${camelCaseName}Id`] = selectedIds[`${camelCaseName}Id`]
     }
-    statement.bind(parameters)
-    let rows = []
-    while (statement.step()) {
-      rows.push(statement.getAsObject())
-    }
-    statement.free()
-    return rows
+    return this._rows(INSTANCE_TYPES_SQL, parameters)
   }
 }
