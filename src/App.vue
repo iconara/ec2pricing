@@ -7,42 +7,42 @@
       <div>
         <filter-selector
           v-model="selections.purchaseOptionId"
-          v-bind:options="purchaseOptions"
+          v-bind:options="filters.purchaseOptions"
           v-bind:name="'purchaseOption'"/>
 
         <filter-selector
           v-model="selections.leaseContractLengthId"
-          v-bind:options="leaseContractLengths"
+          v-bind:options="filters.leaseContractLengths"
           v-bind:name="'leaseContractLength'"/>
 
         <filter-selector
           v-model="selections.offeringClassId"
-          v-bind:options="offeringClasses"
+          v-bind:options="filters.offeringClasses"
           v-bind:name="'offeringClass'"/>
 
         <filter-selector
           v-model="selections.locationId"
-          v-bind:options="locations"
+          v-bind:options="filters.locations"
           v-bind:name="'location'"/>
 
         <filter-selector
           v-model="selections.operatingSystemId"
-          v-bind:options="operatingSystems"
+          v-bind:options="filters.operatingSystems"
           v-bind:name="'operatingSystem'"/>
 
         <filter-selector
           v-model="selections.tenancyId"
-          v-bind:options="tenancies"
+          v-bind:options="filters.tenancies"
           v-bind:name="'tenancy'"/>
 
         <filter-selector
           v-model="selections.licenseModelId"
-          v-bind:options="licenseModels"
+          v-bind:options="filters.licenseModels"
           v-bind:name="'licenseModel'"/>
 
         <filter-selector
           v-model="selections.preinstalledSoftwareId"
-          v-bind:options="preinstalledSoftwares"
+          v-bind:options="filters.preinstalledSoftwares"
           v-bind:name="'preinstalledSoftware'"/>
       </div>
       <instance-types-table v-bind:instance-types="instanceTypes"></instance-types-table>
@@ -118,29 +118,18 @@ export default {
   },
 
   data () {
-    return {
+    let d = {
       loaded: false,
       progress: 0,
       publicationDate: null,
-      purchaseOptions: [],
-      leaseContractLengths: [],
-      offeringClasses: [],
-      locations: [],
-      operatingSystems: [],
-      tenancies: [],
-      licenseModels: [],
-      preinstalledSoftwares: [],
-      selections: {
-        purchaseOptionId: null,
-        leaseContractLengthId: null,
-        offeringClassId: null,
-        locationId: null,
-        operatingSystemId: null,
-        tenancyId: null,
-        licenseModelId: null,
-        preinstalledSoftwareId: null
-      }
+      filters: {},
+      selections: {}
     }
+    for (let [_, idName, collectionName] of DIMENSION_META) {
+      d.filters[collectionName] = []
+      d.selections[idName] = null
+    }
+    return d
   },
 
   created () {
@@ -162,7 +151,7 @@ export default {
         for (let [name, idName, collectionName] of DIMENSION_META) {
           let elements = this.db[collectionName]()
           let defaultElement = elements.find((element) => element[name] === DIMENSION_DEFAULTS[name])
-          this[collectionName] = elements
+          this.filters[collectionName] = elements
           this.selections[idName] = defaultElement && defaultElement.id || 0
         }
       })
