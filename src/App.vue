@@ -88,6 +88,32 @@ import CostDatabase from './utils/CostDatabase'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
+function instanceTypeSort (it1, it2) {
+  let [family1, size1] = it1.name.split('.')
+  let [family2, size2] = it2.name.split('.')
+  let familyResult = family1.localeCompare(family2)
+  if (familyResult === 0) {
+    return sizeToNumber(size1) - sizeToNumber(size2)
+  } else {
+    return familyResult
+  }
+}
+
+function sizeToNumber (size) {
+  let sizes = ['nano', 'micro', 'small', 'medium', 'large', 'xlarge']
+  let n = sizes.indexOf(size)
+  if (n > -1) {
+    return n
+  } else {
+    let matches = size.match(/^(\d+)xlarge/)
+    if (matches) {
+      return sizes.length + parseInt(matches[1])
+    } else {
+      return -1
+    }
+  }
+}
+
 export default {
   name: 'app',
 
@@ -148,39 +174,13 @@ export default {
         this.selectedLicenseModelId = this.licenseModels.find((lm) => lm.licenseModel === 'No License required').id
         this.selectedPreinstalledSoftwareId = this.preinstalledSoftwares.find((ps) => ps.preinstalledSoftware === 'NA').id
       })
-    },
-
-    instanceTypeSort (it1, it2) {
-      let [family1, size1] = it1.name.split('.')
-      let [family2, size2] = it2.name.split('.')
-      let familyResult = family1.localeCompare(family2)
-      if (familyResult === 0) {
-        return this.sizeToNumber(size1) - this.sizeToNumber(size2)
-      } else {
-        return familyResult
-      }
-    },
-
-    sizeToNumber (size) {
-      let sizes = ['nano', 'micro', 'small', 'medium', 'large', 'xlarge']
-      let n = sizes.indexOf(size)
-      if (n > -1) {
-        return n
-      } else {
-        let matches = size.match(/^(\d+)xlarge/)
-        if (matches) {
-          return sizes.length + parseInt(matches[1])
-        } else {
-          return -1
-        }
-      }
     }
   },
 
   computed: {
     instanceTypes () {
       if (this.db) {
-        return this.db.instanceTypes(this).sort((it1, it2) => this.instanceTypeSort(it1, it2))
+        return this.db.instanceTypes(this).sort(instanceTypeSort)
       } else {
         return []
       }
