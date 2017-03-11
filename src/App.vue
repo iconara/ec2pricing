@@ -5,49 +5,49 @@
     </div>
     <div v-else>
       <div>
-        <select v-model="selectedPurchaseOptionId">
+        <select v-model="selections.purchaseOptionId">
           <option v-for="purchaseOption in purchaseOptions" v-bind:value="purchaseOption.id">
             {{purchaseOption.purchaseOption}}
           </option>
         </select>
 
-        <select v-model="selectedLeaseContractLengthId">
+        <select v-model="selections.leaseContractLengthId">
           <option v-for="leaseContractLength in leaseContractLengths" v-bind:value="leaseContractLength.id">
             {{leaseContractLength.leaseContractLength}}
           </option>
         </select>
 
-        <select v-model="selectedOfferingClassId">
+        <select v-model="selections.offeringClassId">
           <option v-for="offeringClass in offeringClasses" v-bind:value="offeringClass.id">
             {{offeringClass.offeringClass}}
           </option>
         </select>
 
-        <select v-model="selectedLocationId">
+        <select v-model="selections.locationId">
           <option v-for="location in locations" v-bind:value="location.id">
             {{location.location}}
           </option>
         </select>
 
-        <select v-model="selectedOperatingSystemId">
+        <select v-model="selections.operatingSystemId">
           <option v-for="operatingSystem in operatingSystems" v-bind:value="operatingSystem.id">
             {{operatingSystem.operatingSystem}}
           </option>
         </select>
 
-        <select v-model="selectedTenancyId">
+        <select v-model="selections.tenancyId">
           <option v-for="tenancy in tenancies" v-bind:value="tenancy.id">
             {{tenancy.tenancy}}
           </option>
         </select>
 
-        <select v-model="selectedLicenseModelId">
+        <select v-model="selections.licenseModelId">
           <option v-for="licenseModel in licenseModels" v-bind:value="licenseModel.id">
             {{licenseModel.licenseModel}}
           </option>
         </select>
 
-        <select v-model="selectedPreinstalledSoftwareId">
+        <select v-model="selections.preinstalledSoftwareId">
           <option v-for="preinstalledSoftware in preinstalledSoftwares" v-bind:value="preinstalledSoftware.id">
             {{preinstalledSoftware.preinstalledSoftware}}
           </option>
@@ -130,14 +130,16 @@ export default {
       tenancies: [],
       licenseModels: [],
       preinstalledSoftwares: [],
-      selectedPurchaseOptionId: null,
-      selectedLeaseContractLengthId: null,
-      selectedOfferingClassId: null,
-      selectedLocationId: null,
-      selectedOperatingSystemId: null,
-      selectedTenancyId: null,
-      selectedLicenseModelId: null,
-      selectedPreinstalledSoftwareId: null
+      selections: {
+        purchaseOptionId: null,
+        leaseContractLengthId: null,
+        offeringClassId: null,
+        locationId: null,
+        operatingSystemId: null,
+        tenancyId: null,
+        licenseModelId: null,
+        preinstalledSoftwareId: null
+      }
     }
   },
 
@@ -165,14 +167,16 @@ export default {
         this.tenancies = this.db.tenancies()
         this.licenseModels = this.db.licenseModels()
         this.preinstalledSoftwares = this.db.preinstalledSoftwares()
-        this.selectedPurchaseOptionId = this.purchaseOptions.find((po) => po.purchaseOption === '').id
-        this.selectedLeaseContractLengthId = this.leaseContractLengths.find((lcl) => lcl.leaseContractLength === '').id
-        this.selectedOfferingClassId = this.offeringClasses.find((oc) => oc.offeringClass === '').id
-        this.selectedLocationId = this.locations.find((l) => l.location === 'US East (N. Virginia)').id
-        this.selectedOperatingSystemId = this.operatingSystems.find((os) => os.operatingSystem === 'Linux').id
-        this.selectedTenancyId = this.tenancies.find((t) => t.tenancy === 'Shared').id
-        this.selectedLicenseModelId = this.licenseModels.find((lm) => lm.licenseModel === 'No License required').id
-        this.selectedPreinstalledSoftwareId = this.preinstalledSoftwares.find((ps) => ps.preinstalledSoftware === 'NA').id
+        this.selections = {
+          purchaseOptionId: this.purchaseOptions.find((po) => po.purchaseOption === '').id,
+          leaseContractLengthId: this.leaseContractLengths.find((lcl) => lcl.leaseContractLength === '').id,
+          offeringClassId: this.offeringClasses.find((oc) => oc.offeringClass === '').id,
+          locationId: this.locations.find((l) => l.location === 'US East (N. Virginia)').id,
+          operatingSystemId: this.operatingSystems.find((os) => os.operatingSystem === 'Linux').id,
+          tenancyId: this.tenancies.find((t) => t.tenancy === 'Shared').id,
+          licenseModelId: this.licenseModels.find((lm) => lm.licenseModel === 'No License required').id,
+          preinstalledSoftwareId: this.preinstalledSoftwares.find((ps) => ps.preinstalledSoftware === 'NA').id
+        }
       })
     }
   },
@@ -180,7 +184,7 @@ export default {
   computed: {
     instanceTypes () {
       if (this.db) {
-        return this.db.instanceTypes(this).sort(instanceTypeSort)
+        return this.db.instanceTypes(this.selections).sort(instanceTypeSort)
       } else {
         return []
       }

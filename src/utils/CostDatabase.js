@@ -1,3 +1,14 @@
+const ID_NAMES = [
+  'purchaseOptionId',
+  'leaseContractLengthId',
+  'offeringClassId',
+  'locationId',
+  'operatingSystemId',
+  'tenancyId',
+  'licenseModelId',
+  'preinstalledSoftwareId'
+]
+
 export default class CostDatabase {
   constructor (db) {
     this.db = db
@@ -72,16 +83,11 @@ export default class CostDatabase {
       )
     `
     let statement = this.db.prepare(sql)
-    statement.bind({
-      ':purchaseOptionId': selectedIds.selectedPurchaseOptionId,
-      ':leaseContractLengthId': selectedIds.selectedLeaseContractLengthId,
-      ':offeringClassId': selectedIds.selectedOfferingClassId,
-      ':locationId': selectedIds.selectedLocationId,
-      ':operatingSystemId': selectedIds.selectedOperatingSystemId,
-      ':tenancyId': selectedIds.selectedTenancyId,
-      ':licenseModelId': selectedIds.selectedLicenseModelId,
-      ':preinstalledSoftwareId': selectedIds.selectedPreinstalledSoftwareId
-    })
+    let parameters = {}
+    for (let name of ID_NAMES) {
+      parameters[`:${name}`] = selectedIds[name]
+    }
+    statement.bind(parameters)
     let rows = []
     while (statement.step()) {
       rows.push(statement.getAsObject())
