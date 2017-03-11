@@ -29,7 +29,7 @@ export default class DatabaseLoader {
         xhr.onerror = (event) => {
           reject(event)
         }
-        xhr.onload = (event) => {
+        xhr.onload = () => {
           this.progressListeners = null
           this.database = new window.SQL.Database(new Uint8Array(xhr.response))
           resolve(this.database)
