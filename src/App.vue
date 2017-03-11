@@ -5,53 +5,45 @@
     </div>
     <div v-else>
       <div>
-        <select v-model="selections.purchaseOptionId">
-          <option v-for="purchaseOption in purchaseOptions" v-bind:value="purchaseOption.id">
-            {{purchaseOption.purchaseOption}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.purchaseOptionId"
+          v-bind:options="purchaseOptions"
+          v-bind:name="'purchaseOption'"/>
 
-        <select v-model="selections.leaseContractLengthId">
-          <option v-for="leaseContractLength in leaseContractLengths" v-bind:value="leaseContractLength.id">
-            {{leaseContractLength.leaseContractLength}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.leaseContractLengthId"
+          v-bind:options="leaseContractLengths"
+          v-bind:name="'leaseContractLength'"/>
 
-        <select v-model="selections.offeringClassId">
-          <option v-for="offeringClass in offeringClasses" v-bind:value="offeringClass.id">
-            {{offeringClass.offeringClass}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.offeringClassId"
+          v-bind:options="offeringClasses"
+          v-bind:name="'offeringClass'"/>
 
-        <select v-model="selections.locationId">
-          <option v-for="location in locations" v-bind:value="location.id">
-            {{location.location}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.locationId"
+          v-bind:options="locations"
+          v-bind:name="'location'"/>
 
-        <select v-model="selections.operatingSystemId">
-          <option v-for="operatingSystem in operatingSystems" v-bind:value="operatingSystem.id">
-            {{operatingSystem.operatingSystem}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.operatingSystemId"
+          v-bind:options="operatingSystems"
+          v-bind:name="'operatingSystem'"/>
 
-        <select v-model="selections.tenancyId">
-          <option v-for="tenancy in tenancies" v-bind:value="tenancy.id">
-            {{tenancy.tenancy}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.tenancyId"
+          v-bind:options="tenancies"
+          v-bind:name="'tenancy'"/>
 
-        <select v-model="selections.licenseModelId">
-          <option v-for="licenseModel in licenseModels" v-bind:value="licenseModel.id">
-            {{licenseModel.licenseModel}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.licenseModelId"
+          v-bind:options="licenseModels"
+          v-bind:name="'licenseModel'"/>
 
-        <select v-model="selections.preinstalledSoftwareId">
-          <option v-for="preinstalledSoftware in preinstalledSoftwares" v-bind:value="preinstalledSoftware.id">
-            {{preinstalledSoftware.preinstalledSoftware}}
-          </option>
-        </select>
+        <filter-selector
+          v-model="selections.preinstalledSoftwareId"
+          v-bind:options="preinstalledSoftwares"
+          v-bind:name="'preinstalledSoftware'"/>
       </div>
       <instance-types-table v-bind:instance-types="instanceTypes"></instance-types-table>
       <div>
@@ -65,6 +57,7 @@
 import DatabaseLoader from './utils/DatabaseLoader'
 import CostDatabase from './utils/CostDatabase'
 import InstanceTypesTable from './components/InstanceTypesTable'
+import FilterSelector from './components/FilterSelector'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
@@ -120,7 +113,8 @@ export default {
   name: 'app',
 
   components: {
-    InstanceTypesTable
+    InstanceTypesTable,
+    FilterSelector
   },
 
   data () {
