@@ -3,7 +3,8 @@ function compareInstanceTypes (it1, it2) {
   let [family2, size2] = it2.name.split('.')
   let familyResult = family1.localeCompare(family2)
   if (familyResult === 0) {
-    return sizeToNumber(size1) - sizeToNumber(size2)
+    let difference = sizeToNumber(size1) - sizeToNumber(size2)
+    return difference === 0 ? 0 : difference / Math.abs(difference)
   } else {
     return familyResult
   }
@@ -19,7 +20,7 @@ function sizeToNumber (size) {
     if (matches) {
       return sizes.length + parseInt(matches[1])
     } else {
-      return -1
+      return Math.pow(2, 31)
     }
   }
 }
