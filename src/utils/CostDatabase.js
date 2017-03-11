@@ -41,40 +41,50 @@ export default class CostDatabase {
     return rows
   }
 
+  _dimensionRows (dimensionName) {
+    let [snakeCaseName, camelCaseName] = DIMENSION_NAMES.find((pair) => pair[1] === dimensionName)
+    return this._rows(`
+      SELECT
+        ${snakeCaseName}_id AS id,
+        ${snakeCaseName} AS ${camelCaseName}
+      FROM ${snakeCaseName}
+    `)
+  }
+
   publicationDate () {
     return this._rows('SELECT value FROM meta WHERE key = \'publication_date\'')[0].value
   }
 
   purchaseOptions () {
-    return this._rows('SELECT purchase_option_id AS id, purchase_option AS purchaseOption FROM purchase_option')
+    return this._dimensionRows('purchaseOption')
   }
 
   leaseContractLengths () {
-    return this._rows('SELECT lease_contract_length_id AS id, lease_contract_length AS leaseContractLength FROM lease_contract_length')
+    return this._dimensionRows('leaseContractLength')
   }
 
   offeringClasses () {
-    return this._rows('SELECT offering_class_id AS id, offering_class AS offeringClass FROM offering_class')
+    return this._dimensionRows('offeringClass')
   }
 
   locations () {
-    return this._rows('SELECT location_id AS id, location FROM location')
+    return this._dimensionRows('location')
   }
 
   operatingSystems () {
-    return this._rows('SELECT operating_system_id AS id, operating_system AS operatingSystem FROM operating_system')
+    return this._dimensionRows('operatingSystem')
   }
 
   tenancies () {
-    return this._rows('SELECT tenancy_id AS id, tenancy FROM tenancy')
+    return this._dimensionRows('tenancy')
   }
 
   licenseModels () {
-    return this._rows('SELECT license_model_id AS id, license_model AS licenseModel FROM license_model')
+    return this._dimensionRows('licenseModel')
   }
 
   preinstalledSoftwares () {
-    return this._rows('SELECT preinstalled_software_id AS id, preinstalled_software AS preinstalledSoftware FROM preinstalled_software')
+    return this._dimensionRows('preinstalledSoftware')
   }
 
   instanceTypes (selectedIds) {
