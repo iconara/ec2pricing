@@ -6,44 +6,11 @@
     <div v-else>
       <div>
         <filter-selector
-          v-model="selections.purchaseOptionId"
-          v-bind:options="filters.purchaseOptions"
-          v-bind:name="'purchaseOption'"/>
-
-        <filter-selector
-          v-model="selections.leaseContractLengthId"
-          v-bind:options="filters.leaseContractLengths"
-          v-bind:name="'leaseContractLength'"/>
-
-        <filter-selector
-          v-model="selections.offeringClassId"
-          v-bind:options="filters.offeringClasses"
-          v-bind:name="'offeringClass'"/>
-
-        <filter-selector
-          v-model="selections.locationId"
-          v-bind:options="filters.locations"
-          v-bind:name="'location'"/>
-
-        <filter-selector
-          v-model="selections.operatingSystemId"
-          v-bind:options="filters.operatingSystems"
-          v-bind:name="'operatingSystem'"/>
-
-        <filter-selector
-          v-model="selections.tenancyId"
-          v-bind:options="filters.tenancies"
-          v-bind:name="'tenancy'"/>
-
-        <filter-selector
-          v-model="selections.licenseModelId"
-          v-bind:options="filters.licenseModels"
-          v-bind:name="'licenseModel'"/>
-
-        <filter-selector
-          v-model="selections.preinstalledSoftwareId"
-          v-bind:options="filters.preinstalledSoftwares"
-          v-bind:name="'preinstalledSoftware'"/>
+          v-for="[name, idName, collectionName] in filterMeta"
+          v-bind:key="name"
+          v-model="selections[idName]"
+          v-bind:options="filters[collectionName]"
+          v-bind:name="name"/>
       </div>
       <instance-types-table v-bind:instance-types="instanceTypes"></instance-types-table>
       <div>
@@ -122,6 +89,7 @@ export default {
       loaded: false,
       progress: 0,
       publicationDate: null,
+      filterMeta: DIMENSION_META,
       filters: {},
       selections: {}
     }
