@@ -1,3 +1,8 @@
-/public/data/*.sqlite
-/public/lib/*.js
+/static/data/*.sqlite
+/static/lib/*.js
 /tmp
+/node_modules
+/dist
+/test/unit/coverage
+npm-debug.log
+yarn-error.log

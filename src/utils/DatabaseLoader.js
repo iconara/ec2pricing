@@ -1,28 +1,28 @@
-class DatabaseLoader {
-  constructor(location) {
+export default class DatabaseLoader {
+  constructor (location) {
     this.location = location
     this.progressListeners = []
     this.database = null
   }
 
-  onProgress(listener) {
+  onProgress (listener) {
     if (this.progressListeners) {
       this.progressListeners.push(listener)
     }
   }
 
-  loadDatabase() {
+  loadDatabase () {
     if (this.database) {
       return Promise.resolve(this.database)
     } else {
       return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest()
-        xhr.open("GET", this.location, true)
-        xhr.responseType = "arraybuffer"
+        xhr.open('GET', this.location, true)
+        xhr.responseType = 'arraybuffer'
         xhr.onprogress = (event) => {
           if (event.lengthComputable) {
             for (let listener of this.progressListeners) {
-              listener.call(null, event.loaded, event.total)
+              listener(event.loaded, event.total)
             }
           }
         }
@@ -31,7 +31,7 @@ class DatabaseLoader {
         }
         xhr.onload = (event) => {
           this.progressListeners = null
-          this.database = new SQL.Database(new Uint8Array(xhr.response))
+          this.database = new window.SQL.Database(new Uint8Array(xhr.response))
           resolve(this.database)
         }
         xhr.send()
