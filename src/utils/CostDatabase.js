@@ -1,13 +1,30 @@
-const ID_NAMES = [
-  'purchaseOptionId',
-  'leaseContractLengthId',
-  'offeringClassId',
-  'locationId',
-  'operatingSystemId',
-  'tenancyId',
-  'licenseModelId',
-  'preinstalledSoftwareId'
+const DIMENSION_NAMES = [
+  ['purchase_option', 'purchaseOption'],
+  ['lease_contract_length', 'leaseContractLength'],
+  ['offering_class', 'offeringClass'],
+  ['location', 'location'],
+  ['operating_system', 'operatingSystem'],
+  ['tenancy', 'tenancy'],
+  ['license_model', 'licenseModel'],
+  ['preinstalled_software', 'preinstalledSoftware']
 ]
+
+const DIMENSION_FILTERS = DIMENSION_NAMES.map(([snakeCaseName, camelCaseName]) => `${snakeCaseName}_id = :${camelCaseName}Id`)
+
+const INSTANCE_TYPES_SQL = `
+  SELECT
+    instance_type AS name,
+    vcpus,
+    memory,
+    storage,
+    network_performance AS networkPerformance,
+    hourly_rate AS hourlyRate
+  FROM instance_type it
+  LEFT JOIN cost c ON (
+    it.instance_type_id = c.instance_type_id
+    AND ${DIMENSION_FILTERS.join(' AND ')}
+  )
+`
 
 export default class CostDatabase {
   constructor (db) {
@@ -61,31 +78,11 @@ export default class CostDatabase {
   }
 
   instanceTypes (selectedIds) {
-    let sql = `
-      SELECT
-        instance_type AS name,
-        vcpus,
-        memory,
-        storage,
-        network_performance AS networkPerformance,
-        hourly_rate AS hourlyRate
-      FROM instance_type it
-      LEFT JOIN cost c ON (
-        it.instance_type_id = c.instance_type_id
-        AND purchase_option_id = :purchaseOptionId
-        AND lease_contract_length_id = :leaseContractLengthId
-        AND offering_class_id = :offeringClassId
-        AND location_id = :locationId
-        AND operating_system_id = :operatingSystemId
-        AND tenancy_id = :tenancyId
-        AND license_model_id = :licenseModelId
-        AND preinstalled_software_id = :preinstalledSoftwareId
-      )
-    `
-    let statement = this.db.prepare(sql)
+    let statement = this.db.prepare(INSTANCE_TYPES_SQL)
     let parameters = {}
-    for (let name of ID_NAMES) {
-      parameters[`:${name}`] = selectedIds[name]
+    for (let pair of DIMENSION_NAMES) {
+      let camelCaseName = pair[1]
+      parameters[`:${camelCaseName}Id`] = selectedIds[`${camelCaseName}Id`]
     }
     statement.bind(parameters)
     let rows = []
