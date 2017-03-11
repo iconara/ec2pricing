@@ -24,6 +24,7 @@
 <script>
 import DatabaseLoader from './utils/DatabaseLoader'
 import CostDatabase from './utils/CostDatabase'
+import Comparators from './utils/Comparators'
 import InstanceTypesTable from './components/InstanceTypesTable'
 import FilterSelector from './components/FilterSelector'
 
@@ -49,32 +50,6 @@ const FILTER_DEFAULTS = {
   'tenancy': 'Shared',
   'licenseModel': 'No License required',
   'preinstalledSoftware': 'NA'
-}
-
-function instanceTypeSort (it1, it2) {
-  let [family1, size1] = it1.name.split('.')
-  let [family2, size2] = it2.name.split('.')
-  let familyResult = family1.localeCompare(family2)
-  if (familyResult === 0) {
-    return sizeToNumber(size1) - sizeToNumber(size2)
-  } else {
-    return familyResult
-  }
-}
-
-function sizeToNumber (size) {
-  let sizes = ['nano', 'micro', 'small', 'medium', 'large', 'xlarge']
-  let n = sizes.indexOf(size)
-  if (n > -1) {
-    return n
-  } else {
-    let matches = size.match(/^(\d+)xlarge/)
-    if (matches) {
-      return sizes.length + parseInt(matches[1])
-    } else {
-      return -1
-    }
-  }
 }
 
 export default {
@@ -130,7 +105,7 @@ export default {
   computed: {
     instanceTypes () {
       if (this.db) {
-        return this.db.instanceTypes(this.selections).sort(instanceTypeSort)
+        return this.db.instanceTypes(this.selections).sort(Comparators.instanceType)
       } else {
         return []
       }
