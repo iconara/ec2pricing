@@ -53,28 +53,7 @@
           </option>
         </select>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>CPUs</th>
-            <th>RAM</th>
-            <th>Disk</th>
-            <th>Network performance</th>
-            <th>Hourly rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="instanceType in instanceTypes">
-            <td>{{instanceType.name}}</td>
-            <td>{{instanceType.vcpus}}</td>
-            <td>{{instanceType.memory}}</td>
-            <td>{{instanceType.storage}}</td>
-            <td>{{instanceType.networkPerformance}}</td>
-            <td>{{instanceType.hourlyRate}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <instance-types-table v-bind:instance-types="instanceTypes"></instance-types-table>
       <div>
         Data published by AWS at {{publicationDate}}
       </div>
@@ -85,6 +64,7 @@
 <script>
 import DatabaseLoader from './utils/DatabaseLoader'
 import CostDatabase from './utils/CostDatabase'
+import InstanceTypesTable from './components/InstanceTypesTable'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
@@ -138,6 +118,10 @@ function sizeToNumber (size) {
 
 export default {
   name: 'app',
+
+  components: {
+    InstanceTypesTable
+  },
 
   data () {
     return {
