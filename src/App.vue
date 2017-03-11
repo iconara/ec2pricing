@@ -12,7 +12,8 @@
           v-bind:options="filters[collectionName]"
           v-bind:name="name"/>
       </div>
-      <instance-types-table v-bind:instance-types="instanceTypes"></instance-types-table>
+      <instance-types-table
+        v-bind:instance-types="instanceTypes"/>
       <div>
         Data published by AWS at {{publicationDate}}
       </div>
