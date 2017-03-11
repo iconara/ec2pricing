@@ -45,7 +45,7 @@ export default class CostDatabase {
   }
 
   _dimensionRows (dimensionName) {
-    let [snakeCaseName, camelCaseName] = DIMENSION_NAMES.find((pair) => pair[1] === dimensionName)
+    let [snakeCaseName, camelCaseName] = DIMENSION_NAMES.find(([_, camelCaseName]) => camelCaseName === dimensionName)
     return this._rows(`
       SELECT
         ${snakeCaseName}_id AS id,
