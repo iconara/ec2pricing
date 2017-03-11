@@ -1,10 +1,13 @@
-.PHONY: deps dev db
+.PHONY: deps dev test db
 
 deps: static/lib/sql.js
 	npm install
 
 dev:
 	npm run dev
+
+test:
+	npm run unit
 
 db: static/data/ec2.sqlite
 
