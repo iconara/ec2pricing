@@ -35,9 +35,9 @@ export default class CostDatabase {
   }
 
   setup () {
-    this._onDemandPurchaseOptionId = this.purchaseOptions().find((po) => po.purchaseOption === '').id
-    this._onDemandLeaseContractLengthId = this.leaseContractLengths().find((lcl) => lcl.leaseContractLength === '').id
-    this._onDemandOfferingClassId = this.offeringClasses().find((oc) => oc.offeringClass === '').id
+    this._onDemandPurchaseOptionId = this.purchaseOptions.find((po) => po.purchaseOption === '').id
+    this._onDemandLeaseContractLengthId = this.leaseContractLengths.find((lcl) => lcl.leaseContractLength === '').id
+    this._onDemandOfferingClassId = this.offeringClasses.find((oc) => oc.offeringClass === '').id
     return this
   }
 
@@ -67,39 +67,39 @@ export default class CostDatabase {
     return this._dimensionRowsCache[dimensionName]
   }
 
-  publicationDate () {
+  get publicationDate () {
     return this._rows('SELECT value FROM meta WHERE key = \'publication_date\'')[0].value
   }
 
-  purchaseOptions () {
+  get purchaseOptions () {
     return this._dimensionRows('purchaseOption')
   }
 
-  leaseContractLengths () {
+  get leaseContractLengths () {
     return this._dimensionRows('leaseContractLength')
   }
 
-  offeringClasses () {
+  get offeringClasses () {
     return this._dimensionRows('offeringClass')
   }
 
-  locations () {
+  get locations () {
     return this._dimensionRows('location')
   }
 
-  operatingSystems () {
+  get operatingSystems () {
     return this._dimensionRows('operatingSystem')
   }
 
-  tenancies () {
+  get tenancies () {
     return this._dimensionRows('tenancy')
   }
 
-  licenseModels () {
+  get licenseModels () {
     return this._dimensionRows('licenseModel')
   }
 
-  preinstalledSoftwares () {
+  get preinstalledSoftwares () {
     return this._dimensionRows('preinstalledSoftware')
   }
 

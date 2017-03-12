@@ -109,9 +109,9 @@ export default {
 
     setup () {
       this._db.setup()
-      this.publicationDate = this._db.publicationDate()
+      this.publicationDate = this._db.publicationDate
       for (let [name, idName, collectionName] of FILTER_META) {
-        let elements = this._db[collectionName]()
+        let elements = this._db[collectionName]
         let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
         this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
         this.selections[idName] = defaultElement && defaultElement.id || 0
