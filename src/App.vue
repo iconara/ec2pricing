@@ -101,17 +101,17 @@ export default {
       })
 
       loader.loadDatabase().then((db) => {
-        this.db = new CostDatabase(db)
+        this._db = new CostDatabase(db)
         this.loaded = true
         Vue.nextTick(this.setup)
       })
     },
 
     setup () {
-      this.db.setup()
-      this.publicationDate = this.db.publicationDate()
+      this._db.setup()
+      this.publicationDate = this._db.publicationDate()
       for (let [name, idName, collectionName] of FILTER_META) {
-        let elements = this.db[collectionName]()
+        let elements = this._db[collectionName]()
         let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
         this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
         this.selections[idName] = defaultElement && defaultElement.id || 0
@@ -121,8 +121,8 @@ export default {
 
   computed: {
     instanceTypes () {
-      if (this.db) {
-        return this.db.instanceTypes(this.selections).sort(Comparators.instanceType)
+      if (this._db) {
+        return this._db.instanceTypes(this.selections).sort(Comparators.instanceType)
       } else {
         return []
       }
