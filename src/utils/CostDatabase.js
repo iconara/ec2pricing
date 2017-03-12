@@ -60,6 +60,7 @@ const INSTANCE_TYPES_SQL = `
 export default class CostDatabase {
   constructor (db) {
     this.db = db
+    this._dimensionRowsCache = {}
   }
 
   setup () {
@@ -83,13 +84,16 @@ export default class CostDatabase {
   }
 
   _dimensionRows (dimensionName) {
-    let [snakeCaseName, camelCaseName] = DIMENSION_NAMES.find(([_, camelCaseName]) => camelCaseName === dimensionName)
-    return this._rows(`
-      SELECT
-        ${snakeCaseName}_id AS id,
-        ${snakeCaseName} AS ${camelCaseName}
-      FROM ${snakeCaseName}
-    `)
+    if (!(dimensionName in this._dimensionRowsCache)) {
+      let [snakeCaseName, camelCaseName] = DIMENSION_NAMES.find(([_, camelCaseName]) => camelCaseName === dimensionName)
+      this._dimensionRowsCache[dimensionName] = this._rows(`
+        SELECT
+          ${snakeCaseName}_id AS id,
+          ${snakeCaseName} AS ${camelCaseName}
+        FROM ${snakeCaseName}
+      `)
+    }
+    return this._dimensionRowsCache[dimensionName]
   }
 
   publicationDate () {
