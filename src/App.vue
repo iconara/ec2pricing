@@ -103,7 +103,7 @@ export default {
       loader.loadDatabase().then((db) => {
         this._db = new CostDatabase(db)
         this.loaded = true
-        Vue.nextTick(this.setup)
+        this.setup()
       })
     },
 
