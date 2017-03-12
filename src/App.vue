@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import DatabaseLoader from './utils/DatabaseLoader'
 import CostDatabase from './utils/CostDatabase'
 import Comparators from './utils/Comparators'
@@ -100,16 +101,21 @@ export default {
       })
 
       loader.loadDatabase().then((db) => {
-        this.db = new CostDatabase(db).setup()
+        this.db = new CostDatabase(db)
         this.loaded = true
-        this.publicationDate = this.db.publicationDate()
-        for (let [name, idName, collectionName] of FILTER_META) {
-          let elements = this.db[collectionName]()
-          let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
-          this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
-          this.selections[idName] = defaultElement && defaultElement.id || 0
-        }
+        Vue.nextTick(this.setup)
       })
+    },
+
+    setup () {
+      this.db.setup()
+      this.publicationDate = this.db.publicationDate()
+      for (let [name, idName, collectionName] of FILTER_META) {
+        let elements = this.db[collectionName]()
+        let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
+        this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
+        this.selections[idName] = defaultElement && defaultElement.id || 0
+      }
     }
   },
 
