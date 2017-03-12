@@ -278,8 +278,7 @@ LEFT JOIN license_model lm ON lm.license_model = "License Model"
 LEFT JOIN preinstalled_software ps ON ps.preinstalled_software = "Pre Installed S/W"
 WHERE "Product Family" = 'Compute Instance'
 AND "PriceDescription" = 'Upfront Fee'
-AND "Unit" = 'Quantity'
-AND "EBS Optimized" <> 'Yes';
+AND "Unit" = 'Quantity';
 
 CREATE TABLE cost (
   purchase_option_id INTEGER NOT NULL,
