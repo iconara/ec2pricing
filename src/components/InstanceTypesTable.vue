@@ -7,7 +7,9 @@
         <th>RAM</th>
         <th>Disk</th>
         <th>Network performance</th>
-        <th>Hourly rate</th>
+        <th>On demand</th>
+        <th>Reserved</th>
+        <th>Upfront</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +19,9 @@
         <td>{{instanceType.memory}}</td>
         <td>{{instanceType.storage}}</td>
         <td>{{instanceType.networkPerformance}}</td>
-        <td>{{instanceType.hourlyRate}}</td>
+        <td>{{instanceType.onDemandHourlyRate}}</td>
+        <td>{{instanceType.reservedHourlyRate}}</td>
+        <td>{{instanceType.upfrontCost}}</td>
       </tr>
     </tbody>
   </table>

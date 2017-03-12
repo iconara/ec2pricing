@@ -42,14 +42,25 @@ const FILTER_META = [
 ]
 
 const FILTER_DEFAULTS = {
-  'purchaseOption': '',
-  'leaseContractLength': '',
-  'offeringClass': '',
+  'purchaseOption': 'Partial Upfront',
+  'leaseContractLength': '1yr',
+  'offeringClass': 'standard',
   'location': 'US East (N. Virginia)',
   'operatingSystem': 'Linux',
   'tenancy': 'Shared',
   'licenseModel': 'No License required',
   'preinstalledSoftware': 'NA'
+}
+
+const FILTER_BLACKLISTS = {
+  'purchaseOption': [''],
+  'leaseContractLength': [''],
+  'offeringClass': [''],
+  'location': [''],
+  'operatingSystem': [''],
+  'tenancy': ['', 'Host'],
+  'licenseModel': [''],
+  'preinstalledSoftware': ['']
 }
 
 export default {
@@ -89,13 +100,13 @@ export default {
       })
 
       loader.loadDatabase().then((db) => {
-        this.db = new CostDatabase(db)
+        this.db = new CostDatabase(db).setup()
         this.loaded = true
         this.publicationDate = this.db.publicationDate()
         for (let [name, idName, collectionName] of FILTER_META) {
           let elements = this.db[collectionName]()
           let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
-          this.filters[collectionName] = elements
+          this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
           this.selections[idName] = defaultElement && defaultElement.id || 0
         }
       })

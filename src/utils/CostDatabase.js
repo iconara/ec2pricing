@@ -13,22 +13,60 @@ const DIMENSION_FILTERS = DIMENSION_NAMES.map(([snakeCaseName, camelCaseName]) =
 
 const INSTANCE_TYPES_SQL = `
   SELECT
-    instance_type AS name,
-    vcpus,
-    memory,
-    storage,
-    network_performance AS networkPerformance,
-    hourly_rate AS hourlyRate
-  FROM instance_type it
-  LEFT JOIN cost c ON (
-    it.instance_type_id = c.instance_type_id
-    AND ${DIMENSION_FILTERS.join(' AND ')}
-  )
+    it.instance_type AS name,
+    it.vcpus,
+    it.memory,
+    it.storage,
+    it.network_performance AS networkPerformance,
+    ac.on_demand_hourly_rate AS onDemandHourlyRate,
+    ac.reserved_hourly_rate AS reservedHourlyRate,
+    ac.upfront_cost AS upfrontCost
+  FROM
+    instance_type it LEFT JOIN (
+      SELECT
+        c1.instance_type_id,
+        c1.location_id,
+        c1.operating_system_id,
+        c1.tenancy_id,
+        c1.license_model_id,
+        c1.preinstalled_software_id,
+        c1.hourly_rate AS on_demand_hourly_rate,
+        c2.hourly_rate AS reserved_hourly_rate,
+        c2.upfront_cost
+      FROM cost c1 LEFT JOIN cost c2 ON (
+        c1.instance_type_id = c2.instance_type_id
+        AND c1.location_id = c2.location_id
+        AND c1.operating_system_id = c2.operating_system_id
+        AND c1.tenancy_id = c2.tenancy_id
+        AND c1.license_model_id = c2.license_model_id
+        AND c1.preinstalled_software_id = c2.preinstalled_software_id
+      )
+      WHERE c1.purchase_option_id = :onDemandPurchaseOptionId
+      AND c1.lease_contract_length_id = :onDemandLeaseContractLengthId
+      AND c1.offering_class_id = :onDemandOfferingClassId
+      AND c2.purchase_option_id = :purchaseOptionId
+      AND c2.lease_contract_length_id = :leaseContractLengthId
+      AND c2.offering_class_id = :offeringClassId
+    ) ac ON (
+      it.instance_type_id = ac.instance_type_id
+      AND ac.location_id = :locationId
+      AND ac.operating_system_id = :operatingSystemId
+      AND ac.tenancy_id = :tenancyId
+      AND ac.license_model_id = :licenseModelId
+      AND ac.preinstalled_software_id = :preinstalledSoftwareId
+    )
 `
 
 export default class CostDatabase {
   constructor (db) {
     this.db = db
+  }
+
+  setup () {
+    this._onDemandPurchaseOptionId = this.purchaseOptions().find((po) => po.purchaseOption === '').id
+    this._onDemandLeaseContractLengthId = this.leaseContractLengths().find((lcl) => lcl.leaseContractLength === '').id
+    this._onDemandOfferingClassId = this.offeringClasses().find((oc) => oc.offeringClass === '').id
+    return this
   }
 
   _rows (sql, parameters) {
@@ -91,7 +129,11 @@ export default class CostDatabase {
   }
 
   instanceTypes (selectedIds) {
-    let parameters = {}
+    let parameters = {
+      ':onDemandPurchaseOptionId': this._onDemandPurchaseOptionId,
+      ':onDemandLeaseContractLengthId': this._onDemandLeaseContractLengthId,
+      ':onDemandOfferingClassId': this._onDemandOfferingClassId
+    }
     for (let pair of DIMENSION_NAMES) {
       let camelCaseName = pair[1]
       parameters[`:${camelCaseName}Id`] = selectedIds[`${camelCaseName}Id`]
