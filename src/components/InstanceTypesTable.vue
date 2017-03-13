@@ -16,12 +16,12 @@
       <tr v-for="instanceType in instanceTypes">
         <td class="text">{{instanceType.name}}</td>
         <td>{{instanceType.vcpus}}</td>
-        <td>{{instanceType.memory}}</td>
-        <td>{{instanceType.storage}}</td>
-        <td class="text">{{instanceType.networkPerformance}}</td>
-        <td>{{instanceType.onDemandHourlyRate}}</td>
-        <td>{{instanceType.reservedHourlyRate}}</td>
-        <td>{{instanceType.upfrontCost}}</td>
+        <td>{{instanceType.memory | memory}}</td>
+        <td>{{instanceType.storage | storage}}</td>
+        <td class="text">{{instanceType.networkPerformance | networkPerformance}}</td>
+        <td>{{instanceType.onDemandHourlyRate | dollars}}</td>
+        <td>{{instanceType.reservedHourlyRate | dollars}}</td>
+        <td>{{instanceType.upfrontCost | dollars}}</td>
       </tr>
     </tbody>
   </table>
@@ -62,6 +62,34 @@ export default {
 
   data () {
     return {}
+  },
+
+  filters: {
+    memory (str) {
+      return str.replace(/gib/i, 'GiB')
+    },
+
+    storage (str) {
+      if (/ebs only/i.test(str)) {
+        return '(EBS only)'
+      } else if (/SSD|HDD/.test(str)) {
+        return str
+      } else {
+        return `${str} HDD`
+      }
+    },
+
+    networkPerformance (str) {
+      return str.toLowerCase()
+    },
+
+    dollars (str) {
+      if (str == null || str.length === 0) {
+        return 'n/a'
+      } else {
+        return `$${str.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}`
+      }
+    }
   }
 }
 </script>
