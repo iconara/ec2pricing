@@ -2,18 +2,18 @@
   <table>
     <thead>
       <tr>
-        <th class="text">Name</th>
-        <th>CPUs</th>
-        <th>RAM</th>
-        <th>Disk</th>
-        <th class="text">Network performance</th>
-        <th>On demand</th>
-        <th>Reserved</th>
-        <th>Upfront</th>
+        <th class="text" v-on:click="sortBy('name')">Name</th>
+        <th v-on:click="sortBy('vcpus')">CPUs</th>
+        <th v-on:click="sortBy('memory')">RAM</th>
+        <th v-on:click="sortBy('disk')">Disk</th>
+        <th v-on:click="sortBy('networkPerformance')" class="text">Network performance</th>
+        <th v-on:click="sortBy('onDemandHourlyRate')">On demand</th>
+        <th v-on:click="sortBy('reservedHourlyRate')">Reserved</th>
+        <th v-on:click="sortBy('upfrontCost')">Upfront</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="instanceType in sortedInstanceTypes">
+      <tr v-for="instanceType in sortedInstanceTypes" v-bind:key="instanceType.name">
         <td class="text">{{instanceType.name}}</td>
         <td>{{instanceType.vcpus}}</td>
         <td>{{instanceType.memory | memory}}</td>
@@ -63,12 +63,35 @@ export default {
   props: ['instance-types'],
 
   data () {
-    return {}
+    return {
+      reverse: false,
+      comparator: Comparators.name
+    }
+  },
+
+  methods: {
+    sortBy (what) {
+      const newComparator = Comparators[what]
+      if (this.comparator === newComparator) {
+        this.reverse = !this.reverse
+      } else {
+        this.reverse = false
+      }
+      this.comparator = newComparator
+    }
   },
 
   computed: {
     sortedInstanceTypes () {
-      return this.instanceTypes.sort(Comparators.instanceType)
+      if (this.instanceTypes) {
+        let sorted = this.instanceTypes.sort(this.comparator)
+        if (this.reverse) {
+          sorted = sorted.reverse()
+        }
+        return sorted
+      } else {
+        return []
+      }
     }
   },
 
@@ -95,7 +118,13 @@ export default {
       if (str == null || str.length === 0) {
         return 'n/a'
       } else {
-        return `$${str.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}`
+        let [whole, fractions] = str.split('.')
+        whole = whole.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+        if (fractions) {
+          return `$${whole}.${fractions}`
+        } else {
+          return `$${whole}`
+        }
       }
     }
   }

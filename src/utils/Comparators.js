@@ -1,4 +1,4 @@
-function compareInstanceTypes (it1, it2) {
+function name (it1, it2) {
   let [family1, size1] = it1.name.split('.')
   let [family2, size2] = it2.name.split('.')
   let familyResult = family1.localeCompare(family2)
@@ -25,6 +25,71 @@ function sizeToNumber (size) {
   }
 }
 
+function vcpus (it1, it2) {
+  return it1.vcpus - it2.vcpus
+}
+
+function memory (it1, it2) {
+  return it1.memory.localeCompare(it2.memory)
+}
+
+function storage (it1, it2) {
+  return it1.storage.localeCompare(it2.storage)
+}
+
+function networkPerformance (it1, it2) {
+  return it1.networkPerformance.localeCompare(it2.networkPerformance)
+}
+
+function onDemandHourlyRate (it1, it2) {
+  let rate1 = it1.onDemandHourlyRate
+  let rate2 = it2.onDemandHourlyRate
+  if (rate1 == null && rate2 == null) {
+    return 0
+  } else if (rate1 == null) {
+    return 1
+  } else if (rate2 == null) {
+    return -1
+  } else {
+    return rate1.localeCompare(rate2)
+  }
+}
+
+function reservedHourlyRate (it1, it2) {
+  let rate1 = it1.reservedHourlyRate
+  let rate2 = it2.reservedHourlyRate
+  if (rate1 == null && rate2 == null) {
+    return 0
+  } else if (rate1 == null) {
+    return 1
+  } else if (rate2 == null) {
+    return -1
+  } else {
+    return rate1.localeCompare(rate2)
+  }
+}
+
+function upfrontCost (it1, it2) {
+  let cost1 = it1.upfrontCost
+  let cost2 = it2.upfrontCost
+  if (cost1 == null && cost2 == null) {
+    return 0
+  } else if (cost1 == null) {
+    return 1
+  } else if (cost2 == null) {
+    return -1
+  } else {
+    return cost1.localeCompare(cost2)
+  }
+}
+
 export default {
-  instanceType: compareInstanceTypes
+  name,
+  vcpus,
+  memory,
+  storage,
+  networkPerformance,
+  onDemandHourlyRate,
+  reservedHourlyRate,
+  upfrontCost
 }
