@@ -56,7 +56,6 @@ html, body {
 import Vue from 'vue'
 import DatabaseLoader from './utils/DatabaseLoader'
 import CostDatabase from './utils/CostDatabase'
-import Comparators from './utils/Comparators'
 import InstanceTypesTable from './components/InstanceTypesTable'
 import FilterSelector from './components/FilterSelector'
 
@@ -154,7 +153,7 @@ export default {
   computed: {
     instanceTypes () {
       if (this._db) {
-        return this._db.instanceTypes(this.selections).sort(Comparators.instanceType)
+        return this._db.instanceTypes(this.selections)
       } else {
         return []
       }

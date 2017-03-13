@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="instanceType in instanceTypes">
+      <tr v-for="instanceType in sortedInstanceTypes">
         <td class="text">{{instanceType.name}}</td>
         <td>{{instanceType.vcpus}}</td>
         <td>{{instanceType.memory | memory}}</td>
@@ -56,12 +56,20 @@ th.text, td.text {
 </style>
 
 <script>
+import Comparators from '../utils/Comparators'
+
 export default {
   name: 'instance-types-table',
   props: ['instance-types'],
 
   data () {
     return {}
+  },
+
+  computed: {
+    sortedInstanceTypes () {
+      return this.instanceTypes.sort(Comparators.instanceType)
+    }
   },
 
   filters: {
