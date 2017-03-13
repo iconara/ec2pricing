@@ -16,7 +16,7 @@
         class="instance-types"
         v-bind:instance-types="instanceTypes"/>
       <div class="footer">
-        Data published by AWS at {{publicationDate}}
+        Last updated at {{buildDate | dateTime}} with pricing data last updated at {{publicationDate | dateTime}}
       </div>
     </div>
   </div>
@@ -141,6 +141,7 @@ export default {
     setup () {
       this._db.setup()
       this.publicationDate = this._db.publicationDate
+      this.buildDate = this._db.buildDate
       for (let [name, idName, collectionName] of FILTER_META) {
         let elements = this._db[collectionName]
         let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
@@ -157,6 +158,15 @@ export default {
       } else {
         return []
       }
+    }
+  },
+
+  filters: {
+    dateTime (date) {
+      const zeroFill = (n) => n < 10 ? `0${n}` : n.toString()
+      const dateString = [date.getUTCFullYear(), zeroFill(date.getUTCMonth()), zeroFill(date.getUTCDate())].join('-')
+      const timeString = [zeroFill(date.getUTCHours()), zeroFill(date.getUTCMinutes())].join(':')
+      return `${dateString} ${timeString} UTC`
     }
   }
 }

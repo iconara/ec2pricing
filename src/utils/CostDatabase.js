@@ -68,7 +68,19 @@ export default class CostDatabase {
   }
 
   get publicationDate () {
-    return this._rows('SELECT value FROM meta WHERE key = \'publication_date\'')[0].value
+    if (!this._publicationDate) {
+      let rows = this._rows('SELECT value FROM meta WHERE key = \'publication_date\' LIMIT 1')
+      this._publicationDate = new Date(rows[0].value)
+    }
+    return this._publicationDate
+  }
+
+  get buildDate () {
+    if (!this._buildDate) {
+      let rows = this._rows('SELECT value FROM meta WHERE key = \'build_date\' LIMIT 1')
+      this._buildDate = new Date(rows[0].value)
+    }
+    return this._buildDate
   }
 
   get purchaseOptions () {
