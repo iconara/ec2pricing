@@ -16,7 +16,7 @@
         class="instance-types"
         v-bind:instance-types="instanceTypes"/>
       <div class="footer">
-        Last updated at {{buildDate | dateTime}} with pricing data last updated at {{publicationDate | dateTime}}
+        This page was last updated at {{buildDate | dateTime}} with pricing data last updated at {{publicationDate | dateTime}}, your time
       </div>
     </div>
   </div>
@@ -164,9 +164,9 @@ export default {
   filters: {
     dateTime (date) {
       const zeroFill = (n) => n < 10 ? `0${n}` : n.toString()
-      const dateString = [date.getUTCFullYear(), zeroFill(date.getUTCMonth()), zeroFill(date.getUTCDate())].join('-')
-      const timeString = [zeroFill(date.getUTCHours()), zeroFill(date.getUTCMinutes())].join(':')
-      return `${dateString} ${timeString} UTC`
+      const dateString = [date.getFullYear(), zeroFill(date.getMonth()), zeroFill(date.getDate())].join('-')
+      const timeString = [zeroFill(date.getHours()), zeroFill(date.getMinutes())].join(':')
+      return `${dateString} ${timeString}`
     }
   }
 }
