@@ -4,7 +4,7 @@
       {{progress}}%
     </div>
     <div v-else>
-      <div>
+      <div class="filters">
         <filter-selector
           v-for="[name, idName, collectionName] in filterMeta"
           v-bind:key="name"
@@ -13,13 +13,43 @@
           v-bind:name="name"/>
       </div>
       <instance-types-table
+        class="instance-types"
         v-bind:instance-types="instanceTypes"/>
-      <div>
+      <div class="footer">
         Data published by AWS at {{publicationDate}}
       </div>
     </div>
   </div>
 </template>
+
+<style lang="less">
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  padding: 1rem;
+
+  .filters {
+    margin-bottom: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .instance-types {
+    width: 100%;
+  }
+
+  .footer {
+    margin-top: 1rem;
+  }
+}
+</style>
 
 <script>
 import Vue from 'vue'
@@ -130,8 +160,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-}
-</style>

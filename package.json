@@ -12,6 +12,9 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "less": "^2.7.2",
+    "less-loader": "^3.0.0",
+    "node-less": "^1.0.0",
     "sql.js": "^0.4.0",
     "vue": "^2.2.2"
   },
