@@ -111,6 +111,7 @@ export default {
       filterMeta: FILTER_META,
       filters: {},
       selections: {}
+      buildDate: null,
     }
     for (let [_, idName, collectionName] of FILTER_META) {
       d.filters[collectionName] = []
