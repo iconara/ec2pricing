@@ -10,7 +10,8 @@
           v-bind:key="name"
           v-model="selections[idName]"
           v-bind:options="filters[collectionName]"
-          v-bind:name="name"/>
+          v-bind:name="name"
+          v-bind:disabled="(name === 'licenseModel' || name === 'preinstalledSoftware') && !windowsSelected"/>
       </div>
       <instance-types-table
         class="instance-types"
@@ -147,6 +148,16 @@ export default {
         this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
         this.selections[idName] = defaultElement && defaultElement.id || 0
       }
+    },
+
+    findId (filterName, filterValue) {
+      const [_, __, collectionName] = FILTER_META.find((m) => m[0] === filterName)
+      const element = this.filters[collectionName].find((element) => element[filterName] === filterValue)
+      return element && element.id
+    },
+
+    findDefaultId (filterName) {
+      return this.findId(filterName, FILTER_DEFAULTS[filterName])
     }
   },
 
@@ -156,6 +167,21 @@ export default {
         return this._db.instanceTypes(this.selections)
       } else {
         return []
+      }
+    },
+
+    windowsSelected () {
+      return +this.selections.operatingSystemId === +this.findId('operatingSystem', 'Windows')
+    }
+  },
+
+  watch: {
+    'selections.operatingSystemId': function (operatingSystemId) {
+      if (this.windowsSelected) {
+        this.selections.licenseModelId = this.findId('licenseModel', 'License Included')
+      } else {
+        this.selections.licenseModelId = this.findDefaultId('licenseModel')
+        this.selections.preinstalledSoftwareId = this.findDefaultId('preinstalledSoftware')
       }
     }
   },
