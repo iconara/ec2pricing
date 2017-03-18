@@ -88,7 +88,7 @@ const FILTER_BLACKLISTS = {
   'leaseContractLength': [''],
   'offeringClass': [''],
   'location': [''],
-  'operatingSystem': [''],
+  'operatingSystem': ['', 'NA'],
   'tenancy': ['', 'Host'],
   'licenseModel': [''],
   'preinstalledSoftware': ['']
