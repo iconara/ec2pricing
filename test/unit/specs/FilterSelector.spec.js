@@ -7,10 +7,9 @@ describe('FilterSelector', (done) => {
     const vm = new Constructor().$mount()
     vm.value = 2
     vm.options = [
-      {id: 1, label: 'foo'},
-      {id: 2, label: 'bar'}
+      {id: 1, value: 'foo'},
+      {id: 2, value: 'bar'}
     ]
-    vm.name = 'label'
     Vue.nextTick(() => {
       const firstOption = vm.$el.querySelector('select option:first-child')
       const label = firstOption.textContent.replace(/^\s+|\s+$/g, '')

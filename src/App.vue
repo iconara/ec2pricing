@@ -6,12 +6,11 @@
     <div v-else>
       <div class="filters">
         <filter-selector
-          v-for="[name, idName, collectionName] in filterMeta"
-          v-bind:key="name"
-          v-model="selections[idName]"
-          v-bind:options="filters[collectionName]"
-          v-bind:name="name"
-          v-bind:disabled="(name === 'licenseModel' || name === 'preinstalledSoftware') && !windowsSelected"/>
+          v-for="filter in Object.values(filters)"
+          v-model="filter.selected.id"
+          v-bind:key="filter.name"
+          v-bind:options="filter.options"
+          v-bind:disabled="(filter.name === 'licenseModel' || filter.name === 'preinstalledSoftware') && !windowsSelected"/>
       </div>
       <instance-types-table
         class="instance-types"
@@ -62,38 +61,16 @@ import FilterSelector from './components/FilterSelector'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
-const FILTER_META = [
-  ['purchaseOption', 'purchaseOptionId', 'purchaseOptions'],
-  ['leaseContractLength', 'leaseContractLengthId', 'leaseContractLengths'],
-  ['offeringClass', 'offeringClassId', 'offeringClasses'],
-  ['location', 'locationId', 'locations'],
-  ['operatingSystem', 'operatingSystemId', 'operatingSystems'],
-  ['tenancy', 'tenancyId', 'tenancies'],
-  ['licenseModel', 'licenseModelId', 'licenseModels'],
-  ['preinstalledSoftware', 'preinstalledSoftwareId', 'preinstalledSoftwares']
+const FILTER_CONFIG = [
+  {name: 'purchaseOption', collectionName: 'purchaseOptions', defaultValue: 'Partial Upfront', ignoredValues: ['']},
+  {name: 'leaseContractLength', collectionName: 'leaseContractLengths', defaultValue: '1yr', ignoredValues: ['']},
+  {name: 'offeringClass', collectionName: 'offeringClasses', defaultValue: 'standard', ignoredValues: ['']},
+  {name: 'location', collectionName: 'locations', defaultValue: 'US East (N. Virginia)', ignoredValues: ['']},
+  {name: 'operatingSystem', collectionName: 'operatingSystems', defaultValue: 'Linux', ignoredValues: ['', 'NA']},
+  {name: 'tenancy', collectionName: 'tenancies', defaultValue: 'Shared', ignoredValues: ['', 'Host']},
+  {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: 'No License required', ignoredValues: ['']},
+  {name: 'preinstalledSoftware', collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']}
 ]
-
-const FILTER_DEFAULTS = {
-  'purchaseOption': 'Partial Upfront',
-  'leaseContractLength': '1yr',
-  'offeringClass': 'standard',
-  'location': 'US East (N. Virginia)',
-  'operatingSystem': 'Linux',
-  'tenancy': 'Shared',
-  'licenseModel': 'No License required',
-  'preinstalledSoftware': 'NA'
-}
-
-const FILTER_BLACKLISTS = {
-  'purchaseOption': [''],
-  'leaseContractLength': [''],
-  'offeringClass': [''],
-  'location': [''],
-  'operatingSystem': ['', 'NA'],
-  'tenancy': ['', 'Host'],
-  'licenseModel': [''],
-  'preinstalledSoftware': ['']
-}
 
 export default {
   name: 'app',
@@ -108,14 +85,17 @@ export default {
       loaded: false,
       progress: 0,
       publicationDate: null,
-      filterMeta: FILTER_META,
-      filters: {},
-      selections: {}
       buildDate: null,
+      filters: {}
     }
-    for (let [_, idName, collectionName] of FILTER_META) {
-      d.filters[collectionName] = []
-      d.selections[idName] = null
+    for (let filterConfig of FILTER_CONFIG) {
+      d.filters[filterConfig.name] = {
+        name: filterConfig.name,
+        config: filterConfig,
+        selected: {id: null, value: null},
+        default: null,
+        options: []
+      }
     }
     return d
   },
@@ -143,47 +123,49 @@ export default {
       this._db.setup()
       this.publicationDate = this._db.publicationDate
       this.buildDate = this._db.buildDate
-      for (let [name, idName, collectionName] of FILTER_META) {
-        let elements = this._db[collectionName]
-        let defaultElement = elements.find((element) => element[name] === FILTER_DEFAULTS[name])
-        this.filters[collectionName] = elements.filter((element) => FILTER_BLACKLISTS[name].indexOf(element[name]) === -1)
-        this.selections[idName] = defaultElement && defaultElement.id || 0
+      for (let filter of Object.values(this.filters)) {
+        let options = this._db[filter.config.collectionName]
+        options = options.map((option) => { return {id: option.id, value: option[filter.name]} })
+        options = options.filter((option) => filter.config.ignoredValues.indexOf(option.value) === -1)
+        filter.options = options
+        filter.default = filter.options.find((option) => option.value === filter.config.defaultValue)
+        filter.selected = {id: filter.default.id, value: null}
+        this.$watch(`filters.${filter.name}.selected.id`, (selectedId) => {
+          const selectedOption = filter.options.find((option) => +option.id === +selectedId)
+          filter.selected.value = selectedOption.value
+        })
       }
-    },
-
-    findId (filterName, filterValue) {
-      const [_, __, collectionName] = FILTER_META.find((m) => m[0] === filterName)
-      const element = this.filters[collectionName].find((element) => element[filterName] === filterValue)
-      return element && element.id
-    },
-
-    findDefaultId (filterName) {
-      return this.findId(filterName, FILTER_DEFAULTS[filterName])
     }
   },
 
   computed: {
     instanceTypes () {
       if (this._db) {
-        return this._db.instanceTypes(this.selections)
+        const selections = {}
+        for (let filter of Object.values(this.filters)) {
+          selections[`${filter.name}Id`] = filter.selected.id
+        }
+        return this._db.instanceTypes(selections)
       } else {
         return []
       }
     },
 
     windowsSelected () {
-      return +this.selections.operatingSystemId === +this.findId('operatingSystem', 'Windows')
+      return this.filters.operatingSystem.selected.value === 'Windows'
     }
   },
 
   watch: {
-    'selections.operatingSystemId': function (operatingSystemId) {
-      if (this.windowsSelected) {
-        this.selections.licenseModelId = this.findId('licenseModel', 'License Included')
-      } else {
-        this.selections.licenseModelId = this.findDefaultId('licenseModel')
-        this.selections.preinstalledSoftwareId = this.findDefaultId('preinstalledSoftware')
-      }
+    'filters.operatingSystem.selected.id': function (operatingSystemId) {
+      Vue.nextTick(() => {
+        if (this.windowsSelected) {
+          this.filters.licenseModel.selected = this.filters.licenseModel.options.find((option) => option.value === 'License Included')
+        } else {
+          this.filters.licenseModel.selected = this.filters.licenseModel.default
+          this.filters.preinstalledSoftware.selected = this.filters.preinstalledSoftware.default
+        }
+      })
     }
   },
 

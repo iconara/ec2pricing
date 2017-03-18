@@ -1,7 +1,7 @@
 <template>
-  <select v-bind:value="value" v-on:change="$emit('input', $event.target.value)">
+  <select v-bind:value="value" v-on:change="emitChange($event)">
     <option v-for="option in options" v-bind:value="option.id">
-      {{option[name]}}
+      {{option.value}}
     </option>
   </select>
 </template>
@@ -9,10 +9,16 @@
 <script>
 export default {
   name: 'filter-selector',
-  props: ['value', 'options', 'name'],
+  props: ['value', 'options'],
 
   data () {
     return {}
+  },
+
+  methods: {
+    emitChange (event) {
+      this.$emit('input', event.target.value)
+    }
   }
 }
 </script>
