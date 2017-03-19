@@ -10,11 +10,13 @@ class FakeDb {
     this.results.set(sql, result)
   }
 
-  findResult (sql) {
+  findResult (statement) {
     for (let [pattern, result] of this.results) {
-      if (pattern.test && pattern.test(sql)) {
+      if (typeof pattern === 'function' && pattern(statement)) {
         return result
-      } else if (pattern === sql) {
+      } else if (pattern.test && pattern.test(statement.sql)) {
+        return result
+      } else if (pattern === statement.sql) {
         return result
       }
     }
@@ -22,25 +24,28 @@ class FakeDb {
   }
 
   prepare (sql) {
-    let statement = new FakeStatement(sql, this.findResult(sql))
+    let statement = new FakeStatement(sql, this)
     this.statements.push(statement)
     return statement
   }
 }
 
 class FakeStatement {
-  constructor (sql, result) {
+  constructor (sql, database) {
     this.sql = sql
+    this.database = database
     this.index = -1
-    this.result = result
     this.freed = false
   }
 
   bind (parameters) {
-    this.parameters = parameters
+    this.parameters = parameters && Object.assign({}, parameters)
   }
 
   step () {
+    if (this.index === -1) {
+      this.result = this.database.findResult(this)
+    }
     this.index++
     return this.result && this.index < this.result.length
   }
@@ -188,6 +193,142 @@ describe('CostDatabase', () => {
         let countAfter = database.statements.length
         expect(countAfter).to.equal(countBefore + 1)
       })
+    })
+  })
+
+  describe('instanceTypes', () => {
+    let result
+
+    const selectedIds = {
+      purchaseOptionId: 1,
+      leaseContractLengthId: 2,
+      offeringClassId: 3,
+      locationId: 4,
+      operatingSystemId: 5,
+      tenancyId: 6,
+      licenseModelId: 7,
+      preinstalledSoftwareId: 8
+    }
+
+    const instanceTypes = [
+      {name: 'y1.small', vcpus: 1, memory: '1 GiB', storage: '1 x 1 SSD', networkPerformance: 'ok'},
+      {name: 'y1.medium', vcpus: 2, memory: '2 GiB', storage: '2 x 2 SSD', networkPerformance: 'fair'},
+      {name: 'z1.medium', vcpus: 3, memory: '3 GiB', storage: '3 x 3 SSD', networkPerformance: 'not sluggish'},
+      {name: 'z1.large', vcpus: 4, memory: '4 GiB', storage: '4 x 4 SSD', networkPerformance: 'blazing'}
+    ]
+
+    const reservedPriceResult = [
+      Object.assign({hourlyRate: '0.01', upfrontCost: '1'}, instanceTypes[0]),
+      Object.assign({hourlyRate: '0.02', upfrontCost: '2'}, instanceTypes[1]),
+      Object.assign({hourlyRate: '0.03', upfrontCost: '3'}, instanceTypes[2]),
+      Object.assign({hourlyRate: '0.04', upfrontCost: '4'}, instanceTypes[3])
+    ]
+
+    const onDemandPriceResult = [
+      Object.assign({hourlyRate: '0.1'}, instanceTypes[0]),
+      Object.assign({hourlyRate: '0.2'}, instanceTypes[1]),
+      Object.assign({hourlyRate: '0.3'}, instanceTypes[2]),
+      Object.assign({hourlyRate: '0.4'}, instanceTypes[3])
+    ]
+
+    const reservedPriceStatement = (statement) => {
+      return statement.sql.indexOf('FROM instance_type') > -1 &&
+             statement.parameters[':purchaseOptionId'] === 1 &&
+             statement.parameters[':leaseContractLengthId'] === 2 &&
+             statement.parameters[':offeringClassId'] === 3
+    }
+
+    const onDemandPriceStatement = (statement) => {
+      return statement.sql.indexOf('FROM instance_type') > -1 &&
+             statement.parameters[':purchaseOptionId'] === 0 &&
+             statement.parameters[':leaseContractLengthId'] === 0 &&
+             statement.parameters[':offeringClassId'] === 0
+    }
+
+    beforeEach(() => {
+      database.setResult(reservedPriceStatement, reservedPriceResult)
+      database.setResult(onDemandPriceStatement, onDemandPriceResult)
+      result = costDatabase.instanceTypes(selectedIds)
+    })
+
+    it('loads the prices for reserved instances', () => {
+      const statement = database.statements.find(reservedPriceStatement)
+      expect(statement).to.exist
+      expect(statement.parameters[':purchaseOptionId']).to.equal(1)
+      expect(statement.parameters[':leaseContractLengthId']).to.equal(2)
+      expect(statement.parameters[':offeringClassId']).to.equal(3)
+      expect(statement.parameters[':locationId']).to.equal(4)
+      expect(statement.parameters[':operatingSystemId']).to.equal(5)
+      expect(statement.parameters[':tenancyId']).to.equal(6)
+      expect(statement.parameters[':licenseModelId']).to.equal(7)
+      expect(statement.parameters[':preinstalledSoftwareId']).to.equal(8)
+    })
+
+    it('loads the prices for on demand instances, overriding the purchase option, lease contract length and offer code IDs for on demand', () => {
+      const statement = database.statements.find(onDemandPriceStatement)
+      expect(statement).to.exist
+      expect(statement.parameters[':purchaseOptionId']).to.equal(0)
+      expect(statement.parameters[':leaseContractLengthId']).to.equal(0)
+      expect(statement.parameters[':offeringClassId']).to.equal(0)
+      expect(statement.parameters[':locationId']).to.equal(4)
+      expect(statement.parameters[':operatingSystemId']).to.equal(5)
+      expect(statement.parameters[':tenancyId']).to.equal(6)
+      expect(statement.parameters[':licenseModelId']).to.equal(7)
+      expect(statement.parameters[':preinstalledSoftwareId']).to.equal(8)
+    })
+
+    it('joins the instance_type table with the cost table to ensure that every instance type is always in the result', () => {
+      [reservedPriceStatement, onDemandPriceStatement].forEach((statementPredicate) => {
+        const statement = database.statements.find(statementPredicate)
+        expect(statement.sql).to.include('FROM instance_type')
+        expect(statement.sql).to.include('LEFT JOIN cost')
+      })
+    })
+
+    it('orders by instance type name so that the on demand and reserved price results are guaranteed to be in the same order', () => {
+      [reservedPriceStatement, onDemandPriceStatement].forEach((statementPredicate) => {
+        const statement = database.statements.find(statementPredicate)
+        expect(statement.sql).to.include('ORDER BY instance_type')
+      })
+    })
+
+    it('converts the table\'s snake case names to camel case', () => {
+      [reservedPriceStatement, onDemandPriceStatement].forEach((statementPredicate) => {
+        const statement = database.statements.find(statementPredicate)
+        expect(statement.sql).to.include('instance_type AS name')
+        expect(statement.sql).to.include('network_performance AS networkPerformance')
+        expect(statement.sql).to.include('hourly_rate AS hourlyRate')
+        expect(statement.sql).to.include('upfront_cost AS upfrontCost')
+      })
+    })
+
+    it('filters on all dimensions', () => {
+      [reservedPriceStatement, onDemandPriceStatement].forEach((statementPredicate) => {
+        const statement = database.statements.find(statementPredicate)
+        expect(statement.sql).to.include('purchase_option_id = :purchaseOptionId')
+        expect(statement.sql).to.include('lease_contract_length_id = :leaseContractLengthId')
+        expect(statement.sql).to.include('offering_class_id = :offeringClassId')
+        expect(statement.sql).to.include('location_id = :locationId')
+        expect(statement.sql).to.include('operating_system_id = :operatingSystemId')
+        expect(statement.sql).to.include('tenancy_id = :tenancyId')
+        expect(statement.sql).to.include('license_model_id = :licenseModelId')
+        expect(statement.sql).to.include('preinstalled_software_id = :preinstalledSoftwareId')
+      })
+    })
+
+    it('returns the combined prices for reserved and on demand instances', () => {
+      const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+      expect(z1Medium.onDemandHourlyRate).to.equal('0.3')
+      expect(z1Medium.reservedHourlyRate).to.equal('0.03')
+      expect(z1Medium.upfrontCost).to.equal('3')
+    })
+
+    it('returns instance type details', () => {
+      const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+      expect(z1Medium.vcpus).to.equal(3)
+      expect(z1Medium.memory).to.equal('3 GiB')
+      expect(z1Medium.storage).to.equal('3 x 3 SSD')
+      expect(z1Medium.networkPerformance).to.equal('not sluggish')
     })
   })
 })
