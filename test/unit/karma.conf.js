@@ -13,7 +13,7 @@ module.exports = function (config) {
     // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai'],
-    reporters: ['spec', 'coverage'],
+    reporters: ['spec', 'coverage', 'html'],
     files: [
       '../../node_modules/phantomjs-polyfill-find/find-polyfill.js',
       './index.js'
@@ -31,6 +31,12 @@ module.exports = function (config) {
         { type: 'lcov', subdir: '.' },
         { type: 'text-summary' }
       ]
+    },
+    htmlReporter: {
+      outputFile: './report.html',
+      groupSuites: true,
+      useCompactStyle: true,
+      useLegacyStyle: true
     }
   })
 }
