@@ -47,4 +47,18 @@ describe('Comparators', () => {
       })
     })
   })
+
+  describe('vcpus', () => {
+    it('returns -1 when the first instance type has fewer vCPUs than the second', () => {
+      expect(Comparators.vcpus({vcpus: 1}, {vcpus: 2})).to.equal(-1)
+    })
+
+    it('returns 1 when the first instance type has more vCPUs than the second', () => {
+      expect(Comparators.vcpus({vcpus: 3}, {vcpus: 2})).to.equal(1)
+    })
+
+    it('returns 0 when the instance types have the same number of vCPUs', () => {
+      expect(Comparators.vcpus({vcpus: 2}, {vcpus: 2})).to.equal(0)
+    })
+  })
 })
