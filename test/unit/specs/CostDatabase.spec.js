@@ -66,6 +66,10 @@ describe('CostDatabase', () => {
     costDatabase = new CostDatabase(database).setup()
   })
 
+  afterEach(() => {
+    expect(database.statements.every((statement) => statement.freed)).to.be.true
+  })
+
   describe('publicationDate', () => {
     beforeEach(() => {
       database.setResult(/FROM meta WHERE key = 'publication_date'/, [{'value': '2017-03-19T09:42:37Z'}])
