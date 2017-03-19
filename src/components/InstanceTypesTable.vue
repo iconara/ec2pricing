@@ -58,7 +58,8 @@ th.text, td.text {
 <script>
 import Comparators from '../utils/Comparators'
 
-function prettyNumber (str) {
+function prettyNumber (n) {
+  let str = n.toString()
   let [whole, fractions] = str.split('.')
   whole = whole.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
   if (fractions) {
@@ -107,16 +108,14 @@ export default {
 
   filters: {
     memory (n) {
-      return `${prettyNumber(n.toString())} GiB`
+      return `${prettyNumber(n)} GiB`
     },
 
-    storage (str) {
-      if (/ebs only/i.test(str)) {
+    storage (s) {
+      if (s.ebsOnly) {
         return '(EBS only)'
-      } else if (/SSD|HDD/.test(str)) {
-        return str
       } else {
-        return `${str} HDD`
+        return `${s.disks} × ${prettyNumber(s.size)} GB ${s.type}`
       }
     },
 

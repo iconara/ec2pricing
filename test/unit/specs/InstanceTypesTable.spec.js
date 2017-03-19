@@ -3,13 +3,13 @@ import InstanceTypesTable from '@/components/InstanceTypesTable'
 
 describe('InstanceTypesTable', (done) => {
   const instanceTypes = [
-    {name: 'm3.xlarge', vcpus: 4, memory: 15, storage: '2 x 40 SSD', networkPerformance: 'High', onDemandHourlyRate: '0.266', reservedHourlyRate: '0.07', upfrontCost: '842'},
-    {name: 'm3.medium', vcpus: 1, memory: 3.75, storage: '1 x 4 SSD', networkPerformance: 'Moderate', onDemandHourlyRate: '0.067', reservedHourlyRate: '0.017', upfrontCost: '211'},
-    {name: 'm3.large', vcpus: 2, memory: 7.5, storage: '1 x 32 SSD', networkPerformance: 'Moderate', onDemandHourlyRate: '0.133', reservedHourlyRate: '0.035', upfrontCost: '421'},
-    {name: 'm3.2xlarge', vcpus: 8, memory: 30, storage: '2 x 80 SSD', networkPerformance: 'High', onDemandHourlyRate: '0.532', reservedHourlyRate: '0.139', upfrontCost: '1683'},
-    {name: 'c4.8xlarge', vcpus: 36, memory: 60, storage: 'EBS only', networkPerformance: '10 Gigabit', onDemandHourlyRate: '1.591', reservedHourlyRate: '0.483', upfrontCost: '4231'},
-    {name: 'm1.xlarge', vcpus: 4, memory: 15, storage: '4 x 420', networkPerformance: 'High', onDemandHourlyRate: '0.35', reservedHourlyRate: '0.082', upfrontCost: '$987'},
-    {name: 'x1.32xlarge', vcpus: 128, memory: 1952, storage: '2 x 1,920 HDD', networkPerformance: 'High', onDemandHourlyRate: '13.33835', reservedHourlyRate: '3.914', upfrontCost: '34285'}
+    {name: 'm3.xlarge', vcpus: 4, memory: 15, storage: {disks: 2, size: 40, totalSize: 80, type: 'SSD'}, networkPerformance: 'High', onDemandHourlyRate: '0.266', reservedHourlyRate: '0.07', upfrontCost: '842'},
+    {name: 'm3.medium', vcpus: 1, memory: 3.75, storage: {disks: 1, size: 4, totalSize: 4, type: 'SSD'}, networkPerformance: 'Moderate', onDemandHourlyRate: '0.067', reservedHourlyRate: '0.017', upfrontCost: '211'},
+    {name: 'm3.large', vcpus: 2, memory: 7.5, storage: {disks: 1, size: 32, totalSize: 32, type: 'SSD'}, networkPerformance: 'Moderate', onDemandHourlyRate: '0.133', reservedHourlyRate: '0.035', upfrontCost: '421'},
+    {name: 'm3.2xlarge', vcpus: 8, memory: 30, storage: {disks: 2, size: 80, totalSize: 160, type: 'SSD'}, networkPerformance: 'High', onDemandHourlyRate: '0.532', reservedHourlyRate: '0.139', upfrontCost: '1683'},
+    {name: 'c4.8xlarge', vcpus: 36, memory: 60, storage: {ebsOnly: true, type: 'EBS'}, networkPerformance: '10 Gigabit', onDemandHourlyRate: '1.591', reservedHourlyRate: '0.483', upfrontCost: '4231'},
+    {name: 'm1.xlarge', vcpus: 4, memory: 15, storage: {disks: 4, size: 420, totalSize: 1680, type: 'HDD'}, networkPerformance: 'High', onDemandHourlyRate: '0.35', reservedHourlyRate: '0.082', upfrontCost: '$987'},
+    {name: 'x1.32xlarge', vcpus: 128, memory: 1952, storage: {disks: 2, size: 1920, totalSize: 3840, type: 'HDD'}, networkPerformance: 'High', onDemandHourlyRate: '13.33835', reservedHourlyRate: '3.914', upfrontCost: '34285'}
   ]
 
   const withMountedComponent = function (body) {
@@ -44,7 +44,7 @@ describe('InstanceTypesTable', (done) => {
       expect(columns[0].textContent).to.equal('m3.medium')
       expect(columns[1].textContent).to.equal('1')
       expect(columns[2].textContent).to.equal('3.75 GiB')
-      expect(columns[3].textContent).to.equal('1 x 4 SSD')
+      expect(columns[3].textContent).to.equal('1 × 4 GB SSD')
       expect(columns[4].textContent).to.match(/moderate/i)
       expect(columns[5].textContent).to.match(/0\.067/)
       expect(columns[6].textContent).to.match(/0\.017/)
@@ -53,7 +53,7 @@ describe('InstanceTypesTable', (done) => {
     })
   })
 
-  it('formats the memory column as a number and adds GiB', (done) => {
+  it('formats the memory column as a number and adds "GiB"', (done) => {
     withMountedComponent((component) => {
       const m3MediumColumns = component.$el.querySelectorAll('table tbody tr:nth-child(3) td')
       const x132XLargeColumns = component.$el.querySelectorAll('table tbody tr:nth-child(7) td')
@@ -63,15 +63,17 @@ describe('InstanceTypesTable', (done) => {
     })
   })
 
-  it('adds "HDD" to the storage column when it\'s missing', (done) => {
+  it('formats the storage column with the number of disks, their size, their type and adds "GB"', (done) => {
     withMountedComponent((component) => {
-      const columns = component.$el.querySelectorAll('table tbody tr:nth-child(2) td')
-      expect(columns[3].textContent).to.equal('4 x 420 HDD')
+      const m3MediumColumns = component.$el.querySelectorAll('table tbody tr:nth-child(3) td')
+      const x132XLargeColumns = component.$el.querySelectorAll('table tbody tr:nth-child(7) td')
+      expect(m3MediumColumns[3].textContent).to.equal('1 × 4 GB SSD')
+      expect(x132XLargeColumns[3].textContent).to.equal('2 × 1,920 GB HDD')
       done()
     })
   })
 
-  it('parenthesizes "EBS only" in the storage column', (done) => {
+  it('formats the storage column as "(EBS only)" when the instance doesn\'t have instance storage', (done) => {
     withMountedComponent((component) => {
       const columns = component.$el.querySelectorAll('table tbody tr:nth-child(1) td')
       expect(columns[3].textContent).to.equal('(EBS only)')

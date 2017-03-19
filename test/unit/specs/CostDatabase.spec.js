@@ -211,11 +211,12 @@ describe('CostDatabase', () => {
     }
 
     const instanceTypeRows = [
-      {name: 'y1.small', vcpus: 1, memory: '1 GiB', storage: '1 x 1 SSD', networkPerformance: 'ok'},
-      {name: 'y1.medium', vcpus: 2, memory: '2 GiB', storage: '2 x 2 SSD', networkPerformance: 'fair'},
+      {name: 'y1.small', vcpus: 1, memory: '1 GiB', storage: '1 x 1 GB', networkPerformance: 'ok'},
+      {name: 'y1.medium', vcpus: 2, memory: '2 GiB', storage: '2 x 2', networkPerformance: 'fair'},
       {name: 'z1.medium', vcpus: 3, memory: '3 GiB', storage: '3 x 3 SSD', networkPerformance: 'not sluggish'},
       {name: 'z1.large', vcpus: 4, memory: '4.2 GiB', storage: '4 x 4 SSD', networkPerformance: 'quick indeed'},
-      {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 SSD', networkPerformance: 'blazing'}
+      {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 HDD', networkPerformance: 'blazing'},
+      {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'network? more like snailwork'}
     ]
 
     const reservedPriceResult = []
@@ -322,7 +323,6 @@ describe('CostDatabase', () => {
     it('returns instance type details', () => {
       const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
       expect(z1Medium.vcpus).to.equal(3)
-      expect(z1Medium.storage).to.equal('3 x 3 SSD')
       expect(z1Medium.networkPerformance).to.equal('not sluggish')
     })
 
@@ -333,6 +333,28 @@ describe('CostDatabase', () => {
       expect(z1Medium.memory).to.deep.equal(3)
       expect(z1Large.memory).to.deep.equal(4.2)
       expect(z164XLarge.memory).to.deep.equal(2048)
+    })
+
+    it('parses the storage strings and returns the number of disks, their size and type separately', () => {
+      const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+      const z164XLarge = result.find((instanceType) => instanceType.name === 'z1.64xlarge')
+      expect(z1Medium.storage).to.deep.equal({disks: 3, size: 3, totalSize: 9, type: 'SSD'})
+      expect(z164XLarge.storage).to.deep.equal({disks: 4, size: 16384, totalSize: 65536, type: 'HDD'})
+    })
+
+    it('parses the storage strings of EBS only instances and returns a flag, a zero total size and the type as "EBS"', () => {
+      const w1Nano = result.find((instanceType) => instanceType.name === 'w1.nano')
+      expect(w1Nano.storage).to.deep.equal({ebsOnly: true, totalSize: 0, type: 'EBS'})
+    })
+
+    it('assumes the disk type is HDD when none is specified', () => {
+      const y1Medium = result.find((instanceType) => instanceType.name === 'y1.medium')
+      expect(y1Medium.storage).to.deep.equal({disks: 2, size: 2, totalSize: 4, type: 'HDD'})
+    })
+
+    it('ignores "GB" in storage strings', () => {
+      const y1Small = result.find((instanceType) => instanceType.name === 'y1.small')
+      expect(y1Small.storage).to.deep.equal({disks: 1, size: 1, totalSize: 1, type: 'HDD'})
     })
   })
 })

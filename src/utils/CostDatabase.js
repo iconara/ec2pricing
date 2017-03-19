@@ -138,12 +138,25 @@ export default class CostDatabase {
       mergedRow.reservedHourlyRate = reservedRows[i].hourlyRate
       mergedRows.push(mergedRow)
     }
-    return mergedRows.map(this.parseInstanceType)
+    return mergedRows.map((it) => this.parseInstanceType(it))
   }
 
   parseInstanceType (rawInstanceType) {
     const instanceType = Object.assign({}, rawInstanceType)
     instanceType.memory = parseFloat(instanceType.memory.replace(',', ''))
+    instanceType.storage = this.parseStorage(instanceType.storage)
     return instanceType
+  }
+
+  parseStorage (storageStr) {
+    if (storageStr.indexOf('EBS') > -1) {
+      return {ebsOnly: true, totalSize: 0, type: 'EBS'}
+    } else {
+      let [_, diskCount, diskSize, type] = storageStr.match(/^(?:(\d+) x )?([\d,.]+)(?: GB)?(?: (HDD|SSD))?$/)
+      diskCount = parseInt(diskCount || '1')
+      diskSize = parseInt(diskSize.replace(',', ''))
+      type = type || 'HDD'
+      return {disks: diskCount, size: diskSize, totalSize: diskCount * diskSize, type: type}
+    }
   }
 }

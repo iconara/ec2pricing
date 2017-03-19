@@ -43,21 +43,8 @@ function memory (it1, it2) {
   return cmp(it1.memory, it2.memory)
 }
 
-const DISK_SIZE_PATTERN = /^(?:(\d+) x )?([\d,.]+)/
-
-function totalDiskSize (storageString) {
-  if (storageString.indexOf('EBS') > -1) {
-    return 0
-  } else {
-    let [_, diskCount, diskSize] = storageString.match(DISK_SIZE_PATTERN)
-    diskCount = parseInt(diskCount || '1')
-    diskSize = parseInt(diskSize.replace(',', ''))
-    return diskCount * diskSize
-  }
-}
-
 function storage (it1, it2) {
-  return cmp(totalDiskSize(it1.storage), totalDiskSize(it2.storage))
+  return cmp(it1.storage.totalSize, it2.storage.totalSize)
 }
 
 function networkPerformance (it1, it2) {
