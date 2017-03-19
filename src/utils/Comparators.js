@@ -25,12 +25,24 @@ function sizeToNumber (size) {
   }
 }
 
+function cmp (n1, n2) {
+  if (n1 < n2) {
+    return -1
+  } else if (n1 > n2) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
 function vcpus (it1, it2) {
   return it1.vcpus - it2.vcpus
 }
 
 function memory (it1, it2) {
-  return it1.memory.localeCompare(it2.memory)
+  const m1 = parseFloat(it1.memory)
+  const m2 = parseFloat(it2.memory)
+  return cmp(m1, m2)
 }
 
 function storage (it1, it2) {

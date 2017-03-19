@@ -61,4 +61,24 @@ describe('Comparators', () => {
       expect(Comparators.vcpus({vcpus: 2}, {vcpus: 2})).to.equal(0)
     })
   })
+
+  describe('memory', () => {
+    it('returns -1 when the first instance type has less memory than the second', () => {
+      expect(Comparators.memory({memory: '7.5 GiB'}, {memory: '15 GiB'})).to.equal(-1)
+      expect(Comparators.memory({memory: '3.75 GiB'}, {memory: '3.8 GiB'})).to.equal(-1)
+    })
+
+    it('returns 1 when the first instance type has more memory than the second', () => {
+      expect(Comparators.memory({memory: '128 GiB'}, {memory: '0.5 GiB'})).to.equal(1)
+    })
+
+    it('returns 0 when the instance types have the same amount of memory', () => {
+      expect(Comparators.memory({memory: '0.613 GiB'}, {memory: '0.613 GiB'})).to.equal(0)
+      expect(Comparators.memory({memory: '244 GiB'}, {memory: '244 GiB'})).to.equal(0)
+    })
+
+    xit('takes the unit into account', () => {
+      expect(Comparators.memory({memory: '0.5 GiB'}, {memory: '512 MiB'})).to.equal(0)
+    })
+  })
 })
