@@ -1,15 +1,20 @@
-const DIMENSION_NAMES = [
-  ['purchase_option', 'purchaseOption'],
-  ['lease_contract_length', 'leaseContractLength'],
-  ['offering_class', 'offeringClass'],
-  ['location', 'location'],
-  ['operating_system', 'operatingSystem'],
-  ['tenancy', 'tenancy'],
-  ['license_model', 'licenseModel'],
-  ['preinstalled_software', 'preinstalledSoftware']
-]
+const COLUMN_NAMES = {
+  'purchaseOption': 'purchase_option',
+  'leaseContractLength': 'lease_contract_length',
+  'offeringClass': 'offering_class',
+  'location': 'location',
+  'operatingSystem': 'operating_system',
+  'tenancy': 'tenancy',
+  'licenseModel': 'license_model',
+  'preinstalledSoftware': 'preinstalled_software'
+}
 
-const DIMENSION_FILTERS = DIMENSION_NAMES.map(([snakeCaseName, camelCaseName]) => `${snakeCaseName}_id = :${camelCaseName}Id`)
+const FILTER_SQL = []
+
+for (let propertyName in COLUMN_NAMES) {
+  let columnName = COLUMN_NAMES[propertyName]
+  FILTER_SQL.push(`${columnName}_id = :${propertyName}Id`)
+}
 
 const INSTANCE_TYPES_SQL = `
   SELECT
@@ -23,7 +28,7 @@ const INSTANCE_TYPES_SQL = `
   FROM instance_type it
   LEFT JOIN cost c ON (
     it.instance_type_id = c.instance_type_id
-    AND ${DIMENSION_FILTERS.join(' AND ')}
+    AND ${FILTER_SQL.join(' AND ')}
   )
   ORDER BY instance_type
 `
@@ -56,12 +61,13 @@ export default class CostDatabase {
 
   _dimensionRows (dimensionName) {
     if (!(dimensionName in this._dimensionRowsCache)) {
-      let [snakeCaseName, camelCaseName] = DIMENSION_NAMES.find(([_, camelCaseName]) => camelCaseName === dimensionName)
+      const columnName = COLUMN_NAMES[dimensionName]
+      const tableName = columnName
       this._dimensionRowsCache[dimensionName] = this._rows(`
         SELECT
-          ${snakeCaseName}_id AS id,
-          ${snakeCaseName} AS ${camelCaseName}
-        FROM ${snakeCaseName}
+          ${columnName}_id AS id,
+          ${columnName} AS ${dimensionName}
+        FROM ${tableName}
       `)
     }
     return this._dimensionRowsCache[dimensionName]
@@ -117,9 +123,8 @@ export default class CostDatabase {
 
   instanceTypes (selectedIds) {
     let parameters = {}
-    for (let pair of DIMENSION_NAMES) {
-      let camelCaseName = pair[1]
-      parameters[`:${camelCaseName}Id`] = selectedIds[`${camelCaseName}Id`]
+    for (let propertyName in COLUMN_NAMES) {
+      parameters[`:${propertyName}Id`] = selectedIds[`${propertyName}Id`]
     }
     let reservedRows = this._rows(INSTANCE_TYPES_SQL, parameters)
     parameters[':purchaseOptionId'] = this._onDemandPurchaseOptionId
