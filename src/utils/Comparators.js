@@ -40,9 +40,7 @@ function vcpus (it1, it2) {
 }
 
 function memory (it1, it2) {
-  const m1 = parseFloat(it1.memory)
-  const m2 = parseFloat(it2.memory)
-  return cmp(m1, m2)
+  return cmp(it1.memory, it2.memory)
 }
 
 const DISK_SIZE_PATTERN = /^(?:(\d+) x )?([\d,.]+)/

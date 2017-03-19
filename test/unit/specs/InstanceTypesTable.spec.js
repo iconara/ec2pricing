@@ -3,12 +3,13 @@ import InstanceTypesTable from '@/components/InstanceTypesTable'
 
 describe('InstanceTypesTable', (done) => {
   const instanceTypes = [
-    {name: 'm3.xlarge', vcpus: 4, memory: '15 Gib', storage: '2 x 40 SSD', networkPerformance: 'High', onDemandHourlyRate: '0.266', reservedHourlyRate: '0.07', upfrontCost: '842'},
-    {name: 'm3.medium', vcpus: 1, memory: '3.75 GiB', storage: '1 x 4 SSD', networkPerformance: 'Moderate', onDemandHourlyRate: '0.067', reservedHourlyRate: '0.017', upfrontCost: '211'},
-    {name: 'm3.large', vcpus: 2, memory: '7.5 GiB', storage: '1 x 32 SSD', networkPerformance: 'Moderate', onDemandHourlyRate: '0.133', reservedHourlyRate: '0.035', upfrontCost: '421'},
-    {name: 'm3.2xlarge', vcpus: 8, memory: '30 GiB', storage: '2 x 80 SSD', networkPerformance: 'High', onDemandHourlyRate: '0.532', reservedHourlyRate: '0.139', upfrontCost: '1683'},
-    {name: 'c4.8xlarge', vcpus: 36, memory: '60 GiB', storage: 'EBS only', networkPerformance: '10 Gigabit', onDemandHourlyRate: '1.591', reservedHourlyRate: '0.483', upfrontCost: '4231'},
-    {name: 'm1.xlarge', vcpus: 4, memory: '15 GiB', storage: '4 x 420', networkPerformance: 'Hight', onDemandHourlyRate: '0.35', reservedHourlyRate: '0.082', upfrontCost: '$987'}
+    {name: 'm3.xlarge', vcpus: 4, memory: 15, storage: '2 x 40 SSD', networkPerformance: 'High', onDemandHourlyRate: '0.266', reservedHourlyRate: '0.07', upfrontCost: '842'},
+    {name: 'm3.medium', vcpus: 1, memory: 3.75, storage: '1 x 4 SSD', networkPerformance: 'Moderate', onDemandHourlyRate: '0.067', reservedHourlyRate: '0.017', upfrontCost: '211'},
+    {name: 'm3.large', vcpus: 2, memory: 7.5, storage: '1 x 32 SSD', networkPerformance: 'Moderate', onDemandHourlyRate: '0.133', reservedHourlyRate: '0.035', upfrontCost: '421'},
+    {name: 'm3.2xlarge', vcpus: 8, memory: 30, storage: '2 x 80 SSD', networkPerformance: 'High', onDemandHourlyRate: '0.532', reservedHourlyRate: '0.139', upfrontCost: '1683'},
+    {name: 'c4.8xlarge', vcpus: 36, memory: 60, storage: 'EBS only', networkPerformance: '10 Gigabit', onDemandHourlyRate: '1.591', reservedHourlyRate: '0.483', upfrontCost: '4231'},
+    {name: 'm1.xlarge', vcpus: 4, memory: 15, storage: '4 x 420', networkPerformance: 'High', onDemandHourlyRate: '0.35', reservedHourlyRate: '0.082', upfrontCost: '$987'},
+    {name: 'x1.32xlarge', vcpus: 128, memory: 1952, storage: '2 x 1,920 HDD', networkPerformance: 'High', onDemandHourlyRate: '13.33835', reservedHourlyRate: '3.914', upfrontCost: '34285'}
   ]
 
   const withMountedComponent = function (body) {
@@ -52,11 +53,12 @@ describe('InstanceTypesTable', (done) => {
     })
   })
 
-  it('fixes capitalization issues in the memory column', (done) => {
+  it('formats the memory column as a number and adds GiB', (done) => {
     withMountedComponent((component) => {
-      const columns = component.$el.querySelectorAll('table tbody tr:nth-child(5) td')
-      expect(columns[0].textContent).to.equal('m3.xlarge')
-      expect(columns[2].textContent).to.equal('15 GiB')
+      const m3MediumColumns = component.$el.querySelectorAll('table tbody tr:nth-child(3) td')
+      const x132XLargeColumns = component.$el.querySelectorAll('table tbody tr:nth-child(7) td')
+      expect(m3MediumColumns[2].textContent).to.equal('3.75 GiB')
+      expect(x132XLargeColumns[2].textContent).to.equal('1,952 GiB')
       done()
     })
   })

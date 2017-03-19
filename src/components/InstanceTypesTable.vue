@@ -58,6 +58,16 @@ th.text, td.text {
 <script>
 import Comparators from '../utils/Comparators'
 
+function prettyNumber (str) {
+  let [whole, fractions] = str.split('.')
+  whole = whole.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+  if (fractions) {
+    return `${whole}.${fractions}`
+  } else {
+    return whole
+  }
+}
+
 export default {
   name: 'instance-types-table',
   props: ['instance-types'],
@@ -96,8 +106,8 @@ export default {
   },
 
   filters: {
-    memory (str) {
-      return str.replace(/gib/i, 'GiB')
+    memory (n) {
+      return `${prettyNumber(n.toString())} GiB`
     },
 
     storage (str) {
@@ -118,13 +128,7 @@ export default {
       if (str == null || str.length === 0) {
         return 'n/a'
       } else {
-        let [whole, fractions] = str.split('.')
-        whole = whole.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
-        if (fractions) {
-          return `$${whole}.${fractions}`
-        } else {
-          return `$${whole}`
-        }
+        return `$${prettyNumber(str)}`
       }
     }
   }

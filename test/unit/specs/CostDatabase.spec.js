@@ -210,26 +210,22 @@ describe('CostDatabase', () => {
       preinstalledSoftwareId: 8
     }
 
-    const instanceTypes = [
+    const instanceTypeRows = [
       {name: 'y1.small', vcpus: 1, memory: '1 GiB', storage: '1 x 1 SSD', networkPerformance: 'ok'},
       {name: 'y1.medium', vcpus: 2, memory: '2 GiB', storage: '2 x 2 SSD', networkPerformance: 'fair'},
       {name: 'z1.medium', vcpus: 3, memory: '3 GiB', storage: '3 x 3 SSD', networkPerformance: 'not sluggish'},
-      {name: 'z1.large', vcpus: 4, memory: '4 GiB', storage: '4 x 4 SSD', networkPerformance: 'blazing'}
+      {name: 'z1.large', vcpus: 4, memory: '4.2 GiB', storage: '4 x 4 SSD', networkPerformance: 'quick indeed'},
+      {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 SSD', networkPerformance: 'blazing'}
     ]
 
-    const reservedPriceResult = [
-      Object.assign({hourlyRate: '0.01', upfrontCost: '1'}, instanceTypes[0]),
-      Object.assign({hourlyRate: '0.02', upfrontCost: '2'}, instanceTypes[1]),
-      Object.assign({hourlyRate: '0.03', upfrontCost: '3'}, instanceTypes[2]),
-      Object.assign({hourlyRate: '0.04', upfrontCost: '4'}, instanceTypes[3])
-    ]
+    const reservedPriceResult = []
+    const onDemandPriceResult = []
 
-    const onDemandPriceResult = [
-      Object.assign({hourlyRate: '0.1'}, instanceTypes[0]),
-      Object.assign({hourlyRate: '0.2'}, instanceTypes[1]),
-      Object.assign({hourlyRate: '0.3'}, instanceTypes[2]),
-      Object.assign({hourlyRate: '0.4'}, instanceTypes[3])
-    ]
+    instanceTypeRows.forEach((row, index) => {
+      let n = index + 1
+      reservedPriceResult.push(Object.assign({hourlyRate: (n / 100).toString(), upfrontCost: n.toString()}, row))
+      onDemandPriceResult.push(Object.assign({hourlyRate: (n / 10).toString()}, row))
+    })
 
     const reservedPriceStatement = (statement) => {
       return statement.sql.indexOf('FROM instance_type') > -1 &&
@@ -326,9 +322,17 @@ describe('CostDatabase', () => {
     it('returns instance type details', () => {
       const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
       expect(z1Medium.vcpus).to.equal(3)
-      expect(z1Medium.memory).to.equal('3 GiB')
       expect(z1Medium.storage).to.equal('3 x 3 SSD')
       expect(z1Medium.networkPerformance).to.equal('not sluggish')
+    })
+
+    it('parses the memory strings and returns the number of GiB', () => {
+      const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+      const z1Large = result.find((instanceType) => instanceType.name === 'z1.large')
+      const z164XLarge = result.find((instanceType) => instanceType.name === 'z1.64xlarge')
+      expect(z1Medium.memory).to.deep.equal(3)
+      expect(z1Large.memory).to.deep.equal(4.2)
+      expect(z164XLarge.memory).to.deep.equal(2048)
     })
   })
 })

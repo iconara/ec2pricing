@@ -138,6 +138,12 @@ export default class CostDatabase {
       mergedRow.reservedHourlyRate = reservedRows[i].hourlyRate
       mergedRows.push(mergedRow)
     }
-    return mergedRows
+    return mergedRows.map(this.parseInstanceType)
+  }
+
+  parseInstanceType (rawInstanceType) {
+    const instanceType = Object.assign({}, rawInstanceType)
+    instanceType.memory = parseFloat(instanceType.memory.replace(',', ''))
+    return instanceType
   }
 }
