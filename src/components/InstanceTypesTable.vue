@@ -5,7 +5,7 @@
         <th class="text" v-on:click="sortBy('name')">Name</th>
         <th v-on:click="sortBy('vcpus')">CPUs</th>
         <th v-on:click="sortBy('memory')">RAM</th>
-        <th v-on:click="sortBy('disk')">Disk</th>
+        <th v-on:click="sortBy('storage')">Disk</th>
         <th v-on:click="sortBy('networkPerformance')" class="text">Network performance</th>
         <th v-on:click="sortBy('onDemandHourlyRate')">On demand</th>
         <th v-on:click="sortBy('reservedHourlyRate')">Reserved</th>
