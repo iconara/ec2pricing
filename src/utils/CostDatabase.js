@@ -145,6 +145,7 @@ export default class CostDatabase {
     const instanceType = Object.assign({}, rawInstanceType)
     instanceType.memory = parseFloat(instanceType.memory.replace(',', ''))
     instanceType.storage = this.parseStorage(instanceType.storage)
+    instanceType.networkPerformance = instanceType.networkPerformance.toLowerCase()
     return instanceType
   }
 

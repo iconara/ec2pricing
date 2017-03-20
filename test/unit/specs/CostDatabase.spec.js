@@ -211,12 +211,12 @@ describe('CostDatabase', () => {
     }
 
     const instanceTypeRows = [
-      {name: 'y1.small', vcpus: 1, memory: '1 GiB', storage: '1 x 1 GB', networkPerformance: 'ok'},
-      {name: 'y1.medium', vcpus: 2, memory: '2 GiB', storage: '2 x 2', networkPerformance: 'fair'},
-      {name: 'z1.medium', vcpus: 3, memory: '3 GiB', storage: '3 x 3 SSD', networkPerformance: 'not sluggish'},
-      {name: 'z1.large', vcpus: 4, memory: '4.2 GiB', storage: '4 x 4 SSD', networkPerformance: 'quick indeed'},
-      {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 HDD', networkPerformance: 'blazing'},
-      {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'network? more like snailwork'}
+      {name: 'y1.small', vcpus: 1, memory: '1 GiB', storage: '1 x 1 GB', networkPerformance: 'low to moderate'},
+      {name: 'y1.medium', vcpus: 2, memory: '2 GiB', storage: '2 x 2', networkPerformance: 'Moderate'},
+      {name: 'z1.medium', vcpus: 3, memory: '3 GiB', storage: '3 x 3 SSD', networkPerformance: 'High'},
+      {name: 'z1.large', vcpus: 4, memory: '4.2 GiB', storage: '4 x 4 SSD', networkPerformance: 'up to 10 Gigabit'},
+      {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 HDD', networkPerformance: '20 gigabit'},
+      {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'very low'}
     ]
 
     const reservedPriceResult = []
@@ -320,10 +320,9 @@ describe('CostDatabase', () => {
       expect(z1Medium.upfrontCost).to.equal('3')
     })
 
-    it('returns instance type details', () => {
+    it('returns instance type details like the number of vCPUs', () => {
       const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
       expect(z1Medium.vcpus).to.equal(3)
-      expect(z1Medium.networkPerformance).to.equal('not sluggish')
     })
 
     it('parses the memory strings and returns the number of GiB', () => {
@@ -355,6 +354,15 @@ describe('CostDatabase', () => {
     it('ignores "GB" in storage strings', () => {
       const y1Small = result.find((instanceType) => instanceType.name === 'y1.small')
       expect(y1Small.storage).to.deep.equal({disks: 1, size: 1, totalSize: 1, type: 'HDD'})
+    })
+
+    it('normalizes the network performance strings by lower casing them', () => {
+      const y1Small = result.find((instanceType) => instanceType.name === 'y1.small')
+      const z1Large = result.find((instanceType) => instanceType.name === 'z1.large')
+      const z164xLarge = result.find((instanceType) => instanceType.name === 'z1.64xlarge')
+      expect(y1Small.networkPerformance).to.equal('low to moderate')
+      expect(z1Large.networkPerformance).to.equal('up to 10 gigabit')
+      expect(z164xLarge.networkPerformance).to.equal('20 gigabit')
     })
   })
 })

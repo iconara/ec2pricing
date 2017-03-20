@@ -47,8 +47,24 @@ function storage (it1, it2) {
   return cmp(it1.storage.totalSize, it2.storage.totalSize)
 }
 
+const NETWORK_PERFORMANCES = {
+  'very low': 10,
+  'low': 100,
+  'low to moderate': 250,
+  'moderate': 500,
+  'high': 1000
+}
+
+function approximateNetworkSpeed (networkPerformance) {
+  if (networkPerformance in NETWORK_PERFORMANCES) {
+    return NETWORK_PERFORMANCES[networkPerformance]
+  } else if (/(up to )?(\d+) gigabit/.test(networkPerformance)) {
+    return parseInt(RegExp.$2) * 1000 * (RegExp.$1 ? 0.9 : 1)
+  }
+}
+
 function networkPerformance (it1, it2) {
-  return it1.networkPerformance.localeCompare(it2.networkPerformance)
+  return cmp(approximateNetworkSpeed(it1.networkPerformance), approximateNetworkSpeed(it2.networkPerformance))
 }
 
 function onDemandHourlyRate (it1, it2) {

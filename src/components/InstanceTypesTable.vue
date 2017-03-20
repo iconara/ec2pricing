@@ -61,7 +61,8 @@ import Comparators from '../utils/Comparators'
 const REVERSE_DEFAULT_ORDER = {
   vcpus: true,
   memory: true,
-  storage: true
+  storage: true,
+  networkPerformance: true
 }
 
 function prettyNumber (n) {

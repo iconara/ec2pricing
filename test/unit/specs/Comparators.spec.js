@@ -111,4 +111,20 @@ describe('Comparators', () => {
       expect(Comparators.storage({storage: {disks: 2, size: 4, totalSize: 8}}, {storage: {disks: 1, size: 8, totalSize: 8}})).to.equal(0)
     })
   })
+
+  describe('networkPerformance', () => {
+    it('returns -1 when the first instance type has lower network performance than the second', () => {
+      expect(Comparators.networkPerformance({networkPerformance: 'very low'}, {networkPerformance: 'low'})).to.equal(-1)
+      expect(Comparators.networkPerformance({networkPerformance: 'low'}, {networkPerformance: 'high'})).to.equal(-1)
+    })
+
+    it('returns 1 when the first instance type has higher network performance than the second', () => {
+      expect(Comparators.networkPerformance({networkPerformance: 'up to 10 gigabit'}, {networkPerformance: '20 gigabit'})).to.equal(1)
+    })
+
+    it('returns 0 when the instance types have the same network performance', () => {
+      expect(Comparators.networkPerformance({networkPerformance: 'moderate'}, {networkPerformance: 'moderate'})).to.equal(0)
+      expect(Comparators.networkPerformance({networkPerformance: 'high'}, {networkPerformance: 'high'})).to.equal(0)
+    })
+  })
 })
