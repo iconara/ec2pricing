@@ -31,7 +31,20 @@ html, body {
 }
 
 #app {
+  width: 100%;
+  height: 100%;
   padding: 1rem;
+  box-sizing: border-box;
+
+  .progress {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 500%;
+    font-weight: bold;
+  }
 
   .filters {
     margin-bottom: 1rem;
