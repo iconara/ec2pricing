@@ -36,7 +36,7 @@ function cmp (n1, n2) {
 }
 
 function vcpus (it1, it2) {
-  return it1.vcpus - it2.vcpus
+  return cmp(it1.vcpus, it2.vcpus)
 }
 
 function memory (it1, it2) {
