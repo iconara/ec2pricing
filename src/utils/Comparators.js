@@ -67,45 +67,9 @@ function networkPerformance (it1, it2) {
   return cmp(approximateNetworkSpeed(it1.networkPerformance), approximateNetworkSpeed(it2.networkPerformance))
 }
 
-function onDemandHourlyRate (it1, it2) {
-  let rate1 = it1.onDemandHourlyRate
-  let rate2 = it2.onDemandHourlyRate
-  if (rate1 == null && rate2 == null) {
-    return 0
-  } else if (rate1 == null) {
-    return 1
-  } else if (rate2 == null) {
-    return -1
-  } else {
-    return rate1.localeCompare(rate2)
-  }
-}
-
-function reservedHourlyRate (it1, it2) {
-  let rate1 = it1.reservedHourlyRate
-  let rate2 = it2.reservedHourlyRate
-  if (rate1 == null && rate2 == null) {
-    return 0
-  } else if (rate1 == null) {
-    return 1
-  } else if (rate2 == null) {
-    return -1
-  } else {
-    return rate1.localeCompare(rate2)
-  }
-}
-
-function upfrontCost (it1, it2) {
-  let cost1 = it1.upfrontCost
-  let cost2 = it2.upfrontCost
-  if (cost1 == null && cost2 == null) {
-    return 0
-  } else if (cost1 == null) {
-    return 1
-  } else if (cost2 == null) {
-    return -1
-  } else {
-    return cost1.localeCompare(cost2)
+function numericComparator (propertyName) {
+  return function (it1, it2) {
+    return cmp(parseFloat(it1[propertyName] || 0), parseFloat(it2[propertyName] || 0))
   }
 }
 
@@ -115,7 +79,7 @@ export default {
   memory,
   storage,
   networkPerformance,
-  onDemandHourlyRate,
-  reservedHourlyRate,
-  upfrontCost
+  onDemandHourlyRate: numericComparator('onDemandHourlyRate'),
+  reservedHourlyRate: numericComparator('reservedHourlyRate'),
+  upfrontCost: numericComparator('upfrontCost')
 }

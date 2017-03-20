@@ -58,13 +58,6 @@ th.text, td.text {
 <script>
 import Comparators from '../utils/Comparators'
 
-const REVERSE_DEFAULT_ORDER = {
-  vcpus: true,
-  memory: true,
-  storage: true,
-  networkPerformance: true
-}
-
 function prettyNumber (n) {
   let str = n.toString()
   let [whole, fractions] = str.split('.')
@@ -93,7 +86,7 @@ export default {
       if (this.comparator === newComparator) {
         this.reverse = !this.reverse
       } else {
-        this.reverse = REVERSE_DEFAULT_ORDER[what] || false
+        this.reverse = (what !== 'name')
       }
       this.comparator = newComparator
     }
