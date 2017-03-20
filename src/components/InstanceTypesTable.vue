@@ -2,14 +2,14 @@
   <table>
     <thead>
       <tr>
-        <th class="text" v-on:click="sortBy('name')">Name</th>
-        <th v-on:click="sortBy('vcpus')">CPUs</th>
-        <th v-on:click="sortBy('memory')">RAM</th>
-        <th v-on:click="sortBy('storage')">Disk</th>
-        <th v-on:click="sortBy('networkPerformance')" class="text">Network performance</th>
-        <th v-on:click="sortBy('onDemandHourlyRate')">On demand</th>
-        <th v-on:click="sortBy('reservedHourlyRate')">Reserved</th>
-        <th v-on:click="sortBy('upfrontCost')">Upfront</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'name', text: true}" v-on:click="sortBy('name')">Name</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'vcpus'}" v-on:click="sortBy('vcpus')">CPUs</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'memory'}" v-on:click="sortBy('memory')">RAM</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'storage'}" v-on:click="sortBy('storage')">Disk</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'networkPerformance'}" v-on:click="sortBy('networkPerformance')" class="text">Network performance</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'onDemandHourlyRate'}" v-on:click="sortBy('onDemandHourlyRate')">On demand</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'reservedHourlyRate'}" v-on:click="sortBy('reservedHourlyRate')">Reserved</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'upfrontCost'}" v-on:click="sortBy('upfrontCost')">Upfront</th>
       </tr>
     </thead>
     <tbody>
@@ -53,6 +53,15 @@ th:last-child, td:last-child {
 th.text, td.text {
   text-align: left;
 }
+
+th {
+  user-select: none;
+  cursor: n-resize;
+}
+
+th.reverse {
+  cursor: s-resize;
+}
 </style>
 
 <script>
@@ -76,7 +85,8 @@ export default {
   data () {
     return {
       reverse: false,
-      comparator: Comparators.name
+      comparator: Comparators.name,
+      comparatorName: 'name'
     }
   },
 
@@ -89,6 +99,7 @@ export default {
         this.reverse = (what !== 'name')
       }
       this.comparator = newComparator
+      this.comparatorName = what
     }
   },
 
