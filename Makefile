@@ -1,4 +1,4 @@
-.PHONY: deps dev test dist deploy db
+.PHONY: deps dev dev-test test dist deploy db
 
 deps: static/lib/sql.js
 	npm install
@@ -6,8 +6,11 @@ deps: static/lib/sql.js
 dev:
 	npm run dev
 
+dev-test:
+	npm run unit-watch
+
 test:
-	npm run unit
+	npm run test
 
 dist: test db
 	npm run build
