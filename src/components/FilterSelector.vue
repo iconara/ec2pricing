@@ -1,6 +1,6 @@
 <template>
   <select v-bind:value="value" v-on:change="emitChange($event)">
-    <option v-for="option in options" v-bind:value="option.id">
+    <option v-for="option in options" v-bind:value="option.id" v-bind:disabled="!option.enabled">
       {{option.value}}
     </option>
   </select>

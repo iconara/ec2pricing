@@ -138,7 +138,7 @@ export default {
       this.buildDate = this._db.buildDate
       for (let filter of Object.values(this.filters)) {
         let options = this._db[filter.config.collectionName]
-        options = options.map((option) => { return {id: option.id, value: option[filter.name]} })
+        options = options.map((option) => { return {id: option.id, value: option[filter.name], enabled: true} })
         options = options.filter((option) => filter.config.ignoredValues.indexOf(option.value) === -1)
         filter.options = options
         filter.default = filter.options.find((option) => option.value === filter.config.defaultValue)
@@ -147,6 +147,29 @@ export default {
           const selectedOption = filter.options.find((option) => +option.id === +selectedId)
           filter.selected.value = selectedOption.value
         })
+      }
+    },
+
+    updateReservationOptions () {
+      const purchaseOption = this.filters.purchaseOption
+      const leaseContractLength = this.filters.leaseContractLength
+      const offeringClass = this.filters.offeringClass
+      const noUpfront = purchaseOption.options.find((option) => option.value === 'No Upfront')
+      const oneYear = leaseContractLength.options.find((option) => option.value === '1yr')
+      const threeYear = leaseContractLength.options.find((option) => option.value === '3yr')
+      const convertible = offeringClass.options.find((option) => option.value === 'convertible')
+      noUpfront.enabled = leaseContractLength.selected.value === '1yr'
+      oneYear.enabled = offeringClass.selected.value !== 'convertible'
+      threeYear.enabled = purchaseOption.selected.value !== 'No Upfront'
+      convertible.enabled = leaseContractLength.selected.value !== '1yr'
+      if (!noUpfront.enabled && purchaseOption.selected.id === noUpfront.id) {
+        purchaseOption.selected = Object.assign({}, purchaseOption.default)
+      }
+      if (!oneYear.enabled && leaseContractLength.selected.id === oneYear.id) {
+        leaseContractLength.selected = Object.assign({}, threeYear)
+      }
+      if (!convertible.enabled && offeringClass.selected.id === convertible.id) {
+        offeringClass.selected = Object.assign({}, offeringClass.default)
       }
     }
   },
@@ -170,13 +193,25 @@ export default {
   },
 
   watch: {
+    'filters.purchaseOption.selected.id': function (_) {
+      Vue.nextTick(this.updateReservationOptions)
+    },
+
+    'filters.leaseContractLength.selected.id': function (_) {
+      Vue.nextTick(this.updateReservationOptions)
+    },
+
+    'filters.offeringClass.selected.id': function (_) {
+      Vue.nextTick(this.updateReservationOptions)
+    },
+
     'filters.operatingSystem.selected.id': function (operatingSystemId) {
       Vue.nextTick(() => {
         if (this.windowsSelected) {
-          this.filters.licenseModel.selected = this.filters.licenseModel.options.find((option) => option.value === 'License Included')
+          this.filters.licenseModel.selected = Object.assign({}, this.filters.licenseModel.options.find((option) => option.value === 'License Included'))
         } else {
-          this.filters.licenseModel.selected = this.filters.licenseModel.default
-          this.filters.preinstalledSoftware.selected = this.filters.preinstalledSoftware.default
+          this.filters.licenseModel.selected = Object.assign({}, this.filters.licenseModel.default)
+          this.filters.preinstalledSoftware.selected = Object.assign({}, this.filters.preinstalledSoftware.default)
         }
       })
     }
