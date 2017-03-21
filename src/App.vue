@@ -74,14 +74,28 @@ import FilterSelector from './components/FilterSelector'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
+const PARTIAL_UPFRONT = 'Partial Upfront'
+const NO_UPFRONT = 'No Upfront'
+const ONE_YEAR = '1yr'
+const THREE_YEAR = '3yr'
+const STANDARD = 'standard'
+const CONVERTIBLE = 'convertible'
+const US_EAST_1 = 'US East (N. Virginia)'
+const LINUX = 'Linux'
+const WINDOWS = 'Windows'
+const SHARED = 'Shared'
+const NO_LICENSE_REQUIRED = 'No License required'
+const LICENSE_INCLUDED = 'License Included'
+const BYO_LICENSE = 'Bring your own license'
+
 const FILTER_CONFIG = [
-  {name: 'purchaseOption', collectionName: 'purchaseOptions', defaultValue: 'Partial Upfront', ignoredValues: ['']},
-  {name: 'leaseContractLength', collectionName: 'leaseContractLengths', defaultValue: '1yr', ignoredValues: ['']},
-  {name: 'offeringClass', collectionName: 'offeringClasses', defaultValue: 'standard', ignoredValues: ['']},
-  {name: 'location', collectionName: 'locations', defaultValue: 'US East (N. Virginia)', ignoredValues: ['']},
-  {name: 'operatingSystem', collectionName: 'operatingSystems', defaultValue: 'Linux', ignoredValues: ['', 'NA']},
-  {name: 'tenancy', collectionName: 'tenancies', defaultValue: 'Shared', ignoredValues: ['', 'Host']},
-  {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: 'No License required', ignoredValues: ['', 'NA']},
+  {name: 'purchaseOption', collectionName: 'purchaseOptions', defaultValue: PARTIAL_UPFRONT, ignoredValues: ['']},
+  {name: 'leaseContractLength', collectionName: 'leaseContractLengths', defaultValue: ONE_YEAR, ignoredValues: ['']},
+  {name: 'offeringClass', collectionName: 'offeringClasses', defaultValue: STANDARD, ignoredValues: ['']},
+  {name: 'location', collectionName: 'locations', defaultValue: US_EAST_1, ignoredValues: ['']},
+  {name: 'operatingSystem', collectionName: 'operatingSystems', defaultValue: LINUX, ignoredValues: ['', 'NA']},
+  {name: 'tenancy', collectionName: 'tenancies', defaultValue: SHARED, ignoredValues: ['', 'Host']},
+  {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: NO_LICENSE_REQUIRED, ignoredValues: ['', 'NA']},
   {name: 'preinstalledSoftware', collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']}
 ]
 
@@ -157,21 +171,21 @@ export default {
       const purchaseOption = this.filters.purchaseOption
       const leaseContractLength = this.filters.leaseContractLength
       const offeringClass = this.filters.offeringClass
-      const noUpfront = purchaseOption.options.find((option) => option.value === 'No Upfront')
-      const oneYear = leaseContractLength.options.find((option) => option.value === '1yr')
-      const threeYear = leaseContractLength.options.find((option) => option.value === '3yr')
-      const convertible = offeringClass.options.find((option) => option.value === 'convertible')
-      noUpfront.enabled = leaseContractLength.selected.value === '1yr'
-      oneYear.enabled = offeringClass.selected.value !== 'convertible'
-      threeYear.enabled = purchaseOption.selected.value !== 'No Upfront'
-      convertible.enabled = leaseContractLength.selected.value !== '1yr'
-      if (!noUpfront.enabled && purchaseOption.selected.id === noUpfront.id) {
+      const noUpfront = purchaseOption.options.find((option) => option.value === NO_UPFRONT)
+      const oneYear = leaseContractLength.options.find((option) => option.value === ONE_YEAR)
+      const threeYear = leaseContractLength.options.find((option) => option.value === THREE_YEAR)
+      const convertible = offeringClass.options.find((option) => option.value === CONVERTIBLE)
+      noUpfront.enabled = +leaseContractLength.selected.id === +oneYear.id
+      oneYear.enabled = +offeringClass.selected.id !== +convertible.id
+      threeYear.enabled = +purchaseOption.selected.id !== +noUpfront.id
+      convertible.enabled = +leaseContractLength.selected.id !== +oneYear.id
+      if (!noUpfront.enabled && +purchaseOption.selected.id === +noUpfront.id) {
         purchaseOption.selected = Object.assign({}, purchaseOption.default)
       }
-      if (!oneYear.enabled && leaseContractLength.selected.id === oneYear.id) {
+      if (!oneYear.enabled && +leaseContractLength.selected.id === +oneYear.id) {
         leaseContractLength.selected = Object.assign({}, threeYear)
       }
-      if (!convertible.enabled && offeringClass.selected.id === convertible.id) {
+      if (!convertible.enabled && +offeringClass.selected.id === +convertible.id) {
         offeringClass.selected = Object.assign({}, offeringClass.default)
       }
     },
@@ -180,10 +194,10 @@ export default {
       const operatingSystem = this.filters.operatingSystem
       const licenseModel = this.filters.licenseModel
       const preinstalledSoftware = this.filters.preinstalledSoftware
-      const licenseIncluded = licenseModel.options.find((option) => option.value === 'License Included')
-      const noLicenseRequired = licenseModel.options.find((option) => option.value === 'No License required')
-      const bringYourOwnLicense = licenseModel.options.find((option) => option.value === 'Bring your own license')
-      const windowsSelected = operatingSystem.selected.value === 'Windows'
+      const licenseIncluded = licenseModel.options.find((option) => option.value === LICENSE_INCLUDED)
+      const noLicenseRequired = licenseModel.options.find((option) => option.value === NO_LICENSE_REQUIRED)
+      const bringYourOwnLicense = licenseModel.options.find((option) => option.value === BYO_LICENSE)
+      const windowsSelected = operatingSystem.selected.value === WINDOWS
       licenseModel.enabled = windowsSelected
       noLicenseRequired.enabled = !windowsSelected
       if (licenseModel.enabled && +licenseModel.selected.id === +licenseModel.default.id) {
