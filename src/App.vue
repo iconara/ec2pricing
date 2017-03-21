@@ -10,7 +10,7 @@
           v-model="filter.selected.id"
           v-bind:key="filter.name"
           v-bind:options="filter.options"
-          v-bind:disabled="(filter.name === 'licenseModel' || filter.name === 'preinstalledSoftware') && !windowsSelected"/>
+          v-bind:disabled="!filter.enabled"/>
       </div>
       <instance-types-table
         class="instance-types"
@@ -81,7 +81,7 @@ const FILTER_CONFIG = [
   {name: 'location', collectionName: 'locations', defaultValue: 'US East (N. Virginia)', ignoredValues: ['']},
   {name: 'operatingSystem', collectionName: 'operatingSystems', defaultValue: 'Linux', ignoredValues: ['', 'NA']},
   {name: 'tenancy', collectionName: 'tenancies', defaultValue: 'Shared', ignoredValues: ['', 'Host']},
-  {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: 'No License required', ignoredValues: ['']},
+  {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: 'No License required', ignoredValues: ['', 'NA']},
   {name: 'preinstalledSoftware', collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']}
 ]
 
@@ -105,6 +105,7 @@ export default {
       d.filters[filterConfig.name] = {
         name: filterConfig.name,
         config: filterConfig,
+        enabled: true,
         selected: {id: null, value: null},
         default: null,
         options: []
@@ -148,6 +149,8 @@ export default {
           filter.selected.value = selectedOption.value
         })
       }
+      this.updateReservationOptions()
+      this.updateOperatingSystemOptions()
     },
 
     updateReservationOptions () {
@@ -171,6 +174,27 @@ export default {
       if (!convertible.enabled && offeringClass.selected.id === convertible.id) {
         offeringClass.selected = Object.assign({}, offeringClass.default)
       }
+    },
+
+    updateOperatingSystemOptions () {
+      const operatingSystem = this.filters.operatingSystem
+      const licenseModel = this.filters.licenseModel
+      const preinstalledSoftware = this.filters.preinstalledSoftware
+      const licenseIncluded = licenseModel.options.find((option) => option.value === 'License Included')
+      const noLicenseRequired = licenseModel.options.find((option) => option.value === 'No License required')
+      const bringYourOwnLicense = licenseModel.options.find((option) => option.value === 'Bring your own license')
+      const windowsSelected = operatingSystem.selected.value === 'Windows'
+      licenseModel.enabled = windowsSelected
+      noLicenseRequired.enabled = !windowsSelected
+      if (licenseModel.enabled && +licenseModel.selected.id === +licenseModel.default.id) {
+        licenseModel.selected = Object.assign({}, licenseIncluded)
+      } else if (!licenseModel.enabled && +licenseModel.selected.id !== +licenseModel.default.id) {
+        licenseModel.selected = Object.assign({}, licenseModel.default)
+      }
+      preinstalledSoftware.enabled = windowsSelected && +licenseModel.selected.id === +licenseIncluded.id
+      if (!preinstalledSoftware.enabled && +preinstalledSoftware.selected.id !== +preinstalledSoftware.default.id) {
+        preinstalledSoftware.selected = Object.assign({}, preinstalledSoftware.default)
+      }
     }
   },
 
@@ -185,10 +209,6 @@ export default {
       } else {
         return []
       }
-    },
-
-    windowsSelected () {
-      return this.filters.operatingSystem.selected.value === 'Windows'
     }
   },
 
@@ -206,14 +226,15 @@ export default {
     },
 
     'filters.operatingSystem.selected.id': function (operatingSystemId) {
-      Vue.nextTick(() => {
-        if (this.windowsSelected) {
-          this.filters.licenseModel.selected = Object.assign({}, this.filters.licenseModel.options.find((option) => option.value === 'License Included'))
-        } else {
-          this.filters.licenseModel.selected = Object.assign({}, this.filters.licenseModel.default)
-          this.filters.preinstalledSoftware.selected = Object.assign({}, this.filters.preinstalledSoftware.default)
-        }
-      })
+      Vue.nextTick(this.updateOperatingSystemOptions)
+    },
+
+    'filters.licenseModel.selected.id': function (operatingSystemId) {
+      Vue.nextTick(this.updateOperatingSystemOptions)
+    },
+
+    'filters.preinstalledSoftware.selected.id': function (operatingSystemId) {
+      Vue.nextTick(this.updateOperatingSystemOptions)
     }
   },
 
