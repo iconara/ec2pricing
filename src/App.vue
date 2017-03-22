@@ -14,7 +14,8 @@
       </div>
       <instance-types-table
         class="instance-types"
-        v-bind:instance-types="instanceTypes"/>
+        v-bind:instance-types="instanceTypes"
+        v-on:selectInstanceType="selectInstanceType($event)"/>
       <div class="footer">
         This page was last updated at {{buildDate | dateTime}} with pricing data last updated at {{publicationDate | dateTime}}, your time
       </div>
@@ -113,6 +114,7 @@ export default {
       progress: 0,
       publicationDate: null,
       buildDate: null,
+      instanceTypes: [],
       filters: {}
     }
     for (let filterConfig of FILTER_CONFIG) {
@@ -165,6 +167,19 @@ export default {
       }
       this.updateReservationOptions()
       this.updateOperatingSystemOptions()
+      this.loadInstanceTypes()
+    },
+
+    loadInstanceTypes () {
+      const selections = {}
+      for (let filter of Object.values(this.filters)) {
+        selections[`${filter.name}Id`] = filter.selected.id
+      }
+      this.instanceTypes = []
+      for (let instanceType of this._db.instanceTypes(selections)) {
+        instanceType.selected = false
+        this.instanceTypes.push(instanceType)
+      }
     },
 
     updateReservationOptions () {
@@ -209,20 +224,10 @@ export default {
       if (!preinstalledSoftware.enabled && +preinstalledSoftware.selected.id !== +preinstalledSoftware.default.id) {
         preinstalledSoftware.selected = Object.assign({}, preinstalledSoftware.default)
       }
-    }
-  },
+    },
 
-  computed: {
-    instanceTypes () {
-      if (this._db) {
-        const selections = {}
-        for (let filter of Object.values(this.filters)) {
-          selections[`${filter.name}Id`] = filter.selected.id
-        }
-        return this._db.instanceTypes(selections)
-      } else {
-        return []
-      }
+    selectInstanceType (instanceType) {
+      instanceType.selected = !instanceType.selected
     }
   },
 

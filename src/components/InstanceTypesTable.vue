@@ -13,7 +13,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="instanceType in sortedInstanceTypes" v-bind:key="instanceType.name">
+      <tr
+        v-for="instanceType in sortedInstanceTypes"
+        v-bind:key="instanceType.name"
+        v-bind:class="{selected: instanceType.selected}"
+        v-on:click="selectInstanceType(instanceType)">
         <td class="text">{{instanceType.name}}</td>
         <td>{{instanceType.vcpus}}</td>
         <td>{{instanceType.memory | memory}}</td>
@@ -30,24 +34,31 @@
 <style lang="less" scoped>
 table {
   border-collapse: collapse;
+  margin-left: -0.4rem;
+  width: calc(100% + 3 * 0.4rem) !important;
 }
 
 tr:hover {
   background-color: #fafafa;
 }
 
+tr.selected {
+  background-color: #f0f0f0;
+}
+
 th, td {
   text-align: right;
-  padding: 0.2rem;
-  padding-left: 0.6rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.8rem;
 }
 
 th:first-child, td:first-child {
-  padding-left: 0;
+  padding-left: 0.4rem;
 }
 
 th:last-child, td:last-child {
-  padding-right: 0;
+  padding-right: 0.4rem;
 }
 
 th.text, td.text {
@@ -100,6 +111,10 @@ export default {
       }
       this.comparator = newComparator
       this.comparatorName = what
+    },
+
+    selectInstanceType (instanceType) {
+      this.$emit('selectInstanceType', instanceType)
     }
   },
 
