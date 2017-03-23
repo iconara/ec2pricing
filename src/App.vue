@@ -15,6 +15,7 @@
       <instance-types-table
         class="instance-types"
         v-bind:instance-types="instanceTypes"
+        v-bind:rate-multiplier="filters.rateMultiplier.selected.rateMultiplier"
         v-on:selectInstanceType="selectInstanceType($event)"/>
       <div class="footer">
         This page was last updated at {{buildDate | dateTime}} with pricing data last updated at {{publicationDate | dateTime}}, your time
@@ -75,6 +76,14 @@ import FilterSelector from './components/FilterSelector'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
+const RATE_MULTIPLIER_OPTIONS = [
+  {id: 0, value: 'hour', enabled: true, rateMultiplier: 1},
+  {id: 1, value: 'day', enabled: true, rateMultiplier: 24},
+  {id: 2, value: 'week', enabled: true, rateMultiplier: 24 * 7},
+  {id: 3, value: 'month', enabled: true, rateMultiplier: 24 * 30},
+  {id: 4, value: 'year', enabled: true, rateMultiplier: 24 * 365}
+]
+
 const PARTIAL_UPFRONT = 'Partial Upfront'
 const NO_UPFRONT = 'No Upfront'
 const ONE_YEAR = '1yr'
@@ -97,7 +106,8 @@ const FILTER_CONFIG = [
   {name: 'operatingSystem', collectionName: 'operatingSystems', defaultValue: LINUX, ignoredValues: ['', 'NA']},
   {name: 'tenancy', collectionName: 'tenancies', defaultValue: SHARED, ignoredValues: ['', 'Host']},
   {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: NO_LICENSE_REQUIRED, ignoredValues: ['', 'NA']},
-  {name: 'preinstalledSoftware', collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']}
+  {name: 'preinstalledSoftware', collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']},
+  {name: 'rateMultiplier', defaultValue: 'hour', options: RATE_MULTIPLIER_OPTIONS}
 ]
 
 export default {
@@ -118,7 +128,7 @@ export default {
       filters: {}
     }
     for (let filterConfig of FILTER_CONFIG) {
-      d.filters[filterConfig.name] = {
+      const filter = {
         name: filterConfig.name,
         config: filterConfig,
         enabled: true,
@@ -126,6 +136,10 @@ export default {
         default: null,
         options: []
       }
+      if (filterConfig.options) {
+        filter.options = filterConfig.options
+      }
+      d.filters[filterConfig.name] = filter
     }
     return d
   },
@@ -154,10 +168,12 @@ export default {
       this.publicationDate = this._db.publicationDate
       this.buildDate = this._db.buildDate
       for (let filter of Object.values(this.filters)) {
-        let options = this._db[filter.config.collectionName]
-        options = options.map((option) => { return {id: option.id, value: option[filter.name], enabled: true} })
-        options = options.filter((option) => filter.config.ignoredValues.indexOf(option.value) === -1)
-        filter.options = options
+        if (filter.options.length === 0) {
+          let options = this._db[filter.config.collectionName]
+          options = options.map((option) => { return {id: option.id, value: option[filter.name], enabled: true} })
+          options = options.filter((option) => filter.config.ignoredValues.indexOf(option.value) === -1)
+          filter.options = options
+        }
         filter.default = filter.options.find((option) => option.value === filter.config.defaultValue)
         filter.selected = {id: filter.default.id, value: null}
         this.$watch(`filters.${filter.name}.selected.id`, (selectedId) => {

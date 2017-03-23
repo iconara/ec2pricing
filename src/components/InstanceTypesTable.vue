@@ -23,8 +23,8 @@
         <td>{{instanceType.memory | memory}}</td>
         <td>{{instanceType.storage | storage}}</td>
         <td class="text">{{instanceType.networkPerformance | networkPerformance}}</td>
-        <td>{{instanceType.onDemandHourlyRate | rate}}</td>
-        <td>{{instanceType.reservedHourlyRate | rate}}</td>
+        <td>{{multiplyRate(instanceType.onDemandHourlyRate) | rate}}</td>
+        <td>{{multiplyRate(instanceType.reservedHourlyRate) | rate}}</td>
         <td>{{instanceType.upfrontCost | cost}}</td>
       </tr>
     </tbody>
@@ -109,7 +109,7 @@ function fixedPrettyNumber (n) {
 
 export default {
   name: 'instance-types-table',
-  props: ['instance-types'],
+  props: ['instance-types', 'rate-multiplier'],
 
   data () {
     return {
@@ -133,6 +133,14 @@ export default {
 
     selectInstanceType (instanceType) {
       this.$emit('selectInstanceType', instanceType)
+    },
+
+    multiplyRate (rate) {
+      if (rate) {
+        return parseFloat(rate) * (this.rateMultiplier || 1)
+      } else {
+        return rate
+      }
     }
   },
 
