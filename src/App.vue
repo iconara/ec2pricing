@@ -162,7 +162,7 @@ export default {
         filter.selected = {id: filter.default.id, value: null}
         this.$watch(`filters.${filter.name}.selected.id`, (selectedId) => {
           const selectedOption = filter.options.find((option) => +option.id === +selectedId)
-          filter.selected.value = selectedOption.value
+          Object.assign(filter.selected, selectedOption)
           this.loadInstanceTypes()
         })
       }
