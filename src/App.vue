@@ -18,7 +18,9 @@
         v-bind:rate-multiplier="filters.rateMultiplier.selected.rateMultiplier"
         v-on:selectInstanceType="selectInstanceType($event)"/>
       <div class="footer">
-        This page was last updated at {{buildDate | dateTime}} with pricing data last updated at {{publicationDate | dateTime}}, your time
+        The prices were <strong>last updated at {{buildDate | dateTime}}</strong> using <strong>data published at {{publicationDate | dateTime}}</strong>, your time.
+        The prices and instance type details come from the from the <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html">AWS Price List API</a>.
+        This page was build by <a href="http://twitter.com/iconara" title="Theo Hultberg">@iconara</a>, and you can find the code, as well as report bugs or leave feature requests at <a href="https://github.com/iconara/ec2pricing">github.com/iconara/ec2pricing</a>.
       </div>
     </div>
   </div>
@@ -62,6 +64,7 @@ html, body {
 
   .footer {
     margin-top: 1rem;
+    font-size: 80%;
   }
 }
 </style>
