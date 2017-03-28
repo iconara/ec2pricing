@@ -194,9 +194,10 @@ export default {
       for (let filter of Object.values(this.filters)) {
         selections[`${filter.name}Id`] = filter.selected.id
       }
+      const selectedInstanceTypes = this.instanceTypes.filter((it) => it.selected).map((it) => it.name)
       this.instanceTypes = []
       for (let instanceType of this._db.instanceTypes(selections)) {
-        instanceType.selected = false
+        instanceType.selected = selectedInstanceTypes.indexOf(instanceType.name) !== -1
         this.instanceTypes.push(instanceType)
       }
     },
