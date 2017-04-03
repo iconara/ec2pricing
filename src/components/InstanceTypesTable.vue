@@ -32,24 +32,56 @@
 </template>
 
 <style lang="less" scoped>
+@import "../style/variables.less";
+
 table {
   border-collapse: collapse;
   margin-left: -0.4rem;
   width: calc(100% + 3 * 0.4rem) !important;
 }
 
-tr:hover {
-  background-color: #fafafa;
+thead {
+  border-bottom: 1px solid #666;
 }
 
-tr.selected {
-  background-color: #f0f0f0;
+tbody {
+  border-bottom: 1px solid #666;
+
+  tr {
+    &:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    &:first-child {
+      td {
+        padding-top: 0.6rem;
+      }
+    }
+
+    &:last-child {
+      td {
+        padding-bottom: 0.6rem;
+      }
+    }
+
+    &:hover {
+      background-color: lighten(@accent-color, 60%) !important;
+    }
+
+    &.selected {
+      background-color: lighten(@accent-color, 50%) !important;
+
+      &:hover {
+        background-color: lighten(@accent-color, 52%) !important;
+      }
+    }
+  }
 }
 
 th, td {
   text-align: right;
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   padding-left: 0.8rem;
 }
 
