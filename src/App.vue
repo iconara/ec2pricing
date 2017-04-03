@@ -8,19 +8,23 @@
         <selector
           v-model="period.selection"
           v-bind:options="period.options"
+          v-bind:format-label="formatSelectorLabel"
           v-bind:format-group-label="formatSelectorGroupLabel"/>
         <selector
           v-model="reservation.selection"
           v-bind:options="reservation.options"
+          v-bind:format-label="formatSelectorLabel"
           v-bind:format-group-label="formatSelectorGroupLabel"/>
         <selector
           v-model="location.selection"
           v-bind:options="location.options"
+          v-bind:format-label="formatSelectorLabel"
           v-bind:format-group-label="formatSelectorGroupLabel"/>
         <selector
           v-model="software.selection"
           v-bind:options="software.options"
           v-bind:enabled="software.enabled"
+          v-bind:format-label="formatSelectorLabel"
           v-bind:format-group-label="formatSelectorGroupLabel"/>
       </div>
       <instance-types-table
@@ -119,6 +123,7 @@ const SHARED = 'Shared'
 const NO_LICENSE_REQUIRED = 'No License required'
 const LICENSE_INCLUDED = 'License Included'
 const BYO_LICENSE = 'Bring your own license'
+const NA = 'NA'
 
 const FILTER_CONFIG = {
   'period': {
@@ -134,9 +139,9 @@ const FILTER_CONFIG = {
     'tenancy': {collectionName: 'tenancies', defaultValue: SHARED, ignoredValues: ['', 'Host']}
   },
   'software': {
-    'operatingSystem': {collectionName: 'operatingSystems', defaultValue: LINUX, ignoredValues: ['', 'NA']},
-    'licenseModel': {collectionName: 'licenseModels', defaultValue: NO_LICENSE_REQUIRED, ignoredValues: ['', 'NA']},
-    'preinstalledSoftware': {collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']}
+    'operatingSystem': {collectionName: 'operatingSystems', defaultValue: LINUX, ignoredValues: ['', NA]},
+    'licenseModel': {collectionName: 'licenseModels', defaultValue: NO_LICENSE_REQUIRED, ignoredValues: ['', NA]},
+    'preinstalledSoftware': {collectionName: 'preinstalledSoftwares', defaultValue: NA, ignoredValues: ['']}
   }
 }
 
@@ -284,11 +289,31 @@ export default {
       instanceType.selected = !instanceType.selected
     },
 
+    formatSelectorLabel (selector, selectedOptions) {
+      if (selectedOptions === this.location.selection) {
+        return selectedOptions.location.value
+      } else if (selectedOptions === this.software.selection && selectedOptions.operatingSystem.value !== WINDOWS) {
+        return selectedOptions.operatingSystem.value
+      } else if (selectedOptions === this.software.selection && selectedOptions.operatingSystem.value === WINDOWS && selectedOptions.preinstalledSoftware.value === NA) {
+        return `${selectedOptions.operatingSystem.value}, ${selectedOptions.licenseModel.value}`
+      } else {
+        return Object
+          .values(selectedOptions)
+          .filter(option => !!option)
+          .map(option => option.value)
+          .join(', ')
+      }
+    },
+
     formatSelectorGroupLabel (selector, groupKey) {
       let label = groupKey
-      label = label.replace(/\B[A-Z]/, s => ' ' + s)
-      label = label.substring(0, 1).toUpperCase() + label.substring(1)
-      return label
+      if (label === 'rateMultiplier') {
+        return 'Period'
+      } else {
+        label = label.replace(/\B[A-Z]/, s => ' ' + s)
+        label = label.substring(0, 1).toUpperCase() + label.substring(1)
+        return label
+      }
     }
   },
 

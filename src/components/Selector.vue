@@ -3,7 +3,7 @@
     <div
       v-on:click="open = !open"
       v-bind:class="{label: true, open: open}">
-      {{formatLabel(this, selectedOptions)}}
+      {{mainLabel}}
     </div>
     <div class="options" v-if="open">
       <div
@@ -13,7 +13,7 @@
         class="option-group"
       >
         <div class="group-label">
-          {{formatGroupLabel(this, groupKey)}}
+          {{groupLabel(groupKey)}}
         </div>
         <div
           v-for="option in groupOptions"
@@ -209,6 +209,10 @@ export default {
       }
     },
 
+    groupLabel (groupKey) {
+      return this.formatGroupLabel(this, groupKey)
+    },
+
     isSelected (groupKey, option) {
       return this.selectedOptions[groupKey] === option
     },
@@ -225,6 +229,12 @@ export default {
       if (!event.path.some(element => element === this.$el)) {
         this.open = false
       }
+    }
+  },
+
+  computed: {
+    mainLabel () {
+      return this.formatLabel(this, this.selectedOptions)
     }
   },
 
