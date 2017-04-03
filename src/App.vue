@@ -38,6 +38,8 @@
 </template>
 
 <style lang="less">
+@import "style/variables.less";
+
 html, body {
   margin: 0;
   width: 100%;
@@ -51,7 +53,7 @@ html, body {
   box-sizing: border-box;
 
   a {
-    color: #b20a0a;
+    color: @accent-color;
   }
 
   .progress {
