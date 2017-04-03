@@ -50,6 +50,10 @@ html, body {
   padding: 1rem;
   box-sizing: border-box;
 
+  a {
+    color: #b20a0a;
+  }
+
   .progress {
     width: 100%;
     height: 100%;
@@ -76,6 +80,8 @@ html, body {
   .footer {
     margin-top: 1rem;
     font-size: 80%;
+    line-height: 150%;
+    color: #333;
   }
 }
 </style>
