@@ -54,6 +54,7 @@ html, body {
 
   a {
     color: @accent-color;
+    text-decoration: none;
   }
 
   .progress {
