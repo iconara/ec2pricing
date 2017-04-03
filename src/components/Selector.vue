@@ -112,6 +112,8 @@
 </style>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'selector',
 
@@ -205,6 +207,31 @@ export default {
 
     isOptionEnabled (groupKey, option) {
       return this.isGroupEnabled(groupKey) && option.enabled !== false
+    },
+
+    onClickOutside (event) {
+      if (!event.path.some(element => element === this.$el)) {
+        this.open = false
+      }
+    }
+  },
+
+  watch: {
+    open (state) {
+      if (state) {
+        window.addEventListener('click', this.onClickOutside)
+      } else {
+        window.removeEventListener('click', this.onClickOutside)
+      }
+      Vue.nextTick(() => {
+        const label = this.$el.querySelector('.label')
+        const optionsElement = this.$el.querySelector('.options')
+        if (optionsElement) {
+          const style = window.getComputedStyle(optionsElement)
+          const width = Math.max(optionsElement.offsetWidth, label.offsetWidth - parseInt(style.borderLeft) - parseInt(style.borderRight))
+          optionsElement.setAttribute('style', `width: ${width}px`)
+        }
+      })
     }
   }
 }
