@@ -28,8 +28,10 @@
 </template>
 
 <style scoped lang="less">
+@import "../style/variables.less";
+
 @border-radius: 0.2rem;
-@passive-color: #666;
+@passive-color: #333;
 @active-color: #000;
 
 .label {
@@ -42,10 +44,10 @@
   padding: 0.4rem 0.6rem;
 
   &.open {
-    border-top-left-radius:     @border-radius;
-    border-top-right-radius:    @border-radius;
+    border-top-left-radius: @border-radius;
+    border-top-right-radius: @border-radius;
     border-bottom-right-radius: 0;
-    border-bottom-left-radius:  0;
+    border-bottom-left-radius: 0;
   }
 
   &::after {
@@ -54,9 +56,11 @@
     margin-left: 0.4rem;
   }
 
-  &:hover {
-    color: @active-color;
+  &.open, &:hover {
     border-color: @active-color;
+    background-color: @accent-color;
+    border-color: @accent-color;
+    color: #eee;
   }
 }
 
@@ -73,7 +77,7 @@
 
   .option-group {
     margin-top: 0.8rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0rem;
   }
 
   .option-group:first-child {
@@ -90,11 +94,19 @@
     text-indent: 1.2rem;
 
     &:hover {
-      background-color: #fafafa;
+      background-color: lighten(@accent-color, 60%);
     }
 
     &.disabled:hover {
       background-color: inherit;
+    }
+
+    &.selected {
+      background-color: lighten(@accent-color, 50%);
+
+      &:last-child {
+        border-radius: @border-radius;
+      }
     }
 
     &.selected::before {
