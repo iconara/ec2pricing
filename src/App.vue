@@ -7,17 +7,21 @@
       <div class="filters">
         <selector
           v-model="period.selection"
-          v-bind:options="period.options"/>
+          v-bind:options="period.options"
+          v-bind:format-group-label="formatSelectorGroupLabel"/>
         <selector
           v-model="reservation.selection"
-          v-bind:options="reservation.options"/>
+          v-bind:options="reservation.options"
+          v-bind:format-group-label="formatSelectorGroupLabel"/>
         <selector
           v-model="location.selection"
-          v-bind:options="location.options"/>
+          v-bind:options="location.options"
+          v-bind:format-group-label="formatSelectorGroupLabel"/>
         <selector
           v-model="software.selection"
           v-bind:options="software.options"
-          v-bind:enabled="software.enabled"/>
+          v-bind:enabled="software.enabled"
+          v-bind:format-group-label="formatSelectorGroupLabel"/>
       </div>
       <instance-types-table
         class="instance-types"
@@ -269,6 +273,13 @@ export default {
 
     selectInstanceType (instanceType) {
       instanceType.selected = !instanceType.selected
+    },
+
+    formatSelectorGroupLabel (selector, groupKey) {
+      let label = groupKey
+      label = label.replace(/\B[A-Z]/, s => ' ' + s)
+      label = label.substring(0, 1).toUpperCase() + label.substring(1)
+      return label
     }
   },
 

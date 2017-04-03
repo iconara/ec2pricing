@@ -1,15 +1,20 @@
 <template>
   <div class="selector">
-    <div class="display" v-on:click="open = !open">
-      {{formatTitle(this, selectedOptions)}}
+    <div
+      v-on:click="open = !open"
+      v-bind:class="{label: true, open: open}">
+      {{formatLabel(this, selectedOptions)}}
     </div>
     <div class="options" v-if="open">
       <div
         v-for="(groupOptions, groupKey) in options"
         v-bind:key="groupKey"
         v-bind:class="{disabled: !isGroupEnabled(groupKey)}"
+        class="option-group"
       >
-        <div>{{formatGroupTitle(this, groupKey)}}</div>
+        <div class="group-label">
+          {{formatGroupLabel(this, groupKey)}}
+        </div>
         <div
           v-for="option in groupOptions"
           v-bind:key="option.id"
@@ -23,11 +28,36 @@
 </template>
 
 <style scoped lang="less">
-.display {
+@border-radius: 0.2rem;
+@passive-color: #666;
+@active-color: #000;
+
+.label {
   user-select: none;
   cursor: pointer;
-  border: 1px solid black;
-  padding: 0.4rem;
+  border: 1px solid;
+  color: @passive-color;
+  border-color: @passive-color;
+  border-radius: @border-radius;
+  padding: 0.4rem 0.6rem;
+
+  &.open {
+    border-top-left-radius:     @border-radius;
+    border-top-right-radius:    @border-radius;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius:  0;
+  }
+
+  &::after {
+    content: "▼";
+    font-size: 70%;
+    margin-left: 0.4rem;
+  }
+
+  &:hover {
+    color: @active-color;
+    border-color: @active-color;
+  }
 }
 
 .options {
@@ -35,11 +65,29 @@
   background-color: white;
   user-select: none;
   cursor: pointer;
-  border: 1px solid red;
+  border: 1px solid;
+  border-color: @active-color;
+  border-bottom-right-radius: @border-radius;
+  border-bottom-left-radius:  @border-radius;
+  margin-top: -1px;
+
+  .option-group {
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .option-group:first-child {
+    margin-top: 0;
+  }
+
+  .group-label {
+    padding: 0.4rem 0.6rem;
+    font-weight: bold;
+  }
 
   .option {
-    padding: 0.4rem;
-    padding-left: 1.6rem;
+    padding: 0.4rem 0.6rem;
+    text-indent: 1.2rem;
 
     &:hover {
       background-color: #fafafa;
@@ -52,9 +100,7 @@
     &.selected::before {
       content: '✓';
       position: absolute;
-      margin-left: -1.0rem;
-      height: 1rem;
-      width: 1rem;
+      left: -0.6rem;
     }
 
     &.disabled {
@@ -104,7 +150,7 @@ export default {
       type: Object,
       default: function () { return {} }
     },
-    'format-title': {
+    'format-label': {
       type: Function,
       default: function (_, selectedOptions) {
         return Object
@@ -114,7 +160,7 @@ export default {
           .join(', ')
       }
     },
-    'format-group-title': {
+    'format-group-label': {
       type: Function,
       default: function (_, groupKey) {
         return groupKey
@@ -140,22 +186,6 @@ export default {
   },
 
   methods: {
-    formatGroupTitleInternal (groupKey) {
-      if (this.formatGroupTitle) {
-        return this.formatGroupTitle(this, groupKey)
-      } else {
-        return groupKey
-      }
-    },
-
-    formatOptionValueInternal (groupKey, option) {
-      if (this.formatOptionValue) {
-        return this.formatOptionValue(this, groupKey, option)
-      } else {
-        return option
-      }
-    },
-
     select (groupKey, option) {
       if (this.isOptionEnabled(groupKey, option)) {
         const newSelectedOptions = Object.assign({}, this.selectedOptions)
