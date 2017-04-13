@@ -34,6 +34,10 @@
 @passive-color: #333;
 @active-color: #ccc;
 
+.selector {
+  white-space: nowrap;
+}
+
 .label {
   user-select: none;
   cursor: pointer;
@@ -251,9 +255,17 @@ export default {
         const label = this.$el.querySelector('.label')
         const optionsElement = this.$el.querySelector('.options')
         if (optionsElement) {
-          const style = window.getComputedStyle(optionsElement)
-          const width = Math.max(optionsElement.offsetWidth, label.offsetWidth - parseInt(style.borderLeft) - parseInt(style.borderRight))
-          optionsElement.setAttribute('style', `min-width: ${width}px`)
+          const computedStyle = window.getComputedStyle(optionsElement)
+          const computedWidth = optionsElement.offsetWidth
+          const minWidth = label.offsetWidth - parseInt(computedStyle.borderLeft) - parseInt(computedStyle.borderRight)
+          const width = Math.max(computedWidth, minWidth)
+          const boundingRect = optionsElement.getBoundingClientRect()
+          const rightEdge = boundingRect.right + width
+          let left = label.offsetLeft
+          if (rightEdge > window.innerWidth) {
+            left -= optionsElement.offsetWidth - minWidth
+          }
+          optionsElement.setAttribute('style', `min-width: ${width}px; left: ${left}px;`)
         }
       })
     }
