@@ -4,18 +4,39 @@
       {{progress}}%
     </div>
     <div v-else>
-      <div class="filters">
-        <filter-selector
-          v-for="filter in Object.values(filters)"
-          v-model="filter.selected.id"
-          v-bind:key="filter.name"
-          v-bind:options="filter.options"
-          v-bind:disabled="!filter.enabled"/>
-      </div>
+      <header>
+        <div class="title">
+          <img class="cloud" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAuZJREFUeNrsmztoFFEUhu/oBlwxhvjAqKgQLExAiY80EVGxtlAbEUEQTKWdrY0oFoIYFEuL2IhNChGLFDaKoqgIojESRRBNBPGF7qrE8T/ZM7I7TjJzs3ce93Hg2xSZzHK+eZ1z7sTzfV/YHHOE5eEEOAFOgBPgBDgBFkeJPjzPU7nPuaALbATrwDJQBhUwAUbAY/AcTOaV+L8CUHEluBUMgCecsB9BhX8/wNvnJmAqd0UC+sB1PqK+BJP8d326CmgBJ0FVMvEwVd5Pi04CFoOhJhMPM8T7LbyANjCsOPmAYd5/oQUMppR8wGCRBfSnnHxAfxYCvKmP5HXACvAQdGRwmY6DzeBd6Ps38U96grwGj8DnrOqAUxkd/YDT/L1rwCXwIWKbMXACLEz7EmgHbzIWMAr2glcJtr0P1qYpYE/GyQf8kdiWKsylMgJkmqGdOVWtMo3KBr4cZnEziO8ab+V0BsjyFXSqPgPmgZWadLitYJfqeUBZ9i6bc3SrFqDb6klZtYAf3MfrEhMqBWwDV8EqjQQ8UPEUmA/Ogl+a3P0DnoIFzRZCHSm2u2kXTfubrQQXgdsaJh9AI7ZjcbXATAKuaJx8PR/BObBcRsBBQ5Kv5wXYnkRAG3dfvoF8AbvjBBw2NPn6S6JnOgG0enPTcAHEHe5r/muGaMzUK8wPWoA5EFUJ9vDjz4Y4Imrrlw0CVksOHnSOLXzGNwhoFfZEicd7DQJ+C7uiNyxg3DIBS8IC6GWFnxYJqIQFUP88YpGA0bCAl1wI2RI3ogYiNEj8bkE1+Ba0R43Fn4HLFhz9a+DTdCMx6gnGDG+IOuMGItQ7fzNUwNGkM8F9orbEZFLyF2WGohQ7eJpiQvLn6xugpAIo6E2MCxpfEnQ/OzSbsXg41oMzovY6SrXgSVOVdw8c55v6jFNh2XeEurmd7OKzoySKsW7o8ZrAe14YucvFXeyCkOf+a8zycAKcACfACXACnAAnwN74K8AAiYdT5l3jQYgAAAAASUVORK5CYII=">
+          <span>EC2 Instance<br>Types &amp; Pricing</span>
+        </div>
+        <div class="filters">
+          <selector
+            v-model="period.selection"
+            v-bind:options="period.options"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+          <selector
+            v-model="reservation.selection"
+            v-bind:options="reservation.options"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+          <selector
+            v-model="location.selection"
+            v-bind:options="location.options"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+          <selector
+            v-model="software.selection"
+            v-bind:options="software.options"
+            v-bind:enabled="software.enabled"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+        </div>
+      </header>
       <instance-types-table
         class="instance-types"
         v-bind:instance-types="instanceTypes"
-        v-bind:rate-multiplier="filters.rateMultiplier.selected.rateMultiplier"
+        v-bind:rate-multiplier="period.selection.rateMultiplier.rateMultiplier"
         v-on:selectInstanceType="selectInstanceType($event)"/>
       <div class="footer">
         The prices were <strong>last updated at {{buildDate | dateTime}}</strong> using <strong>data published at {{publicationDate | dateTime}}</strong>, your time.
@@ -27,6 +48,8 @@
 </template>
 
 <style lang="less">
+@import "style/variables.less";
+
 html, body {
   margin: 0;
   width: 100%;
@@ -39,6 +62,11 @@ html, body {
   padding: 1rem;
   box-sizing: border-box;
 
+  a {
+    color: @accent-color;
+    text-decoration: none;
+  }
+
   .progress {
     width: 100%;
     height: 100%;
@@ -49,13 +77,40 @@ html, body {
     font-weight: bold;
   }
 
-  .filters {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: 1rem;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    .title {
+      display: flex;
+      font-weight: bold;
+      white-space: nowrap;
+      margin-left: -0.2rem;
+      margin-bottom: -0.4rem;
+
+      span {
+        margin-top: 0.3rem;
+      }
+
+      .cloud {
+        width: 3rem;
+        height: 3rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .filters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+
+      & > * {
+        margin-left: 1rem;
+      }
+    }
   }
 
   .instance-types {
@@ -65,6 +120,8 @@ html, body {
   .footer {
     margin-top: 1rem;
     font-size: 80%;
+    line-height: 150%;
+    color: #333;
   }
 }
 </style>
@@ -74,7 +131,7 @@ import Vue from 'vue'
 import DatabaseLoader from './utils/DatabaseLoader'
 import CostDatabase from './utils/CostDatabase'
 import InstanceTypesTable from './components/InstanceTypesTable'
-import FilterSelector from './components/FilterSelector'
+import Selector from './components/Selector'
 
 const DATABASE_LOCATION = 'static/data/ec2.sqlite'
 
@@ -99,49 +156,52 @@ const SHARED = 'Shared'
 const NO_LICENSE_REQUIRED = 'No License required'
 const LICENSE_INCLUDED = 'License Included'
 const BYO_LICENSE = 'Bring your own license'
+const NA = 'NA'
 
-const FILTER_CONFIG = [
-  {name: 'purchaseOption', collectionName: 'purchaseOptions', defaultValue: PARTIAL_UPFRONT, ignoredValues: ['']},
-  {name: 'leaseContractLength', collectionName: 'leaseContractLengths', defaultValue: ONE_YEAR, ignoredValues: ['']},
-  {name: 'offeringClass', collectionName: 'offeringClasses', defaultValue: STANDARD, ignoredValues: ['']},
-  {name: 'location', collectionName: 'locations', defaultValue: US_EAST_1, ignoredValues: ['']},
-  {name: 'operatingSystem', collectionName: 'operatingSystems', defaultValue: LINUX, ignoredValues: ['', 'NA']},
-  {name: 'tenancy', collectionName: 'tenancies', defaultValue: SHARED, ignoredValues: ['', 'Host']},
-  {name: 'licenseModel', collectionName: 'licenseModels', defaultValue: NO_LICENSE_REQUIRED, ignoredValues: ['', 'NA']},
-  {name: 'preinstalledSoftware', collectionName: 'preinstalledSoftwares', defaultValue: 'NA', ignoredValues: ['']},
-  {name: 'rateMultiplier', defaultValue: 'hour', options: RATE_MULTIPLIER_OPTIONS}
-]
+const FILTER_CONFIG = {
+  'period': {
+    'rateMultiplier': {defaultValue: 'hour', options: RATE_MULTIPLIER_OPTIONS}
+  },
+  'reservation': {
+    'purchaseOption': {collectionName: 'purchaseOptions', defaultValue: PARTIAL_UPFRONT, ignoredValues: ['']},
+    'leaseContractLength': {collectionName: 'leaseContractLengths', defaultValue: ONE_YEAR, ignoredValues: ['']},
+    'offeringClass': {collectionName: 'offeringClasses', defaultValue: STANDARD, ignoredValues: ['']}
+  },
+  'location': {
+    'location': {collectionName: 'locations', defaultValue: US_EAST_1, ignoredValues: ['']},
+    'tenancy': {collectionName: 'tenancies', defaultValue: SHARED, ignoredValues: ['', 'Host']}
+  },
+  'software': {
+    'operatingSystem': {collectionName: 'operatingSystems', defaultValue: LINUX, ignoredValues: ['', NA]},
+    'licenseModel': {collectionName: 'licenseModels', defaultValue: NO_LICENSE_REQUIRED, ignoredValues: ['', NA]},
+    'preinstalledSoftware': {collectionName: 'preinstalledSoftwares', defaultValue: NA, ignoredValues: ['']}
+  }
+}
 
 export default {
   name: 'app',
 
   components: {
     InstanceTypesTable,
-    FilterSelector
+    Selector
   },
 
   data () {
-    let d = {
+    const d = {
       loaded: false,
       progress: 0,
       publicationDate: null,
       buildDate: null,
-      instanceTypes: [],
-      filters: {}
+      instanceTypes: []
     }
-    for (let filterConfig of FILTER_CONFIG) {
-      const filter = {
-        name: filterConfig.name,
-        config: filterConfig,
-        enabled: true,
-        selected: {id: null, value: null},
-        default: null,
-        options: []
+    for (let filterGroupName in FILTER_CONFIG) {
+      let group = d[filterGroupName] = {defaults: {}, selection: {}, enabled: {}, options: {}}
+      for (let name in FILTER_CONFIG[filterGroupName]) {
+        group.defaults[name] = null
+        group.selection[name] = null
+        group.enabled[name] = true
+        group.options[name] = []
       }
-      if (filterConfig.options) {
-        filter.options = filterConfig.options
-      }
-      d.filters[filterConfig.name] = filter
     }
     return d
   },
@@ -169,30 +229,48 @@ export default {
       this._db.setup()
       this.publicationDate = this._db.publicationDate
       this.buildDate = this._db.buildDate
-      for (let filter of Object.values(this.filters)) {
-        if (filter.options.length === 0) {
-          let options = this._db[filter.config.collectionName]
-          options = options.map((option) => { return {id: option.id, value: option[filter.name], enabled: true} })
-          options = options.filter((option) => filter.config.ignoredValues.indexOf(option.value) === -1)
-          filter.options = options
+
+      for (let filterGroupName in FILTER_CONFIG) {
+        let filterGroup = this[filterGroupName]
+        for (let filterName in FILTER_CONFIG[filterGroupName]) {
+          let filterConfig = FILTER_CONFIG[filterGroupName][filterName]
+          let options = filterConfig.options
+          if (!options || options.length === 0) {
+            options = this._db[filterConfig.collectionName]
+            options = options.map(option => {
+              return {
+                id: option.id,
+                value: option[filterName],
+                enabled: true
+              }
+            })
+            options = options.filter(option => filterConfig.ignoredValues.indexOf(option.value) === -1)
+          }
+          filterGroup.options[filterName] = options
+          filterGroup.selection[filterName] = filterGroup.defaults[filterName] = options.find(option => option.value === filterConfig.defaultValue)
         }
-        filter.default = filter.options.find((option) => option.value === filter.config.defaultValue)
-        filter.selected = {id: filter.default.id, value: null}
-        this.$watch(`filters.${filter.name}.selected.id`, (selectedId) => {
-          const selectedOption = filter.options.find((option) => +option.id === +selectedId)
-          Object.assign(filter.selected, selectedOption)
-          this.loadInstanceTypes()
-        })
       }
+
+      this.$watch('reservation.selection', this.updateReservationOptions)
+      this.$watch('software.selection', this.updateOperatingSystemOptions)
+      this.$watch('reservation.selection', this.loadInstanceTypes)
+      this.$watch('software.selection', this.loadInstanceTypes)
+      this.$watch('location.selection', this.loadInstanceTypes)
       this.updateReservationOptions()
       this.updateOperatingSystemOptions()
       this.loadInstanceTypes()
     },
 
     loadInstanceTypes () {
-      const selections = {}
-      for (let filter of Object.values(this.filters)) {
-        selections[`${filter.name}Id`] = filter.selected.id
+      const selections = {
+        purchaseOptionId: this.reservation.selection.purchaseOption.id,
+        leaseContractLengthId: this.reservation.selection.leaseContractLength.id,
+        offeringClassId: this.reservation.selection.offeringClass.id,
+        locationId: this.location.selection.location.id,
+        tenancyId: this.location.selection.tenancy.id,
+        operatingSystemId: this.software.selection.operatingSystem.id,
+        licenseModelId: this.software.selection.licenseModel.id,
+        preinstalledSoftwareId: this.software.selection.preinstalledSoftware.id
       }
       const selectedInstanceTypes = this.instanceTypes.filter((it) => it.selected).map((it) => it.name)
       this.instanceTypes = []
@@ -203,86 +281,85 @@ export default {
     },
 
     updateReservationOptions () {
-      const purchaseOption = this.filters.purchaseOption
-      const leaseContractLength = this.filters.leaseContractLength
-      const offeringClass = this.filters.offeringClass
-      const noUpfront = purchaseOption.options.find((option) => option.value === NO_UPFRONT)
-      const oneYear = leaseContractLength.options.find((option) => option.value === ONE_YEAR)
-      const threeYear = leaseContractLength.options.find((option) => option.value === THREE_YEAR)
-      const convertible = offeringClass.options.find((option) => option.value === CONVERTIBLE)
-      noUpfront.enabled = +leaseContractLength.selected.id === +oneYear.id
-      oneYear.enabled = +offeringClass.selected.id !== +convertible.id
-      threeYear.enabled = +purchaseOption.selected.id !== +noUpfront.id
-      convertible.enabled = +leaseContractLength.selected.id !== +oneYear.id
-      if (!noUpfront.enabled && +purchaseOption.selected.id === +noUpfront.id) {
-        purchaseOption.selected = Object.assign({}, purchaseOption.default)
+      const noUpfront = this.reservation.options.purchaseOption.find(option => option.value === NO_UPFRONT)
+      const oneYear = this.reservation.options.leaseContractLength.find(option => option.value === ONE_YEAR)
+      const threeYear = this.reservation.options.leaseContractLength.find(option => option.value === THREE_YEAR)
+      const convertible = this.reservation.options.offeringClass.find(option => option.value === CONVERTIBLE)
+      noUpfront.enabled = this.reservation.selection.leaseContractLength === oneYear
+      oneYear.enabled = this.reservation.selection.offeringClass !== convertible
+      threeYear.enabled = this.reservation.selection.purchaseOption !== noUpfront
+      convertible.enabled = this.reservation.selection.leaseContractLength !== oneYear
+      if (!noUpfront.enabled && this.reservation.selection.purchaseOption === noUpfront) {
+        this.reservation.selection.purchaseOption = this.reservation.defaults.purchaseOption
       }
-      if (!oneYear.enabled && +leaseContractLength.selected.id === +oneYear.id) {
-        leaseContractLength.selected = Object.assign({}, threeYear)
+      if (!oneYear.enabled && this.reservation.selection.leaseContractLength === oneYear) {
+        this.reservation.selection.leaseContractLength = this.reservation.defaults.leaseContractLength
       }
-      if (!convertible.enabled && +offeringClass.selected.id === +convertible.id) {
-        offeringClass.selected = Object.assign({}, offeringClass.default)
+      if (!convertible.enabled && this.reservation.selection.offeringClass === convertible) {
+        this.reservation.selection.offeringClass = this.reservation.defaults.offeringClass
       }
     },
 
     updateOperatingSystemOptions () {
-      const operatingSystem = this.filters.operatingSystem
-      const licenseModel = this.filters.licenseModel
-      const preinstalledSoftware = this.filters.preinstalledSoftware
-      const licenseIncluded = licenseModel.options.find((option) => option.value === LICENSE_INCLUDED)
-      const noLicenseRequired = licenseModel.options.find((option) => option.value === NO_LICENSE_REQUIRED)
-      const bringYourOwnLicense = licenseModel.options.find((option) => option.value === BYO_LICENSE)
-      const windowsSelected = operatingSystem.selected.value === WINDOWS
-      licenseModel.enabled = windowsSelected
+      const licenseIncluded = this.software.options.licenseModel.find((option) => option.value === LICENSE_INCLUDED)
+      const noLicenseRequired = this.software.options.licenseModel.find((option) => option.value === NO_LICENSE_REQUIRED)
+      const bringYourOwnLicense = this.software.options.licenseModel.find((option) => option.value === BYO_LICENSE)
+      const windowsSelected = this.software.selection.operatingSystem.value === WINDOWS
+      this.software.enabled.licenseModel = windowsSelected
       noLicenseRequired.enabled = !windowsSelected
-      if (licenseModel.enabled && +licenseModel.selected.id === +licenseModel.default.id) {
-        licenseModel.selected = Object.assign({}, licenseIncluded)
-      } else if (!licenseModel.enabled && +licenseModel.selected.id !== +licenseModel.default.id) {
-        licenseModel.selected = Object.assign({}, licenseModel.default)
+      if (this.software.enabled.licenseModel && this.software.selection.licenseModel === this.software.defaults.licenseModel) {
+        this.software.selection.licenseModel = licenseIncluded
+      } else if (!this.software.enabled.licenseModel && this.software.selection.licenseModel !== this.software.defaults.licenseModel) {
+        this.software.selection.licenseModel = this.software.defaults.licenseModel
       }
-      preinstalledSoftware.enabled = windowsSelected && +licenseModel.selected.id === +licenseIncluded.id
-      if (!preinstalledSoftware.enabled && +preinstalledSoftware.selected.id !== +preinstalledSoftware.default.id) {
-        preinstalledSoftware.selected = Object.assign({}, preinstalledSoftware.default)
+      this.software.enabled.preinstalledSoftware = windowsSelected && this.software.selection.licenseModel === licenseIncluded
+      if (!this.software.enabled.preinstalledSoftware && this.software.selection.preinstalledSoftware !== this.software.defaults.preinstalledSoftware) {
+        this.software.selection.preinstalledSoftware = this.software.defaults.preinstalledSoftware
       }
     },
 
     selectInstanceType (instanceType) {
       instanceType.selected = !instanceType.selected
-    }
-  },
-
-  watch: {
-    'filters.purchaseOption.selected.id': function (_) {
-      Vue.nextTick(this.updateReservationOptions)
     },
 
-    'filters.leaseContractLength.selected.id': function (_) {
-      Vue.nextTick(this.updateReservationOptions)
+    formatSelectorLabel (selector, selectedOptions) {
+      if (selectedOptions === this.location.selection) {
+        return selectedOptions.location.value
+      } else if (selectedOptions === this.software.selection && selectedOptions.operatingSystem.value !== WINDOWS) {
+        return selectedOptions.operatingSystem.value
+      } else if (selectedOptions === this.software.selection && selectedOptions.operatingSystem.value === WINDOWS && selectedOptions.preinstalledSoftware.value === NA) {
+        return `${selectedOptions.operatingSystem.value}, ${selectedOptions.licenseModel.value}`
+      } else {
+        return Object
+          .values(selectedOptions)
+          .filter(option => !!option)
+          .map(option => option.value)
+          .join(', ')
+      }
     },
 
-    'filters.offeringClass.selected.id': function (_) {
-      Vue.nextTick(this.updateReservationOptions)
-    },
-
-    'filters.operatingSystem.selected.id': function (operatingSystemId) {
-      Vue.nextTick(this.updateOperatingSystemOptions)
-    },
-
-    'filters.licenseModel.selected.id': function (operatingSystemId) {
-      Vue.nextTick(this.updateOperatingSystemOptions)
-    },
-
-    'filters.preinstalledSoftware.selected.id': function (operatingSystemId) {
-      Vue.nextTick(this.updateOperatingSystemOptions)
+    formatSelectorGroupLabel (selector, groupKey) {
+      let label = groupKey
+      if (label === 'rateMultiplier') {
+        return 'Period'
+      } else {
+        label = label.replace(/\B[A-Z]/, s => ' ' + s)
+        label = label.substring(0, 1).toUpperCase() + label.substring(1)
+        return label
+      }
     }
   },
 
   filters: {
     dateTime (date) {
-      const zeroFill = (n) => n < 10 ? `0${n}` : n.toString()
-      const dateString = [date.getFullYear(), zeroFill(date.getMonth()), zeroFill(date.getDate())].join('-')
-      const timeString = [zeroFill(date.getHours()), zeroFill(date.getMinutes())].join(':')
-      return `${dateString} ${timeString}`
+      if (date) {
+        const zeroFill = (n) => n < 10 ? `0${n}` : n.toString()
+        const dateString = [date.getFullYear(), zeroFill(date.getMonth()), zeroFill(date.getDate())].join('-')
+        const timeString = [zeroFill(date.getHours()), zeroFill(date.getMinutes())].join(':')
+        return `${dateString} ${timeString}`
+      } else {
+        return ''
+      }
     }
   }
 }
