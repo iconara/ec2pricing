@@ -4,29 +4,35 @@
       {{progress}}%
     </div>
     <div v-else>
-      <div class="filters">
-        <selector
-          v-model="period.selection"
-          v-bind:options="period.options"
-          v-bind:format-label="formatSelectorLabel"
-          v-bind:format-group-label="formatSelectorGroupLabel"/>
-        <selector
-          v-model="reservation.selection"
-          v-bind:options="reservation.options"
-          v-bind:format-label="formatSelectorLabel"
-          v-bind:format-group-label="formatSelectorGroupLabel"/>
-        <selector
-          v-model="location.selection"
-          v-bind:options="location.options"
-          v-bind:format-label="formatSelectorLabel"
-          v-bind:format-group-label="formatSelectorGroupLabel"/>
-        <selector
-          v-model="software.selection"
-          v-bind:options="software.options"
-          v-bind:enabled="software.enabled"
-          v-bind:format-label="formatSelectorLabel"
-          v-bind:format-group-label="formatSelectorGroupLabel"/>
-      </div>
+      <header>
+        <div class="title">
+          <img class="cloud" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAuZJREFUeNrsmztoFFEUhu/oBlwxhvjAqKgQLExAiY80EVGxtlAbEUEQTKWdrY0oFoIYFEuL2IhNChGLFDaKoqgIojESRRBNBPGF7qrE8T/ZM7I7TjJzs3ce93Hg2xSZzHK+eZ1z7sTzfV/YHHOE5eEEOAFOgBPgBDgBFkeJPjzPU7nPuaALbATrwDJQBhUwAUbAY/AcTOaV+L8CUHEluBUMgCecsB9BhX8/wNvnJmAqd0UC+sB1PqK+BJP8d326CmgBJ0FVMvEwVd5Pi04CFoOhJhMPM8T7LbyANjCsOPmAYd5/oQUMppR8wGCRBfSnnHxAfxYCvKmP5HXACvAQdGRwmY6DzeBd6Ps38U96grwGj8DnrOqAUxkd/YDT/L1rwCXwIWKbMXACLEz7EmgHbzIWMAr2glcJtr0P1qYpYE/GyQf8kdiWKsylMgJkmqGdOVWtMo3KBr4cZnEziO8ab+V0BsjyFXSqPgPmgZWadLitYJfqeUBZ9i6bc3SrFqDb6klZtYAf3MfrEhMqBWwDV8EqjQQ8UPEUmA/Ogl+a3P0DnoIFzRZCHSm2u2kXTfubrQQXgdsaJh9AI7ZjcbXATAKuaJx8PR/BObBcRsBBQ5Kv5wXYnkRAG3dfvoF8AbvjBBw2NPn6S6JnOgG0enPTcAHEHe5r/muGaMzUK8wPWoA5EFUJ9vDjz4Y4Imrrlw0CVksOHnSOLXzGNwhoFfZEicd7DQJ+C7uiNyxg3DIBS8IC6GWFnxYJqIQFUP88YpGA0bCAl1wI2RI3ogYiNEj8bkE1+Ba0R43Fn4HLFhz9a+DTdCMx6gnGDG+IOuMGItQ7fzNUwNGkM8F9orbEZFLyF2WGohQ7eJpiQvLn6xugpAIo6E2MCxpfEnQ/OzSbsXg41oMzovY6SrXgSVOVdw8c55v6jFNh2XeEurmd7OKzoySKsW7o8ZrAe14YucvFXeyCkOf+a8zycAKcACfACXACnAAnwN74K8AAiYdT5l3jQYgAAAAASUVORK5CYII=">
+          EC2 Instance Types &amp; Pricing
+        </div>
+        <div class="filters">
+          <selector
+            v-model="period.selection"
+            v-bind:options="period.options"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+          <selector
+            v-model="reservation.selection"
+            v-bind:options="reservation.options"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+          <selector
+            v-model="location.selection"
+            v-bind:options="location.options"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+          <selector
+            v-model="software.selection"
+            v-bind:options="software.options"
+            v-bind:enabled="software.enabled"
+            v-bind:format-label="formatSelectorLabel"
+            v-bind:format-group-label="formatSelectorGroupLabel"/>
+        </div>
+      </header>
       <instance-types-table
         class="instance-types"
         v-bind:instance-types="instanceTypes"
@@ -71,13 +77,33 @@ html, body {
     font-weight: bold;
   }
 
-  .filters {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     margin-bottom: 1rem;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    .title {
+      font-weight: bold;
+
+      .cloud {
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: -0.4rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    .filters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+
+      & > * {
+        margin-left: 1rem;
+      }
+    }
   }
 
   .instance-types {
