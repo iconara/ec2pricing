@@ -94,6 +94,7 @@
 
   .option {
     padding: 0.4rem 0.6rem;
+    padding-right: 1.2rem;
     text-indent: 1.2rem;
 
     &:hover {
@@ -252,7 +253,7 @@ export default {
         if (optionsElement) {
           const style = window.getComputedStyle(optionsElement)
           const width = Math.max(optionsElement.offsetWidth, label.offsetWidth - parseInt(style.borderLeft) - parseInt(style.borderRight))
-          optionsElement.setAttribute('style', `width: ${width}px`)
+          optionsElement.setAttribute('style', `min-width: ${width}px`)
         }
       })
     }
