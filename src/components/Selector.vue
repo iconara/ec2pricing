@@ -32,7 +32,7 @@
 
 @border-radius: 0.2rem;
 @passive-color: #333;
-@active-color: #000;
+@active-color: #ccc;
 
 .label {
   user-select: none;
@@ -51,9 +51,8 @@
   }
 
   &::after {
-    content: "▼";
-    font-size: 70%;
-    margin-left: 0.4rem;
+    content: "▾";
+    margin-left: 0.6rem;
   }
 
   &.open, &:hover {
@@ -74,18 +73,22 @@
   border-bottom-right-radius: @border-radius;
   border-bottom-left-radius:  @border-radius;
   margin-top: -1px;
+  box-shadow: 0 0.2rem 1rem 0.01rem #ccc;
 
   .option-group {
-    margin-top: 0.8rem;
-    margin-bottom: 0rem;
-  }
+    margin-top: 0.4rem;
+    margin-bottom: 0.8rem;
+    border-top: 1px solid @active-color;
 
-  .option-group:first-child {
-    margin-top: 0;
+    &:first-child {
+      border-top: none;
+    }
   }
 
   .group-label {
-    padding: 0.4rem 0.6rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.2rem;
+    padding: 0rem 0.8rem;
     font-weight: bold;
   }
 
@@ -102,8 +105,6 @@
     }
 
     &.selected {
-      background-color: lighten(@accent-color, 50%);
-
       &:last-child {
         border-radius: @border-radius;
       }
