@@ -20,10 +20,13 @@ export default class DatabaseLoader {
         xhr.open('GET', this.location, true)
         xhr.responseType = 'arraybuffer'
         xhr.addEventListener('progress', (event) => {
+          let uncompressedLength = xhr.getResponseHeader('x-amz-meta-x-amz-meta-uncompressed-content-length')
           if (event.lengthComputable) {
             for (let listener of this.progressListeners) {
               listener(event.loaded, event.total)
             }
+          } else if (uncompressedLength) {
+            listener(event.loaded, parseInt(uncompressedLength))
           }
         })
         xhr.addEventListener('error', (event) => {

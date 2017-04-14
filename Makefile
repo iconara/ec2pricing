@@ -18,7 +18,7 @@ dist: test db
 deploy: dist
 	aws s3 sync --acl public-read --exclude='*.sqlite' --exclude='sql.js' dist/ s3://ec2pricing.net/beta/
 	gzip -c dist/static/lib/sql.js | aws s3 cp --acl public-read --content-encoding gzip - s3://ec2pricing.net/beta/static/lib/sql.js
-	gzip -c dist/static/data/ec2.sqlite | aws s3 cp --acl public-read --content-encoding gzip - s3://ec2pricing.net/beta/static/data/ec2.sqlite
+	gzip -c dist/static/data/ec2.sqlite | aws s3 cp --acl public-read --content-encoding gzip --metadata "x-amz-meta-uncompressed-content-length=$(shell stat -f '%z' static/data/ec2.sqlite)" - s3://ec2pricing.net/beta/static/data/ec2.sqlite
 
 db: static/data/ec2.sqlite
 
