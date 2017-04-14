@@ -19,21 +19,21 @@ export default class DatabaseLoader {
         let xhr = new XMLHttpRequest()
         xhr.open('GET', this.location, true)
         xhr.responseType = 'arraybuffer'
-        xhr.onprogress = (event) => {
+        xhr.addEventListener('progress', (event) => {
           if (event.lengthComputable) {
             for (let listener of this.progressListeners) {
               listener(event.loaded, event.total)
             }
           }
-        }
-        xhr.onerror = (event) => {
+        })
+        xhr.addEventListener('error', (event) => {
           reject(event)
-        }
-        xhr.onload = () => {
+        })
+        xhr.addEventListener('load', () => {
           this.progressListeners = null
           this.database = new window.SQL.Database(new Uint8Array(xhr.response))
           resolve(this.database)
-        }
+        })
         xhr.send()
       })
     }
