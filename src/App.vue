@@ -343,7 +343,7 @@ export default {
       if (label === 'rateMultiplier') {
         return 'Period'
       } else {
-        label = label.replace(/\B[A-Z]/, s => ' ' + s)
+        label = label.replace(/\B[A-Z]/g, s => ' ' + s)
         label = label.substring(0, 1).toUpperCase() + label.substring(1)
         return label
       }
