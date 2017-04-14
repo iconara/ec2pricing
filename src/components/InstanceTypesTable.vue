@@ -34,6 +34,8 @@
 <style lang="less" scoped>
 @import "../style/variables.less";
 
+@border-color: #ccc;
+
 table {
   border-collapse: collapse;
   margin-left: -0.4rem;
@@ -41,11 +43,11 @@ table {
 }
 
 thead {
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid @border-color;
 }
 
 tbody {
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid @border-color;
 
   tr {
     &:nth-child(even) {
