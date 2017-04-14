@@ -10,6 +10,7 @@
         <th v-bind:class="{reverse: reverse && comparatorName === 'onDemandHourlyRate'}" v-on:click="sortBy('onDemandHourlyRate')">On demand</th>
         <th v-bind:class="{reverse: reverse && comparatorName === 'reservedHourlyRate'}" v-on:click="sortBy('reservedHourlyRate')">Reserved</th>
         <th v-bind:class="{reverse: reverse && comparatorName === 'upfrontCost'}" v-on:click="sortBy('upfrontCost')">Upfront</th>
+        <th v-bind:class="{reverse: reverse && comparatorName === 'reservedEffectiveHourlyRate'}" v-on:click="sortBy('reservedEffectiveHourlyRate')">Effective reserved</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td>{{multiplyRate(instanceType.onDemandHourlyRate) | rate}}</td>
         <td>{{multiplyRate(instanceType.reservedHourlyRate) | rate}}</td>
         <td>{{instanceType.upfrontCost | cost}}</td>
+        <td>{{multiplyRate(instanceType.reservedEffectiveHourlyRate) | rate}}</td>
       </tr>
     </tbody>
   </table>
@@ -210,7 +212,7 @@ export default {
     },
 
     rate (str, multiplier) {
-      if (str == null || str.length === 0) {
+      if (str == null || isNaN(str) || str.length === 0) {
         return 'n/a'
       } else {
         return `$${fixedPrettyNumber(str)}`

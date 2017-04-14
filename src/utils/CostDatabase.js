@@ -73,6 +73,19 @@ export default class CostDatabase {
     return this._dimensionRowsCache[dimensionName]
   }
 
+  _leaseContractLengthInHours (leaseContractLengthId) {
+    if (!this._leaseContractLengthsInHours) {
+      let acc = this._leaseContractLengthsInHours = {}
+      for (let leaseContractLength of this.leaseContractLengths) {
+        let match = leaseContractLength.leaseContractLength.match(/^(\d+)yr$/)
+        if (match) {
+          acc[leaseContractLength.id] = 24 * 365.25 * parseInt(match[1])
+        }
+      }
+    }
+    return this._leaseContractLengthsInHours[leaseContractLengthId]
+  }
+
   get publicationDate () {
     if (!this._publicationDate) {
       let rows = this._rows('SELECT value FROM meta WHERE key = \'publication_date\' LIMIT 1')
@@ -136,6 +149,14 @@ export default class CostDatabase {
       let mergedRow = Object.assign({}, reservedRows[i])
       mergedRow.onDemandHourlyRate = onDemandRows[i].hourlyRate
       mergedRow.reservedHourlyRate = reservedRows[i].hourlyRate
+      let reservedHourlyRateNum = parseFloat(mergedRow.reservedHourlyRate)
+      let reservedUpfrontCostNum = parseFloat(mergedRow.upfrontCost)
+      let reservedHours = this._leaseContractLengthInHours(selectedIds.leaseContractLengthId)
+      if (!(isNaN(reservedHourlyRateNum) || isNaN(reservedUpfrontCostNum) || isNaN(reservedHours))) {
+        mergedRow.reservedEffectiveHourlyRate = reservedHourlyRateNum + reservedUpfrontCostNum / reservedHours
+      } else {
+        mergedRow.reservedEffectiveHourlyRate = reservedHourlyRateNum
+      }
       mergedRows.push(mergedRow)
     }
     return mergedRows.map((it) => this.parseInstanceType(it))

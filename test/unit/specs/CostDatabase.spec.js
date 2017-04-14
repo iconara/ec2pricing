@@ -66,7 +66,7 @@ describe('CostDatabase', () => {
   beforeEach(() => {
     database = new FakeDb()
     database.setResult(/FROM purchase_option/, [{id: 0, purchaseOption: ''}])
-    database.setResult(/FROM lease_contract_length/, [{id: 0, leaseContractLength: ''}])
+    database.setResult(/FROM lease_contract_length/, [{id: 0, leaseContractLength: ''}, {id: 1, leaseContractLength: '3yr'}, {id: 2, leaseContractLength: '1yr'}])
     database.setResult(/FROM offering_class/, [{id: 0, offeringClass: ''}])
     costDatabase = new CostDatabase(database).setup()
   })
@@ -134,9 +134,9 @@ describe('CostDatabase', () => {
       })
 
       it('returns a list of objects with IDs and values', () => {
-        let expected = [{id: 0}]
-        expected[0][name] = ''
-        expect(costDatabase[collectionName]).to.deep.equal(expected)
+        let expected = {id: 0}
+        expected[name] = ''
+        expect(costDatabase[collectionName][0]).to.deep.equal(expected)
       })
 
       it('caches the results', () => {
@@ -219,19 +219,13 @@ describe('CostDatabase', () => {
       {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'very low'}
     ]
 
-    const reservedPriceResult = []
-    const onDemandPriceResult = []
-
-    instanceTypeRows.forEach((row, index) => {
-      let n = index + 1
-      reservedPriceResult.push(Object.assign({hourlyRate: (n / 100).toString(), upfrontCost: n.toString()}, row))
-      onDemandPriceResult.push(Object.assign({hourlyRate: (n / 10).toString()}, row))
-    })
+    let reservedPriceResult = null
+    let onDemandPriceResult = null
 
     const reservedPriceStatement = (statement) => {
       return statement.sql.indexOf('FROM instance_type') > -1 &&
              statement.parameters[':purchaseOptionId'] === 1 &&
-             statement.parameters[':leaseContractLengthId'] === 2 &&
+             statement.parameters[':leaseContractLengthId'] !== 0 &&
              statement.parameters[':offeringClassId'] === 3
     }
 
@@ -241,6 +235,16 @@ describe('CostDatabase', () => {
              statement.parameters[':leaseContractLengthId'] === 0 &&
              statement.parameters[':offeringClassId'] === 0
     }
+
+    beforeEach(() => {
+      reservedPriceResult = []
+      onDemandPriceResult = []
+      instanceTypeRows.forEach((row, index) => {
+        let n = index + 1
+        reservedPriceResult.push(Object.assign({hourlyRate: (n / 100).toString(), upfrontCost: n.toString()}, row))
+        onDemandPriceResult.push(Object.assign({hourlyRate: (n / 10).toString()}, row))
+      })
+    })
 
     beforeEach(() => {
       database.setResult(reservedPriceStatement, reservedPriceResult)
@@ -363,6 +367,47 @@ describe('CostDatabase', () => {
       expect(y1Small.networkPerformance).to.equal('low to moderate')
       expect(z1Large.networkPerformance).to.equal('up to 10 gigabit')
       expect(z164xLarge.networkPerformance).to.equal('20 gigabit')
+    })
+
+    describe('when the lease contract length is "1yr"', () => {
+      beforeEach(() => {
+        selectedIds.leaseContractLengthId = 2
+        result = costDatabase.instanceTypes(selectedIds)
+      })
+
+      it('returns the effective reserved rate as the reserved rate plus the upfront cost divided by the hours in a year', () => {
+        const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+        expect(z1Medium.reservedEffectiveHourlyRate).to.be.within(0.0303, 0.0304)
+      })
+    })
+
+    describe('when there is no upfront cost', () => {
+      beforeEach(() => {
+        selectedIds.leaseContractLengthId = 2
+        reservedPriceResult.forEach(row => {
+          if (row.name === 'z1.medium') {
+            row.upfrontCost = null
+          }
+        })
+        result = costDatabase.instanceTypes(selectedIds)
+      })
+
+      it('returns the effective reserved rate as the reserved rate', () => {
+        const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+        expect(z1Medium.reservedEffectiveHourlyRate).to.be.within(0.02999, 0.03001)
+      })
+    })
+
+    describe('when the lease contract length is "3yr"', () => {
+      beforeEach(() => {
+        selectedIds.leaseContractLengthId = 1
+        result = costDatabase.instanceTypes(selectedIds)
+      })
+
+      it('returns the effective reserved rate as the reserved rate plus the upfront cost divided by the hours in three years', () => {
+        const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
+        expect(z1Medium.reservedEffectiveHourlyRate).to.be.within(0.0301, 0.0302)
+      })
     })
   })
 })
