@@ -323,7 +323,9 @@ export default {
     },
 
     formatSelectorLabel (selector, selectedOptions) {
-      if (selectedOptions === this.location.selection) {
+      if (selectedOptions === this.period.selection) {
+        return `Price per ${selectedOptions.rateMultiplier.value}`
+      } else if (selectedOptions === this.location.selection) {
         return selectedOptions.location.value
       } else if (selectedOptions === this.software.selection && selectedOptions.operatingSystem.value !== WINDOWS) {
         return selectedOptions.operatingSystem.value
@@ -341,7 +343,7 @@ export default {
     formatSelectorGroupLabel (selector, groupKey) {
       let label = groupKey
       if (label === 'rateMultiplier') {
-        return 'Period'
+        return ''
       } else {
         label = label.replace(/\B[A-Z]/g, s => ' ' + s)
         label = label.substring(0, 1).toUpperCase() + label.substring(1)
