@@ -159,7 +159,7 @@ FROM "AmazonEC2"
 EXCEPT
 SELECT preinstalled_software FROM preinstalled_software;
 
-CREATE TABLE hourly_rate (
+CREATE TEMPORARY TABLE hourly_rate (
   purchase_option_id INTEGER NOT NULL,
   lease_contract_length_id INTEGER NOT NULL,
   offering_class_id INTEGER NOT NULL,
@@ -221,7 +221,7 @@ WHERE "Product Family" = 'Compute Instance'
 AND "Unit" IN ('Hrs', 'hrs')
 AND "EBS Optimized" <> 'Yes';
 
-CREATE TABLE upfront_cost (
+CREATE TEMPORARY TABLE upfront_cost (
   purchase_option_id INTEGER NOT NULL,
   lease_contract_length_id INTEGER NOT NULL,
   offering_class_id INTEGER NOT NULL,
@@ -340,7 +340,5 @@ FROM hourly_rate hr LEFT JOIN upfront_cost uc ON (
 );
 
 DROP TABLE "AmazonEC2";
-DROP TABLE hourly_rate;
-DROP TABLE upfront_cost;
 
 VACUUM;
