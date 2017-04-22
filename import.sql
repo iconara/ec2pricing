@@ -218,9 +218,9 @@ LEFT JOIN tenancy t ON t.tenancy = raw."Tenancy"
 LEFT JOIN license_model lm ON lm.license_model = "License Model"
 LEFT JOIN preinstalled_software ps ON ps.preinstalled_software = "Pre Installed S/W"
 WHERE "Product Family" = 'Compute Instance'
-AND "Unit" IN ('Hrs', 'hrs')
 AND "EBS Optimized" <> 'Yes'
 AND ("TermType" = 'Reserved' OR "PriceDescription" <> 'ReservedHostUsage:f1')
+AND LOWER("Unit") = 'hrs'
 ;
 
 CREATE TEMPORARY TABLE upfront_cost (
