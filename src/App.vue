@@ -358,7 +358,7 @@ export default {
     dateTime (date) {
       if (date) {
         const zeroFill = (n) => n < 10 ? `0${n}` : n.toString()
-        const dateString = [date.getFullYear(), zeroFill(date.getMonth()), zeroFill(date.getDate())].join('-')
+        const dateString = [date.getFullYear(), zeroFill(date.getMonth() + 1), zeroFill(date.getDate())].join('-')
         const timeString = [zeroFill(date.getHours()), zeroFill(date.getMinutes())].join(':')
         return `${dateString} ${timeString}`
       } else {
