@@ -216,7 +216,8 @@ describe('CostDatabase', () => {
       {name: 'z1.medium', vcpus: 3, memory: '3 GiB', storage: '3 x 3 SSD', networkPerformance: 'High'},
       {name: 'z1.large', vcpus: 4, memory: '4.2 GiB', storage: '4 x 4 SSD', networkPerformance: 'up to 10 Gigabit'},
       {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 HDD', networkPerformance: '20 gigabit'},
-      {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'very low'}
+      {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'very low'},
+      {name: 'v1.large', vcpus: 1, memory: '1 GiB', storage: '8 x 1.9 NVMe SSD', networkPerformance: 'really high'}
     ]
 
     let reservedPriceResult = null
@@ -341,8 +342,10 @@ describe('CostDatabase', () => {
     it('parses the storage strings and returns the number of disks, their size and type separately', () => {
       const z1Medium = result.find((instanceType) => instanceType.name === 'z1.medium')
       const z164XLarge = result.find((instanceType) => instanceType.name === 'z1.64xlarge')
+      const v1Large = result.find((instanceType) => instanceType.name === 'v1.large')
       expect(z1Medium.storage).to.deep.equal({disks: 3, size: 3, totalSize: 9, type: 'SSD'})
       expect(z164XLarge.storage).to.deep.equal({disks: 4, size: 16384, totalSize: 65536, type: 'HDD'})
+      expect(v1Large.storage).to.deep.equal({disks: 8, size: 1900, totalSize: 15200, type: "NVMe SSD"})
     })
 
     it('parses the storage strings of EBS only instances and returns a flag, a zero total size and the type as "EBS"', () => {

@@ -174,9 +174,13 @@ export default class CostDatabase {
     if (storageStr.indexOf('EBS') > -1) {
       return {ebsOnly: true, totalSize: 0, type: 'EBS'}
     } else {
-      let [_, diskCount, diskSize, type] = storageStr.match(/^(?:(\d+) x )?([\d,.]+)(?: GB)?(?: (HDD|SSD))?$/)
+      let [_, diskCount, diskSize, type] = storageStr.match(/^(?:(\d+) x )?([\d,.]+)(?: GB)?(?: (HDD|SSD|NVMe SSD))?$/)
       diskCount = parseInt(diskCount || '1')
-      diskSize = parseInt(diskSize.replace(',', ''))
+      if (type === 'NVMe SSD') {
+        diskSize = Math.floor(parseFloat(diskSize) * 1000)
+      } else {
+        diskSize = parseInt(diskSize.replace(',', ''))
+      }
       type = type || 'HDD'
       return {disks: diskCount, size: diskSize, totalSize: diskCount * diskSize, type: type}
     }
