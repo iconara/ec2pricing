@@ -211,8 +211,8 @@ export default {
       return str.toLowerCase()
     },
 
-    rate (str, multiplier) {
-      if (str == null || isNaN(str) || str.length === 0) {
+    rate (str) {
+      if (str == null || isNaN(str) || str === 0 || str.length === 0) {
         return 'n/a'
       } else {
         return `$${fixedPrettyNumber(str)}`
