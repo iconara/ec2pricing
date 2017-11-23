@@ -23,7 +23,7 @@ CREATE TABLE purchase_option (
 );
 
 INSERT INTO purchase_option (purchase_option)
-SELECT DISTINCT "PurchaseOption"
+SELECT DISTINCT REPLACE("PurchaseOption", ' ', '')
 FROM "AmazonEC2"
 EXCEPT
 SELECT purchase_option FROM purchase_option;
@@ -34,7 +34,7 @@ CREATE TABLE lease_contract_length (
 );
 
 INSERT INTO lease_contract_length (lease_contract_length)
-SELECT DISTINCT "LeaseContractLength"
+SELECT DISTINCT REPLACE("LeaseContractLength", ' ', '')
 FROM "AmazonEC2"
 EXCEPT
 SELECT lease_contract_length FROM lease_contract_length;
@@ -208,8 +208,8 @@ SELECT
   ELSE "PricePerUnit"
   END
 FROM "AmazonEC2" raw
-LEFT JOIN purchase_option po ON po.purchase_option = "PurchaseOption"
-LEFT JOIN lease_contract_length lcl ON lcl.lease_contract_length = "LeaseContractLength"
+LEFT JOIN purchase_option po ON po.purchase_option = REPLACE("PurchaseOption", ' ', '')
+LEFT JOIN lease_contract_length lcl ON lcl.lease_contract_length = REPLACE("LeaseContractLength", ' ', '')
 LEFT JOIN offering_class oc ON oc.offering_class = "OfferingClass"
 LEFT JOIN location l ON l.location = raw."Location"
 LEFT JOIN instance_type it ON it.instance_type = "Instance Type"
@@ -269,8 +269,8 @@ SELECT
   ps.preinstalled_software_id,
   "PricePerUnit"
 FROM "AmazonEC2" raw
-LEFT JOIN purchase_option po ON po.purchase_option = "PurchaseOption"
-LEFT JOIN lease_contract_length lcl ON lcl.lease_contract_length = "LeaseContractLength"
+LEFT JOIN purchase_option po ON po.purchase_option = REPLACE("PurchaseOption", ' ', '')
+LEFT JOIN lease_contract_length lcl ON lcl.lease_contract_length = REPLACE("LeaseContractLength", ' ', '')
 LEFT JOIN offering_class oc ON oc.offering_class = "OfferingClass"
 LEFT JOIN location l ON l.location = raw."Location"
 LEFT JOIN instance_type it ON it.instance_type = "Instance Type"

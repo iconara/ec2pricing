@@ -145,8 +145,8 @@ const RATE_MULTIPLIER_OPTIONS = [
   {id: 4, value: 'year', enabled: true, rateMultiplier: 24 * 365}
 ]
 
-const PARTIAL_UPFRONT = 'Partial Upfront'
-const NO_UPFRONT = 'No Upfront'
+const PARTIAL_UPFRONT = 'PartialUpfront'
+const NO_UPFRONT = 'NoUpfront'
 const ONE_YEAR = '1yr'
 const THREE_YEAR = '3yr'
 const STANDARD = 'standard'
@@ -253,12 +253,10 @@ export default {
         }
       }
 
-      this.$watch('reservation.selection', this.updateReservationOptions)
       this.$watch('software.selection', this.updateOperatingSystemOptions)
       this.$watch('reservation.selection', this.loadInstanceTypes)
       this.$watch('software.selection', this.loadInstanceTypes)
       this.$watch('location.selection', this.loadInstanceTypes)
-      this.updateReservationOptions()
       this.updateOperatingSystemOptions()
       this.loadInstanceTypes()
     },
@@ -279,26 +277,6 @@ export default {
       for (let instanceType of this._db.instanceTypes(selections)) {
         instanceType.selected = selectedInstanceTypes.indexOf(instanceType.name) !== -1
         this.instanceTypes.push(instanceType)
-      }
-    },
-
-    updateReservationOptions () {
-      const noUpfront = this.reservation.options.purchaseOption.find(option => option.value === NO_UPFRONT)
-      const oneYear = this.reservation.options.leaseContractLength.find(option => option.value === ONE_YEAR)
-      const threeYear = this.reservation.options.leaseContractLength.find(option => option.value === THREE_YEAR)
-      const convertible = this.reservation.options.offeringClass.find(option => option.value === CONVERTIBLE)
-      noUpfront.enabled = this.reservation.selection.leaseContractLength === oneYear
-      oneYear.enabled = this.reservation.selection.offeringClass !== convertible
-      threeYear.enabled = this.reservation.selection.purchaseOption !== noUpfront
-      convertible.enabled = this.reservation.selection.leaseContractLength !== oneYear
-      if (!noUpfront.enabled && this.reservation.selection.purchaseOption === noUpfront) {
-        this.reservation.selection.purchaseOption = this.reservation.defaults.purchaseOption
-      }
-      if (!oneYear.enabled && this.reservation.selection.leaseContractLength === oneYear) {
-        this.reservation.selection.leaseContractLength = this.reservation.defaults.leaseContractLength
-      }
-      if (!convertible.enabled && this.reservation.selection.offeringClass === convertible) {
-        this.reservation.selection.offeringClass = this.reservation.defaults.offeringClass
       }
     },
 
