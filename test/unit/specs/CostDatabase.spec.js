@@ -345,7 +345,7 @@ describe('CostDatabase', () => {
       const v1Large = result.find((instanceType) => instanceType.name === 'v1.large')
       expect(z1Medium.storage).to.deep.equal({disks: 3, size: 3, totalSize: 9, type: 'SSD'})
       expect(z164XLarge.storage).to.deep.equal({disks: 4, size: 16384, totalSize: 65536, type: 'HDD'})
-      expect(v1Large.storage).to.deep.equal({disks: 8, size: 1900, totalSize: 15200, type: "NVMe SSD"})
+      expect(v1Large.storage).to.deep.equal({disks: 8, size: 1900, totalSize: 15200, type: 'NVMe SSD'})
     })
 
     it('parses the storage strings of EBS only instances and returns a flag, a zero total size and the type as "EBS"', () => {
