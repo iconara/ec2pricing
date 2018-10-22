@@ -1,0 +1,9 @@
+/static/data/*.sqlite
+/static/lib/*.js
+/tmp
+/node_modules
+/dist
+/test/unit/coverage
+/test/unit/report.html
+npm-debug.log
+yarn-error.log
