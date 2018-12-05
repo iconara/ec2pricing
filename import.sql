@@ -221,6 +221,9 @@ WHERE "Product Family" = 'Compute Instance'
 AND LOWER("Unit") = 'hrs'
 AND NOT ("EBS Optimized" = 'Yes' OR "usageType" LIKE 'EBSOptimized:%')
 AND NOT ("TermType" = 'OnDemand' AND "usageType" LIKE 'ReservedHostUsage:%')
+AND "PriceDescription" NOT LIKE '%Unused Reservation%'
+AND "PriceDescription" NOT LIKE '$0.00 per Reservation%'
+AND "PriceDescription" NOT LIKE '$0.00 per Dedicated Reservation%'
 ;
 
 CREATE TEMPORARY TABLE upfront_cost (
