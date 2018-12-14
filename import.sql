@@ -101,6 +101,7 @@ SELECT DISTINCT
   "GPU"
 FROM "AmazonEC2"
 WHERE "Product Family" = 'Compute Instance'
+AND "Instance Type" <> 'p3dn'
 EXCEPT
 SELECT
   instance_type,
@@ -224,6 +225,7 @@ AND NOT ("TermType" = 'OnDemand' AND "usageType" LIKE 'ReservedHostUsage:%')
 AND "PriceDescription" NOT LIKE '%Unused Reservation%'
 AND "PriceDescription" NOT LIKE '$0.00 per Reservation%'
 AND "PriceDescription" NOT LIKE '$0.00 per Dedicated Reservation%'
+AND "Instance Type" <> 'p3dn'
 ;
 
 CREATE TEMPORARY TABLE upfront_cost (
