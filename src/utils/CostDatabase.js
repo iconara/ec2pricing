@@ -177,7 +177,7 @@ export default class CostDatabase {
       let [_, diskCount, diskSize, type] = storageStr.match(/^(?:(\d+) x )?([\d,.]+)(?: GB)?(?: (HDD|SSD|NVMe SSD))?$/)
       diskCount = parseInt(diskCount || '1')
       if (type === 'NVMe SSD') {
-        diskSize = Math.floor(parseFloat(diskSize) * 1000)
+        diskSize = parseFloat(diskSize)
       } else {
         diskSize = parseInt(diskSize.replace(',', ''))
       }

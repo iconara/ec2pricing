@@ -217,7 +217,7 @@ describe('CostDatabase', () => {
       {name: 'z1.large', vcpus: 4, memory: '4.2 GiB', storage: '4 x 4 SSD', networkPerformance: 'up to 10 Gigabit'},
       {name: 'z1.64xlarge', vcpus: 128, memory: '2,048 GiB', storage: '4 x 16,384 HDD', networkPerformance: '20 gigabit'},
       {name: 'w1.nano', vcpus: 1, memory: '1 GiB', storage: 'EBS only', networkPerformance: 'very low'},
-      {name: 'v1.large', vcpus: 1, memory: '1 GiB', storage: '8 x 1.9 NVMe SSD', networkPerformance: 'really high'}
+      {name: 'v1.large', vcpus: 1, memory: '1 GiB', storage: '8 x 1900 NVMe SSD', networkPerformance: 'really high'}
     ]
 
     let reservedPriceResult = null
